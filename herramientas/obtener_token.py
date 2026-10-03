@@ -4,7 +4,7 @@
 Se corre UNA vez, en tu computadora (no en la nube), con Python 3.8+ y sin
 instalar nada extra:
 
-    python obtener_token.py client_secret_XXXX.json
+    python obtener_token.py   (busca solo el client_secret*.json de la carpeta)
 
 El navegador se abre: elegí la cuenta canal.atajoia@gmail.com y, si te lo
 pregunta, el canal "Atajo IA". Al terminar, el script imprime YT_CLIENT_ID,
@@ -13,9 +13,11 @@ No los pegues en el chat.
 """
 
 import base64
+import glob
 import hashlib
 import http.server
 import json
+import os
 import secrets
 import sys
 import urllib.error
@@ -69,9 +71,17 @@ def esperar_codigo(estado_esperado):
 
 
 def main():
-    if len(sys.argv) != 2:
-        sys.exit("Uso: python obtener_token.py client_secret_XXXX.json")
-    client_id, client_secret = cargar_cliente(sys.argv[1])
+    ruta = sys.argv[1] if len(sys.argv) > 1 else ""
+    if not os.path.isfile(ruta):
+        candidatos = glob.glob("client_secret*.json")
+        if len(candidatos) != 1:
+            sys.exit(
+                f"No encontré el archivo '{ruta}'. JSON en esta carpeta: {glob.glob('*.json') or 'ninguno'}\n"
+                "Pasá el nombre exacto: python obtener_token.py NOMBRE.json"
+            )
+        ruta = candidatos[0]
+        print(f"Usando {ruta}")
+    client_id, client_secret = cargar_cliente(ruta)
 
     verificador = secrets.token_urlsafe(64)
     desafio = base64.urlsafe_b64encode(hashlib.sha256(verificador.encode()).digest()).rstrip(b"=").decode()
