@@ -93,8 +93,9 @@ def main():
     url_banner = {}
 
     def subir_banner():
-        url_banner["url"] = banner()
-        return "subido"
+        resultado = banner()
+        url_banner["url"] = resultado
+        return resultado if simular else "subido"
 
     def branding():
         actual = get(DATA + "channels", {"part": "brandingSettings", "id": canal_id}, token)["items"][0]
