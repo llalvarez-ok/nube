@@ -21,7 +21,7 @@
 
 En YouTube Studio:
 1. **Foto de perfil:** Personalización → Imagen de marca → Foto → subir `logo.png`.
-2. **Handle:** Personalización → Información básica → Handle → **@AtajosIA** (o la variante libre más parecida).
+2. **Handle:** Personalización → Información básica → Handle → **@AtajosIAoficial** ✔ (hecho).
 3. **Enlaces:** Personalización → Información básica → Vínculos → agregar la newsletter cuando exista.
 4. **Valores de subida predeterminados:** Configuración → Valores de subida predeterminados:
    - Categoría: *Ciencia y tecnología*
