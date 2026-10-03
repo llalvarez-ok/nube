@@ -1,3 +1,6 @@
 client_secret*.json
 __pycache__/
 .env
+node_modules/
+produccion/*/build/
+produccion/*/*.mp4
