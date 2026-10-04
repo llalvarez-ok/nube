@@ -13,7 +13,7 @@
 #property version     "1.00"
 #property description "ATS Tick Recorder: graba ticks, spread, ping y especificaciones. No opera."
 
-input string InpSymbols        = "XAUUSDc"; // Simbolos separados por coma
+input string InpSymbols        = "XAUUSDc,BTCUSDc,BTCUSDTc,ETHUSDc,ETHUSDTc,EURJPYc,EURGBPc,EURCHFc,AUDCADc"; // Simbolos separados por coma (los que no existan se ignoran)
 input int    InpPollMs         = 10;        // Intervalo de consulta de ticks (ms)
 input int    InpStatusEverySec = 10;        // Cada cuantos segundos registrar ping y estado
 input string InpRootFolder     = "ATS";     // Carpeta dentro de Common\Files

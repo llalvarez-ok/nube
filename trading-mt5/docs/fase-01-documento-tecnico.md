@@ -1219,3 +1219,9 @@ Con tus respuestas a §25: **Etapa 0 — FASE 2 (Market Data Engine + TickRecord
 | **Cripto** | Opera los 7 días; los fines de semana tienen menos liquidez y spreads distintos. El spread suele ser alto en relación al movimiento de corto plazo: candidato a necesitar plazos más largos. Los swaps (costo por mantener la posición de un día para otro) suelen ser altos: no conviene dejar posiciones abiertas de un día para otro. |
 | **Disponibilidad en la cuenta cent** | Hay que verificar qué activos ofrece la cuenta cent de Exness. Si alguno no está, se graba desde una cuenta demo del mismo broker en una segunda instalación de MT5, con otra carpeta de salida (`InpRootFolder`). Los costos de la demo son orientativos. |
 | **Orden de trabajo** | Se graban los seis desde el principio (cuesta poco), pero las estrategias se investigan **de a un activo**, empezando por el de mejor CVR. |
+
+### 26.2 Activos disponibles en la cuenta cent (04/10/2026)
+
+- **En la cuenta cent:** XAUUSDc, BTC y ETH (con sufijo `USDc` o `USDTc`; se graban ambas variantes y la que no exista se ignora), EURJPYc, EURGBPc, EURCHFc y AUDCADc.
+- **Índices (US30, US100, US500):** según el usuario, no están en la cuenta cent. Se pueden grabar desde una cuenta demo de Exness en otra instalación de MT5 con `InpRootFolder = ATS_demo`. Sirve para medir su volatilidad; los costos de la demo son orientativos.
+- **Cruces de Forex agregados:** EURGBP, EURCHF y AUDCAD suelen moverse poco en plazos cortos y en cuenta cent el spread puede ser grande en comparación: es probable que salgan mal en el mapa de costos, pero grabarlos cuesta poco y el dato decide. EURJPY, EURGBP y EURCHF comparten el euro: para el control de riesgo cuentan como un factor común.

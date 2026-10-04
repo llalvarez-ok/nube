@@ -23,7 +23,7 @@ Ocupa del orden de decenas de MB por día y por activo (las cripto graban tambi�
 2. En **Observación del mercado** (clic derecho → Mostrar todo), anotá el nombre exacto de cada activo en tu cuenta: oro, BTC, ETH, US30, US100 y US500. En cuentas cent de Exness el oro suele ser `XAUUSDc`.
 3. Menú **Archivo → Abrir carpeta de datos**. Entrá a `MQL5\Services` y copiá ahí `ATS_TickRecorder.mq5`.
 4. Abrí **MetaEditor** (tecla F4), abrí el archivo y compilalo (tecla F7). **Si aparece algún error o advertencia, mandame el texto completo** de la pestaña "Errores".
-5. En MT5, panel **Navegador → Servicios**: clic derecho sobre `ATS_TickRecorder` → **Agregar servicio**. En `InpSymbols` poné los nombres exactos de los activos separados por coma, tal como aparecen en Observación del mercado. Por ejemplo, en Exness podrían ser `XAUUSDc,BTCUSDc,ETHUSDc,US30c,USTECc,US500c` (US100 suele llamarse `USTEC`), pero **los nombres cambian según la cuenta: copialos de tu terminal**. Aceptá; el servicio arranca.
+5. En MT5, panel **Navegador → Servicios**: clic derecho sobre `ATS_TickRecorder` → **Agregar servicio**. El valor por defecto de `InpSymbols` ya trae los activos de la cuenta cent (oro, BTC, ETH y cuatro cruces de Forex); los nombres que no existan se ignoran. Si querés cambiarlos, en `InpSymbols` poné los nombres exactos de los activos separados por coma, tal como aparecen en Observación del mercado. Por ejemplo, en Exness podrían ser `XAUUSDc,BTCUSDc,ETHUSDc,US30c,USTECc,US500c` (US100 suele llamarse `USTEC`), pero **los nombres cambian según la cuenta: copialos de tu terminal**. Aceptá; el servicio arranca.
    - Si algún activo no está en la cuenta cent, el servicio lo anota en `events.csv` y sigue con los demás. Ese activo se puede grabar desde una cuenta demo en **otra instalación de MT5**, con otro valor en `InpRootFolder` (por ejemplo `ATS_demo`) para que no se mezclen los archivos.
 6. Verificá en la pestaña **Diario** (abajo) que aparezca `ATS_TickRecorder: START`. Después de un minuto, en `C:\Users\<tu usuario>\AppData\Roaming\MetaQuotes\Terminal\Common\Files\ATS\ticks\` tiene que haber un archivo `.bin` creciendo.
 
@@ -39,7 +39,7 @@ Ocupa del orden de decenas de MB por día y por activo (las cripto graban tambi�
 ```
 pip install -r requirements.txt
 python -m research.ticks.analizar_costos --raiz <carpeta ATS> \
-    --simbolo XAUUSDc,BTCUSDc,ETHUSDc,US30c,USTECc,US500c --salida reporte_costos.md
+    --simbolo XAUUSDc,BTCUSDc,ETHUSDc,EURJPYc,EURGBPc,EURCHFc,AUDCADc --salida reporte_costos.md
 ```
 
 Con varios activos, el reporte empieza con una **tabla comparativa** (CVR por plazo de cada activo, mejor hora y spread típico) y sigue con el detalle de cada uno.
