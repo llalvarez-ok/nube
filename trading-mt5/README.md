@@ -4,6 +4,7 @@ Proyecto independiente del canal de YouTube. Se trabaja por fases (BUILD → TES
 
 - Fase 1 — Arquitectura y viabilidad: [`docs/fase-01-documento-tecnico.md`](docs/fase-01-documento-tecnico.md) (decisiones del 04/10 en §26)
 - Fase 2 / Etapa 0 — Grabador de ticks y mapa de costos: [`docs/fase-02-grabador-de-ticks.md`](docs/fase-02-grabador-de-ticks.md)
+- Fase 3 (adelantada) — Features, simulador y línea base: [`docs/fase-03-features-y-simulador.md`](docs/fase-03-features-y-simulador.md)
 
 Estructura:
 
