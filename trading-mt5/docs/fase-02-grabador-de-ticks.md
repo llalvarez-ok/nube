@@ -25,7 +25,10 @@ Ocupa del orden de decenas de MB por día y por activo (las cripto graban tambi�
 4. Abrí **MetaEditor** (tecla F4), abrí el archivo y compilalo (tecla F7). **Si aparece algún error o advertencia, mandame el texto completo** de la pestaña "Errores".
 5. En MT5, panel **Navegador → Servicios**: clic derecho sobre `ATS_TickRecorder` → **Agregar servicio**. El valor por defecto de `InpSymbols` ya trae los activos de la cuenta cent (oro, BTC, ETH y cuatro cruces de Forex); los nombres que no existan se ignoran. Si querés cambiarlos, en `InpSymbols` poné los nombres exactos de los activos separados por coma, tal como aparecen en Observación del mercado. Por ejemplo, en Exness podrían ser `XAUUSDc,BTCUSDc,ETHUSDc,US30c,USTECc,US500c` (US100 suele llamarse `USTEC`), pero **los nombres cambian según la cuenta: copialos de tu terminal**. Aceptá; el servicio arranca.
    - Si algún activo no está en la cuenta cent, el servicio lo anota en `events.csv` y sigue con los demás. Ese activo se puede grabar desde una cuenta demo en **otra instalación de MT5**, con otro valor en `InpRootFolder` (por ejemplo `ATS_demo`) para que no se mezclen los archivos.
-6. Verificá en la pestaña **Diario** (abajo) que aparezca `ATS_TickRecorder: START`. Después de un minuto, en `C:\Users\<tu usuario>\AppData\Roaming\MetaQuotes\Terminal\Common\Files\ATS\ticks\` tiene que haber un archivo `.bin` creciendo.
+6. Verificá que esté corriendo:
+   - En la **Caja de herramientas** (Ctrl+T), pestaña **Expertos** (o **Diario**), tienen que aparecer `ATS_TickRecorder: START`, un `START_SYMBOL` por cada activo encontrado y un `ERROR` por cada nombre que no existe (es normal con las variantes de BTC y ETH).
+   - **Archivo → Abrir carpeta de datos**, subí dos niveles hasta la carpeta `Terminal` y entrá a `Common\Files\ATS\ticks`. Tiene que haber una carpeta por activo con un archivo `.bin` cuyo tamaño crece al refrescar (F5).
+   - En `Common\Files\ATS\status` hay un `.csv` que se puede abrir con el Bloc de notas: cada 10 segundos agrega una línea por activo y la columna `ticks_written` va subiendo.
 
 ### Para que la grabación sirva
 
