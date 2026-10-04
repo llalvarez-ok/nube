@@ -1182,3 +1182,28 @@ Cada uno con método y criterio de rechazo, a ejecutar en la Etapa 0–1.
 ### Próximo paso propuesto
 
 Con tus respuestas a §25: **Etapa 0 — FASE 2 (Market Data Engine + TickRecorder)** y **especificación de la sonda de ejecución**, con el ciclo BUILD → TEST → AUDIT → FIX → VALIDATE. No avanzo a estrategias hasta tener el mapa de costos reales.
+
+---
+
+## 26. Decisiones y ajustes (04/10/2026)
+
+**Decisiones del usuario:**
+- **Objetivo:** muchas operaciones rápidas. Se aclara que deben ser muchas *decisiones independientes*, cada una con riesgo chico, y no una posición grande partida en muchas órdenes iguales (como en el reel de referencia, donde ~40 posiciones al mismo precio eran una sola apuesta con apalancamiento de ~5.000 veces).
+- **Instrumento principal:** oro (XAUUSD).
+- **Brokers posibles:** Exness o BlackBull.
+- **Pruebas:** cuenta **cent de Exness** con ~10 USD (1.000 USC).
+- **Infraestructura:** PC hogareña que puede quedar prendida mucho tiempo.
+
+**Consecuencias para el diseño:**
+
+| Tema | Consecuencia |
+|---|---|
+| Cuenta cent | Buena para la sonda de ejecución y el micro-live: el volumen mínimo es diminuto en dólares, así que se puede respetar un riesgo de 0,25–0,5 % por operación incluso con 10 USD (verificar `contract_size` y `volume_min` en `specs`). |
+| Cuenta cent | Sus costos (spread, ejecución) **no son los de una cuenta Raw/Zero ni los de BlackBull**. Lo que se mida en cent vale para cent; para otra cuenta hay que volver a medir. |
+| 10 USD | Es presupuesto de investigación, no capital para hacer crecer. El objetivo de esta etapa es obtener datos, no ganancia. |
+| Apalancamiento alto/ilimitado del broker | No cambia nada: el Risk Engine limita la exposición con sus propios topes, sin importar cuánto permita el broker. |
+| PC hogareña en Argentina | Latencia probable de 150–300 ms al servidor: penaliza los plazos de segundos. Se mide con el ping que graba el servicio. Si el mapa de costos muestra espacio en plazos cortos pero la latencia lo come, se evalúa un VPS. |
+| PC hogareña | Riesgo de cortes de luz/internet y suspensión: **SL de catástrofe en el servidor obligatorio** en toda operación (ya previsto en §8 y §18). |
+| Exness / BlackBull | Leer los términos de ambos sobre scalping y plazos mínimos antes de operar en real. BlackBull (cuentas con comisión) puede servir para comparar costos con una cuenta demo. |
+
+**Próximo entregable:** grabación de ticks del oro durante 1–2 semanas con `ATS_TickRecorder` (ver `fase-02-grabador-de-ticks.md`) y el mapa de costo contra movimiento por plazo y hora.
