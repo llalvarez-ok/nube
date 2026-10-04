@@ -1,21 +1,21 @@
 //+------------------------------------------------------------------+
 //| ATS_TickRecorder.mq5                                             |
 //| Servicio de MT5: graba todos los ticks recibidos, el ping y las  |
-//| especificaciones de cada símbolo. No opera: solo observa.        |
+//| especificaciones de cada simbolo. No opera: solo observa.        |
 //|                                                                  |
-//| Salida (carpeta común de los terminales: ...\Common\Files\ATS\): |
+//| Salida (carpeta comun de los terminales: ...\Common\Files\ATS\): |
 //|   ticks\<SIMBOLO>\<AAAAMMDD>.bin  registros de 52 bytes (ver doc)|
-//|   status\<AAAAMMDD>.csv           ping, conexión y spread         |
-//|   specs\<SIMBOLO>_<AAAAMMDD>.csv  especificaciones del símbolo    |
+//|   status\<AAAAMMDD>.csv           ping, conexion y spread         |
+//|   specs\<SIMBOLO>_<AAAAMMDD>.csv  especificaciones del simbolo    |
 //|   events.csv                      inicio, fin y errores           |
 //+------------------------------------------------------------------+
 #property service
 #property version     "1.00"
 #property description "ATS Tick Recorder: graba ticks, spread, ping y especificaciones. No opera."
 
-input string InpSymbols        = "XAUUSDc"; // Símbolos separados por coma
+input string InpSymbols        = "XAUUSDc"; // Simbolos separados por coma
 input int    InpPollMs         = 10;        // Intervalo de consulta de ticks (ms)
-input int    InpStatusEverySec = 10;        // Cada cuántos segundos registrar ping y estado
+input int    InpStatusEverySec = 10;        // Cada cuantos segundos registrar ping y estado
 input string InpRootFolder     = "ATS";     // Carpeta dentro de Common\Files
 
 #define MAX_TICKS_PER_POLL 100000
@@ -43,7 +43,7 @@ void EnsureFolder(const string folder)
    FolderCreate(folder, FILE_COMMON);
   }
 
-// Agrega una línea a un archivo de texto de la carpeta común.
+// Agrega una linea a un archivo de texto de la carpeta comun.
 bool AppendLine(const string path, const string line, const string header = "")
   {
    int h = FileOpen(path, FILE_READ | FILE_WRITE | FILE_TXT | FILE_ANSI | FILE_COMMON | FILE_SHARE_READ);
@@ -71,7 +71,7 @@ void LogEvent(const string type, const string detail)
   }
 
 //+------------------------------------------------------------------+
-//| Especificaciones del símbolo y de la cuenta                      |
+//| Especificaciones del simbolo y de la cuenta                      |
 //+------------------------------------------------------------------+
 void WriteSpecs(const string symbol, const string day)
   {
@@ -112,7 +112,7 @@ void WriteSpecs(const string symbol, const string day)
    FileWriteString(h, "calc_mode;" + IntegerToString(SymbolInfoInteger(symbol, SYMBOL_TRADE_CALC_MODE)) + "\n");
    FileWriteString(h, "swap_long;" + DoubleToString(SymbolInfoDouble(symbol, SYMBOL_SWAP_LONG), 4) + "\n");
    FileWriteString(h, "swap_short;" + DoubleToString(SymbolInfoDouble(symbol, SYMBOL_SWAP_SHORT), 4) + "\n");
-   // Datos de cuenta sin identificar al titular (sin número de cuenta ni nombre).
+   // Datos de cuenta sin identificar al titular (sin numero de cuenta ni nombre).
    FileWriteString(h, "account_company;" + AccountInfoString(ACCOUNT_COMPANY) + "\n");
    FileWriteString(h, "account_server;" + AccountInfoString(ACCOUNT_SERVER) + "\n");
    FileWriteString(h, "account_currency;" + AccountInfoString(ACCOUNT_CURRENCY) + "\n");
@@ -125,19 +125,30 @@ void WriteSpecs(const string symbol, const string day)
   }
 
 //+------------------------------------------------------------------+
-//| Grabador de un símbolo                                           |
+//| Grabador de un simbolo                                           |
 //+------------------------------------------------------------------+
 class CSymbolRecorder
   {
 private:
    string            m_symbol;
-   long              m_last_msc;      // time_msc del último tick escrito
+   long              m_last_msc;      // time_msc del ultimo tick escrito
    int               m_dup;           // ticks ya escritos con time_msc == m_last_msc
    int               m_handle;
    string            m_day;
    long              m_written_total;
    long              m_errors;
 
+public:
+   void              CloseFile(void)
+     {
+      if(m_handle != INVALID_HANDLE)
+        {
+         FileClose(m_handle);
+         m_handle = INVALID_HANDLE;
+        }
+     }
+
+private:
    bool              OpenDay(const string day)
      {
       CloseFile();
@@ -164,14 +175,14 @@ private:
       if(m_handle == INVALID_HANDLE)
          return;
       // Registro de 52 bytes, little-endian. El orden no se cambia sin cambiar
-      // también research/ticks/formato.py.
+      // tambien research/ticks/formato.py.
       FileWriteLong(m_handle, t.time_msc);                // 8: hora del servidor en ms
       FileWriteDouble(m_handle, t.bid);                   // 8
       FileWriteDouble(m_handle, t.ask);                   // 8
       FileWriteDouble(m_handle, t.last);                  // 8
       FileWriteDouble(m_handle, t.volume_real);           // 8
       FileWriteInteger(m_handle, (int)t.flags, INT_VALUE);// 4
-      FileWriteLong(m_handle, (long)local_us);            // 8: reloj monotónico local al leerlo
+      FileWriteLong(m_handle, (long)local_us);            // 8: reloj monotonico local al leerlo
       m_written_total++;
      }
 
@@ -189,7 +200,7 @@ public:
       m_symbol = symbol;
       if(!SymbolSelect(symbol, true))
         {
-         LogEvent("ERROR", StringFormat("símbolo %s no disponible (error %d)", symbol, GetLastError()));
+         LogEvent("ERROR", StringFormat("simbolo %s no disponible (error %d)", symbol, GetLastError()));
          return false;
         }
       MqlTick t;
@@ -215,7 +226,7 @@ public:
         }
       ulong local_us = GetMicrosecondCount();
 
-      // CopyTicks devuelve también los ticks del milisegundo m_last_msc que ya
+      // CopyTicks devuelve tambien los ticks del milisegundo m_last_msc que ya
       // escribimos en la consulta anterior: se saltean.
       int start = 0;
       while(start < n && start < m_dup && ticks[start].time_msc == m_last_msc)
@@ -246,18 +257,10 @@ public:
          FileFlush(m_handle);
      }
 
-   void              CloseFile(void)
-     {
-      if(m_handle != INVALID_HANDLE)
-        {
-         FileClose(m_handle);
-         m_handle = INVALID_HANDLE;
-        }
-     }
   };
 
 //+------------------------------------------------------------------+
-//| Estado: ping, conexión y spread actual                           |
+//| Estado: ping, conexion y spread actual                           |
 //+------------------------------------------------------------------+
 void WriteStatus(CSymbolRecorder &recs[])
   {
@@ -323,11 +326,11 @@ void OnStart()
      }
    if(count == 0)
      {
-      LogEvent("STOP", "no hay símbolos válidos en InpSymbols=" + InpSymbols);
+      LogEvent("STOP", "no hay simbolos validos en InpSymbols=" + InpSymbols);
       return;
      }
 
-   LogEvent("START", StringFormat("símbolos=%s poll_ms=%d gmt=%s local=%s",
+   LogEvent("START", StringFormat("simbolos=%s poll_ms=%d gmt=%s local=%s",
                                   InpSymbols, InpPollMs,
                                   TimeToString(TimeGMT(), TIME_DATE | TIME_SECONDS),
                                   TimeToString(TimeLocal(), TIME_DATE | TIME_SECONDS)));
@@ -364,7 +367,7 @@ void OnStart()
                WriteSpecs(recs[i].Name(), spec_day);
            }
         }
-      Sleep(MathMax(1, InpPollMs));
+      Sleep((int)MathMax(1, InpPollMs));
      }
 
    for(int i = 0; i < count; i++)
