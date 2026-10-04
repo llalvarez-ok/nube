@@ -18,7 +18,7 @@
 //|  volumen es volumen de ticks. No es asesoramiento financiero.    |
 //+------------------------------------------------------------------+
 #property copyright "Real Investors Club"
-#property version   "1.00"
+#property version   "1.10"
 #property description "Opera las divergencias precio/CVD de RIC Delta Pro en M1, M3, M5 y M15, cada temporalidad por separado."
 
 #include <Trade\Trade.mqh>
@@ -53,6 +53,7 @@ input int    InpMaxSpread   = 0;        // Spread máximo para abrir, en puntos 
 input int    InpSlippage    = 30;       // Desvío máximo, en puntos
 input ulong  InpMagic       = 2026100;  // Magic base (cada TF usa base + minutos)
 input bool   InpShowPanel   = true;     // Mostrar panel en el gráfico
+input bool   InpDebug       = false;    // Registrar cada pivote en la pestaña Expertos
 
 //--- estado por temporalidad
 struct TFState
@@ -83,12 +84,16 @@ struct TFState
    //--- netting: posición virtual en lotes con signo
    double            vpos;
    string            lastSignal;
+   string            lastAction;  // qué hizo el EA con la última señal (o por qué no operó)
+   int               liveDivs;    // divergencias detectadas desde que se cargó el EA
   };
 
 TFState g[4];
 CTrade  trade;
 bool    g_hedging = true;
 bool    g_useReal = false;
+datetime g_lastTick = 0;
+datetime g_started  = 0;
 
 //+------------------------------------------------------------------+
 int OnInit()
@@ -114,6 +119,8 @@ int OnInit()
       g[i].magic      = InpMagic + mins[i];
       g[i].vpos       = 0.0;
       g[i].lastSignal = "-";
+      g[i].lastAction = "-";
+      g[i].liveDivs   = 0;
       ResetSignalState(i);
      }
 
@@ -136,8 +143,20 @@ int OnInit()
       if(g[i].enabled)
          Warmup(i);
 
-   PrintFormat("RIC Div EA iniciado en %s | cuenta %s | volumen %s",
-               _Symbol, g_hedging ? "HEDGING" : "NETTING", g_useReal ? "real" : "ticks");
+   g_started = TimeCurrent();
+   PrintFormat("RIC Div EA iniciado en %s | cuenta %s | volumen %s | lote mín %s, paso %s",
+               _Symbol, g_hedging ? "HEDGING" : "NETTING", g_useReal ? "real" : "ticks",
+               DoubleToString(SymbolInfoDouble(_Symbol, SYMBOL_VOLUME_MIN), VolDigits()),
+               DoubleToString(SymbolInfoDouble(_Symbol, SYMBOL_VOLUME_STEP), VolDigits()));
+   string why = TradeBlockReason();
+   if(why != "")
+      Print("ATENCIÓN: el EA no va a poder operar: ", why);
+   for(int i = 0; i < 4; i++)
+      if(g[i].enabled)
+         PrintFormat("%s: %s, lote %s, última divergencia en la historia: %s", g[i].name,
+                     g[i].ready ? "historia cargada" : "historia todavía no disponible",
+                     DoubleToString(NormLots(g[i].lots), VolDigits()), g[i].lastSignal);
+   EventSetTimer(5);
    UpdatePanel();
    return INIT_SUCCEEDED;
   }
@@ -145,19 +164,49 @@ int OnInit()
 //+------------------------------------------------------------------+
 void OnDeinit(const int reason)
   {
+   EventKillTimer();
    Comment("");
+  }
+
+// El panel se refresca aunque no lleguen ticks (mercado cerrado)
+void OnTimer()
+  {
+   UpdatePanel();
+  }
+
+// Motivo por el que el EA no puede enviar órdenes ("" = puede operar)
+string TradeBlockReason()
+  {
+   if(MQLInfoInteger(MQL_TESTER))
+      return "";
+   if(!TerminalInfoInteger(TERMINAL_TRADE_ALLOWED))
+      return "botón 'Trading algorítmico' apagado en la barra del terminal";
+   if(!MQLInfoInteger(MQL_TRADE_ALLOWED))
+      return "falta tildar 'Permitir trading algorítmico' en las propiedades del EA (F7 sobre el gráfico)";
+   if(!AccountInfoInteger(ACCOUNT_TRADE_ALLOWED))
+      return "la cuenta no permite operar (¿sesión con contraseña de inversor?)";
+   if(!AccountInfoInteger(ACCOUNT_TRADE_EXPERT))
+      return "el broker no permite expertos en esta cuenta";
+   if(SymbolInfoInteger(_Symbol, SYMBOL_TRADE_MODE) == SYMBOL_TRADE_MODE_DISABLED)
+      return "el símbolo tiene el trading deshabilitado";
+   return "";
   }
 
 //+------------------------------------------------------------------+
 void OnTick()
   {
+   g_lastTick = TimeCurrent();
    bool changed = false;
    for(int i = 0; i < 4; i++)
      {
       if(!g[i].enabled)
          continue;
-      if(!g[i].ready && !Warmup(i))
-         continue;
+      if(!g[i].ready)
+        {
+         if(!Warmup(i))
+            continue;
+         PrintFormat("%s: historia cargada", g[i].name);
+        }
 
       datetime t1 = iTime(_Symbol, g[i].tf, 1);
       datetime t0 = iTime(_Symbol, g[i].tf, 0);
@@ -238,12 +287,17 @@ bool DetectRealVolume()
       return false;
    if(InpVolSrc == VOL_REAL)
       return true;
+   // Solo se usa el volumen real si casi todas las velas lo traen: si viene en cero en parte
+   // de las velas el CVD queda plano y no aparecen divergencias.
    MqlRates r[];
    int n = CopyRates(_Symbol, PERIOD_M1, 1, 200, r);
+   if(n <= 0)
+      return false;
+   int withReal = 0;
    for(int k = 0; k < n; k++)
       if(r[k].real_volume > 0)
-         return true;
-   return false;
+         withReal++;
+   return withReal >= n * 0.9;
   }
 
 double Vol(const MqlRates &r)
@@ -353,6 +407,10 @@ void ProcessBar(int i, const MqlRates &bar, bool &bull, bool &bear)
      }
 
    double cvdAtPiv = g[i].cv[c];
+   if(InpDebug && g[i].ready && (isPH || isPL))
+      PrintFormat("%s pivote %s%s precio %s CVD %.0f (anterior máx %s/%.0f, mín %s/%.0f)", g[i].name,
+                  isPH ? "MÁX " : "", isPL ? "MÍN " : "", DoubleToString(isPH ? ph : pl, _Digits), cvdAtPiv,
+                  DoubleToString(g[i].lastPhP, _Digits), g[i].lastPhC, DoubleToString(g[i].lastPlP, _Digits), g[i].lastPlC);
    if(isPH)
      {
       bear = g[i].hasPh && ph > g[i].lastPhP && cvdAtPiv < g[i].lastPhC;
@@ -376,6 +434,7 @@ void OnDivergence(int i, bool bull, bool bear, datetime barTime)
   {
    string when = TimeToString(barTime - InpPivLen * PeriodSeconds(g[i].tf), TIME_DATE | TIME_MINUTES);
    g[i].lastSignal = (bull && bear ? "DOBLE " : bull ? "ALCISTA " : "BAJISTA ") + when;
+   g[i].liveDivs++;
    PrintFormat("%s %s: divergencia %s confirmada (pivote %s)", _Symbol, g[i].name,
                bull && bear ? "alcista y bajista" : bull ? "ALCISTA" : "BAJISTA", when);
 
@@ -390,18 +449,31 @@ void OnDivergence(int i, bool bull, bool bear, datetime barTime)
      {
       int sig = bull ? 1 : -1;
       if(cur == sig)
-         return; // ya está en ese sentido: se mantiene
+        {
+         g[i].lastAction = "ya estaba en ese sentido";
+         return;
+        }
       newDir = (cur == -sig && !InpReverse) ? 0 : sig;
      }
 
-   if(newDir != 0 && !CanOpen(i, newDir))
-      newDir = 0;
+   if(newDir != 0)
+     {
+      string no = OpenBlockReason(i, newDir);
+      if(no != "")
+        {
+         PrintFormat("%s: no se abre: %s", g[i].name, no);
+         g[i].lastAction = "no abrió: " + no;
+         newDir = 0;
+        }
+     }
    if(newDir == cur)
       return;
 
-   if(!TerminalInfoInteger(TERMINAL_TRADE_ALLOWED) || !MQLInfoInteger(MQL_TRADE_ALLOWED))
+   string why = TradeBlockReason();
+   if(why != "")
      {
-      Print("Trading automático deshabilitado: no se ejecuta la señal.");
+      PrintFormat("%s: señal sin ejecutar: %s", g[i].name, why);
+      g[i].lastAction = "sin ejecutar: " + why;
       return;
      }
 
@@ -427,41 +499,31 @@ int CurrentDir(int i)
    return dir;
   }
 
-bool CanOpen(int i, int dir)
+// Motivo por el que no se puede abrir en ese sentido ("" = se puede)
+string OpenBlockReason(int i, int dir)
   {
    if(dir > 0 && !InpAllowBuy)
-      return false;
+      return "compras desactivadas en los parámetros";
    if(dir < 0 && !InpAllowSell)
-      return false;
+      return "ventas desactivadas en los parámetros";
 
    long mode = SymbolInfoInteger(_Symbol, SYMBOL_TRADE_MODE);
    if(dir > 0 && mode != SYMBOL_TRADE_MODE_FULL && mode != SYMBOL_TRADE_MODE_LONGONLY)
-     {
-      Print("El símbolo no admite compras ahora: solo se cierra.");
-      return false;
-     }
+      return "el símbolo no admite compras ahora";
    if(dir < 0 && mode != SYMBOL_TRADE_MODE_FULL && mode != SYMBOL_TRADE_MODE_SHORTONLY)
-     {
-      Print("El símbolo no admite ventas ahora: solo se cierra.");
-      return false;
-     }
+      return "el símbolo no admite ventas ahora";
 
    if(InpMaxSpread > 0 && SymbolInfoInteger(_Symbol, SYMBOL_SPREAD) > InpMaxSpread)
-     {
-      PrintFormat("Spread %d > %d puntos: no se abre.", (int)SymbolInfoInteger(_Symbol, SYMBOL_SPREAD), InpMaxSpread);
-      return false;
-     }
+      return StringFormat("spread %d > %d puntos", (int)SymbolInfoInteger(_Symbol, SYMBOL_SPREAD), InpMaxSpread);
 
    double lots  = NormLots(g[i].lots);
    double price = dir > 0 ? SymbolInfoDouble(_Symbol, SYMBOL_ASK) : SymbolInfoDouble(_Symbol, SYMBOL_BID);
    double margin;
    if(OrderCalcMargin(dir > 0 ? ORDER_TYPE_BUY : ORDER_TYPE_SELL, _Symbol, lots, price, margin)
       && margin > AccountInfoDouble(ACCOUNT_MARGIN_FREE))
-     {
-      PrintFormat("Margen insuficiente para %.2f lotes en %s: no se abre.", lots, g[i].name);
-      return false;
-     }
-   return true;
+      return StringFormat("margen insuficiente para %s lotes (hace falta %.2f, libre %.2f)",
+                          DoubleToString(lots, VolDigits()), margin, AccountInfoDouble(ACCOUNT_MARGIN_FREE));
+   return "";
   }
 
 //--- hedging: una posición por TF identificada por su magic
@@ -478,8 +540,10 @@ void ApplyHedging(int i, int cur, int newDir)
          if(!trade.PositionClose(tk, InpSlippage))
            {
             PrintFormat("%s: no se pudo cerrar #%I64u (%d %s)", g[i].name, tk, trade.ResultRetcode(), trade.ResultRetcodeDescription());
+            g[i].lastAction = "error al cerrar: " + trade.ResultRetcodeDescription();
             return;
            }
+         g[i].lastAction = "cerró";
         }
      }
    if(newDir != 0)
@@ -488,7 +552,12 @@ void ApplyHedging(int i, int cur, int newDir)
       string cmt  = "RIC Div " + g[i].name;
       bool ok = newDir > 0 ? trade.Buy(lots, _Symbol, 0, 0, 0, cmt) : trade.Sell(lots, _Symbol, 0, 0, 0, cmt);
       if(!ok || !RetcodeOk(trade.ResultRetcode()))
+        {
          PrintFormat("%s: no se pudo abrir (%d %s)", g[i].name, trade.ResultRetcode(), trade.ResultRetcodeDescription());
+         g[i].lastAction = "error al abrir: " + trade.ResultRetcodeDescription();
+        }
+      else
+         g[i].lastAction = newDir > 0 ? "abrió COMPRA" : "abrió VENTA";
      }
   }
 
@@ -512,6 +581,7 @@ void ApplyNetting(int i, int newDir)
       if(!ok || !RetcodeOk(trade.ResultRetcode()))
         {
          PrintFormat("%s: orden de %.2f lotes rechazada (%d %s)", g[i].name, v, trade.ResultRetcode(), trade.ResultRetcodeDescription());
+         g[i].lastAction = "orden rechazada: " + trade.ResultRetcodeDescription();
          break;
         }
       done += v;
@@ -519,6 +589,8 @@ void ApplyNetting(int i, int newDir)
      }
    g[i].vpos = NormalizeDouble(g[i].vpos + (diff > 0 ? done : -done), VolDigits());
    SaveVirtual(i);
+   if(rest <= 1e-9)
+      g[i].lastAction = newDir > 0 ? "posición virtual COMPRADA" : newDir < 0 ? "posición virtual VENDIDA" : "cerró";
   }
 
 bool RetcodeOk(uint rc)
@@ -598,6 +670,10 @@ void UpdatePanel()
       return;
    string txt = StringFormat("RIC Delta Divergencias EA · %s · %s · vol %s\n",
                              _Symbol, g_hedging ? "hedging" : "netting", g_useReal ? "real" : "ticks");
+   string why = TradeBlockReason();
+   txt += why == "" ? "Trading: habilitado\n" : "TRADING BLOQUEADO: " + why + "\n";
+   txt += g_lastTick == 0 ? "Sin ticks desde que se cargó el EA (¿mercado cerrado?)\n"
+                          : "Último tick: " + TimeToString(g_lastTick, TIME_DATE | TIME_SECONDS) + "\n";
    for(int i = 0; i < 4; i++)
      {
       if(!g[i].enabled)
@@ -606,9 +682,10 @@ void UpdatePanel()
          continue;
         }
       int d = CurrentDir(i);
-      txt += StringFormat("%s: %s | última div: %s%s\n", g[i].name,
+      txt += StringFormat("%s: %s | última div: %s | en vivo: %d | acción: %s%s\n", g[i].name,
                           d > 0 ? "COMPRADO" : d < 0 ? "VENDIDO" : "sin posición",
-                          g[i].lastSignal, g[i].ready ? "" : " (cargando historia)");
+                          g[i].lastSignal, g[i].liveDivs, g[i].lastAction,
+                          g[i].ready ? "" : " (cargando historia)");
      }
    Comment(txt);
   }

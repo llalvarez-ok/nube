@@ -28,3 +28,11 @@ Expert Advisor que opera las divergencias precio/CVD del indicador **RIC Delta P
 4. Probar primero en el Probador de estrategias con “Cada tick basado en ticks reales” y en cuenta demo.
 
 No hay stop loss ni take profit: la salida es solo por divergencia contraria. No es asesoramiento financiero.
+
+## Si no abre operaciones
+El panel del gráfico y la pestaña **Expertos** muestran el motivo:
+- `TRADING BLOQUEADO: ...` → botón *Trading algorítmico* apagado, falta tildar *Permitir trading algorítmico* en las propiedades del EA, sesión con contraseña de inversor o broker que no permite expertos.
+- `Sin ticks desde que se cargó el EA` → mercado cerrado (Forex cierra el fin de semana). El EA solo trabaja cuando llegan ticks.
+- `en vivo: 0` → todavía no hubo divergencias nuevas desde que se cargó. Las que ya se ven en el indicador son de la historia y no se operan.
+- `acción: no abrió: ...` → margen, spread, sentido no permitido o símbolo en solo cierre.
+- `Registrar cada pivote` (parámetro) imprime cada pivote con su CVD para comparar con TradingView.
