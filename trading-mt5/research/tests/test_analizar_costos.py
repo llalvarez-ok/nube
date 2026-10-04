@@ -68,3 +68,19 @@ def test_reporte_completo(tmp_path):
     main(["--raiz", str(tmp_path), "--simbolo", "XAUUSDc", "--salida", str(salida)])
     texto = salida.read_text(encoding="utf-8")
     assert "## Resumen por plazo" in texto and "| 300 s |" in texto
+
+
+def test_varios_activos_y_supuestos_por_simbolo(tmp_path):
+    from research.ticks.analizar_costos import valores_por_simbolo
+    assert valores_por_simbolo("0.1", ["A", "B"]) == {"A": 0.1, "B": 0.1}
+    assert valores_por_simbolo("A=2,B=0.5", ["A", "B", "C"]) == {"A": 2.0, "B": 0.5, "C": 0.0}
+
+    escribir_archivo(tmp_path / "ticks" / "XAUUSDc" / "20260904.bin", ticks_sinteticos())
+    escribir_archivo(tmp_path / "ticks" / "BTCUSDc" / "20260904.bin",
+                     ticks_sinteticos(sigma=5.0, spread=10.0, semilla=2))
+    salida = tmp_path / "r.md"
+    main(["--raiz", str(tmp_path), "--simbolo", "XAUUSDc,BTCUSDc,US30c", "--salida", str(salida)])
+    texto = salida.read_text(encoding="utf-8")
+    assert "# Comparación entre activos" in texto
+    assert "| XAUUSDc |" in texto and "| BTCUSDc |" in texto
+    assert "US30c: No hay archivos" in texto

@@ -211,29 +211,103 @@ def reporte(simbolo, ticks, descartados, g, resultado, spreads, specs,
     return "\n".join(lineas) + "\n"
 
 
+def valores_por_simbolo(texto, simbolos):
+    """Interpreta "0.05" (vale para todos) o "XAUUSDc=0.05,BTCUSDc=5" (por símbolo)."""
+    texto = (texto or "0").strip()
+    if "=" not in texto:
+        return {s: float(texto) for s in simbolos}
+    valores = {s: 0.0 for s in simbolos}
+    for parte in texto.split(","):
+        if parte.strip():
+            simbolo, valor = parte.split("=")
+            valores[simbolo.strip()] = float(valor)
+    return valores
+
+
+def comparativo(analisis, horizontes, h_referencia=60):
+    """Tabla con un renglón por activo. El CVR no tiene unidades: se compara entre activos."""
+    lineas = [
+        "# Comparación entre activos",
+        "",
+        "CVR = costo de ida y vuelta / movimiento típico en el plazo. Más bajo es mejor.",
+        "",
+        "| Activo | " + " | ".join(f"CVR {h} s" for h in horizontes)
+        + f" | Mejor hora (CVR {h_referencia} s) | Spread P50 | Horas activas |",
+        "|---|" + "---|" * (len(horizontes) + 3),
+    ]
+    for simbolo, a in analisis.items():
+        celdas = []
+        for h in horizontes:
+            m = a["resultado"].get(h, {}).get("total")
+            celdas.append(f"{m['cvr']:.2f}" if m else "—")
+        por_hora = a["resultado"].get(h_referencia, {}).get("por_hora", {})
+        if por_hora:
+            hora, m = min(por_hora.items(), key=lambda kv: kv[1]["cvr"])
+            mejor = f"{hora:02d} h ({m['cvr']:.2f})"
+        else:
+            mejor = "—"
+        g = a["grilla"]
+        spread_p50 = float(np.percentile(g["spread"][g["valido"]], 50))
+        horas = g["valido"].sum() * g["paso_ms"] / 3_600_000
+        lineas.append(f"| {simbolo} | " + " | ".join(celdas) + f" | {mejor} | {spread_p50:.3f} | {horas:.0f} |")
+    lineas += [
+        "",
+        "- Las horas son del servidor del broker y mezclan todos los días; en cripto incluyen fines de semana.",
+        "- Los índices (US30, US100, US500) se mueven casi juntos, igual que BTC y ETH: "
+        "un buen CVR en los tres índices no son tres oportunidades independientes.",
+        "",
+    ]
+    return "\n".join(lineas)
+
+
+def analizar(raiz, simbolo, horizontes, slippage, comision, desde=None, hasta=None):
+    ticks, descartados = limpiar(leer_simbolo(raiz, simbolo, desde, hasta))
+    if len(ticks) < 100:
+        raise ValueError(f"{simbolo}: hay muy pocos ticks válidos para analizar")
+    g = grilla(ticks)
+    resultado = costo_vs_movimiento(g, horizontes, slippage, comision)
+    texto = reporte(simbolo, ticks, descartados, g, resultado, spread_por_hora(g, ticks),
+                    leer_specs(raiz, simbolo), slippage, comision)
+    return {"grilla": g, "resultado": resultado, "texto": texto}
+
+
 def main(argv=None):
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("--raiz", required=True, help="carpeta ATS dentro de Common\\Files")
-    p.add_argument("--simbolo", required=True)
+    p.add_argument("--simbolo", required=True, help="uno o varios separados por coma")
     p.add_argument("--desde", help="AAAAMMDD")
     p.add_argument("--hasta", help="AAAAMMDD")
     p.add_argument("--horizontes", default=",".join(map(str, HORIZONTES_DEFAULT)),
                    help="plazos en segundos separados por coma")
-    p.add_argument("--slippage", type=float, default=0.0,
-                   help="slippage supuesto por lado, en unidades de precio")
-    p.add_argument("--comision", type=float, default=0.0,
-                   help="comisión supuesta ida y vuelta, en unidades de precio")
+    p.add_argument("--slippage", default="0",
+                   help="slippage supuesto por lado en unidades de precio: un valor, o SIMBOLO=valor,...")
+    p.add_argument("--comision", default="0",
+                   help="comisión supuesta ida y vuelta en unidades de precio: un valor, o SIMBOLO=valor,...")
     p.add_argument("--salida", default="reporte_costos.md")
     a = p.parse_args(argv)
 
-    ticks, descartados = limpiar(leer_simbolo(a.raiz, a.simbolo, a.desde, a.hasta))
-    if len(ticks) < 100:
-        raise SystemExit("Hay muy pocos ticks válidos para analizar.")
-    g = grilla(ticks)
+    simbolos = [s.strip() for s in a.simbolo.split(",") if s.strip()]
     horizontes = [int(x) for x in a.horizontes.split(",") if x.strip()]
-    resultado = costo_vs_movimiento(g, horizontes, a.slippage, a.comision)
-    texto = reporte(a.simbolo, ticks, descartados, g, resultado, spread_por_hora(g, ticks),
-                    leer_specs(a.raiz, a.simbolo), a.slippage, a.comision)
+    slippage = valores_por_simbolo(a.slippage, simbolos)
+    comision = valores_por_simbolo(a.comision, simbolos)
+
+    analisis, faltantes = {}, []
+    for simbolo in simbolos:
+        try:
+            analisis[simbolo] = analizar(a.raiz, simbolo, horizontes, slippage[simbolo],
+                                         comision[simbolo], a.desde, a.hasta)
+        except (FileNotFoundError, ValueError) as e:
+            faltantes.append(f"- {simbolo}: {e}")
+    if not analisis:
+        raise SystemExit("No hay datos para ningún símbolo:\n" + "\n".join(faltantes))
+
+    partes = []
+    if len(simbolos) > 1:
+        partes.append(comparativo(analisis, horizontes))
+        if faltantes:
+            partes.append("Sin datos:\n" + "\n".join(faltantes) + "\n")
+    partes += [a_["texto"] for a_ in analisis.values()]
+    texto = "\n---\n\n".join(partes)
     Path(a.salida).write_text(texto, encoding="utf-8")
     print(texto)
 

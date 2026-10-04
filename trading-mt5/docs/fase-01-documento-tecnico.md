@@ -1189,7 +1189,7 @@ Con tus respuestas a §25: **Etapa 0 — FASE 2 (Market Data Engine + TickRecord
 
 **Decisiones del usuario:**
 - **Objetivo:** muchas operaciones rápidas. Se aclara que deben ser muchas *decisiones independientes*, cada una con riesgo chico, y no una posición grande partida en muchas órdenes iguales (como en el reel de referencia, donde ~40 posiciones al mismo precio eran una sola apuesta con apalancamiento de ~5.000 veces).
-- **Instrumento principal:** oro (XAUUSD).
+- **Instrumentos:** oro (XAUUSD), BTC, ETH, US30, US100 y US500. El oro es el primero en investigarse; el orden de los demás lo decide el mapa de costos.
 - **Brokers posibles:** Exness o BlackBull.
 - **Pruebas:** cuenta **cent de Exness** con ~10 USD (1.000 USC).
 - **Infraestructura:** PC hogareña que puede quedar prendida mucho tiempo.
@@ -1207,3 +1207,15 @@ Con tus respuestas a §25: **Etapa 0 — FASE 2 (Market Data Engine + TickRecord
 | Exness / BlackBull | Leer los términos de ambos sobre scalping y plazos mínimos antes de operar en real. BlackBull (cuentas con comisión) puede servir para comparar costos con una cuenta demo. |
 
 **Próximo entregable:** grabación de ticks del oro durante 1–2 semanas con `ATS_TickRecorder` (ver `fase-02-grabador-de-ticks.md`) y el mapa de costo contra movimiento por plazo y hora.
+
+### 26.1 Multi-activo (oro, BTC, ETH, US30, US100, US500)
+
+| Tema | Consecuencia |
+|---|---|
+| **Correlación** | US30, US100 y US500 se mueven casi juntos; BTC y ETH también. Los seis activos son en la práctica **tres factores**: oro, índices de EE. UU. y cripto. El Portfolio Engine (§32 del prompt) limita la exposición **por factor**: una compra en US100 y otra en US500 cuentan como una sola apuesta grande, no como dos chicas. |
+| **Parámetros propios** | Cada activo tiene su propio spread, tamaño de contrato, valor del punto, horario y volatilidad. Ningún parámetro se copia de un activo a otro (§33 del prompt); cada estrategia se valida por activo. |
+| **Comparación** | El CVR no tiene unidades, así que permite comparar los seis activos en una misma tabla. El análisis genera esa tabla. |
+| **Índices** | Horario con pausa diaria. La apertura de la sesión de contado de Nueva York (13:30 UTC; 14:30 UTC en el horario de invierno de EE. UU.) trae picos de volatilidad y de spread. También hay ajustes por dividendos. |
+| **Cripto** | Opera los 7 días; los fines de semana tienen menos liquidez y spreads distintos. El spread suele ser alto en relación al movimiento de corto plazo: candidato a necesitar plazos más largos. Los swaps (costo por mantener la posición de un día para otro) suelen ser altos: no conviene dejar posiciones abiertas de un día para otro. |
+| **Disponibilidad en la cuenta cent** | Hay que verificar qué activos ofrece la cuenta cent de Exness. Si alguno no está, se graba desde una cuenta demo del mismo broker en una segunda instalación de MT5, con otra carpeta de salida (`InpRootFolder`). Los costos de la demo son orientativos. |
+| **Orden de trabajo** | Se graban los seis desde el principio (cuesta poco), pero las estrategias se investigan **de a un activo**, empezando por el de mejor CVR. |
