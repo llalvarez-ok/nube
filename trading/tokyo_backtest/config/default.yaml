@@ -41,7 +41,7 @@ data:
 # ---------------------------------------------------------------------
 instruments:
   USDJPY:
-    files: {mid: "USDJPY/USDJPY_*.csv.gz"}
+    files: {mid: "**/USDJPY_*.csv.gz"}   # carpeta por símbolo o archivos sueltos
     format: mt5py
     source_tz: UTC
     asset_class: fx
@@ -59,7 +59,7 @@ instruments:
     swap_long_points: 0.0                                          # SUPUESTO
     swap_short_points: 0.0
   AUDJPY:
-    files: {mid: "AUDJPY/AUDJPY_*.csv.gz"}
+    files: {mid: "**/AUDJPY_*.csv.gz"}   # carpeta por símbolo o archivos sueltos
     format: mt5py
     source_tz: UTC
     asset_class: fx
@@ -69,14 +69,14 @@ instruments:
     contract_size: 100000
     lot_step: 0.01
     min_lot: 0.01
-    expected_price_range: [55, 110]
+    expected_price_range: [55, 130]
     spread_model: {type: hourly, unit: pips, default: 1.6, by_hour: {21: 4.0, 22: 4.0, 23: 2.5}}  # SUPUESTO
     slippage_pips: 0.4
     commission_per_lot_rt: 7.0
     swap_long_points: 0.0
     swap_short_points: 0.0
   AUDUSD:
-    files: {mid: "AUDUSD/AUDUSD_*.csv.gz"}
+    files: {mid: "**/AUDUSD_*.csv.gz"}   # carpeta por símbolo o archivos sueltos
     format: mt5py
     source_tz: UTC
     asset_class: fx
@@ -93,7 +93,7 @@ instruments:
     swap_long_points: 0.0
     swap_short_points: 0.0
   NZDUSD:
-    files: {mid: "NZDUSD/NZDUSD_*.csv.gz"}
+    files: {mid: "**/NZDUSD_*.csv.gz"}   # carpeta por símbolo o archivos sueltos
     format: mt5py
     source_tz: UTC
     asset_class: fx
@@ -110,7 +110,7 @@ instruments:
     swap_long_points: 0.0
     swap_short_points: 0.0
   EURJPY:
-    files: {mid: "EURJPY/EURJPY_*.csv.gz"}
+    files: {mid: "**/EURJPY_*.csv.gz"}   # carpeta por símbolo o archivos sueltos
     format: mt5py
     source_tz: UTC
     asset_class: fx
@@ -127,7 +127,7 @@ instruments:
     swap_long_points: 0.0
     swap_short_points: 0.0
   JP225:
-    files: {mid: "JP225/JP225_*.csv.gz"}
+    files: {mid: "**/JP225_*.csv.gz"}   # carpeta por símbolo o archivos sueltos
     format: mt5py
     source_tz: UTC
     asset_class: index_cfd
@@ -144,7 +144,7 @@ instruments:
     swap_long_points: 0.0
     swap_short_points: 0.0
   XAUUSD:
-    files: {mid: "XAUUSD/XAUUSD_*.csv.gz"}
+    files: {mid: "**/XAUUSD_*.csv.gz"}   # carpeta por símbolo o archivos sueltos
     format: mt5py
     source_tz: UTC
     asset_class: metal

@@ -71,7 +71,11 @@ def fetch_year(symbol: str, year: int) -> pd.DataFrame | None:
     if rates is None or len(rates) == 0:
         return None
     df = pd.DataFrame(rates)
-    df["time"] = pd.to_datetime(df["time"], unit="s").dt.strftime("%Y-%m-%d %H:%M:%S")
+    df["time"] = pd.to_datetime(df["time"], unit="s")
+    df = df[df["time"].dt.year == year]          # MT5 a veces devuelve velas fuera del rango pedido
+    if df.empty:
+        return None
+    df["time"] = df["time"].dt.strftime("%Y-%m-%d %H:%M:%S")
     return df[["time", "open", "high", "low", "close", "tick_volume", "spread", "real_volume"]]
 
 
@@ -79,6 +83,8 @@ def main():
     if not mt5.initialize():
         sys.exit(f"No pude conectarme a MetaTrader 5 ({mt5.last_error()}). Abrí MT5, logueate y probá de nuevo.")
     acc, term = mt5.account_info(), mt5.terminal_info()
+    if OUT.exists() and any(OUT.iterdir()):
+        sys.exit(f"Ya existe la carpeta {OUT.resolve()} con datos. Borrala (o renombrala) y ejecutá de nuevo.")
     OUT.mkdir(exist_ok=True)
     specs = {"_broker": {"company": getattr(acc, "company", None), "server": getattr(acc, "server", None),
                          "account_currency": getattr(acc, "currency", None),
@@ -86,8 +92,10 @@ def main():
                          "exported_at_utc": datetime.now(timezone.utc).isoformat()}}
     lines = [f"Broker: {specs['_broker']['company']} / {specs['_broker']['server']}"]
     if term is not None and term.maxbars < 10_000_000:
-        print(f"AVISO: 'Máx. barras en el gráfico' = {term.maxbars}. Para más historial poné 'Unlimited' en "
-              "Herramientas > Opciones > Gráficos y reiniciá MT5.")
+        mt5.shutdown()
+        sys.exit(f"ALTO: 'Máx. barras en el gráfico' está en {term.maxbars:,}, así que MT5 sólo entrega unos meses "
+                 "de M1.\nPoné 'Unlimited' en Herramientas > Opciones > Gráficos > 'Máx. barras en el gráfico', "
+                 "cerrá MT5 por completo, volvé a abrirlo y ejecutá de nuevo este script.")
     for target, cands in WANTED.items():
         sym = find_symbol(cands)
         if sym is None:
