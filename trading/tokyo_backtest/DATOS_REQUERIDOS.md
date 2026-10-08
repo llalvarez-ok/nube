@@ -11,8 +11,39 @@ Verificación hecha:
 | Google Drive conectado | Sin archivos USDJPY / XAUUSD / JP225 / AUDJPY / Nikkei / M1 |
 | Descarga directa (Dukascopy, HistData, Yahoo, Stooq) | Bloqueada por la política de red del entorno (403 del proxy) |
 
-Para correr el estudio necesito que me pases los archivos (subidos al repo en
-`trading/tokyo_backtest/data/raw/`, a Drive, o habilitando un dominio de descarga).
+Para correr el estudio necesito los archivos en `trading/tokyo_backtest/data/raw/`.
+Lo más simple es el camino de la sección 0.
+
+## 0. Camino recomendado: exportar desde tu MetaTrader 5 (Exness)
+
+Claude corre en un servidor en la nube y no puede entrar a tu PC, así que la exportación
+la hace un script en tu computadora, con MT5 abierto:
+
+1. **Instalar Python** (una sola vez): https://www.python.org/downloads/ → al instalar, tildar
+   *"Add Python to PATH"*.
+2. **En MT5**: Herramientas → Opciones → Gráficos → *Máx. barras en el gráfico* = **Unlimited**
+   → Aceptar → cerrar y volver a abrir MT5 (logueado).
+3. **Descargar el script** [`exportar_mt5.py`](exportar_mt5.py) (en GitHub: abrir el archivo →
+   botón *Download raw file*) y guardarlo en una carpeta, por ejemplo `C:\backtest`.
+4. **Abrir una terminal** en esa carpeta (en el Explorador, escribir `cmd` en la barra de
+   dirección y Enter) y ejecutar:
+   ```
+   pip install MetaTrader5 pandas
+   python exportar_mt5.py
+   ```
+   Tarda unos minutos. Crea la carpeta `datos_mt5` con un archivo por símbolo y año,
+   `especificaciones.json` (contrato, punto, swap, moneda: así los costos dejan de ser supuestos)
+   y `resumen.txt`. No guarda número de cuenta, saldo ni contraseña.
+5. **Subir la carpeta a GitHub**: en el repo `nube`, elegir la rama
+   `claude/confident-darwin-t42tpn`, entrar a `trading/tokyo_backtest/data/raw/` →
+   *Add file* → *Upload files* → arrastrar **el contenido** de `datos_mt5` (las carpetas de cada
+   símbolo y los dos archivos) → *Commit changes*.
+6. Avisarle a Claude. Además conviene decirle **qué tipo de cuenta Exness usás** (Standard,
+   Pro, Raw Spread, Zero), porque la comisión depende de eso.
+
+El config ya está preparado para este formato (`format: mt5py`, servidor Exness en UTC; `check-data`
+lo verifica). Si Exness no tiene M1 suficientemente antiguo para algún símbolo, el reporte de
+calidad lo va a mostrar y se puede completar con Dukascopy (opción B).
 
 ## 1. Qué archivos
 
@@ -35,7 +66,7 @@ Todos los símbolos deberían cubrir el mismo período (para correlaciones y por
 
 ## 2. Formatos aceptados
 
-### Opción A (la más simple): export de MetaTrader 5 de tu broker
+### Opción A2: export manual de MetaTrader 5 (sin Python)
 
 En MT5: `Ver > Símbolos > Barras` → elegir símbolo, período M1, rango de fechas →
 `Solicitar` → `Exportar barras`. Genera:

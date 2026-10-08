@@ -34,14 +34,16 @@ data:
 
 # ---------------------------------------------------------------------
 # Instrumentos. Cada uno puede tener specs distintos. Ver DATOS_REQUERIDOS.md
-# format: mt5 | dukascopy | generic
+# format: mt5py (exportar_mt5.py) | mt5 (export manual de MT5) | dukascopy | generic
 # source_tz: UTC | "NY+7" (servidor GMT+2/+3 que sigue DST de NY) | zona IANA
+# Por defecto: export de exportar_mt5.py desde Exness, cuyo servidor MT5 usa GMT+0 (UTC).
+# check-data lo verifica con la apertura semanal; si falla, cambiar source_tz.
 # ---------------------------------------------------------------------
 instruments:
   USDJPY:
-    files: {mid: USDJPY_M1.csv}           # o {bid: ..., ask: ...}
-    format: mt5
-    source_tz: "NY+7"
+    files: {mid: "USDJPY/USDJPY_*.csv.gz"}
+    format: mt5py
+    source_tz: UTC
     asset_class: fx
     quote_ccy: JPY
     point: 0.001
@@ -57,9 +59,9 @@ instruments:
     swap_long_points: 0.0                                          # SUPUESTO
     swap_short_points: 0.0
   AUDJPY:
-    files: {mid: AUDJPY_M1.csv}
-    format: mt5
-    source_tz: "NY+7"
+    files: {mid: "AUDJPY/AUDJPY_*.csv.gz"}
+    format: mt5py
+    source_tz: UTC
     asset_class: fx
     quote_ccy: JPY
     point: 0.001
@@ -74,9 +76,9 @@ instruments:
     swap_long_points: 0.0
     swap_short_points: 0.0
   AUDUSD:
-    files: {mid: AUDUSD_M1.csv}
-    format: mt5
-    source_tz: "NY+7"
+    files: {mid: "AUDUSD/AUDUSD_*.csv.gz"}
+    format: mt5py
+    source_tz: UTC
     asset_class: fx
     quote_ccy: USD
     point: 0.00001
@@ -91,9 +93,9 @@ instruments:
     swap_long_points: 0.0
     swap_short_points: 0.0
   NZDUSD:
-    files: {mid: NZDUSD_M1.csv}
-    format: mt5
-    source_tz: "NY+7"
+    files: {mid: "NZDUSD/NZDUSD_*.csv.gz"}
+    format: mt5py
+    source_tz: UTC
     asset_class: fx
     quote_ccy: USD
     point: 0.00001
@@ -108,9 +110,9 @@ instruments:
     swap_long_points: 0.0
     swap_short_points: 0.0
   EURJPY:
-    files: {mid: EURJPY_M1.csv}
-    format: mt5
-    source_tz: "NY+7"
+    files: {mid: "EURJPY/EURJPY_*.csv.gz"}
+    format: mt5py
+    source_tz: UTC
     asset_class: fx
     quote_ccy: JPY
     point: 0.001
@@ -125,9 +127,9 @@ instruments:
     swap_long_points: 0.0
     swap_short_points: 0.0
   JP225:
-    files: {mid: JP225_M1.csv}
-    format: mt5
-    source_tz: "NY+7"
+    files: {mid: "JP225/JP225_*.csv.gz"}
+    format: mt5py
+    source_tz: UTC
     asset_class: index_cfd
     quote_ccy: JPY        # verificar: algunos brokers cotizan el CFD en USD
     point: 1.0
@@ -142,9 +144,9 @@ instruments:
     swap_long_points: 0.0
     swap_short_points: 0.0
   XAUUSD:
-    files: {mid: XAUUSD_M1.csv}
-    format: mt5
-    source_tz: "NY+7"
+    files: {mid: "XAUUSD/XAUUSD_*.csv.gz"}
+    format: mt5py
+    source_tz: UTC
     asset_class: metal
     quote_ccy: USD
     point: 0.01

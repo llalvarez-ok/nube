@@ -13,7 +13,8 @@ determinar **si existe una ventaja estadística robusta** y en qué condiciones.
 ```bash
 cd trading/tokyo_backtest
 pip install -r requirements.txt
-# 1) copiar los CSV a data/raw/ (ver DATOS_REQUERIDOS.md) y ajustar config/default.yaml
+# 0) en tu PC con MT5 abierto: python exportar_mt5.py  -> subir datos_mt5/* a data/raw/
+# 1) ajustar costos del broker en config/default.yaml (ver DATOS_REQUERIDOS.md)
 python run.py check-data          # SIEMPRE primero: calidad, timezone, gaps, bid/ask, símbolo correcto
 python run.py run                 # estudio completo -> output/
 python run.py run --symbols USDJPY JP225 --strategies C_tokyo_or_breakout D_tokyo_or_failed_breakout

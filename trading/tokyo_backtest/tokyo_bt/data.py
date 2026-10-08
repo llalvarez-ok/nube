@@ -46,6 +46,17 @@ def _read_mt5(path: Path) -> pd.DataFrame:
     return out
 
 
+def _read_mt5py(path: Path) -> pd.DataFrame:
+    """CSV generado por exportar_mt5.py (API Python de MT5): precios BID, hora del servidor."""
+    df = pd.read_csv(path)
+    ts = pd.to_datetime(df["time"], format="%Y-%m-%d %H:%M:%S")
+    out = pd.DataFrame({"o": df["open"].values, "h": df["high"].values, "l": df["low"].values,
+                        "c": df["close"].values, "volume": df["tick_volume"].values,
+                        "spread_points": df["spread"].values}, index=ts)
+    out.attrs["price_side"] = "bid"
+    return out
+
+
 def _read_dukascopy(path: Path) -> pd.DataFrame:
     """CSV de Dukascopy (Historical Data Feed): 'Gmt time,Open,High,Low,Close,Volume' (UTC)."""
     df = pd.read_csv(path)
@@ -91,8 +102,21 @@ def to_utc(idx: pd.DatetimeIndex, source_tz: str) -> pd.DatetimeIndex:
 # Carga de un instrumento
 # ----------------------------------------------------------------------------
 
-def _read_file(path: Path, spec: dict) -> pd.DataFrame:
+def _expand(raw_dir: Path, pattern: str) -> list[Path]:
+    """Un archivo o un patrón glob (p. ej. 'USDJPY/USDJPY_*.csv.gz', un archivo por año)."""
+    return sorted(raw_dir.glob(pattern)) if any(ch in pattern for ch in "*?[") else \
+        ([raw_dir / pattern] if (raw_dir / pattern).exists() else [])
+
+
+def _read_file(path, spec: dict) -> pd.DataFrame:
+    if isinstance(path, list):
+        parts = [_read_file(p, spec) for p in path]
+        out = pd.concat(parts)
+        out.attrs = parts[0].attrs
+        return out
     fmt = spec.get("format", "mt5")
+    if fmt == "mt5py":
+        return _read_mt5py(path)
     if fmt == "mt5":
         return _read_mt5(path)
     if fmt == "dukascopy":
@@ -109,7 +133,7 @@ def load_raw(cfg: dict, symbol: str) -> pd.DataFrame:
     spec = cfg["instruments"][symbol]
     raw_dir = resolve(cfg, cfg["data"]["raw_dir"])
     files = spec.get("files", {})
-    missing = [f for f in files.values() if not (raw_dir / f).exists()]
+    missing = [f for f in files.values() if not _expand(raw_dir, f)]
     if not files or missing:
         raise DataMissingError(f"{symbol}: faltan archivos en {raw_dir}: {missing or 'ninguno configurado'}")
 
@@ -119,8 +143,8 @@ def load_raw(cfg: dict, symbol: str) -> pd.DataFrame:
         return df
 
     if "bid" in files and "ask" in files:
-        bid = clean(_read_file(raw_dir / files["bid"], spec))
-        ask = clean(_read_file(raw_dir / files["ask"], spec))
+        bid = clean(_read_file(_expand(raw_dir, files["bid"]), spec))
+        ask = clean(_read_file(_expand(raw_dir, files["ask"]), spec))
         idx = bid.index.intersection(ask.index)
         bid, ask = bid.loc[idx], ask.loc[idx]
         out = pd.DataFrame(index=idx)
@@ -131,7 +155,7 @@ def load_raw(cfg: dict, symbol: str) -> pd.DataFrame:
         out.attrs.update(has_bid_ask=True, price_side="bid_ask", spread_source="bid_ask_data")
     else:
         f = files.get("mid") or files.get("bid")
-        d = clean(_read_file(raw_dir / f, spec))
+        d = clean(_read_file(_expand(raw_dir, f), spec))
         side = d.attrs.get("price_side", "mid")
         if "bid" in files and side == "file":
             side = "bid"
@@ -167,7 +191,7 @@ def load_cached(cfg: dict, symbol: str) -> pd.DataFrame:
     cache.mkdir(parents=True, exist_ok=True)
     spec = cfg["instruments"][symbol]
     raw_dir = resolve(cfg, cfg["data"]["raw_dir"])
-    mtimes = [(raw_dir / f).stat().st_mtime for f in spec.get("files", {}).values() if (raw_dir / f).exists()]
+    mtimes = [p.stat().st_mtime for f in spec.get("files", {}).values() for p in _expand(raw_dir, f)]
     key = f"{symbol}_{int(max(mtimes)) if mtimes else 0}_{spec.get('source_tz')}.pkl"
     p = cache / key
     if p.exists():
