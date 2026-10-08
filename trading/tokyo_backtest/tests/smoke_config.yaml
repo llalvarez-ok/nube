@@ -1,0 +1,22 @@
+# Override para la prueba de humo con datos SINTÉTICOS (grillas reducidas).
+data: {raw_dir: SYNTH_RAW, cache_dir: SYNTH_CACHE}
+project: {output_dir: SYNTH_OUT}
+selection: {min_trades_is: 40}
+walk_forward: {train_months: 12, test_months: 6, step_months: 6}
+monte_carlo: {n_sims: 2000, top_n_configs: 3}
+strategies:
+  A_asian_range_breakout:
+    symbols: [USDJPY, AUDJPY]
+    grid: {buffer_atr: [0.0, 0.05], sl: [range_opposite, atr_0.50, atr_0.75], tp: [r_1.0, r_2.0, trail_atr_1.0, trail_swing], range_filter: [none, gt_0.25, btw_0.50_1.50]}
+  B_asian_failed_breakout:
+    symbols: [USDJPY, AUDJPY]
+    grid: {buffer_atr: [0.0, 0.05], min_sweep_atr: [0.0, 0.05, 0.10], exit: [tp1_mid, split_mid_opposite], range_filter: [none, gt_0.25]}
+  C_tokyo_or_breakout:
+    symbols: [USDJPY]
+    grid: {or_minutes: [15, 30], buffer_atr: [0.0, 0.05], sl: [or_opposite, atr_0.50], tp: [r_1.0, r_2.0], range_filter: [none]}
+  D_tokyo_or_failed_breakout:
+    symbols: [USDJPY]
+    grid: {or_minutes: [15, 30], buffer_atr: [0.0], min_sweep_atr: [0.0, 0.05], exit: [tp1_mid, tp2_opposite], range_filter: [none]}
+  E_tokyo_breakout_vwap:
+    symbols: [USDJPY, AUDJPY]
+    grid: {buffer_atr: [0.0, 0.05], sl: [range_opposite, atr_0.75], tp: [r_1.0, r_2.0], range_filter: [none]}

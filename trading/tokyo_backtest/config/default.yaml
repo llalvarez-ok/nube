@@ -1,0 +1,332 @@
+# =====================================================================
+# Tokyo Session Backtest — configuración principal
+# Todo horario se expresa en UTC. Internamente todo se trabaja en UTC.
+# Valores marcados  # SUPUESTO  NO provienen de datos: son un modelo
+# conservador que debe reemplazarse por los valores reales del broker.
+# =====================================================================
+
+project:
+  name: tokyo_session_research
+  output_dir: output            # relativo a trading/tokyo_backtest/
+  seed: 20261008
+  account_currency: USD
+  initial_equity: 10000
+
+session:
+  timezone_internal: UTC
+  # Sesión Tokio 00:00-09:00 UTC (21:00-06:00 ART). Japón no usa DST.
+  start_utc: "00:00"
+  end_utc: "09:00"
+  last_entry_utc: "08:00"       # no abrir operaciones después de esta hora
+  exit_time_utc: "09:00"        # cierre forzado de toda posición abierta
+  trading_days: [0, 1, 2, 3, 4] # lunes..viernes (por fecha UTC de la sesión)
+  min_session_coverage: 0.90    # fracción mínima de barras M1 presentes en la sesión
+  daily_boundary_utc: "00:00"   # corte de día para barras D1 (ATR diario)
+  min_daily_hours: 12           # días D1 con menos horas de datos se descartan (stub del domingo)
+
+data:
+  raw_dir: data/raw
+  cache_dir: data/cache
+  # Resolución con la que se simula la ejecución. M1 preferido; M5 permitido.
+  execution_timeframe: M1
+  signal_timeframe: M5          # vela de confirmación
+  supported_timeframes: [M1, M5, M15, H1]
+
+# ---------------------------------------------------------------------
+# Instrumentos. Cada uno puede tener specs distintos. Ver DATOS_REQUERIDOS.md
+# format: mt5 | dukascopy | generic
+# source_tz: UTC | "NY+7" (servidor GMT+2/+3 que sigue DST de NY) | zona IANA
+# ---------------------------------------------------------------------
+instruments:
+  USDJPY:
+    files: {mid: USDJPY_M1.csv}           # o {bid: ..., ask: ...}
+    format: mt5
+    source_tz: "NY+7"
+    asset_class: fx
+    quote_ccy: JPY
+    point: 0.001
+    pip: 0.01
+    contract_size: 100000
+    lot_step: 0.01
+    min_lot: 0.01
+    expected_price_range: [70, 200]
+    spread_model: {type: hourly, unit: pips,                       # SUPUESTO
+                   default: 1.0, by_hour: {21: 3.0, 22: 3.0, 23: 1.5, 0: 1.0, 1: 0.9}}
+    slippage_pips: 0.3                                             # SUPUESTO
+    commission_per_lot_rt: 7.0                                     # SUPUESTO (USD)
+    swap_long_points: 0.0                                          # SUPUESTO
+    swap_short_points: 0.0
+  AUDJPY:
+    files: {mid: AUDJPY_M1.csv}
+    format: mt5
+    source_tz: "NY+7"
+    asset_class: fx
+    quote_ccy: JPY
+    point: 0.001
+    pip: 0.01
+    contract_size: 100000
+    lot_step: 0.01
+    min_lot: 0.01
+    expected_price_range: [55, 110]
+    spread_model: {type: hourly, unit: pips, default: 1.6, by_hour: {21: 4.0, 22: 4.0, 23: 2.5}}  # SUPUESTO
+    slippage_pips: 0.4
+    commission_per_lot_rt: 7.0
+    swap_long_points: 0.0
+    swap_short_points: 0.0
+  AUDUSD:
+    files: {mid: AUDUSD_M1.csv}
+    format: mt5
+    source_tz: "NY+7"
+    asset_class: fx
+    quote_ccy: USD
+    point: 0.00001
+    pip: 0.0001
+    contract_size: 100000
+    lot_step: 0.01
+    min_lot: 0.01
+    expected_price_range: [0.55, 1.10]
+    spread_model: {type: hourly, unit: pips, default: 1.0, by_hour: {21: 3.0, 22: 3.0, 23: 1.5}}  # SUPUESTO
+    slippage_pips: 0.3
+    commission_per_lot_rt: 7.0
+    swap_long_points: 0.0
+    swap_short_points: 0.0
+  NZDUSD:
+    files: {mid: NZDUSD_M1.csv}
+    format: mt5
+    source_tz: "NY+7"
+    asset_class: fx
+    quote_ccy: USD
+    point: 0.00001
+    pip: 0.0001
+    contract_size: 100000
+    lot_step: 0.01
+    min_lot: 0.01
+    expected_price_range: [0.50, 0.90]
+    spread_model: {type: hourly, unit: pips, default: 1.5, by_hour: {21: 4.0, 22: 4.0, 23: 2.0}}  # SUPUESTO
+    slippage_pips: 0.4
+    commission_per_lot_rt: 7.0
+    swap_long_points: 0.0
+    swap_short_points: 0.0
+  EURJPY:
+    files: {mid: EURJPY_M1.csv}
+    format: mt5
+    source_tz: "NY+7"
+    asset_class: fx
+    quote_ccy: JPY
+    point: 0.001
+    pip: 0.01
+    contract_size: 100000
+    lot_step: 0.01
+    min_lot: 0.01
+    expected_price_range: [90, 200]
+    spread_model: {type: hourly, unit: pips, default: 1.5, by_hour: {21: 4.0, 22: 4.0, 23: 2.0}}  # SUPUESTO
+    slippage_pips: 0.4
+    commission_per_lot_rt: 7.0
+    swap_long_points: 0.0
+    swap_short_points: 0.0
+  JP225:
+    files: {mid: JP225_M1.csv}
+    format: mt5
+    source_tz: "NY+7"
+    asset_class: index_cfd
+    quote_ccy: JPY        # verificar: algunos brokers cotizan el CFD en USD
+    point: 1.0
+    pip: 1.0
+    contract_size: 1      # verificar: 1, 10 o 100 JPY por punto según broker
+    lot_step: 0.1
+    min_lot: 0.1
+    expected_price_range: [7000, 60000]
+    spread_model: {type: hourly, unit: pips, default: 8.0, by_hour: {21: 20.0, 22: 20.0, 23: 12.0}}  # SUPUESTO (puntos)
+    slippage_pips: 3.0
+    commission_per_lot_rt: 0.0
+    swap_long_points: 0.0
+    swap_short_points: 0.0
+  XAUUSD:
+    files: {mid: XAUUSD_M1.csv}
+    format: mt5
+    source_tz: "NY+7"
+    asset_class: metal
+    quote_ccy: USD
+    point: 0.01
+    pip: 0.1
+    contract_size: 100
+    lot_step: 0.01
+    min_lot: 0.01
+    expected_price_range: [1000, 6000]
+    spread_model: {type: hourly, unit: pips, default: 3.0, by_hour: {21: 8.0, 22: 8.0, 23: 5.0}}  # SUPUESTO (0.30 USD)
+    slippage_pips: 1.0
+    commission_per_lot_rt: 7.0
+    swap_long_points: 0.0
+    swap_short_points: 0.0
+
+# Conversión a moneda de cuenta (USD) para PnL en $ y comisiones.
+conversion:
+  JPY: {symbol: USDJPY, op: divide}   # 1 JPY = 1 / USDJPY USD
+  USD: null
+
+# ---------------------------------------------------------------------
+# Indicadores (todos calculados sólo con barras YA cerradas)
+# ---------------------------------------------------------------------
+indicators:
+  atr:            # ATR de referencia: filtros de rango, buffers, SL por ATR, clasificación de volatilidad
+    timeframe: D1
+    period: 14
+  trail_atr:      # ATR del trailing (intradía); D1 haría que el trailing casi nunca actúe
+    timeframe: H1
+    period: 14
+  vwap:
+    # session: anclado a anchor_utc. OJO: anclado a 00:00 UTC el filtro es casi tautológico para
+    # la ruptura del rango 00-03 (un cierre sobre el Asian High casi siempre está sobre ese VWAP).
+    # rolling: VWAP de las últimas rolling_minutes (p. ej. 1440 = 24 h), filtro no trivial.
+    mode: session
+    rolling_minutes: 1440
+    anchor_utc: "00:00"
+    slope_lookback_bars: 6        # barras M5
+    price_source: typical         # (h+l+c)/3
+  swing:
+    left: 2
+    right: 2                      # un swing M5 se confirma 2 velas M5 después
+  volatility_regime:
+    lookback_days: 252            # percentiles del ATR calculados sólo con el pasado
+    low_pct: 33
+    high_pct: 67
+
+# ---------------------------------------------------------------------
+# Estrategias y grillas de parámetros
+# ---------------------------------------------------------------------
+strategies:
+  A_asian_range_breakout:
+    enabled: true
+    symbols: [USDJPY, AUDJPY, AUDUSD, NZDUSD, EURJPY, JP225, XAUUSD]
+    range_start_utc: "00:00"
+    range_end_utc: "03:00"
+    grid:
+      buffer_atr: [0.0, 0.025, 0.05, 0.10]
+      sl: ["range_opposite", "range_0.50", "range_0.75", "range_1.00",
+           "atr_0.50", "atr_0.75", "atr_1.00", "atr_1.25"]
+      tp: ["r_0.5", "r_1.0", "r_1.5", "r_2.0", "r_3.0",
+           "trail_atr_0.5", "trail_atr_1.0", "trail_swing"]
+      range_filter: ["none", "gt_0.25", "gt_0.50", "gt_0.75", "btw_0.50_1.50", "btw_0.75_1.50"]
+    trail_tp1_r: 1.0
+    trail_partial_fraction: 0.5   # fracción cerrada en TP1 (0 = sin parcial; sólo BE + trailing)
+
+  B_asian_failed_breakout:
+    enabled: true
+    symbols: [USDJPY, AUDJPY, AUDUSD, NZDUSD, EURJPY, JP225, XAUUSD]
+    range_start_utc: "00:00"
+    range_end_utc: "03:00"
+    grid:
+      buffer_atr: [0.0, 0.025, 0.05, 0.10]
+      min_sweep_atr: [0.0, 0.05, 0.10, 0.20, 0.30, 0.50]
+      exit: ["tp1_mid", "tp2_opposite", "split_mid_opposite"]
+      range_filter: ["none", "gt_0.25", "gt_0.50", "btw_0.50_1.50"]
+    split_move_to_be: true        # en split: tras TP1 el resto pasa a breakeven
+
+  C_tokyo_or_breakout:
+    enabled: true
+    symbols: [JP225, USDJPY, AUDJPY, XAUUSD]   # foco en JP225
+    or_start_utc: "00:00"
+    grid:
+      or_minutes: [5, 15, 30, 60]
+      buffer_atr: [0.0, 0.025, 0.05, 0.10]
+      sl: ["or_opposite", "atr_0.50", "atr_0.75", "atr_1.00"]
+      tp: ["r_1.0", "r_1.5", "r_2.0", "r_3.0", "trail_atr_1.0"]
+      range_filter: ["none"]
+    trail_tp1_r: 1.0
+    trail_partial_fraction: 0.5
+
+  D_tokyo_or_failed_breakout:
+    enabled: true
+    symbols: [JP225, USDJPY, AUDJPY, XAUUSD]
+    or_start_utc: "00:00"
+    grid:
+      or_minutes: [5, 15, 30, 60]
+      buffer_atr: [0.0, 0.025, 0.05, 0.10]
+      min_sweep_atr: [0.0, 0.05, 0.10, 0.20]
+      exit: ["tp1_mid", "tp2_opposite", "split_mid_opposite"]
+      range_filter: ["none"]
+    split_move_to_be: true
+
+  E_tokyo_breakout_vwap:
+    enabled: true
+    symbols: [JP225, USDJPY, AUDJPY]
+    # rango de ruptura: Asian Initial Range (00-03 UTC)
+    range_start_utc: "00:00"
+    range_end_utc: "03:00"
+    vwap_filter: [true, false]     # false = misma estrategia sin VWAP (control)
+    requires_volume: true          # sin volumen no hay VWAP: la estrategia se marca NO DISPONIBLE
+    grid:
+      buffer_atr: [0.0, 0.05]
+      sl: ["range_opposite", "atr_0.75", "atr_1.00"]
+      tp: ["r_1.0", "r_1.5", "r_2.0", "trail_atr_1.0"]
+      range_filter: ["none", "gt_0.50"]
+    trail_tp1_r: 1.0
+    trail_partial_fraction: 0.5
+
+# ---------------------------------------------------------------------
+# Restricciones operativas
+# ---------------------------------------------------------------------
+position_modes:
+  - {name: per_signal,       max_per_session: null, single_position: true}
+  - {name: one_per_session,  max_per_session: 1,    single_position: true}
+  - {name: two_per_session,  max_per_session: 2,    single_position: true}
+default_position_mode: per_signal
+
+# ---------------------------------------------------------------------
+# Costos y sensibilidad
+# ---------------------------------------------------------------------
+costs:
+  use_bid_ask_if_available: true
+  bar_spread_column_is_minimum: true   # columna <SPREAD> de MT5 = cota inferior; se usa max(columna, modelo)
+  same_bar_sl_tp: sl_first             # ambigüedad intrabarra: siempre asumir SL primero
+  limit_tp_slippage: false             # TP como orden límite sin slippage
+sensitivity:
+  spread_mult: [1.0, 1.5, 2.0]
+  slippage_mult: [1.0, 2.0, 3.0]
+  not_robust_rule: "expectancy_R <= 0 con spread x1.5 o slippage x2"
+
+# ---------------------------------------------------------------------
+# Noticias (opcional) — calendario provisto por el usuario
+# ---------------------------------------------------------------------
+news:
+  enabled: true
+  file: data/news/calendar.csv          # columnas: datetime_utc,currency,impact,event
+  impact_levels: [high]
+  window_before_min: 30
+  window_after_min: 30
+  currency_map:
+    USDJPY: [USD, JPY]
+    AUDJPY: [AUD, JPY]
+    AUDUSD: [AUD, USD]
+    NZDUSD: [NZD, USD]
+    EURJPY: [EUR, JPY]
+    JP225: [JPY, USD]
+    XAUUSD: [USD]
+
+# ---------------------------------------------------------------------
+# Gestión de capital
+# ---------------------------------------------------------------------
+money_management:
+  risk_pct: [0.25, 0.50, 1.00]          # % del equity ACTUAL
+  fixed_lot: 0.10                        # comparación con lotaje fijo
+  ruin_drawdown_pct: 50                  # "ruina" = drawdown >= 50% del pico
+
+# ---------------------------------------------------------------------
+# Validación
+# ---------------------------------------------------------------------
+split:
+  in_sample: 0.60
+  validation: 0.20
+  out_of_sample: 0.20                    # NUNCA se usa para elegir parámetros
+walk_forward:
+  train_months: 24
+  test_months: 6
+  step_months: 6
+monte_carlo:
+  n_sims: 10000
+  top_n_configs: 10
+selection:
+  min_trades_is: 100                     # configs con menos operaciones IS no se eligen
+  robustness_neighbors: 1                # vecinos +-1 en cada eje de la grilla
+  fragile_max_year_share: 0.50           # >50% del beneficio en un solo año => FRÁGIL
+  fragile_min_wf_positive: 0.60          # <60% de ventanas WF positivas => FRÁGIL

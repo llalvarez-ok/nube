@@ -1,0 +1,6 @@
+data/raw/*
+!data/raw/.gitkeep
+data/cache/
+data/news/*
+!data/news/.gitkeep
+output/
