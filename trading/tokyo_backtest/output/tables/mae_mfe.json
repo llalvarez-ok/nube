@@ -1,0 +1,19 @@
+{
+  "mae_R_winners_mean": 0.24092868634986486,
+  "mae_R_losers_mean": 0.6097135856969389,
+  "mfe_R_mean": 0.40131211451802906,
+  "mfe_R_winners_mean": 0.6368711349074626,
+  "mfe_R_losers_mean": 0.17777941481440446,
+  "mfe_R_pctiles": {
+    "25": 0.09051311514089261,
+    "50": 0.24554763640253502,
+    "75": 0.5228714715442785,
+    "90": 0.9855853637973674
+  },
+  "winners_mae_gt_0.8R_share": 0.028237259816207186,
+  "losers_mfe_ge_1R_share": 0.01220865704772475,
+  "losers_mfe_ge_0.5R_share": 0.08752180117329951,
+  "notes": [
+    "La mediana de MFE es 0.25R: targets muy por encima de ~0.52R (p75) se alcanzan pocas veces."
+  ]
+}
