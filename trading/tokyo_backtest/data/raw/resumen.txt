@@ -1,0 +1,8 @@
+Broker: Exness Technologies Ltd / Exness-MT5Real22
+USDJPY -> USDJPYc: 100,013 velas M1, años 2013-2026
+AUDJPY -> AUDJPYc: 100,016 velas M1, años 2010-2026
+AUDUSD -> AUDUSDc: 100,016 velas M1, años 2010-2026
+NZDUSD -> NZDUSDc: 100,016 velas M1, años 2010-2026
+EURJPY -> EURJPYc: 100,016 velas M1, años 2010-2026
+JP225: NO ENCONTRADO
+XAUUSD -> XAUUSDc: 100,028 velas M1, años 2010-2026
