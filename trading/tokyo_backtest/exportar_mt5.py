@@ -3,7 +3,8 @@
 Se ejecuta EN TU PC (Windows), con MetaTrader 5 abierto y logueado:
 
     pip install MetaTrader5 pandas
-    python exportar_mt5.py
+    python exportar_mt5.py            # todos los símbolos
+    python exportar_mt5.py XAUUSD     # sólo los indicados
 
 Genera la carpeta `datos_mt5/` con:
   - <SIMBOLO>/<SIMBOLO>_<AÑO>.csv.gz   velas M1 (precio BID, hora del servidor, spread por vela)
@@ -53,7 +54,10 @@ def find_symbol(candidates: list[str]) -> str | None:
         if c in upper:
             return upper[c]
     for c in candidates:                       # con sufijo (USDJPYm, XAUUSDc, ...)
-        hits = sorted(n for n in names if n.upper().startswith(c) and len(n) <= len(c) + 4)
+        # el más corto primero: XAUUSDm antes que XAUUSD247m (variante 24/7 de Exness)
+        hits = sorted((n for n in names if n.upper().startswith(c) and len(n) <= len(c) + 2
+                       and not n[len(c):].isdigit() and "247" not in n),
+                      key=lambda n: (len(n), n))
         if hits:
             return hits[0]
     return None
@@ -83,10 +87,17 @@ def main():
     if not mt5.initialize():
         sys.exit(f"No pude conectarme a MetaTrader 5 ({mt5.last_error()}). Abrí MT5, logueate y probá de nuevo.")
     acc, term = mt5.account_info(), mt5.terminal_info()
-    if OUT.exists() and any(OUT.iterdir()):
-        sys.exit(f"Ya existe la carpeta {OUT.resolve()} con datos. Borrala (o renombrala) y ejecutá de nuevo.")
+    only = [a.upper() for a in sys.argv[1:]]        # p. ej.: python exportar_mt5.py XAUUSD
+    targets = {k: v for k, v in WANTED.items() if not only or k in only}
+    if not targets:
+        sys.exit(f"Símbolos válidos: {', '.join(WANTED)}")
+    for t in targets:
+        if (OUT / t).exists() and any((OUT / t).iterdir()):
+            sys.exit(f"Ya existe {(OUT / t).resolve()} con datos. Borrala (o renombrala) y ejecutá de nuevo.")
     OUT.mkdir(exist_ok=True)
-    specs = {"_broker": {"company": getattr(acc, "company", None), "server": getattr(acc, "server", None),
+    spec_file = OUT / "especificaciones.json"
+    old_specs = json.loads(spec_file.read_text(encoding="utf-8")) if spec_file.exists() else {}
+    specs = {**old_specs, "_broker": {"company": getattr(acc, "company", None), "server": getattr(acc, "server", None),
                          "account_currency": getattr(acc, "currency", None),
                          "max_bars_setting": getattr(term, "maxbars", None),
                          "exported_at_utc": datetime.now(timezone.utc).isoformat()}}
@@ -96,7 +107,7 @@ def main():
         sys.exit(f"ALTO: 'Máx. barras en el gráfico' está en {term.maxbars:,}, así que MT5 sólo entrega unos meses "
                  "de M1.\nPoné 'Unlimited' en Herramientas > Opciones > Gráficos > 'Máx. barras en el gráfico', "
                  "cerrá MT5 por completo, volvé a abrirlo y ejecutá de nuevo este script.")
-    for target, cands in WANTED.items():
+    for target, cands in targets.items():
         sym = find_symbol(cands)
         if sym is None:
             print(f"{target}: no encontrado en este broker")
@@ -121,7 +132,10 @@ def main():
         print(msg)
         lines.append(msg)
     (OUT / "especificaciones.json").write_text(json.dumps(specs, indent=2, default=str), encoding="utf-8")
-    (OUT / "resumen.txt").write_text("\n".join(lines), encoding="utf-8")
+    res = OUT / "resumen.txt"
+    prev = res.read_text(encoding="utf-8").splitlines()[1:] if res.exists() else []
+    prev = [l for l in prev if l.split(" ")[0].rstrip(":") not in targets]
+    res.write_text("\n".join(lines[:1] + prev + lines[1:]), encoding="utf-8")
     mt5.shutdown()
     print(f"\nListo. Carpeta: {OUT.resolve()}")
 
