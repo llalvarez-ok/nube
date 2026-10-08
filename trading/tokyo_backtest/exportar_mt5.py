@@ -47,8 +47,9 @@ SPEC_FIELDS = ["name", "description", "path", "digits", "point", "trade_contract
                "trade_calc_mode", "trade_tick_size", "trade_tick_value"]
 
 
-def find_symbol(candidates: list[str]) -> str | None:
-    names = [s.name for s in (mt5.symbols_get() or [])]
+def find_symbol(candidates: list[str], names: list[str] | None = None, suffix: str = "") -> str | None:
+    """Busca el símbolo; ante varios, prefiere el sufijo de la cuenta (p. ej. 'm' en Standard)."""
+    names = names if names is not None else [s.name for s in (mt5.symbols_get() or [])]
     upper = {n.upper(): n for n in names}
     for c in candidates:                       # nombre exacto
         if c in upper:
@@ -57,7 +58,7 @@ def find_symbol(candidates: list[str]) -> str | None:
         # el más corto primero: XAUUSDm antes que XAUUSD247m (variante 24/7 de Exness)
         hits = sorted((n for n in names if n.upper().startswith(c) and len(n) <= len(c) + 2
                        and not n[len(c):].isdigit() and "247" not in n),
-                      key=lambda n: (len(n), n))
+                      key=lambda n: (n[len(c):] != suffix, len(n), n))
         if hits:
             return hits[0]
     return None
@@ -107,8 +108,11 @@ def main():
         sys.exit(f"ALTO: 'Máx. barras en el gráfico' está en {term.maxbars:,}, así que MT5 sólo entrega unos meses "
                  "de M1.\nPoné 'Unlimited' en Herramientas > Opciones > Gráficos > 'Máx. barras en el gráfico', "
                  "cerrá MT5 por completo, volvé a abrirlo y ejecutá de nuevo este script.")
+    names = [x.name for x in (mt5.symbols_get() or [])]
+    ref = find_symbol(["USDJPY"], names) or ""
+    suffix = ref[6:]                                # sufijo de la cuenta logueada
     for target, cands in targets.items():
-        sym = find_symbol(cands)
+        sym = find_symbol(cands, names, suffix)
         if sym is None:
             print(f"{target}: no encontrado en este broker")
             lines.append(f"{target}: NO ENCONTRADO")
