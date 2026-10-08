@@ -1,5 +1,5 @@
 {
-  "frozen_at_utc": "2026-10-08T23:03:39.477016+00:00",
+  "frozen_at_utc": "2026-10-08T23:37:17.660606+00:00",
   "selections": {
     "A_asian_range_breakout::USDJPY": {
       "cid": "buffer_atr=0.0|sl=range_0.50|tp=trail_swing|rf=gt_0.25",
@@ -294,7 +294,63 @@
         "val_end": "2025-11-04 00:00:00",
         "end": "2026-10-09 00:00:00"
       }
+    },
+    "A_asian_range_breakout::XAUUSD": {
+      "cid": "buffer_atr=0.0|sl=atr_1.25|tp=r_0.5|rf=none",
+      "is_expectancy_R": -0.014223528393788399,
+      "is_robust_expectancy_R": -0.015680135405108635,
+      "val_expectancy_R": -0.015517136680687948,
+      "is_trades": 1248.0,
+      "val_trades": 419.0,
+      "split": {
+        "start": "2017-05-17 00:00:00",
+        "is_end": "2023-01-11 00:00:00",
+        "val_end": "2024-11-22 00:00:00",
+        "end": "2026-10-09 00:00:00"
+      }
+    },
+    "B_asian_failed_breakout::XAUUSD": {
+      "cid": "exit=tp2_opposite|min_sweep_atr=0.1|stop_buffer_atr=0.1|rf=gt_0.25",
+      "is_expectancy_R": -0.11070680199914378,
+      "is_robust_expectancy_R": -0.12895051030658658,
+      "val_expectancy_R": 0.013343776910373402,
+      "is_trades": 197.0,
+      "val_trades": 52.0,
+      "split": {
+        "start": "2017-05-17 00:00:00",
+        "is_end": "2023-01-11 00:00:00",
+        "val_end": "2024-11-22 00:00:00",
+        "end": "2026-10-09 00:00:00"
+      }
+    },
+    "C_tokyo_or_breakout::XAUUSD": {
+      "cid": "buffer_atr=0.0|or_minutes=15|sl=atr_1.00|tp=r_1.5|rf=none",
+      "is_expectancy_R": -0.017729908324040748,
+      "is_robust_expectancy_R": -0.017729908324040748,
+      "val_expectancy_R": -0.012327861169046467,
+      "is_trades": 1450.0,
+      "val_trades": 483.0,
+      "split": {
+        "start": "2017-05-17 00:00:00",
+        "is_end": "2023-01-11 00:00:00",
+        "val_end": "2024-11-22 00:00:00",
+        "end": "2026-10-09 00:00:00"
+      }
+    },
+    "D_tokyo_or_failed_breakout::XAUUSD": {
+      "cid": "exit=tp2_opposite|min_sweep_atr=0.2|or_minutes=60|stop_buffer_atr=0.1|rf=none",
+      "is_expectancy_R": -0.029165735294196138,
+      "is_robust_expectancy_R": -0.028807431367620165,
+      "val_expectancy_R": -7.22252566448907e-05,
+      "is_trades": 209.0,
+      "val_trades": 68.0,
+      "split": {
+        "start": "2017-05-17 00:00:00",
+        "is_end": "2023-01-11 00:00:00",
+        "val_end": "2024-11-22 00:00:00",
+        "end": "2026-10-09 00:00:00"
+      }
     }
   },
-  "hash": "0504c7646f6b622a"
+  "hash": "76ecd438aa06d05a"
 }

@@ -8,6 +8,10 @@
       },
       {
         "level": "ADVERTENCIA",
+        "msg": "Se descartaron 5 velas aisladas (restos de velas diarias)."
+      },
+      {
+        "level": "ADVERTENCIA",
         "msg": "389 saltos > 25 MAD (revisar ticks malos / rolls de futuros)."
       },
       {
@@ -15,7 +19,7 @@
         "msg": "Sin bid/ask: se usa la columna de spread por barra (mínimo) combinada con el modelo del config."
       }
     ],
-    "rows": 1936061,
+    "rows": 1936056,
     "first": "2021-07-16 00:00:00",
     "last": "2026-10-08 21:33:00",
     "years": 5.23,
@@ -26,6 +30,15 @@
     "spread_source": "bar_spread_column+model",
     "intraday_start": "2021-07-16",
     "dropped_coarse_bars": 945,
+    "dropped_isolated_bars": 5,
+    "spread_zero_share_by_year": {
+      "2021": 0.0,
+      "2022": 0.0,
+      "2023": 0.0,
+      "2024": 0.0,
+      "2025": 0.0,
+      "2026": 0.0
+    },
     "ohlc_inconsistent_rows": 0,
     "nonpositive_rows": 0,
     "price_min": 108.718,
@@ -38,32 +51,32 @@
       "2025-10-05 21:05:00": 0.01139,
       "2023-01-18 02:40:00": 0.0111
     },
-    "intraweek_gaps_gt_30bars": 21,
+    "intraweek_gaps_gt_30bars": 11,
     "largest_intraweek_gaps": {
-      "2021-07-18 00:00:00": "1 days 05:47:00",
-      "2021-08-15 00:00:00": "1 days 03:02:00",
-      "2021-07-25 00:00:00": "1 days 03:02:00",
-      "2021-08-01 00:00:00": "1 days 03:02:00",
-      "2021-08-08 00:00:00": "1 days 03:02:00",
       "2026-01-01 22:11:00": "1 days 00:13:00",
       "2024-12-25 22:05:00": "1 days 00:07:00",
-      "2025-12-25 22:05:00": "1 days 00:07:00",
       "2025-01-01 22:05:00": "1 days 00:07:00",
-      "2021-08-08 21:10:00": "0 days 21:10:00"
+      "2025-12-25 22:05:00": "1 days 00:07:00",
+      "2021-07-16 13:01:00": "0 days 13:01:00",
+      "2022-02-09 01:22:00": "0 days 01:37:00",
+      "2021-07-22 03:28:00": "0 days 01:21:00",
+      "2026-08-10 08:19:00": "0 days 01:04:00",
+      "2025-01-03 12:48:00": "0 days 01:03:00",
+      "2023-03-16 17:34:00": "0 days 00:59:00"
     },
     "weekly_open_hour_utc": {
-      "21.0833": 103,
+      "21.0833": 104,
       "22.0833": 56,
-      "21.1": 30,
+      "21.1": 31,
       "22.1": 19,
-      "21": 9
+      "21.1667": 10
     },
     "weekly_open_consistent_with_17NY": 1.0,
     "session_days": 1359,
     "session_coverage_median": 1.0,
     "session_days_below_min_coverage": 8,
     "bars_by_hour_utc": {
-      "0": 81311,
+      "0": 81306,
       "1": 81338,
       "2": 81194,
       "3": 81103,
@@ -125,14 +138,18 @@
       },
       {
         "level": "ADVERTENCIA",
-        "msg": "232 saltos > 25 MAD (revisar ticks malos / rolls de futuros)."
+        "msg": "Se descartaron 5 velas aisladas (restos de velas diarias)."
+      },
+      {
+        "level": "ADVERTENCIA",
+        "msg": "230 saltos > 25 MAD (revisar ticks malos / rolls de futuros)."
       },
       {
         "level": "ADVERTENCIA",
         "msg": "Sin bid/ask: se usa la columna de spread por barra (mínimo) combinada con el modelo del config."
       }
     ],
-    "rows": 1946193,
+    "rows": 1946188,
     "first": "2021-07-16 00:00:00",
     "last": "2026-10-08 21:34:00",
     "years": 5.23,
@@ -143,11 +160,20 @@
     "spread_source": "bar_spread_column+model",
     "intraday_start": "2021-07-16",
     "dropped_coarse_bars": 945,
+    "dropped_isolated_bars": 5,
+    "spread_zero_share_by_year": {
+      "2021": 0.0,
+      "2022": 0.0,
+      "2023": 0.0,
+      "2024": 0.0,
+      "2025": 0.0,
+      "2026": 0.0
+    },
     "ohlc_inconsistent_rows": 0,
     "nonpositive_rows": 0,
     "price_min": 77.891,
     "price_max": 114.955,
-    "return_outliers": 232,
+    "return_outliers": 230,
     "return_outliers_top": {
       "2025-04-06 21:05:00": 0.0164,
       "2022-10-23 23:37:00": 0.01185,
@@ -155,23 +181,23 @@
       "2025-04-09 17:19:00": 0.01073,
       "2025-02-02 22:08:00": 0.01058
     },
-    "intraweek_gaps_gt_30bars": 22,
+    "intraweek_gaps_gt_30bars": 12,
     "largest_intraweek_gaps": {
-      "2021-07-18 00:00:00": "1 days 05:47:00",
-      "2021-07-25 00:00:00": "1 days 03:02:00",
-      "2021-08-01 00:00:00": "1 days 03:02:00",
-      "2021-08-08 00:00:00": "1 days 03:02:00",
-      "2021-08-15 00:00:00": "1 days 03:02:00",
       "2024-12-25 22:12:00": "1 days 00:14:00",
       "2026-01-01 22:11:00": "1 days 00:13:00",
       "2025-12-25 22:08:00": "1 days 00:10:00",
       "2025-01-01 22:06:00": "1 days 00:08:00",
-      "2021-08-15 21:13:00": "0 days 21:13:00"
+      "2021-07-16 13:01:00": "0 days 13:01:00",
+      "2022-02-09 01:23:00": "0 days 01:38:00",
+      "2026-08-10 08:19:00": "0 days 01:24:00",
+      "2021-07-22 03:28:00": "0 days 01:21:00",
+      "2025-01-03 12:48:00": "0 days 01:03:00",
+      "2023-03-16 17:34:00": "0 days 00:59:00"
     },
     "weekly_open_hour_utc": {
-      "21.0833": 106,
+      "21.0833": 107,
       "22.0833": 57,
-      "21.1": 27,
+      "21.1": 29,
       "22.1": 13,
       "21": 9
     },
@@ -180,7 +206,7 @@
     "session_coverage_median": 1.0,
     "session_days_below_min_coverage": 6,
     "bars_by_hour_utc": {
-      "0": 81395,
+      "0": 81390,
       "1": 81437,
       "2": 81408,
       "3": 81417,
@@ -242,6 +268,10 @@
       },
       {
         "level": "ADVERTENCIA",
+        "msg": "Se descartaron 5 velas aisladas (restos de velas diarias)."
+      },
+      {
+        "level": "ADVERTENCIA",
         "msg": "220 saltos > 25 MAD (revisar ticks malos / rolls de futuros)."
       },
       {
@@ -249,7 +279,7 @@
         "msg": "Sin bid/ask: se usa la columna de spread por barra (mínimo) combinada con el modelo del config."
       }
     ],
-    "rows": 1939656,
+    "rows": 1939651,
     "first": "2021-07-16 00:00:00",
     "last": "2026-10-08 21:35:00",
     "years": 5.23,
@@ -260,6 +290,15 @@
     "spread_source": "bar_spread_column+model",
     "intraday_start": "2021-07-16",
     "dropped_coarse_bars": 945,
+    "dropped_isolated_bars": 5,
+    "spread_zero_share_by_year": {
+      "2021": 0.0,
+      "2022": 0.0,
+      "2023": 0.0,
+      "2024": 0.0,
+      "2025": 0.0,
+      "2026": 0.0
+    },
     "ohlc_inconsistent_rows": 0,
     "nonpositive_rows": 0,
     "price_min": 0.59136,
@@ -272,23 +311,23 @@
       "2022-12-13 13:30:00": 0.00995,
       "2022-09-13 12:30:00": 0.00955
     },
-    "intraweek_gaps_gt_30bars": 21,
+    "intraweek_gaps_gt_30bars": 11,
     "largest_intraweek_gaps": {
-      "2021-07-18 00:00:00": "1 days 05:47:00",
-      "2021-08-15 00:00:00": "1 days 03:02:00",
-      "2021-07-25 00:00:00": "1 days 03:02:00",
-      "2021-08-01 00:00:00": "1 days 03:02:00",
-      "2021-08-08 00:00:00": "1 days 03:02:00",
       "2025-12-25 22:07:00": "1 days 00:09:00",
       "2024-12-25 22:06:00": "1 days 00:08:00",
       "2025-01-01 22:06:00": "1 days 00:08:00",
       "2026-01-01 22:05:00": "1 days 00:07:00",
-      "2021-08-15 21:13:00": "0 days 21:13:00"
+      "2021-07-16 13:01:00": "0 days 13:01:00",
+      "2022-02-09 01:22:00": "0 days 01:37:00",
+      "2026-08-10 08:19:00": "0 days 01:24:00",
+      "2021-07-22 03:28:00": "0 days 01:21:00",
+      "2022-12-26 12:32:00": "0 days 01:20:00",
+      "2025-01-03 12:48:00": "0 days 01:03:00"
     },
     "weekly_open_hour_utc": {
       "21.0833": 131,
       "22.0833": 65,
-      "21.1": 21,
+      "21.1": 25,
       "21": 9,
       "22.1": 9
     },
@@ -297,7 +336,7 @@
     "session_coverage_median": 1.0,
     "session_days_below_min_coverage": 8,
     "bars_by_hour_utc": {
-      "0": 81262,
+      "0": 81257,
       "1": 81379,
       "2": 81334,
       "3": 81295,
@@ -359,6 +398,10 @@
       },
       {
         "level": "ADVERTENCIA",
+        "msg": "Se descartaron 5 velas aisladas (restos de velas diarias)."
+      },
+      {
+        "level": "ADVERTENCIA",
         "msg": "186 saltos > 25 MAD (revisar ticks malos / rolls de futuros)."
       },
       {
@@ -366,7 +409,7 @@
         "msg": "Sin bid/ask: se usa la columna de spread por barra (mínimo) combinada con el modelo del config."
       }
     ],
-    "rows": 1935645,
+    "rows": 1935640,
     "first": "2021-07-16 00:00:00",
     "last": "2026-10-08 21:37:00",
     "years": 5.23,
@@ -377,6 +420,15 @@
     "spread_source": "bar_spread_column+model",
     "intraday_start": "2021-07-16",
     "dropped_coarse_bars": 945,
+    "dropped_isolated_bars": 5,
+    "spread_zero_share_by_year": {
+      "2021": 0.0,
+      "2022": 0.0,
+      "2023": 0.0,
+      "2024": 0.0,
+      "2025": 0.0,
+      "2026": 0.0
+    },
     "ohlc_inconsistent_rows": 0,
     "nonpositive_rows": 0,
     "price_min": 0.54847,
@@ -389,32 +441,32 @@
       "2025-02-02 22:10:00": 0.00999,
       "2022-12-13 13:30:00": 0.00997
     },
-    "intraweek_gaps_gt_30bars": 21,
+    "intraweek_gaps_gt_30bars": 11,
     "largest_intraweek_gaps": {
-      "2021-07-18 00:00:00": "1 days 05:47:00",
-      "2021-07-25 00:00:00": "1 days 03:02:00",
-      "2021-08-01 00:00:00": "1 days 03:02:00",
-      "2021-08-08 00:00:00": "1 days 03:02:00",
-      "2021-08-15 00:00:00": "1 days 03:02:00",
       "2024-12-25 22:06:00": "1 days 00:08:00",
-      "2026-01-01 22:05:00": "1 days 00:07:00",
-      "2025-12-25 22:05:00": "1 days 00:07:00",
       "2025-01-01 22:05:00": "1 days 00:07:00",
-      "2021-07-18 21:18:00": "0 days 21:18:00"
+      "2025-12-25 22:05:00": "1 days 00:07:00",
+      "2026-01-01 22:05:00": "1 days 00:07:00",
+      "2021-07-16 13:01:00": "0 days 13:01:00",
+      "2022-02-09 01:22:00": "0 days 01:37:00",
+      "2021-07-22 03:28:00": "0 days 01:21:00",
+      "2026-08-10 08:19:00": "0 days 01:04:00",
+      "2025-01-03 12:48:00": "0 days 01:03:00",
+      "2023-03-16 17:34:00": "0 days 00:59:00"
     },
     "weekly_open_hour_utc": {
       "21.0833": 125,
       "22.0833": 54,
-      "21.1": 19,
+      "21.1": 21,
       "22.1": 13,
-      "21": 9
+      "21.1167": 9
     },
     "weekly_open_consistent_with_17NY": 1.0,
     "session_days": 1359,
     "session_coverage_median": 1.0,
     "session_days_below_min_coverage": 8,
     "bars_by_hour_utc": {
-      "0": 81238,
+      "0": 81233,
       "1": 81406,
       "2": 81343,
       "3": 81244,
@@ -476,6 +528,10 @@
       },
       {
         "level": "ADVERTENCIA",
+        "msg": "Se descartaron 5 velas aisladas (restos de velas diarias)."
+      },
+      {
+        "level": "ADVERTENCIA",
         "msg": "285 saltos > 25 MAD (revisar ticks malos / rolls de futuros)."
       },
       {
@@ -483,7 +539,7 @@
         "msg": "Sin bid/ask: se usa la columna de spread por barra (mínimo) combinada con el modelo del config."
       }
     ],
-    "rows": 1946434,
+    "rows": 1946429,
     "first": "2021-07-16 00:00:00",
     "last": "2026-10-08 20:59:00",
     "years": 5.23,
@@ -494,6 +550,15 @@
     "spread_source": "bar_spread_column+model",
     "intraday_start": "2021-07-16",
     "dropped_coarse_bars": 945,
+    "dropped_isolated_bars": 5,
+    "spread_zero_share_by_year": {
+      "2021": 0.0,
+      "2022": 0.0,
+      "2023": 0.0,
+      "2024": 0.0,
+      "2025": 0.0,
+      "2026": 0.0
+    },
     "ohlc_inconsistent_rows": 0,
     "nonpositive_rows": 0,
     "price_min": 124.387,
@@ -506,23 +571,23 @@
       "2022-02-27 22:08:00": 0.01159,
       "2025-10-05 21:15:00": 0.01071
     },
-    "intraweek_gaps_gt_30bars": 23,
+    "intraweek_gaps_gt_30bars": 13,
     "largest_intraweek_gaps": {
-      "2021-07-18 00:00:00": "1 days 05:47:00",
-      "2021-07-25 00:00:00": "1 days 03:02:00",
-      "2021-08-01 00:00:00": "1 days 03:02:00",
-      "2021-08-08 00:00:00": "1 days 03:02:00",
-      "2021-08-15 00:00:00": "1 days 03:02:00",
       "2024-12-25 22:10:00": "1 days 00:12:00",
       "2026-01-01 22:10:00": "1 days 00:12:00",
-      "2025-12-25 22:05:00": "1 days 00:07:00",
       "2025-01-01 22:05:00": "1 days 00:07:00",
-      "2021-08-08 21:07:00": "0 days 21:07:00"
+      "2025-12-25 22:05:00": "1 days 00:07:00",
+      "2021-07-16 13:01:00": "0 days 13:01:00",
+      "2022-02-09 01:22:00": "0 days 01:37:00",
+      "2021-07-22 03:28:00": "0 days 01:21:00",
+      "2026-08-10 08:19:00": "0 days 01:14:00",
+      "2025-01-03 12:48:00": "0 days 01:03:00",
+      "2023-03-16 17:34:00": "0 days 00:59:00"
     },
     "weekly_open_hour_utc": {
       "21.0833": 83,
       "22.0833": 39,
-      "21.1": 28,
+      "21.1": 32,
       "22.1": 26,
       "21": 9
     },
@@ -531,7 +596,7 @@
     "session_coverage_median": 1.0,
     "session_days_below_min_coverage": 5,
     "bars_by_hour_utc": {
-      "0": 81404,
+      "0": 81399,
       "1": 81439,
       "2": 81355,
       "3": 81319,
@@ -593,6 +658,10 @@
       },
       {
         "level": "ADVERTENCIA",
+        "msg": "Se descartaron 4 velas aisladas (restos de velas diarias)."
+      },
+      {
+        "level": "ADVERTENCIA",
         "msg": "196 saltos > 25 MAD (revisar ticks malos / rolls de futuros)."
       },
       {
@@ -604,7 +673,7 @@
         "msg": "Sin bid/ask: se usa la columna de spread por barra (mínimo) combinada con el modelo del config."
       }
     ],
-    "rows": 1717213,
+    "rows": 1717209,
     "first": "2021-07-16 00:00:00",
     "last": "2026-10-08 20:59:00",
     "years": 5.23,
@@ -615,6 +684,15 @@
     "spread_source": "bar_spread_column+model",
     "intraday_start": "2021-07-16",
     "dropped_coarse_bars": 604,
+    "dropped_isolated_bars": 4,
+    "spread_zero_share_by_year": {
+      "2021": 0.0,
+      "2022": 0.0,
+      "2023": 0.0,
+      "2024": 0.0,
+      "2025": 0.0,
+      "2026": 0.0
+    },
     "ohlc_inconsistent_rows": 0,
     "nonpositive_rows": 0,
     "price_min": 24497.1,
@@ -627,32 +705,32 @@
       "2026-03-08 22:01:00": 0.02174,
       "2024-08-06 00:07:00": 0.02135
     },
-    "intraweek_gaps_gt_30bars": 1102,
+    "intraweek_gaps_gt_30bars": 1094,
     "largest_intraweek_gaps": {
-      "2021-07-18 00:00:00": "1 days 05:47:00",
       "2024-12-25 23:00:00": "1 days 04:46:00",
       "2025-12-25 23:00:00": "1 days 04:46:00",
-      "2021-08-08 00:00:00": "1 days 04:02:00",
-      "2021-08-01 00:00:00": "1 days 04:02:00",
-      "2021-07-25 00:00:00": "1 days 04:02:00",
       "2025-01-01 23:00:00": "1 days 01:01:00",
       "2026-01-01 23:00:00": "1 days 01:01:00",
-      "2021-08-01 23:03:00": "0 days 23:03:00",
-      "2021-08-08 23:02:00": "0 days 23:02:00"
+      "2021-07-16 13:01:00": "0 days 13:01:00",
+      "2025-11-28 12:31:00": "0 days 09:48:00",
+      "2022-09-05 23:11:00": "0 days 06:12:00",
+      "2022-06-20 23:06:00": "0 days 06:07:00",
+      "2021-11-26 00:00:00": "0 days 06:03:00",
+      "2022-05-30 23:01:00": "0 days 06:02:00"
     },
     "weekly_open_hour_utc": {
       "22": 96,
       "23": 82,
       "0": 37,
-      "23.0167": 9,
-      "23.0333": 8
+      "23.0167": 11,
+      "23.0333": 9
     },
-    "weekly_open_consistent_with_17NY": 0.643,
+    "weekly_open_consistent_with_17NY": 0.634,
     "session_days": 1353,
     "session_coverage_median": 0.994,
     "session_days_below_min_coverage": 142,
     "bars_by_hour_utc": {
-      "0": 80831,
+      "0": 80827,
       "1": 80631,
       "2": 78991,
       "3": 78111,
@@ -702,6 +780,144 @@
       "21": 13.6,
       "22": 15.6,
       "23": 15.3
+    },
+    "status": "ADVERTENCIA"
+  },
+  "XAUUSD": {
+    "symbol": "XAUUSD",
+    "issues": [
+      {
+        "level": "ADVERTENCIA",
+        "msg": "Se descartaron 1951 velas no intradía (diarias) anteriores al 2017-04-27: el historial M1 real empieza ahí."
+      },
+      {
+        "level": "ADVERTENCIA",
+        "msg": "Se descartaron 166 velas aisladas (restos de velas diarias)."
+      },
+      {
+        "level": "ADVERTENCIA",
+        "msg": "Años sin dato de spread (columna en 0): [2017, 2018, 2019, 2020, 2021, 2022, 2023]. Se usa el valor de reemplazo medido de 2.4 pips."
+      },
+      {
+        "level": "ADVERTENCIA",
+        "msg": "716 saltos > 25 MAD (revisar ticks malos / rolls de futuros)."
+      },
+      {
+        "level": "ADVERTENCIA",
+        "msg": "Sin bid/ask: se usa la columna de spread por barra (mínimo) combinada con el modelo del config."
+      }
+    ],
+    "rows": 3330775,
+    "first": "2017-04-27 00:00:00",
+    "last": "2026-10-08 20:57:00",
+    "years": 9.45,
+    "timeframe": "M1",
+    "has_bid_ask": false,
+    "price_side": "bid",
+    "has_volume": true,
+    "spread_source": "bar_spread_column+model",
+    "intraday_start": "2017-04-27",
+    "dropped_coarse_bars": 1951,
+    "dropped_isolated_bars": 166,
+    "spread_zero_share_by_year": {
+      "2017": 1.0,
+      "2018": 1.0,
+      "2019": 1.0,
+      "2020": 1.0,
+      "2021": 1.0,
+      "2022": 1.0,
+      "2023": 1.0,
+      "2024": 0.284,
+      "2025": 0.0,
+      "2026": 0.0
+    },
+    "ohlc_inconsistent_rows": 0,
+    "nonpositive_rows": 0,
+    "price_min": 1160.182,
+    "price_max": 5595.324,
+    "return_outliers": 716,
+    "return_outliers_top": {
+      "2026-01-29 15:27:00": 0.02354,
+      "2026-02-01 23:01:00": 0.01864,
+      "2020-01-05 23:05:00": 0.01862,
+      "2022-02-27 23:05:00": 0.01738,
+      "2026-06-14 22:02:00": 0.01624
+    },
+    "intraweek_gaps_gt_30bars": 1964,
+    "largest_intraweek_gaps": {
+      "2020-01-02 00:00:00": "1 days 06:01:00",
+      "2025-12-25 23:11:00": "1 days 04:42:00",
+      "2024-12-25 23:05:00": "1 days 04:36:00",
+      "2019-01-02 00:00:00": "1 days 02:02:00",
+      "2026-01-01 23:05:00": "1 days 01:08:00",
+      "2025-01-01 23:05:00": "1 days 01:08:00",
+      "2021-02-15 23:01:00": "0 days 05:18:00",
+      "2021-01-18 23:01:00": "0 days 05:17:00",
+      "2021-11-25 23:01:00": "0 days 05:17:00",
+      "2021-07-05 22:05:00": "0 days 05:07:00"
+    },
+    "weekly_open_hour_utc": {
+      "22.0833": 225,
+      "23.0833": 126,
+      "23": 41,
+      "0": 36,
+      "22.0167": 22
+    },
+    "weekly_open_consistent_with_17NY": 0.847,
+    "session_days": 2438,
+    "session_coverage_median": 1.0,
+    "session_days_below_min_coverage": 8,
+    "bars_by_hour_utc": {
+      "0": 145851,
+      "1": 145974,
+      "2": 145938,
+      "3": 145920,
+      "4": 145916,
+      "5": 145942,
+      "6": 146160,
+      "7": 146171,
+      "8": 146143,
+      "9": 146127,
+      "10": 146097,
+      "11": 146261,
+      "12": 146218,
+      "13": 146317,
+      "14": 146265,
+      "15": 146277,
+      "16": 146233,
+      "17": 144626,
+      "18": 142887,
+      "19": 141872,
+      "20": 139159,
+      "21": 44422,
+      "22": 91783,
+      "23": 142216
+    },
+    "spread_pips_by_hour_median": {
+      "0": 0.0,
+      "1": 0.0,
+      "2": 0.0,
+      "3": 0.0,
+      "4": 0.0,
+      "5": 0.0,
+      "6": 0.0,
+      "7": 0.0,
+      "8": 0.0,
+      "9": 0.0,
+      "10": 0.0,
+      "11": 0.0,
+      "12": 0.0,
+      "13": 0.0,
+      "14": 0.0,
+      "15": 0.0,
+      "16": 0.0,
+      "17": 0.0,
+      "18": 0.0,
+      "19": 0.0,
+      "20": 0.0,
+      "21": 0.0,
+      "22": 0.0,
+      "23": 0.0
     },
     "status": "ADVERTENCIA"
   }

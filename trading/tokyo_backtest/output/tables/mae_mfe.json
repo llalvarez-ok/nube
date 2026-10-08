@@ -1,19 +1,19 @@
 {
-  "mae_R_winners_mean": 0.24092868634986486,
-  "mae_R_losers_mean": 0.6097135856969389,
-  "mfe_R_mean": 0.40131211451802906,
-  "mfe_R_winners_mean": 0.6368711349074626,
-  "mfe_R_losers_mean": 0.17777941481440446,
+  "mae_R_winners_mean": 0.20947045333185915,
+  "mae_R_losers_mean": 0.5340684332015649,
+  "mfe_R_mean": 0.34619652611544816,
+  "mfe_R_winners_mean": 0.5489374063479499,
+  "mfe_R_losers_mean": 0.15445183796148848,
   "mfe_R_pctiles": {
-    "25": 0.09051311514089261,
-    "50": 0.24554763640253502,
-    "75": 0.5228714715442785,
-    "90": 0.9855853637973674
+    "25": 0.07942427267329291,
+    "50": 0.21040068340846113,
+    "75": 0.4394823116291139,
+    "90": 0.827649948950124
   },
-  "winners_mae_gt_0.8R_share": 0.028237259816207186,
-  "losers_mfe_ge_1R_share": 0.01220865704772475,
-  "losers_mfe_ge_0.5R_share": 0.08752180117329951,
+  "winners_mae_gt_0.8R_share": 0.02143193593970796,
+  "losers_mfe_ge_1R_share": 0.009021049114600735,
+  "losers_mfe_ge_0.5R_share": 0.06659984408063259,
   "notes": [
-    "La mediana de MFE es 0.25R: targets muy por encima de ~0.52R (p75) se alcanzan pocas veces."
+    "La mediana de MFE es 0.21R: targets muy por encima de ~0.44R (p75) se alcanzan pocas veces."
   ]
 }
