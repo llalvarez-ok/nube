@@ -138,8 +138,19 @@ def load_raw(cfg: dict, symbol: str) -> pd.DataFrame:
         raise DataMissingError(f"{symbol}: faltan archivos en {raw_dir}: {missing or 'ninguno configurado'}")
 
     def clean(df):
+        attrs = dict(df.attrs)
         df.index = to_utc(pd.DatetimeIndex(df.index), spec.get("source_tz", "UTC"))
         df = df[~df.index.duplicated(keep="first")].sort_index()
+        # MT5 entrega velas DIARIAS para los años sin M1: se descartan las que preceden al
+        # primer día con historial intradía denso (> 100 velas). Se registra, no se oculta.
+        per_day = df.index.normalize().value_counts().sort_index()
+        dense = per_day[per_day > 100]
+        if len(dense) and dense.index[0] > df.index[0]:
+            dropped = int((df.index < dense.index[0]).sum())
+            df = df[df.index >= dense.index[0]]
+            attrs["dropped_coarse_bars"] = dropped
+            attrs["intraday_start"] = str(dense.index[0].date())
+        df.attrs = attrs
         return df
 
     if "bid" in files and "ask" in files:
@@ -165,6 +176,7 @@ def load_raw(cfg: dict, symbol: str) -> pd.DataFrame:
         out["volume"] = d["volume"].values
         if "spread_points" in d:
             out["spread_points"] = d["spread_points"].values
+        out.attrs.update({k: d.attrs[k] for k in ("dropped_coarse_bars", "intraday_start") if k in d.attrs})
         out.attrs.update(has_bid_ask=False, price_side=side,
                          spread_source="bar_spread_column+model" if "spread_points" in d else "model")
     out.index.name = "time_utc"

@@ -48,16 +48,15 @@ instruments:
     quote_ccy: JPY
     point: 0.001
     pip: 0.01
-    contract_size: 100000
+    contract_size: 100000       # Exness USDJPYm
     lot_step: 0.01
     min_lot: 0.01
     expected_price_range: [70, 200]
-    spread_model: {type: hourly, unit: pips,                       # SUPUESTO
-                   default: 1.0, by_hour: {21: 3.0, 22: 3.0, 23: 1.5, 0: 1.0, 1: 0.9}}
+    spread_model: {type: hourly, unit: pips, default: 0.5}   # piso; el spread real viene de la columna <spread> de cada vela
     slippage_pips: 0.3                                             # SUPUESTO
-    commission_per_lot_rt: 7.0                                     # SUPUESTO (USD)
-    swap_long_points: 0.0                                          # SUPUESTO
-    swap_short_points: 0.0
+    commission_per_lot_rt: 0.0          # Exness Standard: sin comisión
+    swap_long_points: 0.0
+    swap_short_points: -13.9
   AUDJPY:
     files: {mid: "**/AUDJPY_*.csv.gz"}   # carpeta por símbolo o archivos sueltos
     format: mt5py
@@ -66,48 +65,48 @@ instruments:
     quote_ccy: JPY
     point: 0.001
     pip: 0.01
-    contract_size: 100000
+    contract_size: 100000       # Exness AUDJPYm
     lot_step: 0.01
     min_lot: 0.01
     expected_price_range: [55, 130]
-    spread_model: {type: hourly, unit: pips, default: 1.6, by_hour: {21: 4.0, 22: 4.0, 23: 2.5}}  # SUPUESTO
+    spread_model: {type: hourly, unit: pips, default: 0.8}   # piso; el spread real viene de la columna <spread> de cada vela
     slippage_pips: 0.4
-    commission_per_lot_rt: 7.0
-    swap_long_points: 0.0
-    swap_short_points: 0.0
+    commission_per_lot_rt: 0.0          # Exness Standard: sin comisión
+    swap_long_points: -0.1
+    swap_short_points: -2.2
   AUDUSD:
     files: {mid: "**/AUDUSD_*.csv.gz"}   # carpeta por símbolo o archivos sueltos
     format: mt5py
     source_tz: UTC
     asset_class: fx
     quote_ccy: USD
-    point: 0.00001
+    point: 1e-05
     pip: 0.0001
-    contract_size: 100000
+    contract_size: 100000       # Exness AUDUSDm
     lot_step: 0.01
     min_lot: 0.01
     expected_price_range: [0.55, 1.10]
-    spread_model: {type: hourly, unit: pips, default: 1.0, by_hour: {21: 3.0, 22: 3.0, 23: 1.5}}  # SUPUESTO
+    spread_model: {type: hourly, unit: pips, default: 0.5}   # piso; el spread real viene de la columna <spread> de cada vela
     slippage_pips: 0.3
-    commission_per_lot_rt: 7.0
+    commission_per_lot_rt: 0.0          # Exness Standard: sin comisión
     swap_long_points: 0.0
-    swap_short_points: 0.0
+    swap_short_points: -1.9
   NZDUSD:
     files: {mid: "**/NZDUSD_*.csv.gz"}   # carpeta por símbolo o archivos sueltos
     format: mt5py
     source_tz: UTC
     asset_class: fx
     quote_ccy: USD
-    point: 0.00001
+    point: 1e-05
     pip: 0.0001
-    contract_size: 100000
+    contract_size: 100000       # Exness NZDUSDm
     lot_step: 0.01
     min_lot: 0.01
     expected_price_range: [0.50, 0.90]
-    spread_model: {type: hourly, unit: pips, default: 1.5, by_hour: {21: 4.0, 22: 4.0, 23: 2.0}}  # SUPUESTO
+    spread_model: {type: hourly, unit: pips, default: 0.8}   # piso; el spread real viene de la columna <spread> de cada vela
     slippage_pips: 0.4
-    commission_per_lot_rt: 7.0
-    swap_long_points: 0.0
+    commission_per_lot_rt: 0.0          # Exness Standard: sin comisión
+    swap_long_points: -3.6
     swap_short_points: 0.0
   EURJPY:
     files: {mid: "**/EURJPY_*.csv.gz"}   # carpeta por símbolo o archivos sueltos
@@ -117,30 +116,30 @@ instruments:
     quote_ccy: JPY
     point: 0.001
     pip: 0.01
-    contract_size: 100000
+    contract_size: 100000       # Exness EURJPYm
     lot_step: 0.01
     min_lot: 0.01
     expected_price_range: [90, 200]
-    spread_model: {type: hourly, unit: pips, default: 1.5, by_hour: {21: 4.0, 22: 4.0, 23: 2.0}}  # SUPUESTO
+    spread_model: {type: hourly, unit: pips, default: 0.8}   # piso; el spread real viene de la columna <spread> de cada vela
     slippage_pips: 0.4
-    commission_per_lot_rt: 7.0
+    commission_per_lot_rt: 0.0          # Exness Standard: sin comisión
     swap_long_points: 0.0
-    swap_short_points: 0.0
+    swap_short_points: -8.8
   JP225:
     files: {mid: "**/JP225_*.csv.gz"}   # carpeta por símbolo o archivos sueltos
     format: mt5py
     source_tz: UTC
     asset_class: index_cfd
-    quote_ccy: JPY        # verificar: algunos brokers cotizan el CFD en USD
-    point: 1.0
+    quote_ccy: JPY        # Exness JP225m: cotiza en JPY, 1 JPY por punto y lote
+    point: 0.1
     pip: 1.0
-    contract_size: 1      # verificar: 1, 10 o 100 JPY por punto según broker
-    lot_step: 0.1
-    min_lot: 0.1
-    expected_price_range: [7000, 60000]
-    spread_model: {type: hourly, unit: pips, default: 8.0, by_hour: {21: 20.0, 22: 20.0, 23: 12.0}}  # SUPUESTO (puntos)
+    contract_size: 1       # Exness JP225m
+    lot_step: 0.01
+    min_lot: 3.0
+    expected_price_range: [7000, 120000]
+    spread_model: {type: hourly, unit: pips, default: 5.0}   # piso; el spread real viene de la columna <spread> de cada vela
     slippage_pips: 3.0
-    commission_per_lot_rt: 0.0
+    commission_per_lot_rt: 0.0          # Exness Standard: sin comisión
     swap_long_points: 0.0
     swap_short_points: 0.0
   XAUUSD:
@@ -149,16 +148,16 @@ instruments:
     source_tz: UTC
     asset_class: metal
     quote_ccy: USD
-    point: 0.01
+    point: 0.001
     pip: 0.1
-    contract_size: 100
+    contract_size: 100       # Exness XAUUSDm
     lot_step: 0.01
     min_lot: 0.01
     expected_price_range: [1000, 6000]
-    spread_model: {type: hourly, unit: pips, default: 3.0, by_hour: {21: 8.0, 22: 8.0, 23: 5.0}}  # SUPUESTO (0.30 USD)
+    spread_model: {type: hourly, unit: pips, default: 1.5}   # piso; el spread real viene de la columna <spread> de cada vela
     slippage_pips: 1.0
-    commission_per_lot_rt: 7.0
-    swap_long_points: 0.0
+    commission_per_lot_rt: 0.0          # Exness Standard: sin comisión
+    swap_long_points: -523.3
     swap_short_points: 0.0
 
 # Conversión a moneda de cuenta (USD) para PnL en $ y comisiones.

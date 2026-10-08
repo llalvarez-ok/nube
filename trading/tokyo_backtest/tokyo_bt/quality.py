@@ -48,6 +48,11 @@ def check_symbol(cfg: dict, symbol: str) -> dict:
                has_volume=bool(df.attrs.get("has_volume")),
                spread_source=df.attrs.get("spread_source"))
 
+    if df.attrs.get("dropped_coarse_bars"):
+        rep["intraday_start"] = df.attrs["intraday_start"]
+        rep["dropped_coarse_bars"] = df.attrs["dropped_coarse_bars"]
+        issue(WARN, f"Se descartaron {df.attrs['dropped_coarse_bars']} velas no intradía (diarias) anteriores al "
+                    f"{df.attrs['intraday_start']}: el historial M1 real empieza ahí.")
     if tf not in ("M1", "M5"):
         issue(CRITICAL, f"Timeframe inferido {tf}: se requiere M1 (preferido) o M5 para ejecutar.")
     elif tf == "M5":

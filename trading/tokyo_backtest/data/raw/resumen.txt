@@ -1,0 +1,8 @@
+Broker: Exness Technologies Ltd / Exness-MT5Real11
+USDJPY -> USDJPYm: 1,937,006 velas M1, años 2018-2026
+AUDJPY -> AUDJPYm: 1,947,138 velas M1, años 2018-2026
+AUDUSD -> AUDUSDm: 1,940,601 velas M1, años 2018-2026
+NZDUSD -> NZDUSDm: 1,936,590 velas M1, años 2018-2026
+EURJPY -> EURJPYm: 1,947,379 velas M1, años 2018-2026
+JP225 -> JP225m: 1,717,817 velas M1, años 2019-2026
+XAUUSD -> XAUUSDm: 3,332,892 velas M1, años 2014-2026
