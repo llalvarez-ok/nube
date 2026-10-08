@@ -154,7 +154,7 @@ instruments:
     lot_step: 0.01
     min_lot: 0.01
     expected_price_range: [1000, 6000]
-    spread_model: {type: hourly, unit: pips, default: 1.5}   # piso; el spread real viene de la columna <spread> de cada vela
+    spread_model: {type: hourly, unit: pips, default: 1.5, zero_fallback: 2.4}   # piso 0.15 USD; 2017-2023 sin dato de spread: 0.24 USD = p75 medido en Tokio 2024-26
     slippage_pips: 1.0
     commission_per_lot_rt: 0.0          # Exness Standard: sin comisión
     swap_long_points: -523.3

@@ -39,8 +39,12 @@ def build_bid_ask(raw: pd.DataFrame, spec: dict, cfg: dict, spread_mult: float =
         source = "model"
         if "spread_points" in raw and raw["spread_points"].notna().any():
             col = raw["spread_points"].fillna(0).values * spec["point"]
-            s = np.maximum(col, s) if cfg["costs"].get("bar_spread_column_is_minimum", True) else \
-                np.where(col > 0, col, s)
+            # velas sin dato de spread (columna en 0): valor de reemplazo MEDIDO, si está configurado
+            unit = spec["pip"] if spec["spread_model"].get("unit", "pips") == "pips" else spec["point"]
+            zf = spec["spread_model"].get("zero_fallback")
+            fallback = np.maximum(s, float(zf) * unit) if zf is not None else s
+            s = np.where(col > 0, np.maximum(col, s) if cfg["costs"].get("bar_spread_column_is_minimum", True)
+                         else col, fallback)
             source = "bar_spread_column+model"
         s = s * spread_mult
         side = raw.attrs.get("price_side", "mid")

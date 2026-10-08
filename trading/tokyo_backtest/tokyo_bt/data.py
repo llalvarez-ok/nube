@@ -150,6 +150,12 @@ def load_raw(cfg: dict, symbol: str) -> pd.DataFrame:
             df = df[df.index >= dense.index[0]]
             attrs["dropped_coarse_bars"] = dropped
             attrs["intraday_start"] = str(dense.index[0].date())
+        # velas aisladas (> 60 min sin vecinas a ambos lados): restos de velas diarias mezcladas con M1
+        t = df.index.to_series()
+        iso = (t.diff() > pd.Timedelta(minutes=60)) & (t.diff(-1).abs() > pd.Timedelta(minutes=60))
+        if iso.any():
+            attrs["dropped_isolated_bars"] = int(iso.sum())
+            df = df[~iso.values]
         df.attrs = attrs
         return df
 
@@ -176,7 +182,8 @@ def load_raw(cfg: dict, symbol: str) -> pd.DataFrame:
         out["volume"] = d["volume"].values
         if "spread_points" in d:
             out["spread_points"] = d["spread_points"].values
-        out.attrs.update({k: d.attrs[k] for k in ("dropped_coarse_bars", "intraday_start") if k in d.attrs})
+        out.attrs.update({k: d.attrs[k] for k in ("dropped_coarse_bars", "intraday_start", "dropped_isolated_bars")
+                          if k in d.attrs})
         out.attrs.update(has_bid_ask=False, price_side=side,
                          spread_source="bar_spread_column+model" if "spread_points" in d else "model")
     out.index.name = "time_utc"

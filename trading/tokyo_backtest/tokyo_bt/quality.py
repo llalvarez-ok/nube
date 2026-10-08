@@ -53,6 +53,17 @@ def check_symbol(cfg: dict, symbol: str) -> dict:
         rep["dropped_coarse_bars"] = df.attrs["dropped_coarse_bars"]
         issue(WARN, f"Se descartaron {df.attrs['dropped_coarse_bars']} velas no intradía (diarias) anteriores al "
                     f"{df.attrs['intraday_start']}: el historial M1 real empieza ahí.")
+    if df.attrs.get("dropped_isolated_bars"):
+        rep["dropped_isolated_bars"] = df.attrs["dropped_isolated_bars"]
+        issue(WARN, f"Se descartaron {df.attrs['dropped_isolated_bars']} velas aisladas (restos de velas diarias).")
+    if "spread_points" in df and not df.attrs.get("has_bid_ask"):
+        z = (df["spread_points"].fillna(0) == 0).groupby(df.index.year).mean()
+        rep["spread_zero_share_by_year"] = {int(k): round(float(v), 3) for k, v in z.items()}
+        if (z > 0.5).any():
+            fb = spec["spread_model"].get("zero_fallback")
+            issue(WARN, f"Años sin dato de spread (columna en 0): {[int(k) for k in z[z > 0.5].index]}. "
+                        + (f"Se usa el valor de reemplazo medido de {fb} pips." if fb is not None
+                           else "Se usa el piso del modelo: configurar spread_model.zero_fallback."))
     if tf not in ("M1", "M5"):
         issue(CRITICAL, f"Timeframe inferido {tf}: se requiere M1 (preferido) o M5 para ejecutar.")
     elif tf == "M5":
