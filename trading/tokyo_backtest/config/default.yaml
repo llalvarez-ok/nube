@@ -80,7 +80,7 @@ instruments:
     source_tz: UTC
     asset_class: fx
     quote_ccy: USD
-    point: 1e-05
+    point: 0.00001
     pip: 0.0001
     contract_size: 100000       # Exness AUDUSDm
     lot_step: 0.01
@@ -97,7 +97,7 @@ instruments:
     source_tz: UTC
     asset_class: fx
     quote_ccy: USD
-    point: 1e-05
+    point: 0.00001
     pip: 0.0001
     contract_size: 100000       # Exness NZDUSDm
     lot_step: 0.01
