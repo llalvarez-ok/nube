@@ -19,3 +19,4 @@ Canal en español sobre IA práctica para el trabajo. Nombre real del canal: **A
 - API conectada y verificada el 03/10/2026 (Data API y Analytics responden).
 - Rutina semanal de los lunes creada (sesión nueva en cada disparo).
 - Pendiente: auditoría de la API de YouTube (guía en `herramientas/auditoria-api.md`).
+- video02 (primer video Excel + IA, motor v2): idea escalada (falta medir la demanda), guion aprobado en provisional (8,65), vista previa sin voz renderizada, metadatos, miniaturas y `publicacion.md` listos. Falta: `GOOGLE_TTS_API_KEY`, probar la plantilla en Excel para la web y la decisión del creador sobre la idea.

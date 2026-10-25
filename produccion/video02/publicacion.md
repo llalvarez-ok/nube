@@ -12,7 +12,7 @@
 - [ ] **Decisión pendiente: la etapa idea quedó escalada.** `estado.json` sigue en `etapa: idea` (ronda 3: «escalado», nota 7,42; solo la demanda quedó abajo, 6 contra un mínimo de 7, por falta de datos de la API en el entorno). Forzar es una decisión tuya:
   - aprobarla: `python3 herramientas/pipeline.py forzar video02 idea "demanda pendiente de medir por falta de API; condición antes de publicar"`
   - o medir la demanda primero (punto opcional de abajo) y decidir con datos.
-  - El guion también quedó en «provisional-revisar» (ronda 2, nota 7,83). Lo que sostiene el veto del verificador es la comprobación en Excel para la web (punto 3).
+  - El guion quedó **aprobado en provisional** (ronda 3, nota 8,65: hook 9, ritmo 8, promesa 9, claridad 8, veracidad 9). Al forzar la idea, el pipeline avanza solo al guion. La condición del verificador sigue en pie: la comprobación en Excel para la web (punto 3).
 - [ ] **Voz y render final.** Carga `GOOGLE_TTS_API_KEY` en el entorno y corre:
   `python3 herramientas/motor.py video02 --alta`
   Esto genera `produccion/video02/video02.mp4`, `video02.srt` y `capitulos.txt` con los tiempos reales. Compara `capitulos.txt` con `capitulos-estimados.txt` y recalcula los tiempos de los Shorts (sección 4).
@@ -47,13 +47,13 @@
 | B | Fórmulas de Excel con IA: el paso que casi nadie pide | `miniatura-b.png` («PARECE BIEN» + 2.446.165 agrietado) | el método, el error silencioso |
 | C | Fórmulas de Excel con IA (y el error que cobra dos veces) | `miniatura-c.png` («610.575 DE MÁS» + Vencido/PAGADO) | el giro y la cobranza (para Martín) |
 
-  **Por qué la A es la principal:** es el mismo cuadro que abre el video (la hoja Resumen con el gráfico de barras), así que lo que promete se ve en los primeros segundos. Cumple la firma del canal (el resultado terminado como protagonista) y tiene un solo elemento, que se lee a 168 px. Las cifras del gráfico (666.000, 264.600, 58.900) son las de octubre en el video. Las otras dos dependen de entender un error antes de hacer clic, y para eso está la prueba. Detalle: la miniatura C escribe «610,575», con coma, y el video dice «610.575». En México se lee bien, pero si quieres que coincida con el video, cámbialo en `miniatura-c.html` y regenera.
+  **Por qué la A es la principal:** es el mismo cuadro que abre el video (la hoja Resumen con el gráfico de barras), así que lo que promete se ve en los primeros segundos. Cumple la firma del canal (el resultado terminado como protagonista) y tiene un solo elemento, que se lee a 168 px. Las cifras del gráfico (666.000, 264.600, 58.900) son las de octubre en el video. Las otras dos dependen de entender un error antes de hacer clic, y para eso está la prueba. (La miniatura C ya muestra «610.575» con punto, igual que el video.)
 - [ ] **Horario recomendado: viernes 30/10/2026, 13:00 h de Ciudad de México** (16:00 Buenos Aires y Santiago, 15:00 Bogotá y Lima, 20:00 Madrid). Es el horario fijo del plan (`youtube/03-sistema-operativo.md` §5) y cae en un día de cadencia (martes o viernes). Todavía no hay datos de «Cuándo están conectados tus espectadores»: en esta sesión la API no tenía credenciales, y el canal tiene muy poco historial. Hay que ajustarlo desde el mes 2. Si los pendientes de la sección 1 no están listos el jueves 29/10, pásalo al **martes 03/11/2026 a las 13:00 h** de CDMX: no lo publiques sin la comprobación en Excel para la web.
 - [ ] Programa la publicación en esa fecha (Visibilidad → Programar).
 
 ## 4. Shorts (1, 3 y 5 días después)
 
-Los tiempos son **estimados** (motor sin voz, `build/datos.js`). Después de renderizar con voz, busca en `video02.srt` la frase con la que empieza y termina cada tramo y corrige `desde` y `hasta`. Cada tramo tiene que durar 55 s o menos. El `--titulo` de `shorts.py` se quema en el video sin salto de línea, así que va corto (unos 20 caracteres a 74 px). El título completo se escribe al subir el Short. Se recortan del **video final con voz** (`produccion/video02/video02.mp4`, que es el que lee `shorts.py`). En cada Short, en «Video relacionado», enlaza el video largo.
+Los tiempos son **estimados** (motor sin voz, `build/datos.js`, antes del pulido final: pueden correrse unos segundos). Después de renderizar con voz, busca en `video02.srt` la frase con la que empieza y termina cada tramo y corrige `desde` y `hasta`. Cada tramo tiene que durar 55 s o menos. El `--titulo` de `shorts.py` se quema en el video sin salto de línea, así que va corto (unos 20 caracteres a 74 px). El título completo se escribe al subir el Short. Se recortan del **video final con voz** (`produccion/video02/video02.mp4`, que es el que lee `shorts.py`). En cada Short, en «Video relacionado», enlaza el video largo.
 
 ### Short 1 · el giro de la fórmula 7 · publicar el día +1 (sábado 31/10, 13:00 h CDMX)
 - **desde** 4:49.2 · **hasta** 5:41.0 (≈ 52 s)

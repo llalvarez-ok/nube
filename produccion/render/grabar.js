@@ -77,13 +77,13 @@ async function tramo(a, b, archivo, progreso) {
   for (let i = 0; i < n; i++) {
     const a = desde + i * tam, b = Math.min(hasta, a + tam);
     if (a >= b) continue;
-    const archivo = salida.replace(/\.mp4$/, '') + `.parte${i}.mp4`;
+    const archivo = salida.replace(/\.mp4$/, '') + `.${process.pid}.parte${i}.mp4`;
     partes.push(archivo);
     trabajos.push(tramo(a, b, archivo, progreso));
   }
   await browser.close();
   await Promise.all(trabajos);
-  const lista = salida + '.partes.txt';
+  const lista = salida + `.${process.pid}.partes.txt`;
   fs.writeFileSync(lista, partes.map((p) => `file '${path.resolve(p)}'`).join('\n'));
   await new Promise((r, j) => spawn('ffmpeg', ['-y', '-loglevel', 'error', '-f', 'concat', '-safe', '0', '-i', lista, '-c', 'copy', salida], { stdio: 'inherit' })
     .on('close', (c) => (c === 0 ? r() : j(new Error('concat falló')))));
