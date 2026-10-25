@@ -23,7 +23,7 @@
 | `investigador-mercado` | Nichos, narrativa, outliers, demanda con datos de la API | informes | idea |
 | `estratega-canal` | Funda canales: nicho, identidad, marca, ficha, lanzamiento | canal nuevo | — |
 | `ideador` | Ideas con empaque (10 títulos, 3 miniaturas) y evidencia | idea | — |
-| `guionista` | Guion de alta retención → `escenas.json` | guion | — |
+| `guionista` | Guion de alta retención → `guion.json` (voz por beats + coreografía) | guion | — |
 | `director-visual` | Variedad de escenas, imágenes libres, 3 miniaturas | visual | — |
 | `productor` | Respuestas reales de IA, demo, voz, render, Shorts | render | — |
 | `seo-empaquetador` | Títulos A/B, descripción, etiquetas, Shorts, publicación | empaque | — |
@@ -47,8 +47,8 @@ Las definiciones están en [`.claude/agents/`](../.claude/agents/) y los flujos 
 | Etapa | Artefacto en `produccion/<video>/` | Control objetivo | Umbral |
 |---|---|---|---|
 | idea | `idea.md` | evidencia de `investigar.py` | 8,0 |
-| guion | `escenas.json` | `puntuar_guion.py` ≥ 80 | 8,5 |
-| visual | `escenas.json`, `miniatura*.html` | vista previa `--sin-voz` | 8,0 |
+| guion | `guion.json` | `puntuar_guion.py` ≥ 80 | 8,5 |
+| visual | `guion.json`, `miniatura*.html` | capturas `motor.py --cuadros` | 8,0 |
 | render | `<video>.mp4`, `.srt`, `capitulos.txt` | — | — |
 | qc | — | `qc_video.py` sin errores + hoja de contactos | 9,0 |
 | empaque | `metadatos.json`, `miniatura.png`, `publicacion.md`, `shorts/` | — | 8,5 |
@@ -60,14 +60,15 @@ Las definiciones están en [`.claude/agents/`](../.claude/agents/) y los flujos 
 | `pipeline.py` | Estado de cada video, rondas de debate, notas y escaladas | — |
 | `investigar.py` | Autocompletado de YouTube, videos outlier, puntaje de oportunidad, populares por país | API de YouTube (OAuth del canal o `YT_API_KEY`) |
 | `puntuar_guion.py` | Linter de retención: hook, bucle abierto, ritmo, escenas largas, frases largas, relleno, CTA, promesa | — |
-| `producir_video.py` | Escenas HTML → video con voz, zoom, **revelado progresivo con fundidos**, música con *ducking*, subtítulos y capítulos | `GOOGLE_TTS_API_KEY` |
+| `motor.py` | **Motor v2**: motion graphics cuadro por cuadro (GSAP + Chromium): réplica animada de Excel con cursor, fórmulas que se escriben, cámara con zoom, panel y chat de IA, gráficos, transiciones, efectos de sonido sintetizados, voz por beat sincronizada, música con *ducking*, subtítulos y capítulos. Catálogo: [motor-v2.md](motor-v2.md) | `GOOGLE_TTS_API_KEY` |
+| `producir_video.py` | Motor v1 (diapositivas con zoom), solo para video01 | `GOOGLE_TTS_API_KEY` |
 | `qc_video.py` | Resolución, fps, −14 LUFS, pico, silencios, negro, imagen congelada, subtítulos, hoja de contactos | — |
 | `shorts.py` | Short vertical 1080×1920 con fondo desenfocado, título y subtítulos quemados | — |
 | `recursos.py` | Imágenes con licencia libre (Openverse sin clave, Pexels con clave gratis) y registro de créditos | — |
 | `completar_video.py` | Carga título, descripción, miniatura, subtítulos y playlists de un video subido | OAuth del canal |
 | `configurar_canal.py` | Banner, descripción, palabras clave, marca de agua y playlists del canal | OAuth del canal |
 
-Tipos de escena nuevos para más variedad visual: `cifra` (número enorme con fuente), `antes_despues` (pantalla dividida), `cita` e `imagen` (foto a pantalla completa con crédito). Las escenas de lista (`lista`, `herramientas`, `respuesta`, `tabla`, `comparar`) se revelan elemento por elemento al ritmo de la voz. `escenas.json` acepta `marca` (nombre y color de acento), `total_pasos` y `musica` para usar el motor en otros canales.
+El motor v2 acepta `marca` (nombre y color de acento) y `musica` en `guion.json`, así que sirve para otros canales.
 
 ## 5. Automatización
 

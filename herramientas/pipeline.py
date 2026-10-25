@@ -32,7 +32,7 @@ RUBRICAS = json.load(open(os.path.join(RAIZ, "sistema", "rubricas.json"), encodi
 ETAPAS = ["idea", "guion", "visual", "render", "qc", "empaque", "listo", "publicado"]
 CON_DEBATE = set(RUBRICAS["etapas"])
 AGENTES_SIN_DEBATE = {
-    "render": "productor (python3 herramientas/producir_video.py <video>)",
+    "render": "productor (python3 herramientas/motor.py <video> --alta)",
     "listo": "seo-empaquetador escribe publicacion.md; el creador sube el MP4",
     "publicado": "analista a los 2, 7 y 28 días",
 }

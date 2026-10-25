@@ -60,15 +60,15 @@ def analizar(archivo, srt=None, hoja=None):
     pico = re.findall(r"Peak:\s+(-?[\d.]+) dBFS", log)
     integrada = float(lufs[-1]) if lufs else None
     pico_real = float(pico[-1]) if pico else None
-    if integrada is not None and integrada < -60 and archivo.endswith("-preview.mp4"):
-        avisos.append("Vista previa muda: sin control de sonoridad")
+    if integrada is not None and archivo.endswith("-preview.mp4"):
+        avisos.append(f"Vista previa sin voz: sonoridad {integrada} LUFS no se controla")
     elif integrada is not None and abs(integrada + 14) > 1:
         errores.append(f"Sonoridad {integrada} LUFS (objetivo -14 ±1)")
     if pico_real is not None and pico_real > -1.0:
         avisos.append(f"Pico real {pico_real} dBFS (ideal <= -1)")
     for ini, fin in zip(re.findall(r"silence_start: ([\d.]+)", log), re.findall(r"silence_end: ([\d.]+)", log)):
         if float(ini) > 1 and float(fin) < dur - 3:
-            errores.append(f"Silencio de {float(fin) - float(ini):.1f} s en {fmt(float(ini))}")
+            (avisos if archivo.endswith("-preview.mp4") else errores).append(f"Silencio de {float(fin) - float(ini):.1f} s en {fmt(float(ini))}")
     for ini, d in re.findall(r"black_start:([\d.]+) black_end:[\d.]+ black_duration:([\d.]+)", log):
         errores.append(f"Pantalla negra de {float(d):.1f} s en {fmt(float(ini))}")
     for ini in re.findall(r"freeze_start: ([\d.]+)", log):

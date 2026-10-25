@@ -31,7 +31,19 @@ def palabras(t):
     return re.findall(r"[\wáéíóúñü%$]+", t.lower())
 
 
+def aplanar_v2(spec):
+    """guion.json del motor v2: cada beat cuenta como un paso; los beats con acción son un cambio visual."""
+    pasos = []
+    for i, es in enumerate(spec["escenas"]):
+        for j, b in enumerate(es["beats"]):
+            accion = b.get("accion") or b.get("acciones") or es["plantilla"] in ("lista", "comparar") or j == 0
+            pasos.append({"tipo": f"{es['plantilla']}:{i}:{j}" if accion else es["plantilla"] + f":{i}", "voz": b.get("voz", "")})
+    return {**spec, "pasos": pasos}
+
+
 def analizar(spec):
+    if "escenas" in spec:
+        spec = aplanar_v2(spec)
     pasos = spec["pasos"]
     problemas = []  # (penalización, mensaje)
     t, tiempos = 0.0, []
@@ -118,7 +130,9 @@ def main():
     args = [a for a in sys.argv[1:] if not a.startswith("--")]
     if not args:
         sys.exit(__doc__)
-    ruta = args[0] if args[0].endswith(".json") else os.path.join(RAIZ, "produccion", args[0], "escenas.json")
+    ruta = args[0] if args[0].endswith(".json") else os.path.join(RAIZ, "produccion", args[0], "guion.json")
+    if not os.path.exists(ruta):
+        ruta = os.path.join(RAIZ, "produccion", args[0], "escenas.json")
     r = analizar(json.load(open(ruta, encoding="utf-8")))
     if "--json" in sys.argv:
         print(json.dumps(r, ensure_ascii=False, indent=2))

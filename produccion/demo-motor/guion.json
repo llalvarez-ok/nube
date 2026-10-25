@@ -1,0 +1,24 @@
+{"titulo": "Demo del motor", "escenas": [
+ {"plantilla": "excel", "datos": {"archivo": "Ventas_2026.xlsx", "hoja": "Ventas", "anchos": [190, 170, 170, 200, 210],
+   "celdas": [["Vendedor","Región","Ventas","Comisión"],["Ana Díaz","Norte","$ 18.400",""],["Luis Gómez","Sur","$ 12.950",""],["Marta Ruiz","Centro","$ 21.300",""],["Pablo Vera","Norte","$ 9.870",""],["Sofía Paz","Sur","$ 15.640",""],["Diego Sosa","Centro","$ 11.200",""]]},
+  "beats": [
+   {"voz": "Esta planilla calcula sola la comisión de cada vendedor.", "accion": {"tipo": "zoom", "rango": "A1:D7", "escala": 1.25, "retraso": 0.3}},
+   {"voz": "Y la fórmula no la escribí yo: me la dio la inteligencia artificial en diez segundos.", "accion": {"tipo": "escribir", "celda": "D2", "texto": "=SI(C2>15000;C2*8%;C2*5%)"}},
+   {"voz": "Ana vendió más de quince mil, así que cobra el ocho por ciento.", "acciones": [{"tipo": "calcular", "celda": "D2", "valor": "$ 1.472"}, {"tipo": "nota", "celda": "D2", "texto": "Más de $ 15.000 → *8 %*", "retraso": 0.6}]},
+   {"voz": "Arrastro hacia abajo y listo: toda la columna calculada.", "acciones": [{"tipo": "quitar_nota"}, {"tipo": "rellenar", "rango": "D2:D7", "valores": ["$ 1.472","$ 647,50","$ 1.704","$ 493,50","$ 1.251","$ 560"]}]},
+   {"voz": "Te muestro cómo pedírsela a la IA, paso a paso.", "accion": {"tipo": "resaltar", "rango": "D2:D7", "color": "#ffd400", "etiqueta": "Calculado con IA"}}
+  ]},
+ {"plantilla": "titular", "datos": {"etiqueta": "Excel + IA", "icono": "sparkles", "lineas": ["Fórmulas que", "se *escriben solas*"], "sub": "Sin saber programar. Con herramientas gratis."},
+  "beats": [{"voz": "Fórmulas que se escriben solas."}, {"voz": "Sin saber programar, y con herramientas gratis."}]},
+ {"plantilla": "antes_despues", "datos": {"antes": {"segundos": 2700, "texto": "Buscando la fórmula en foros"}, "despues": {"segundos": 40, "texto": "Pidiéndola bien a la IA"}},
+  "beats": [{"voz": "Antes, buscar esta fórmula en foros me llevaba casi una hora."}, {"voz": "Ahora, menos de un minuto."}]},
+ {"plantilla": "capitulo", "capitulo": "El prompt", "datos": {"numero": 1, "total": 3, "titulo": "El prompt que funciona"}, "beats": [{"voz": "Paso uno: el prompt."}]},
+ {"plantilla": "chat", "datos": {"app": "ChatGPT", "modelo": "versión gratuita"},
+  "beats": [{"voz": "Le describo la planilla como si se la explicara a un compañero.", "accion": {"tipo": "prompt", "texto": "Tengo vendedores en la columna A y sus ventas en la C. Necesito en D la comisión: 8 % si vendió más de 15.000, si no 5 %. Dame la fórmula de Excel en español."}},
+   {"voz": "Y me devuelve la fórmula exacta, lista para pegar.", "accion": {"tipo": "respuesta", "texto": "Escribe esta fórmula en D2 y arrástrala hacia abajo:", "formula": "=SI(C2>15000;C2*8%;C2*5%)"}}]},
+ {"plantilla": "lista", "datos": {"titulo": "Las 3 claves del prompt", "items": [{"texto": "Dónde están los datos", "detalle": "columnas y filas exactas", "icono": "table"}, {"texto": "Qué resultado quieres", "detalle": "con un ejemplo concreto", "icono": "target"}, {"texto": "Excel en español", "detalle": "SI, no IF · punto y coma", "icono": "languages"}]},
+  "beats": [{"voz": "Tres claves: dónde están los datos,"}, {"voz": "qué resultado quieres, con un ejemplo,"}, {"voz": "y que la fórmula sea para Excel en español."}]},
+ {"plantilla": "cifra", "datos": {"valor": 87, "sufijo": " %", "etiqueta": "de las fórmulas salieron bien *al primer intento*", "fuente": "Prueba propia con 30 planillas de ejemplo"}, "beats": [{"voz": "En mi prueba, ochenta y siete por ciento salieron bien al primer intento."}]},
+ {"plantilla": "aviso", "datos": {"titulo": "Revisa siempre una fila a mano", "texto": "La IA puede confundir columnas si tu planilla tiene celdas combinadas."}, "beats": [{"voz": "Pero ojo: revisa siempre una fila a mano."}]},
+ {"plantilla": "final", "datos": {"titulo": "Sigue con *este atajo*"}, "beats": [{"voz": "Y si quieres el siguiente paso, mira este video."}]}
+]}

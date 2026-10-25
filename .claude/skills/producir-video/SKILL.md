@@ -24,7 +24,7 @@ Actúas como **orquestador**. No escribes el contenido tú: lo delegas a los age
 - **listo:** el `seo-empaquetador` dejó `publicacion.md`; el productor genera los 3 Shorts. `pipeline.py marcar <video> listo` solo cuando el creador confirme que lo subió.
 
 ## 3. Cierre
-- Commit de los artefactos (idea.md, escenas.json, debate.md, rondas/, metadatos.json, miniaturas, srt, capitulos.txt, publicacion.md, estado.json). Los MP4 no se suben.
+- Commit de los artefactos (idea.md, guion.json, debate.md, rondas/, metadatos.json, miniaturas, srt, capitulos.txt, publicacion.md, estado.json). Los MP4 no se suben.
 - Resumen para el creador: etapa alcanzada, nota de cada etapa, decisiones importantes del showrunner y qué tiene que hacer él (subir el MP4, publicar).
 
 ## Reglas

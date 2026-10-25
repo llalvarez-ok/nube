@@ -16,7 +16,7 @@
       }
     },
     "guion": {
-      "artefacto": "escenas.json",
+      "artefacto": "guion.json",
       "autor": "guionista",
       "criticos": ["critico-retencion", "verificador", "espectador"],
       "umbral": 8.5,
@@ -30,12 +30,12 @@
       }
     },
     "visual": {
-      "artefacto": "escenas.json + miniatura.html",
+      "artefacto": "guion.json + miniatura.html",
       "autor": "director-visual",
       "criticos": ["critico-retencion", "editor-qc"],
       "umbral": 8.0,
       "criterios": {
-        "variedad":     {"peso": 0.30, "minimo": 7, "que_mide": "Cambio visual al menos cada 8-12 s; no más de 2 escenas seguidas del mismo tipo"},
+        "variedad":     {"peso": 0.30, "minimo": 7, "que_mide": "Algo se mueve cada 2-4 s; cada beat de excel/chat con acción; no más de 3 escenas seguidas de la misma plantilla"},
         "legibilidad":  {"peso": 0.30, "minimo": 8, "que_mide": "Texto legible en un celular; máximo ~12 palabras en pantalla por escena"},
         "coherencia":   {"peso": 0.20, "minimo": 8, "que_mide": "Lo que se ve refuerza lo que se dice en ese momento"},
         "marca":        {"peso": 0.20, "minimo": 7, "que_mide": "Respeta la identidad visual del canal"}

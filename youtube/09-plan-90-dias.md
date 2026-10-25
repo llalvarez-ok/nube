@@ -1,5 +1,7 @@
 # 09 · Plan de ejecución: los primeros 90 días
 
+> **Actualización 25/10/2026:** el nicho se angostó a **IA aplicada a Excel y al trabajo de oficina** (Excel + IA 50 %, flujos de oficina 25 %, IA para tu profesión 15 %, novedades de IA en Excel/Office 10 %). Cada video deja una plantilla .xlsx. Las fechas y la estructura de este plan siguen sirviendo, pero los temas de los videos salen ahora de [`canales/atajos-ia/ideas.md`](../canales/atajos-ia/ideas.md) (empezar por las 5 de lanzamiento) y el posicionamiento de [`canales/atajos-ia/ficha.md`](../canales/atajos-ia/ficha.md). Productos y fechas de lanzamiento: [`canales/atajos-ia/productos.md`](../canales/atajos-ia/productos.md). Las playlists de la semana 0 pasan a ser las de los pilares nuevos.
+
 Inicio: **lunes 5 de octubre de 2026**. Cada semana incluye la revisión de los lunes ([08](08-analitica.md)).
 
 ## Semana 0 · Setup (5–11 oct)

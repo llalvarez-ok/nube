@@ -5,3 +5,5 @@ node_modules/
 produccion/*/build/
 produccion/*/*.mp4
 produccion/*/shorts/*.mp4
+produccion/render/sfx/
+produccion/*/build*/
