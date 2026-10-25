@@ -276,3 +276,56 @@ Lo demás está bien en pantalla: el sello PAGADO a 1,8x, los rótulos, los dos 
 - `plantilla_xlsx.py` guarda las matrices dinámicas con `ref` de una sola celda (`D2`, `A8`). Excel suele guardar el rango desbordado; hay que confirmarlo al abrir el archivo.
 - Confirmar ELEGIRCOLS en Excel 2024 y conseguir una URL oficial del separador de listas, si se quiere decir en el video.
 - La duración queda por debajo de 9 min (ver la tabla). Si el showrunner prefiere 9 min o más, hay que relajar la meta de Excel o agregar escenas que no sean de Excel.
+
+## Respuesta del guionista a la ronda 2
+
+Apliqué todo en `produccion/video02/fuente/armar_guion.py` y regeneré `guion.json` (35 escenas, 1.130 palabras) y la plantilla.
+
+### Metas (tiempos estimados por el motor sin voz, `fuente/metas.py`)
+
+| Meta | Ronda 2 | Ronda 3 | ¿Cumple? |
+|---|---|---|---|
+| Fórmula 1 en pantalla antes de 0:40 | 0:38 | 0:39 | Sí, justo (el hook ganó una frase) |
+| Excel ≤ 60 % | 59 % | 56 % | Sí |
+| Ninguna escena excel de más de 45 s | 34 s | 34 s | Sí |
+| Cambio fuerte cada 60–90 s | 70 s | 69 s | Sí |
+| Zoom ≥ 1,6x en calcular/nota | 0 fallos | 0 fallos | Sí |
+| Cierre ≤ 12 s | 11 s | 11 s | Sí |
+| Chats ≤ 12 s (7b ≤ 20 s) | — | 11,0 / 10,2 / 11,4 / 11,9; 7b 12,7 s | Sí |
+| Promesa antes de 0:25 | ~0:22 | ~0:19 | Sí |
+| `puntuar_guion.py` | 100 | 100 | Sí |
+| `verificar_lo242.py` | 109/109 | 109/109 | Sí |
+| Duración | 8:19 | 8:36 (unos 9 min con voz) | Dentro del margen si la voz real estira lo previsto |
+
+### Puntos del orquestador
+1. "Y una la escribí yo": **aplicado.**
+2. Requisitos: **aplicado.** Hay un beat propio de ~4 s: "Solo necesitas Excel para la web, gratis, y una IA gratis: yo uso Claude." El rótulo queda en una línea grande, "Excel web gratis o 365", y debajo, en chico, "no sirve 2016/2019 · datos ficticios". Lo partí en título y sub porque con todo en el título ocupaba dos líneas y tapaba media hoja. El detalle de Excel 2021 va en `descripcion_avisos` y en la hoja Léeme. Nota de veracidad: "una IA gratis" describe lo que necesita el espectador, no el plan que usé yo; el rótulo de los chats sigue sin plan.
+3. Mapa explicado la primera vez: **aplicado** ("Le digo qué hay en cada columna, eso es el mapa, y qué quiero, la meta"). El sub del rótulo dice "el mapa completo está en la hoja Prompts".
+4. `antes_despues` FIN.MES: **aplicado.** Entre las fórmulas 4 y 5: "3 sep." (+30 días ✗) contra "30 sep." (FIN.MES ✓). El capítulo 5 empieza ahí. Quité la pausa de 4,2 s. La explicación del 1/0 y del formato de fecha va en dos beats cortos con voz, y las notas pasaron a C3 para que no se corten a la derecha.
+5. "Antes de cerrar, un aviso honesto": **quitado.** El `aviso` dice y narra "¿Y cuándo conviene no pedírsela a la IA?". La primera fila de `comparar` ya no repite la pregunta.
+6. Beat largo de la escena 5: **partido en dos.** El primero resalta, una por una, las 3 variantes del cliente. **Cambié la ferretería por el kiosco:** en la planilla, las tres variantes que solo difieren en mayúsculas son las del kiosco (B4 "kiosco la esquina", B7 "KIOSCO LA ESQUINA", B12 "Kiosco La Esquina"). Las de la ferretería se diferencian por espacios, que en pantalla casi no se ven. La voz dice "al mismo kiosco de tres formas".
+7. Bucle en el titular de la plantilla: **aplicado.**
+8. Nota del 0 % en I7, con zoom 1,6x a esa zona: **aplicado.**
+9. "Lunes": **quitado de todo el guion** (0 apariciones). Ahora dice "cobranza de la semana", "esta semana habría llamado", "a quién llamar esta semana". El capítulo 8 se llama "FILTRAR: cobranza en Excel, el reporte de la semana".
+10. Fuentes: **actualizadas** con microsoft.com/microsoft-365/free-office-online-for-the-web, exceljet y bettersolutions (ELEGIRCOLS no está en 2021).
+11. `respuestas-ia.md` unificado: correrlo en claude.ai gratis es opcional y solo sirve para volver a poner el plan en el rótulo.
+12. Plantilla gratis sin email: la voz dice "gratis en la descripción" y `descripcion_avisos` dice "Plantilla gratis, sin registro". La palabra "email" no aparece en el guion.
+13. Prompts con `"duracion": 1.2`: **aplicado a los cinco chats.**
+
+### Capturas revisadas (~25)
+Revisé: sello PAGADO a 1,8x, rótulo de requisitos, chat 1 centrado, las 3 variantes del kiosco, la nota del 0 % en I7, el `antes_despues` FIN.MES, las notas de FIN.MES, el chat 7b, UNICOS y el gráfico final. Corregí el rótulo, que ocupaba dos líneas, y las notas de FIN.MES, que se cortaban a la derecha.
+
+### Pendiente (no lo puede cerrar el guionista)
+- Que el creador abra la plantilla en Excel para la web: es lo que sostiene el veto del verificador.
+
+## Pulido final (después de la ronda 3)
+Apliqué los 7 ajustes opcionales en `fuente/armar_guion.py`:
+1. Rótulo del hook: "Excel web gratis o 365 · en 2021 fallan 2 de las 10 · 2016/2019 no · datos ficticios". En la voz: "La empresa es inventada".
+2. Quité el beat "Al final vas a poder…". Queda "Solo necesitas Excel para la web y una IA gratis: yo uso Claude".
+3. Titular de la escena 8 en dos beats: primero el bucle de la fórmula 7 y después, con texto nuevo en pantalla, "Prompts gratis: hoja Prompts".
+4. La fórmula 2 es del kiosco de punta a punta: las variantes 1 y 2 en rojo, la correcta en verde, y el resultado narrado es "Kiosco La Esquina", con las tres filas en verde.
+5. Quité el `aviso` que repetía el título: la pregunta es el primer beat de `comparar` (`beats_filas`).
+6. "Lo cubre: si no hay vencidas, muestra un mensaje en vez de un error."
+7. Agregué un `antes_despues` de ~5,6 s antes de la fórmula 10 ("Ferretería: 2 vencidas a mano → 0 con la prueba"). Para eso la escena 9/10 se partió en dos. El beat "Y si alguien paga…" pasó a dos beats: zoom a la lista con la nota "Pedidos › Pagado = Sí → sale de la lista", y después zoom a la fecha de corte. La columna Pagado no está en la hoja Resumen, así que la mostré con una nota.
+
+Metas después del pulido: fórmula 1 a 0:34, Excel 56 %, escena excel más larga 35 s, mayor hueco entre cambios fuertes 75 s, ningún calcular/nota bajo 1,6x, cierre 11 s, chats ≤ 12,7 s. `puntuar_guion` 100 y `verificar_lo242` 109/109. Revisé unas 12 capturas de los tramos que cambiaron y corregí dos cosas: las etiquetas del kiosco se superponían con la columna C y la tercera línea del titular se cortaba.

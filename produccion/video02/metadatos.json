@@ -1,0 +1,40 @@
+{
+  "titulo": "10 fórmulas de Excel con IA: tu planilla se llena sola",
+  "descripcion": "Fórmulas de Excel con IA gratis: 10 fórmulas que le pides a una IA para que tu planilla se complete sola, sin macros, y una prueba para comprobarlas antes de confiar en ellas.\nPrecios, vencimientos, cobranza en Excel (cuentas por cobrar) y ventas por vendedor, en una planilla de pyme lista para usar.\n\n📥 Plantilla gratis y sin registro, la misma del video, con las 10 fórmulas y la hoja Prompts (cada prompt con qué revisar): [ENLACE A LA PLANTILLA]\n\n⏱️ Capítulos\n{capitulos}\n\n✅ Qué Excel necesitas\n• Excel para la web (gratis con una cuenta Microsoft) o Microsoft 365: sí.\n• Excel 2021: fallan la fórmula 3 (TEXTODESPUES) y la 8 (ELEGIRCOLS, dentro del reporte de cobranza).\n• Excel 2016 y 2019: no (les faltan BUSCARX, FILTRAR, UNICOS y varias más).\n• Si tu Excel separa los argumentos con coma en vez de punto y coma, díselo a la IA en el mapa.\n\n📚 Fuentes\n• BUSCARX (Excel 2021, 2024 y Microsoft 365; no 2016 ni 2019): https://support.microsoft.com/es-ES/Excel/functions/xlookup-function\n• TEXTODESPUES (Microsoft 365 y Excel 2024; no Excel 2021): https://support.microsoft.com/es-ES/Excel/functions/textafter-function\n• ELEGIRCOLS (Microsoft 365 y Excel para la web): https://support.microsoft.com/office/choosecols-function-bf117976-2722-4466-9b9a-1c01ed9aebff\n• ELEGIRCOLS no está en Excel 2021: https://www.bettersolutions.com/excel/functions/updates-2024-new-functions.htm\n• Excel para la web, gratis con cuenta Microsoft: https://www.microsoft.com/microsoft-365/free-office-online-for-the-web\n• 2.446.165, 1.835.590, 610.575 y el resto de las cifras: cálculo propio sobre la planilla ficticia del video.\n\nℹ️ Sobre este video\nLa empresa (Distribuidora Sur), sus clientes y todos los datos son ficticios. Las respuestas de IA que se muestran se generaron con Claude el 25/10/2026; si pegas el mismo prompt en ChatGPT o Copilot, la respuesta puede cambiar, y para eso está la prueba. Narración con voz sintética: la primera persona del guion es un recurso narrativo. Guion, investigación y demos verificados por el equipo de Atajos IA.\n\n🔔 Un atajo nuevo cada martes y viernes: suscríbete a Atajos IA.\n\n#Excel #IA #FórmulasDeExcel",
+  "etiquetas": [
+    "fórmulas de excel con ia",
+    "fórmulas de excel con chatgpt",
+    "cobranza en excel",
+    "cuentas por cobrar",
+    "plantilla excel pyme",
+    "buscarx",
+    "nompropio y espacios",
+    "textodespues",
+    "si.conjunto",
+    "fin.mes excel",
+    "sumar.si.conjunto",
+    "filtrar excel",
+    "unicos excel",
+    "contar.si.conjunto",
+    "Atajos IA"
+  ],
+  "categoria": "27",
+  "playlists": [
+    "Flujos paso a paso con IA",
+    "Empieza aquí: lo mejor de Atajos IA"
+  ],
+  "titulos_ab": [
+    {
+      "titulo": "10 fórmulas de Excel con IA: tu planilla se llena sola",
+      "miniatura": "miniatura-a.png"
+    },
+    {
+      "titulo": "Fórmulas de Excel con IA: el paso que casi nadie pide",
+      "miniatura": "miniatura-b.png"
+    },
+    {
+      "titulo": "Fórmulas de Excel con IA (y el error que cobra dos veces)",
+      "miniatura": "miniatura-c.png"
+    }
+  ]
+}

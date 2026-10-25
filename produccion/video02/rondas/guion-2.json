@@ -1,0 +1,53 @@
+{
+ "evaluaciones": [
+  {
+   "agente": "critico-retencion",
+   "puntajes": {
+    "hook": 8,
+    "ritmo": 7,
+    "promesa": 8,
+    "claridad": 7
+   },
+   "objeciones": [
+    "'La décima la escribí yo' → 'Y una la escribí yo'.",
+    "Mapa sin explicar en 0:30 → 'le digo qué hay en cada columna, eso es el mapa, y qué quiero, la meta'.",
+    "45 s de Excel entre fórmulas 4 y 5 y pausa muerta de 4,2 s → antes_despues '+30 días: 3 sep ✗ / FIN.MES: 30 sep ✓'.",
+    "'Antes de cerrar, un aviso honesto' anuncia el final → quitar y entrar con '¿Y cuándo conviene NO pedírsela a la IA?'.",
+    "Escena 5: beat de 13 s con dos ideas → partir y resaltar las 3 variantes.",
+    "Requisitos del hook: 9 s y rótulo ilegible → una línea.",
+    "Chat: panel vacío con texto chico abajo → mensaje al centro, 28-32 px; saltar tecleo en prompts cortos.",
+    "En 1:55, plantilla + bucle: 'en la fórmula siete viene el error que casi me cuesta caro'."
+   ]
+  },
+  {
+   "agente": "verificador",
+   "puntajes": {
+    "veracidad": 8
+   },
+   "objeciones": [
+    "--verificar sigue con 72 diferencias por LibreOffice 24.2; los desbordes FILTRAR/UNICOS no se ejecutaron → condición del creador: abrir la plantilla en Excel para la web.",
+    "Fuente para ELEGIRCOLS ausente en Excel 2021.",
+    "URL de 'Excel para la web gratis' equivocada → microsoft.com/microsoft-365/free-office-online-for-the-web.",
+    "Nombres ELEGIRCOLS/TEXTODESPUES/TEXTOANTES en español sin confirmar → condición del creador.",
+    "Nota '25 × 1.150 → 0 %' en I3 (Librería) → moverla a I7.",
+    "04/11/2026 es miércoles → no decir 'lunes' o aceptarlo.",
+    "Unificar respuestas-ia.md con debate.md (correr en claude.ai es opcional)."
+   ]
+  },
+  {
+   "agente": "espectador",
+   "puntajes": {
+    "claridad": 8,
+    "promesa": 9
+   },
+   "objeciones": [
+    "'Una la escribí yo' en lugar de 'la décima'.",
+    "Media frase: 'y una IA gratis; yo uso Claude, pero sirve ChatGPT o Copilot'.",
+    "Volver a poner que no sirve Excel 2016/2019 (3 s).",
+    "'Datos inventados' una vez al principio.",
+    "Explicar 'mapa' la primera vez.",
+    "'Gratis, a cambio de tu email' si es así."
+   ]
+  }
+ ]
+}

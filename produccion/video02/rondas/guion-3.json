@@ -1,0 +1,37 @@
+{
+ "evaluaciones": [
+  {
+   "agente": "critico-retencion",
+   "puntajes": {
+    "hook": 9,
+    "ritmo": 8,
+    "promesa": 9,
+    "claridad": 8
+   },
+   "objeciones": [
+    "Pulido aplicado después de la evaluación: antes_despues de la ferretería antes de la fórmula 10, escena 8 en dos beats, escena 5 con un solo cliente, sin el beat de promesa genérica, sin la escena 32 y 'si punto error' explicado."
+   ]
+  },
+  {
+   "agente": "verificador",
+   "puntajes": {
+    "veracidad": 9
+   },
+   "objeciones": [
+    "CONDICIÓN DEL CREADOR: abrir la plantilla en Excel para la web en español y confirmar (1) H, E, I y J, (2) los desbordes de D2:F5 y A8:A12 sin @, (3) los nombres BUSCARX/TEXTODESPUES/ELEGIRCOLS/FILTRAR/ORDENAR/UNICOS y (4) que el enlace se descargue sin registro."
+   ]
+  },
+  {
+   "agente": "espectador",
+   "puntajes": {
+    "claridad": 8,
+    "promesa": 9
+   },
+   "objeciones": [
+    "Excel 2021 en el rótulo (aplicado).",
+    "'La empresa es inventada' en voz (aplicado).",
+    "Confirmar que la plantilla se baja sin email (condición del creador)."
+   ]
+  }
+ ]
+}

@@ -176,6 +176,72 @@
         "[espectador] No narrar 'la copio hacia abajo' después de la fórmula 2.",
         "[espectador] 'Gratis, a cambio de tu email' si es así."
       ]
+    },
+    {
+      "fecha": "2026-10-25T22:45:06",
+      "etapa": "guion",
+      "ronda": 2,
+      "resultado": "provisional-revisar",
+      "nota": 7.83,
+      "criterios": {
+        "hook": 8.0,
+        "ritmo": 7.0,
+        "promesa": 8.5,
+        "claridad": 7.5,
+        "veracidad": 8.0
+      },
+      "motivos": [
+        "«ritmo» 7.0 < mínimo 8",
+        "«claridad» 7.5 < mínimo 8",
+        "«veracidad» 8.0 < mínimo 9",
+        "veto de verificador en «veracidad» (8)",
+        "nota 7.83 < umbral 8.5"
+      ],
+      "objeciones": [
+        "[critico-retencion] 'La décima la escribí yo' → 'Y una la escribí yo'.",
+        "[critico-retencion] Mapa sin explicar en 0:30 → 'le digo qué hay en cada columna, eso es el mapa, y qué quiero, la meta'.",
+        "[critico-retencion] 45 s de Excel entre fórmulas 4 y 5 y pausa muerta de 4,2 s → antes_despues '+30 días: 3 sep ✗ / FIN.MES: 30 sep ✓'.",
+        "[critico-retencion] 'Antes de cerrar, un aviso honesto' anuncia el final → quitar y entrar con '¿Y cuándo conviene NO pedírsela a la IA?'.",
+        "[critico-retencion] Escena 5: beat de 13 s con dos ideas → partir y resaltar las 3 variantes.",
+        "[critico-retencion] Requisitos del hook: 9 s y rótulo ilegible → una línea.",
+        "[critico-retencion] Chat: panel vacío con texto chico abajo → mensaje al centro, 28-32 px; saltar tecleo en prompts cortos.",
+        "[critico-retencion] En 1:55, plantilla + bucle: 'en la fórmula siete viene el error que casi me cuesta caro'.",
+        "[verificador] --verificar sigue con 72 diferencias por LibreOffice 24.2; los desbordes FILTRAR/UNICOS no se ejecutaron → condición del creador: abrir la plantilla en Excel para la web.",
+        "[verificador] Fuente para ELEGIRCOLS ausente en Excel 2021.",
+        "[verificador] URL de 'Excel para la web gratis' equivocada → microsoft.com/microsoft-365/free-office-online-for-the-web.",
+        "[verificador] Nombres ELEGIRCOLS/TEXTODESPUES/TEXTOANTES en español sin confirmar → condición del creador.",
+        "[verificador] Nota '25 × 1.150 → 0 %' en I3 (Librería) → moverla a I7.",
+        "[verificador] 04/11/2026 es miércoles → no decir 'lunes' o aceptarlo.",
+        "[verificador] Unificar respuestas-ia.md con debate.md (correr en claude.ai es opcional).",
+        "[espectador] 'Una la escribí yo' en lugar de 'la décima'.",
+        "[espectador] Media frase: 'y una IA gratis; yo uso Claude, pero sirve ChatGPT o Copilot'.",
+        "[espectador] Volver a poner que no sirve Excel 2016/2019 (3 s).",
+        "[espectador] 'Datos inventados' una vez al principio.",
+        "[espectador] Explicar 'mapa' la primera vez.",
+        "[espectador] 'Gratis, a cambio de tu email' si es así."
+      ]
+    },
+    {
+      "fecha": "2026-10-25T23:04:59",
+      "etapa": "guion",
+      "ronda": 3,
+      "resultado": "provisional-aprobado",
+      "nota": 8.65,
+      "criterios": {
+        "hook": 9.0,
+        "ritmo": 8.0,
+        "promesa": 9.0,
+        "claridad": 8.0,
+        "veracidad": 9.0
+      },
+      "motivos": [],
+      "objeciones": [
+        "[critico-retencion] Pulido aplicado después de la evaluación: antes_despues de la ferretería antes de la fórmula 10, escena 8 en dos beats, escena 5 con un solo cliente, sin el beat de promesa genérica, sin la escena 32 y 'si punto error' explicado.",
+        "[verificador] CONDICIÓN DEL CREADOR: abrir la plantilla en Excel para la web en español y confirmar (1) H, E, I y J, (2) los desbordes de D2:F5 y A8:A12 sin @, (3) los nombres BUSCARX/TEXTODESPUES/ELEGIRCOLS/FILTRAR/ORDENAR/UNICOS y (4) que el enlace se descargue sin registro.",
+        "[espectador] Excel 2021 en el rótulo (aplicado).",
+        "[espectador] 'La empresa es inventada' en voz (aplicado).",
+        "[espectador] Confirmar que la plantilla se baja sin email (condición del creador)."
+      ]
     }
   ]
 }

@@ -7,7 +7,7 @@
  },
  "subtitulos": false,
  "progreso": true,
- "descripcion_avisos": "Respuestas generadas con Claude el 25/10/2026. Documentos y empresa de ejemplo ficticios. Voz sintética: la primera persona del guion es un recurso narrativo.",
+ "descripcion_avisos": "Respuestas generadas con Claude el 25/10/2026. Documentos y empresa de ejemplo ficticios. Voz sintética: la primera persona del guion es un recurso narrativo. Plantilla gratis, sin registro. Funciona en Excel para la web (gratis) y Microsoft 365; en Excel 2021 fallan TEXTODESPUES (fórmula 3) y ELEGIRCOLS (fórmula 8); en 2016/2019, varias más.",
  "fuentes": [
   {
    "dato": "610.575, 2.446.165, 1.835.590 y el resto de las cifras de la planilla",
@@ -30,8 +30,13 @@
    "fecha": "2026-10"
   },
   {
-   "dato": "Excel para la web, gratis con cuenta Microsoft (página de plantillas gratuitas de Excel para la web)",
-   "fuente": "https://support.microsoft.com/en-us/excel/free-excel-for-the-web-templates",
+   "dato": "Excel para la web, gratis con cuenta Microsoft (página oficial de Office gratis en la web)",
+   "fuente": "https://www.microsoft.com/microsoft-365/free-office-online-for-the-web",
+   "fecha": "2026-10"
+  },
+  {
+   "dato": "ELEGIRCOLS no está en Excel 2021 (llegó con las funciones de 2024)",
+   "fuente": "https://exceljet.net/functions · https://www.bettersolutions.com/excel/functions/updates-2024-new-functions.htm",
    "fecha": "2026-10"
   },
   {
@@ -715,7 +720,7 @@
      ]
     },
     {
-     "voz": "La décima la escribí yo. Ojo con ese sello: marcaba vencida una factura de Ferretería El Tornillo que ya estaba pagada.",
+     "voz": "Y una la escribí yo. Ojo con ese sello: marcaba vencida una factura de Ferretería El Tornillo que ya estaba pagada.",
      "acciones": [
       {
        "tipo": "zoom",
@@ -740,7 +745,7 @@
      ]
     },
     {
-     "voz": "Casi le cobro dos veces. La atrapé con la tercera parte de un prompt que casi nadie usa.",
+     "voz": "Casi le cobro dos veces. Te muestro cómo la atrapé.",
      "accion": {
       "tipo": "zoom",
       "rango": "C1:M7",
@@ -748,17 +753,17 @@
      }
     },
     {
-     "voz": "Al final vas a poder pedir tus fórmulas y comprobarlas antes de confiar en ellas. Solo necesitas Excel para la web, que es gratis.",
+     "voz": "Solo necesitas Excel para la web, que es gratis, y una IA: yo uso Claude. La empresa es inventada.",
      "acciones": [
       {
        "tipo": "zoom_fuera"
       },
       {
        "tipo": "rotulo",
-       "texto": "Excel para la web · *gratis*",
-       "sub": "o Microsoft 365 · en Excel 2021 fallan la 3 y la 8 · en 2016/2019, varias más · empresa y datos ficticios",
-       "hasta": 5.5,
-       "retraso": 2.2
+       "texto": "Excel web *gratis* o 365",
+       "sub": "en 2021 fallan 2 de las 10 · 2016/2019 no · datos ficticios",
+       "hasta": 4.6,
+       "retraso": 0.3
       }
      ]
     }
@@ -773,19 +778,19 @@
    },
    "beats": [
     {
-     "voz": "Fórmula uno: el precio. Le paso el mapa, entero en la hoja Prompts, y la meta.",
+     "voz": "Fórmula uno: el precio. Le digo qué hay en cada columna, eso es el mapa, y qué quiero, la meta.",
      "acciones": [
       {
        "tipo": "rotulo",
        "numero": "01",
        "texto": "BUSCARX",
-       "sub": "traer el precio del catálogo",
+       "sub": "el mapa completo está en la hoja Prompts",
        "hasta": 3.0
       },
       {
        "tipo": "prompt",
        "texto": "Excel para la web en español, separador punto y coma. Hoja Pedidos, filas 2 a 13: A Fecha, B Cliente, C Cliente limpio, D Vendedor, E Vendedor limpio, F Código, G Cantidad, H Precio, I Descuento, J Neto, K Vence, L Pagado (Sí/No), M Estado. Catálogo en la hoja Productos: A Código, C Precio. Fecha de corte en Resumen!B1. En H2 quiero el precio de cada código; si no existe, que diga \"Código no existe\". Una fórmula para copiar hacia abajo.",
-       "duracion": 3.0,
+       "duracion": 1.2,
        "retraso": 0.3
       }
      ]
@@ -1573,7 +1578,47 @@
    },
    "beats": [
     {
-     "voz": "El sistema escribe a la misma ferretería de tres formas: con espacios de más y mayúsculas mezcladas. En la misma conversación, así no repito el mapa, le pido solo la meta: el nombre prolijo.",
+     "voz": "El sistema escribe al mismo kiosco de tres formas: en minúsculas, en mayúsculas y bien.",
+     "acciones": [
+      {
+       "tipo": "resaltar",
+       "rango": "B4",
+       "color": "#e5484d",
+       "etiqueta": "1",
+       "retraso": 0.3,
+       "hasta": 4.5
+      },
+      {
+       "tipo": "resaltar",
+       "rango": "B7",
+       "color": "#e5484d",
+       "etiqueta": "2",
+       "retraso": 1.6,
+       "hasta": 3.2
+      },
+      {
+       "tipo": "resaltar",
+       "rango": "B12",
+       "color": "#107c41",
+       "etiqueta": "3 · bien",
+       "retraso": 2.9,
+       "hasta": 1.9
+      }
+     ]
+    },
+    {
+     "voz": "Y a otros les sobran espacios: para una lista, eso ya es otro cliente.",
+     "accion": {
+      "tipo": "resaltar",
+      "rango": "B5",
+      "color": "#e5484d",
+      "etiqueta": "espacios de más",
+      "retraso": 0.2,
+      "hasta": 3.0
+     }
+    },
+    {
+     "voz": "En la misma conversación, así no repito el mapa, le pido solo la meta: el nombre prolijo.",
      "acciones": [
       {
        "tipo": "zoom",
@@ -1600,13 +1645,18 @@
      }
     },
     {
-     "voz": "Ferretería El Tornillo. Y las doce filas, prolijas.",
+     "voz": "La copio, y el kiosco queda igual en las tres filas: Kiosco La Esquina.",
      "acciones": [
       {
        "tipo": "calcular",
        "celda": "C2",
        "valor": "Ferretería El Tornillo",
        "derecha": false
+      },
+      {
+       "tipo": "zoom_fuera",
+       "duracion": 0.6,
+       "retraso": 0.6
       },
       {
        "tipo": "rellenar",
@@ -1626,6 +1676,28 @@
         "Ferretería El Tornillo"
        ],
        "retraso": 1.0
+      },
+      {
+       "tipo": "resaltar",
+       "rango": "C4",
+       "color": "#107c41",
+       "retraso": 2.4,
+       "hasta": 3.4
+      },
+      {
+       "tipo": "resaltar",
+       "rango": "C7",
+       "color": "#107c41",
+       "retraso": 2.6,
+       "hasta": 3.2
+      },
+      {
+       "tipo": "resaltar",
+       "rango": "C12",
+       "color": "#107c41",
+       "etiqueta": "las 3, iguales",
+       "retraso": 2.8,
+       "hasta": 3.0
       }
      ]
     },
@@ -1987,17 +2059,26 @@
   {
    "plantilla": "titular",
    "datos": {
-    "etiqueta": "Plantilla gratis",
-    "icono": "file-spreadsheet",
+    "etiqueta": "Lo que viene",
+    "icono": "triangle-alert",
+    "tamano": 84,
     "lineas": [
-     "Los 10 prompts,",
-     "con *qué revisar*"
+     "Fórmula 7: el error",
+     "que casi me *cuesta caro*",
+     {
+      "texto": "Prompts gratis: hoja *Prompts*",
+      "beat": 1
+     }
     ],
-    "sub": "Hoja «Prompts» · enlace en la descripción"
+    "sub": "enlace en la descripción",
+    "sub_beat": 1
    },
    "beats": [
     {
-     "voz": "Los diez prompts, con qué revisar en cada uno, están en la plantilla gratis: hoja Prompts."
+     "voz": "En la fórmula siete, la que escribí yo, viene el error que casi me cuesta caro."
+    },
+    {
+     "voz": "Los diez prompts están gratis en la plantilla: hoja Prompts."
     }
    ]
   },
@@ -2026,7 +2107,7 @@
      "accion": {
       "tipo": "prompt",
       "texto": "En I2 quiero el descuento según el total de la compra (G2*H2): 10 % si llega a 100.000; 5 % si llega a 40.000; si no, 0 %.",
-      "duracion": 2.4
+      "duracion": 1.2
      }
     },
     {
@@ -2290,17 +2371,24 @@
      "voz": "Y si no llega a cuarenta mil, como los veinticinco desinfectantes del kiosco, cero.",
      "acciones": [
       {
+       "tipo": "zoom",
+       "rango": "G4:J8",
+       "escala": 1.6,
+       "duracion": 0.7
+      },
+      {
        "tipo": "mover",
-       "celda": "C5"
+       "celda": "C10"
       },
       {
        "tipo": "nota",
-       "celda": "I3",
+       "celda": "I7",
        "texto": "25 × 1.150 = 28.750 → *0 %*",
        "lado": "abajo",
-       "retraso": 0.3
+       "retraso": 0.8
       }
-     ]
+     ],
+     "pausa": 0.6
     },
     {
      "voz": "Cada pedido cae en su tramo. El neto es una multiplicación simple, que no cuenta entre las diez.",
@@ -2370,6 +2458,32 @@
      ]
     }
    ]
+  },
+  {
+   "plantilla": "antes_despues",
+   "datos": {
+    "antes": {
+     "valor": 3,
+     "sufijo": " sep.",
+     "texto": "*+30 días* desde el 4 de agosto ✗"
+    },
+    "despues": {
+     "valor": 30,
+     "sufijo": " sep.",
+     "texto": "*FIN.MES*: fin del mes siguiente ✓"
+    }
+   },
+   "beats": [
+    {
+     "voz": "Fórmula cinco: vence a fin del mes siguiente. ¿Y si sumas treinta días? Del 4 de agosto llegas al 3 de septiembre.",
+     "voz_tts": "Fórmula cinco: vence a fin del mes siguiente. ¿Y si sumas treinta días? Del cuatro de agosto llegas al tres de septiembre."
+    },
+    {
+     "voz": "Lo correcto es el 30 de septiembre.",
+     "voz_tts": "Lo correcto es el treinta de septiembre."
+    }
+   ],
+   "capitulo": "5. FIN.MES: fechas de vencimiento"
   },
   {
    "plantilla": "excel",
@@ -2592,8 +2706,7 @@
    },
    "beats": [
     {
-     "voz": "Fórmula cinco: vence a fin del mes siguiente. Sumar treinta días no sirve: del 4 de agosto llegas al 3 de septiembre.",
-     "voz_tts": "Fórmula cinco: vence a fin del mes siguiente. Sumar treinta días no sirve: del cuatro de agosto llegas al tres de septiembre.",
+     "voz": "Se lo pedí a la IA, y me dio fin punto mes.",
      "acciones": [
       {
        "tipo": "zoom",
@@ -2606,22 +2719,19 @@
        "texto": "FIN.MES",
        "sub": "se la pedí a Claude · prompt en la hoja Prompts",
        "retraso": 0.3
+      },
+      {
+       "tipo": "escribir",
+       "celda": "K2",
+       "texto": "=FIN.MES(A2;1)",
+       "duracion": 1.1,
+       "retraso": 1.2
       }
-     ]
+     ],
+     "pausa": 0.6
     },
     {
-     "voz": "La IA me dio fin punto mes.",
-     "accion": {
-      "tipo": "escribir",
-      "celda": "K2",
-      "texto": "=FIN.MES(A2;1)",
-      "duracion": 1.1
-     },
-     "pausa": 0.8
-    },
-    {
-     "voz": "Del 4 de agosto, al 30 de septiembre.",
-     "voz_tts": "Del cuatro de agosto, al treinta de septiembre.",
+     "voz": "Treinta de septiembre. El uno es el mes siguiente; con cero, sería el fin de este mes.",
      "acciones": [
       {
        "tipo": "calcular",
@@ -2635,18 +2745,21 @@
       },
       {
        "tipo": "nota",
-       "celda": "K2",
+       "celda": "C3",
+       "lado": "abajo",
        "texto": "FIN.MES(A2;*1*): fin del mes siguiente · con *0*, fin de este mes",
        "retraso": 0.5
-      },
-      {
-       "tipo": "nota",
-       "celda": "K2",
-       "texto": "¿Ves *46295*? Inicio › Formato de número › Fecha corta",
-       "retraso": 3.6
       }
-     ],
-     "pausa": 4.2
+     ]
+    },
+    {
+     "voz": "Si ves un número raro, a la celda le falta formato de fecha.",
+     "accion": {
+      "tipo": "nota",
+      "celda": "C3",
+      "lado": "abajo",
+      "texto": "¿Ves *46295*? Inicio › Formato de número › Fecha corta"
+     }
     },
     {
      "voz": "Y cada pedido, con su vencimiento.",
@@ -2679,8 +2792,7 @@
       }
      ]
     }
-   ],
-   "capitulo": "5. FIN.MES: fechas de vencimiento"
+   ]
   },
   {
    "plantilla": "titular",
@@ -2728,11 +2840,11 @@
      "accion": {
       "tipo": "prompt",
       "texto": "En Resumen tengo los vendedores en A3:A5 y en B2 el primer día del mes que quiero ver. En B3 quiero el neto vendido por ese vendedor en ese mes. Una fórmula para copiar hacia abajo.",
-      "duracion": 2.6
+      "duracion": 1.2
      }
     },
     {
-     "voz": "Y arma el criterio de fechas con fin punto mes, otra vez.",
+     "voz": "Ojo: arma el criterio de fechas con fin punto mes, otra vez.",
      "accion": {
       "tipo": "respuesta",
       "texto": "Suma el neto (J) donde el vendedor (E) es el de A3 y la fecha (A) está entre el primer y el último día del mes de B2. Los $ dejan fija B2 al copiar.",
@@ -3361,7 +3473,7 @@
      "accion": {
       "tipo": "prompt",
       "texto": "Escribí esta fórmula para M2: =SI(K2<Resumen!$B$1;\"Vencido\";\"Al día\"). ¿Qué casos pueden hacer que dé un resultado equivocado sin mostrar error? ¿Qué debería dar la fila 2 (vence 30/09/2026, Pagado: Sí) y la fila 6 (vence 31/10/2026, Pagado: No), con corte 04/11/2026?",
-      "duracion": 3.0
+      "duracion": 1.2
      }
     },
     {
@@ -3386,7 +3498,7 @@
    },
    "beats": [
     {
-     "voz": "El lunes habría llamado a tres clientes para cobrarles cuatro facturas que ya habían pagado."
+     "voz": "Esta semana habría llamado a tres clientes para cobrarles cuatro facturas que ya habían pagado."
     }
    ]
   },
@@ -3759,14 +3871,14 @@
    "datos": {
     "numero": 8,
     "total": 10,
-    "titulo": "FILTRAR: la cobranza del lunes en una celda"
+    "titulo": "FILTRAR: la cobranza de la semana en una celda"
    },
    "beats": [
     {
-     "voz": "Fórmula ocho: el reporte de cobranza del lunes."
+     "voz": "Fórmula ocho: el reporte de cobranza de la semana."
     }
    ],
-   "capitulo": "8. FILTRAR: cobranza en Excel, el reporte del lunes"
+   "capitulo": "8. FILTRAR: cobranza en Excel, el reporte de la semana"
   },
   {
    "plantilla": "chat",
@@ -3779,11 +3891,11 @@
      "accion": {
       "tipo": "prompt",
       "texto": "Mapa: el de antes. Meta: en Resumen!D2, una lista que se actualice sola con Cliente (C), Vence (K) y Neto (J) de las facturas \"Vencido\", de mayor a menor neto. Prueba: antes de darme la fórmula, dime qué casos darían un resultado equivocado sin error y qué debería salir arriba.",
-      "duracion": 2.6
+      "duracion": 1.2
      }
     },
     {
-     "voz": "Y la prueba encuentra un caso: sin vencidas, la fórmula fallaría. Lo cubre con si punto error.",
+     "voz": "La prueba encuentra un caso. Lo cubre: si no hay vencidas, muestra un mensaje en vez de un error.",
      "accion": {
       "tipo": "respuesta",
       "texto": "1. Si no hay ninguna vencida, FILTRAR no tiene nada que devolver y ORDENAR daría error. Lo cubro con SI.ERROR.<br>2. Los pedidos debajo de la fila 13 quedan afuera: amplía los rangos.<br>(y 2 casos más)<br>Arriba debería salir la vencida con el neto más alto.",
@@ -3919,7 +4031,7 @@
       {
        "tipo": "rotulo",
        "numero": "08",
-       "texto": "Cobranza del lunes",
+       "texto": "Cobranza de la semana",
        "sub": "ELEGIRCOLS → FILTRAR → ORDENAR",
        "retraso": 0.3
       }
@@ -4043,7 +4155,7 @@
      ]
     },
     {
-     "voz": "Un millón ochocientos treinta y cinco mil quinientos noventa: a quién llamar el lunes, y por cuánto.",
+     "voz": "Un millón ochocientos treinta y cinco mil quinientos noventa: a quién llamar esta semana, y por cuánto.",
      "accion": {
       "tipo": "resaltar",
       "rango": "F2:F5",
@@ -4052,8 +4164,28 @@
      }
     },
     {
-     "voz": "Y si alguien paga, cambias su Pagado a sí, y sale de la lista. Lo mismo con la fecha de corte: la lista se rehace sola.",
+     "voz": "Si alguien paga, cambias su Pagado a sí en Pedidos, y sale de esta lista.",
      "acciones": [
+      {
+       "tipo": "zoom",
+       "rango": "D1:F5",
+       "escala": 1.6
+      },
+      {
+       "tipo": "nota",
+       "celda": "D3",
+       "lado": "abajo",
+       "texto": "Pedidos › Pagado = *Sí* → sale de la lista",
+       "retraso": 0.4
+      }
+     ]
+    },
+    {
+     "voz": "Y si cambias la fecha de corte, la lista se rehace sola.",
+     "acciones": [
+      {
+       "tipo": "quitar_nota"
+      },
       {
        "tipo": "zoom",
        "rango": "A1:B2",
@@ -4262,16 +4394,161 @@
        "retraso": 0.48
       }
      ]
+    }
+   ]
+  },
+  {
+   "plantilla": "antes_despues",
+   "datos": {
+    "antes": {
+     "valor": 2,
+     "sufijo": " vencidas",
+     "texto": "Ferretería, con la fórmula *a mano* ✗"
     },
+    "despues": {
+     "valor": 0,
+     "sufijo": " vencidas",
+     "texto": "Ferretería, *con la prueba* ✓"
+    }
+   },
+   "beats": [
+    {
+     "voz": "A mano, la ferretería tenía dos vencidas."
+    },
+    {
+     "voz": "Con la prueba, cero."
+    }
+   ]
+  },
+  {
+   "plantilla": "excel",
+   "datos": {
+    "archivo": "Distribuidora Sur.xlsx",
+    "hoja": "Resumen",
+    "anchos": [
+     310,
+     180,
+     30,
+     310,
+     160,
+     160
+    ],
+    "seleccion_inicial": "B8",
+    "celdas": [
+     [
+      "Fecha de corte",
+      "04/11/2026",
+      "",
+      "Cliente",
+      "Vence",
+      "Neto"
+     ],
+     [
+      "Ventas del mes",
+      "01/10/2026",
+      "",
+      "Colegio Nuevo Horizonte",
+      "31/10/2026",
+      "1.215.000"
+     ],
+     [
+      "Diego Paz",
+      "58.900",
+      "",
+      "Librería San Martín Srl",
+      "30/09/2026",
+      "486.000"
+     ],
+     [
+      "Carla Ruiz",
+      "666.000",
+      "",
+      "Hotel Mirador",
+      "31/10/2026",
+      "105.840"
+     ],
+     [
+      "Tomás Gil",
+      "264.600",
+      "",
+      "Kiosco La Esquina",
+      "31/10/2026",
+      "28.750"
+     ],
+     [
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "Cliente",
+      "Vencidas",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "Colegio Nuevo Horizonte",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "Ferretería El Tornillo",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "Hotel Mirador",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "Kiosco La Esquina",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "Librería San Martín Srl",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ]
+    ]
+   },
+   "beats": [
     {
      "voz": "Fórmula diez: cuántas vencidas tiene cada uno. Contar si conjunto, con dos condiciones.",
      "voz_tts": "Fórmula diez: cuántas vencidas tiene cada uno. Contar si punto conjunto, con dos condiciones.",
      "acciones": [
       {
+       "tipo": "zoom",
+       "rango": "A6:B12",
+       "escala": 1.6
+      },
+      {
        "tipo": "rotulo",
        "numero": "10",
        "texto": "CONTAR.SI.CONJUNTO",
-       "sub": "dos condiciones: cliente y «Vencido»"
+       "sub": "dos condiciones: cliente y «Vencido»",
+       "retraso": 0.3
       },
       {
        "tipo": "escribir",
@@ -4284,7 +4561,7 @@
      "pausa": 0.6
     },
     {
-     "voz": "Cuatro clientes deben una factura. La ferretería, ninguna: con mi fórmula a mano, le habría contado dos.",
+     "voz": "Cuatro clientes deben una factura. La ferretería, ninguna.",
      "acciones": [
       {
        "tipo": "calcular",
@@ -4348,19 +4625,6 @@
    ]
   },
   {
-   "plantilla": "aviso",
-   "datos": {
-    "titulo": "Antes de cerrar: cuándo *no* usar la IA",
-    "icono": "hand",
-    "texto": "Y qué pasa si usas otra herramienta."
-   },
-   "beats": [
-    {
-     "voz": "Antes de cerrar, un aviso honesto."
-    }
-   ]
-  },
-  {
    "plantilla": "comparar",
    "datos": {
     "titulo": "¿Cuándo *no* pedírsela a la IA?",
@@ -4385,11 +4649,20 @@
       "Usas ChatGPT o Copilot",
       "Mismo prompt · la respuesta puede cambiar: *Prueba*"
      ]
+    ],
+    "beats_filas": [
+     1,
+     2,
+     3,
+     4
     ]
    },
    "beats": [
     {
-     "voz": "¿Cuándo no usar la IA? Si la fórmula es más corta que el prompt: escríbela tú, y pásala por la prueba."
+     "voz": "¿Y cuándo conviene no pedírsela a la IA?"
+    },
+    {
+     "voz": "Si la fórmula es más corta que el prompt: escríbela tú, y pásala por la prueba."
     },
     {
      "voz": "Si no sabes qué función existe, pídesela."
