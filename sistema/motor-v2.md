@@ -42,6 +42,7 @@
 | `comparar` | `titulo`, `columnas`, `filas`, `ganador` (índice), `ganador_beat`, `beats_filas` | Una fila por beat; el ganador se pinta de amarillo |
 | `excel` | ver abajo | Acciones por beat |
 | `chat` | `app` ("ChatGPT", "Copilot", "Claude"), `modelo` ("versión gratuita") | Acciones `prompt` y `respuesta` |
+| `imagen` | `imagen` (ruta desde la raíz del repo; usa `herramientas/recursos.py`), `titulo`, `texto`, `credito`, `foco` ("30% 40%") | Foto a pantalla completa con acercamiento lento y leyenda |
 | `final` | `titulo` | Dura al menos 20 s (pantalla final de YouTube); deja huecos para el video y el botón de suscribirse |
 
 ### `excel`

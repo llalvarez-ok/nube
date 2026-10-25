@@ -1,0 +1,3889 @@
+{
+ "titulo": "10 fórmulas de Excel con IA: tu planilla se llena sola",
+ "duracion_objetivo_min": 10,
+ "marca": {
+  "nombre": "Atajos IA",
+  "acento": "#ffd400"
+ },
+ "subtitulos": false,
+ "progreso": true,
+ "fuentes": [
+  {
+   "dato": "610.575, 2.446.165, 1.835.590 y el resto de las cifras de la planilla",
+   "fuente": "Cálculo propio sobre la planilla ficticia «Distribuidora Sur» (produccion/video02/guion.json, verificado con plantilla_xlsx.py)",
+   "fecha": "2026-10"
+  },
+  {
+   "dato": "«Unas cuatro horas a mano» (estimación, pendiente de medir por el creador)",
+   "fuente": "Estimación propia; ver produccion/video02/idea.md",
+   "fecha": "2026-10"
+  }
+ ],
+ "escenas": [
+  {
+   "plantilla": "excel",
+   "datos": {
+    "archivo": "Distribuidora Sur.xlsx",
+    "hoja": "Resumen",
+    "anchos": [
+     310,
+     180,
+     30,
+     310,
+     160,
+     160
+    ],
+    "solo_video": true,
+    "seleccion_inicial": "B1",
+    "celdas": [
+     [
+      "Fecha de corte",
+      "04/11/2026",
+      "",
+      "Cliente",
+      "Vence",
+      "Neto"
+     ],
+     [
+      "Ventas del mes",
+      "01/10/2026",
+      "",
+      "Colegio Nuevo Horizonte",
+      "31/10/2026",
+      "1.215.000"
+     ],
+     [
+      "Diego Paz",
+      "58.900",
+      "",
+      "Librería San Martín Srl",
+      "30/09/2026",
+      "486.000"
+     ],
+     [
+      "Carla Ruiz",
+      "666.000",
+      "",
+      "Hotel Mirador",
+      "31/10/2026",
+      "105.840"
+     ],
+     [
+      "Tomás Gil",
+      "264.600",
+      "",
+      "Kiosco La Esquina",
+      "31/10/2026",
+      "28.750"
+     ],
+     [
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "Cliente",
+      "Vencidas",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "Colegio Nuevo Horizonte",
+      "1",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "Ferretería El Tornillo",
+      "0",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "Hotel Mirador",
+      "1",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "Kiosco La Esquina",
+      "1",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "Librería San Martín Srl",
+      "1",
+      "",
+      "",
+      "",
+      ""
+     ]
+    ]
+   },
+   "beats": [
+    {
+     "voz": "Esta planilla se completa sola: precios, vencimientos, cobranza y el resumen del lunes.",
+     "acciones": [
+      {
+       "tipo": "grafico",
+       "titulo": "Ventas · octubre",
+       "etiquetas": [
+        "Diego Paz",
+        "Carla Ruiz",
+        "Tomás Gil"
+       ],
+       "valores": [
+        58900,
+        666000,
+        264600
+       ],
+       "textos": [
+        "58.900",
+        "666.000",
+        "264.600"
+       ],
+       "destacar": 1,
+       "x": 1222,
+       "y": 262,
+       "ancho": 310,
+       "retraso": 0
+      },
+      {
+       "tipo": "resaltar",
+       "rango": "B9",
+       "color": "#ffd400",
+       "etiqueta": "PAGADO",
+       "retraso": 1.4
+      }
+     ]
+    },
+    {
+     "voz": "Diez fórmulas que le pedí a una IA gratis, en minutos. A mano me llevaban unas cuatro horas; es una estimación mía.",
+     "voz_tts": "Diez fórmulas que le pedí a una IA gratis, en minutos. A mano me llevaban unas cuatro horas; es una estimación mía.",
+     "accion": {
+      "tipo": "resaltar",
+      "rango": "D2:F5",
+      "color": "#107c41",
+      "hasta": 3.5
+     }
+    },
+    {
+     "voz": "Ojo con ese sello: una fórmula casi le cobra dos veces a un cliente que ya había pagado. Te muestro cuál, y cómo la atrapé.",
+     "accion": {
+      "tipo": "zoom",
+      "rango": "A7:B12",
+      "escala": 1.5
+     }
+    },
+    {
+     "voz": "Uso un prompt de tres partes. Casi nadie usa la tercera, y es la que encontró el error.",
+     "accion": {
+      "tipo": "zoom_fuera"
+     }
+    }
+   ],
+   "transicion": "corte",
+   "entrada": 0.1
+  },
+  {
+   "plantilla": "lista",
+   "datos": {
+    "titulo": "Lo que necesitas",
+    "items": [
+     {
+      "texto": "Excel para la web *gratis*",
+      "detalle": "o Microsoft 365 · no sirve Excel 2016 ni 2019",
+      "icono": "sheet"
+     },
+     {
+      "texto": "Una IA gratis",
+      "detalle": "uso Claude · el mismo prompt va en ChatGPT o Copilot",
+      "icono": "sparkles"
+     },
+     {
+      "texto": "Datos *ficticios*",
+      "detalle": "la distribuidora es inventada",
+      "icono": "file-spreadsheet"
+     }
+    ]
+   },
+   "beats": [
+    {
+     "voz": "Lo que necesitas: Excel para la web, que es gratis, o Microsoft 365. Varias de estas fórmulas no existen en Excel 2016 ni 2019."
+    },
+    {
+     "voz": "Una IA gratis. Yo uso Claude; el mismo prompt funciona en ChatGPT o en Copilot gratis."
+    },
+    {
+     "voz": "Y la empresa es inventada: los datos son ficticios. Al final vas a poder pedir tus fórmulas y comprobarlas antes de confiar en ellas."
+    }
+   ]
+  },
+  {
+   "plantilla": "excel",
+   "datos": {
+    "archivo": "Distribuidora Sur.xlsx",
+    "hoja": "Pedidos",
+    "seleccion_inicial": "A1",
+    "anchos": [
+     175,
+     340,
+     250,
+     230,
+     190,
+     140,
+     100,
+     120,
+     100,
+     140,
+     150,
+     100,
+     130
+    ],
+    "celdas": [
+     [
+      "Fecha",
+      "Cliente (sistema)",
+      "Cliente",
+      "Vendedor (sistema)",
+      "Vendedor",
+      "Código",
+      "Cant.",
+      "Precio",
+      "Desc.",
+      "Neto",
+      "Vence",
+      "Pagado",
+      "Estado"
+     ],
+     [
+      "04/08/2026",
+      "  ferretería el TORNILLO ",
+      "",
+      "V01 | Diego Paz",
+      "",
+      "LIM-010",
+      "40",
+      "",
+      "",
+      "",
+      "",
+      "Sí",
+      ""
+     ],
+     [
+      "12/08/2026",
+      "LIBRERÍA SAN MARTÍN SRL",
+      "",
+      "V02 | Carla Ruiz",
+      "",
+      "PAP-200",
+      "120",
+      "",
+      "",
+      "",
+      "",
+      "No",
+      ""
+     ],
+     [
+      "21/08/2026",
+      "kiosco la esquina",
+      "",
+      "V03 | Tomás Gil",
+      "",
+      "LIM-020",
+      "15",
+      "",
+      "",
+      "",
+      "",
+      "Sí",
+      ""
+     ],
+     [
+      "02/09/2026",
+      "ferretería el tornillo  ",
+      "",
+      "V01 | Diego Paz",
+      "",
+      "PAP-210",
+      "60",
+      "",
+      "",
+      "",
+      "",
+      "Sí",
+      ""
+     ],
+     [
+      "09/09/2026",
+      "  Colegio Nuevo Horizonte",
+      "",
+      "V02 | Carla Ruiz",
+      "",
+      "PAP-200",
+      "300",
+      "",
+      "",
+      "",
+      "",
+      "No",
+      ""
+     ],
+     [
+      "15/09/2026",
+      "KIOSCO LA ESQUINA",
+      "",
+      "V03 | Tomás Gil",
+      "",
+      "LIM-030",
+      "25",
+      "",
+      "",
+      "",
+      "",
+      "No",
+      ""
+     ],
+     [
+      "23/09/2026",
+      "librería san martín srl ",
+      "",
+      "V01 | Diego Paz",
+      "",
+      "PAP-220",
+      "40",
+      "",
+      "",
+      "",
+      "",
+      "Sí",
+      ""
+     ],
+     [
+      "30/09/2026",
+      "Hotel  Mirador",
+      "",
+      "V01 | Diego Paz",
+      "",
+      "LIM-040",
+      "12",
+      "",
+      "",
+      "",
+      "",
+      "No",
+      ""
+     ],
+     [
+      "06/10/2026",
+      "colegio nuevo horizonte",
+      "",
+      "V02 | Carla Ruiz",
+      "",
+      "PAP-220",
+      "150",
+      "",
+      "",
+      "",
+      "",
+      "No",
+      ""
+     ],
+     [
+      "14/10/2026",
+      "hotel mirador ",
+      "",
+      "V03 | Tomás Gil",
+      "",
+      "LIM-040",
+      "30",
+      "",
+      "",
+      "",
+      "",
+      "No",
+      ""
+     ],
+     [
+      "22/10/2026",
+      "Kiosco La Esquina",
+      "",
+      "V01 | Diego Paz",
+      "",
+      "PAP-201",
+      "10",
+      "",
+      "",
+      "",
+      "",
+      "No",
+      ""
+     ],
+     [
+      "28/10/2026",
+      "Ferretería El Tornillo",
+      "",
+      "V02 | Carla Ruiz",
+      "",
+      "LIM-020",
+      "50",
+      "",
+      "",
+      "",
+      "",
+      "Sí",
+      ""
+     ]
+    ]
+   },
+   "beats": [
+    {
+     "voz": "Esta es Distribuidora Sur. Así exporta su sistema los pedidos: nombres con espacios y mayúsculas mezcladas.",
+     "accion": {
+      "tipo": "resaltar",
+      "rango": "B2:B13",
+      "color": "#e5484d",
+      "etiqueta": "nombres sucios",
+      "retraso": 0.3
+     }
+    },
+    {
+     "voz": "El vendedor viene pegado a su código. Y las columnas vacías las va a llenar cada fórmula, una detrás de otra: cada una usa el resultado de la anterior.",
+     "acciones": [
+      {
+       "tipo": "resaltar",
+       "rango": "D2:D13",
+       "color": "#e5484d",
+       "retraso": 0.1
+      },
+      {
+       "tipo": "seleccionar",
+       "rango": "C2:C13",
+       "retraso": 1.6
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "plantilla": "capitulo",
+   "datos": {
+    "numero": 1,
+    "total": 10,
+    "titulo": "BUSCARX: el precio del catálogo"
+   },
+   "beats": [
+    {
+     "voz": "Fórmula uno: traer el precio de cada pedido."
+    }
+   ],
+   "capitulo": "1. BUSCARX: traer precios del catálogo"
+  },
+  {
+   "plantilla": "chat",
+   "datos": {
+    "app": "Claude",
+    "modelo": "versión gratuita"
+   },
+   "beats": [
+    {
+     "voz": "Primero, el mapa: qué hay en cada columna, y que mi Excel está en español con punto y coma. Después, la meta, en palabras.",
+     "accion": {
+      "tipo": "prompt",
+      "texto": "Excel para la web en español, separador punto y coma. Hoja Pedidos, filas 2 a 13: A Fecha, B Cliente, C Cliente limpio, D Vendedor, E Vendedor limpio, F Código, G Cantidad, H Precio, I Descuento, J Neto, K Vence, L Pagado (Sí/No), M Estado. Catálogo en la hoja Productos: A Código, C Precio. Fecha de corte en Resumen!B1. En H2 quiero el precio de cada código; si no existe, que diga \"Código no existe\". Una fórmula para copiar hacia abajo.",
+      "duracion": 3.5
+     }
+    },
+    {
+     "voz": "Y la respuesta: una fórmula, buscar equis, lista para pegar. Hasta aquí, dos partes del método.",
+     "voz_tts": "Y la respuesta: una fórmula, buscar equis, lista para pegar. Hasta aquí, dos partes del método.",
+     "accion": {
+      "tipo": "respuesta",
+      "texto": "Escribe esto en H2 y cópialo hasta H13. El último argumento es lo que muestra si no encuentra el código, así que no verás #N/A:",
+      "formula": "=BUSCARX(F2;Productos!A:A;Productos!C:C;\"Código no existe\")"
+     }
+    }
+   ]
+  },
+  {
+   "plantilla": "excel",
+   "datos": {
+    "archivo": "Distribuidora Sur.xlsx",
+    "hoja": "Productos",
+    "anchos": [
+     190,
+     320,
+     170
+    ],
+    "seleccion_inicial": "A1",
+    "celdas": [
+     [
+      "Código",
+      "Producto",
+      "Precio"
+     ],
+     [
+      "LIM-010",
+      "Cloro 5 L",
+      "2.400"
+     ],
+     [
+      "LIM-020",
+      "Detergente 5 L",
+      "3.100"
+     ],
+     [
+      "LIM-030",
+      "Desinfectante 1 L",
+      "1.150"
+     ],
+     [
+      "LIM-040",
+      "Papel higiénico x48",
+      "9.800"
+     ],
+     [
+      "PAP-200",
+      "Resma A4",
+      "4.500"
+     ],
+     [
+      "PAP-210",
+      "Cuadernos x10",
+      "6.200"
+     ],
+     [
+      "PAP-220",
+      "Bolígrafos x50",
+      "3.900"
+     ]
+    ]
+   },
+   "beats": [
+    {
+     "voz": "El catálogo vive en otra hoja: el código en la columna A y el precio en la C. Por eso el mapa lo dice.",
+     "acciones": [
+      {
+       "tipo": "resaltar",
+       "rango": "A2:A8",
+       "color": "#3b6fd8",
+       "etiqueta": "busca aquí",
+       "retraso": 0.2
+      },
+      {
+       "tipo": "resaltar",
+       "rango": "C2:C8",
+       "color": "#107c41",
+       "etiqueta": "devuelve esto",
+       "retraso": 1.6
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "plantilla": "excel",
+   "datos": {
+    "archivo": "Distribuidora Sur.xlsx",
+    "hoja": "Pedidos",
+    "anchos": [
+     2,
+     330,
+     2,
+     2,
+     2,
+     170,
+     120,
+     300,
+     2,
+     2,
+     2,
+     2,
+     2
+    ],
+    "seleccion_inicial": "H2",
+    "celdas": [
+     [
+      "",
+      "Cliente (sistema)",
+      "",
+      "",
+      "",
+      "Código",
+      "Cant.",
+      "Precio",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "",
+      "  ferretería el TORNILLO ",
+      "",
+      "",
+      "",
+      "LIM-010",
+      "40",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "",
+      "LIBRERÍA SAN MARTÍN SRL",
+      "",
+      "",
+      "",
+      "PAP-200",
+      "120",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "",
+      "kiosco la esquina",
+      "",
+      "",
+      "",
+      "LIM-020",
+      "15",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "",
+      "ferretería el tornillo  ",
+      "",
+      "",
+      "",
+      "PAP-210",
+      "60",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "",
+      "  Colegio Nuevo Horizonte",
+      "",
+      "",
+      "",
+      "PAP-200",
+      "300",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "",
+      "KIOSCO LA ESQUINA",
+      "",
+      "",
+      "",
+      "LIM-030",
+      "25",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "",
+      "librería san martín srl ",
+      "",
+      "",
+      "",
+      "PAP-220",
+      "40",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "",
+      "Hotel  Mirador",
+      "",
+      "",
+      "",
+      "LIM-040",
+      "12",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "",
+      "colegio nuevo horizonte",
+      "",
+      "",
+      "",
+      "PAP-220",
+      "150",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "",
+      "hotel mirador ",
+      "",
+      "",
+      "",
+      "LIM-040",
+      "30",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "",
+      "Kiosco La Esquina",
+      "",
+      "",
+      "",
+      "PAP-201",
+      "10",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "",
+      "Ferretería El Tornillo",
+      "",
+      "",
+      "",
+      "LIM-020",
+      "50",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ]
+    ]
+   },
+   "beats": [
+    {
+     "voz": "Buscar equis es la versión nueva de buscar uve: no se rompe si agregas columnas.",
+     "voz_tts": "Buscar equis es la versión nueva de buscar uve: no se rompe si agregas columnas.",
+     "accion": {
+      "tipo": "zoom",
+      "rango": "F1:H4",
+      "escala": 1.5
+     }
+    },
+    {
+     "voz": "La pego en la primera fila.",
+     "accion": {
+      "tipo": "escribir",
+      "celda": "H2",
+      "texto": "=BUSCARX(F2;Productos!A:A;Productos!C:C;\"Código no existe\")",
+      "duracion": 2.6
+     }
+    },
+    {
+     "voz": "Dos mil cuatrocientos: el precio del cloro.",
+     "accion": {
+      "tipo": "calcular",
+      "celda": "H2",
+      "valor": "2.400"
+     }
+    },
+    {
+     "voz": "¿Tu Excel usa coma en vez de punto y coma? Mira cualquier fórmula que ya tengas. En México suele ser coma: dilo en el mapa.",
+     "acciones": [
+      {
+       "tipo": "mover",
+       "celda": "B4"
+      },
+      {
+       "tipo": "nota",
+       "celda": "H2",
+       "texto": "¿*;* o *,*? Mira una fórmula que ya tengas",
+       "retraso": 0.4
+      }
+     ]
+    },
+    {
+     "voz": "Ahora la arrastro hacia abajo.",
+     "acciones": [
+      {
+       "tipo": "quitar_nota"
+      },
+      {
+       "tipo": "zoom_fuera",
+       "duracion": 0.8
+      },
+      {
+       "tipo": "rellenar",
+       "rango": "H2:H13",
+       "valores": [
+        "2.400",
+        "4.500",
+        "3.100",
+        "6.200",
+        "4.500",
+        "1.150",
+        "3.900",
+        "9.800",
+        "3.900",
+        "9.800",
+        "Código no existe",
+        "3.100"
+       ],
+       "retraso": 0.6
+      }
+     ]
+    },
+    {
+     "voz": "Pero fíjate en la fila doce. No es un error, es un aviso: el código PAP-201 no existe.",
+     "voz_tts": "Pero fíjate en la fila doce. No es un error, es un aviso: el código pe, a, pe, dos, cero, uno, no existe.",
+     "acciones": [
+      {
+       "tipo": "resaltar",
+       "rango": "F12:H12",
+       "color": "#e5484d",
+       "etiqueta": "aviso, no error"
+      }
+     ]
+    },
+    {
+     "voz": "Era PAP-210. Lo corrijo, y el precio aparece solo.",
+     "voz_tts": "Era pe, a, pe, dos, uno, cero. Lo corrijo, y el precio aparece solo.",
+     "acciones": [
+      {
+       "tipo": "escribir",
+       "celda": "F12",
+       "texto": "PAP-210",
+       "duracion": 1.0
+      },
+      {
+       "tipo": "calcular",
+       "celda": "H12",
+       "valor": "6.200",
+       "retraso": 2.2
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "plantilla": "capitulo",
+   "datos": {
+    "numero": 2,
+    "total": 10,
+    "titulo": "NOMPROPIO + ESPACIOS: nombres prolijos"
+   },
+   "beats": [
+    {
+     "voz": "Fórmula dos: limpiar los nombres."
+    }
+   ],
+   "capitulo": "2. NOMPROPIO y ESPACIOS: limpiar nombres"
+  },
+  {
+   "plantilla": "excel",
+   "datos": {
+    "archivo": "Distribuidora Sur.xlsx",
+    "hoja": "Pedidos",
+    "anchos": [
+     2,
+     360,
+     360,
+     2,
+     2,
+     150,
+     100,
+     140,
+     2,
+     2,
+     2,
+     2,
+     2
+    ],
+    "seleccion_inicial": "C2",
+    "celdas": [
+     [
+      "",
+      "Cliente (sistema)",
+      "Cliente",
+      "",
+      "",
+      "Código",
+      "Cant.",
+      "Precio",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "",
+      "  ferretería el TORNILLO ",
+      "",
+      "",
+      "",
+      "LIM-010",
+      "40",
+      "2.400",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "",
+      "LIBRERÍA SAN MARTÍN SRL",
+      "",
+      "",
+      "",
+      "PAP-200",
+      "120",
+      "4.500",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "",
+      "kiosco la esquina",
+      "",
+      "",
+      "",
+      "LIM-020",
+      "15",
+      "3.100",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "",
+      "ferretería el tornillo  ",
+      "",
+      "",
+      "",
+      "PAP-210",
+      "60",
+      "6.200",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "",
+      "  Colegio Nuevo Horizonte",
+      "",
+      "",
+      "",
+      "PAP-200",
+      "300",
+      "4.500",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "",
+      "KIOSCO LA ESQUINA",
+      "",
+      "",
+      "",
+      "LIM-030",
+      "25",
+      "1.150",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "",
+      "librería san martín srl ",
+      "",
+      "",
+      "",
+      "PAP-220",
+      "40",
+      "3.900",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "",
+      "Hotel  Mirador",
+      "",
+      "",
+      "",
+      "LIM-040",
+      "12",
+      "9.800",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "",
+      "colegio nuevo horizonte",
+      "",
+      "",
+      "",
+      "PAP-220",
+      "150",
+      "3.900",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "",
+      "hotel mirador ",
+      "",
+      "",
+      "",
+      "LIM-040",
+      "30",
+      "9.800",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "",
+      "Kiosco La Esquina",
+      "",
+      "",
+      "",
+      "PAP-210",
+      "10",
+      "6.200",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "",
+      "Ferretería El Tornillo",
+      "",
+      "",
+      "",
+      "LIM-020",
+      "50",
+      "3.100",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ]
+    ]
+   },
+   "beats": [
+    {
+     "voz": "Con el mapa ya enviado, le pido solo la meta: el nombre prolijo, sin espacios de más y con mayúscula inicial.",
+     "accion": {
+      "tipo": "zoom",
+      "rango": "B1:C5",
+      "escala": 1.45
+     }
+    },
+    {
+     "voz": "Me da dos funciones, una dentro de otra: espacios quita los espacios sobrantes; nompropio arregla las mayúsculas.",
+     "voz_tts": "Me da dos funciones, una dentro de otra: espacios quita los espacios sobrantes; nom propio arregla las mayúsculas.",
+     "accion": {
+      "tipo": "escribir",
+      "celda": "C2",
+      "texto": "=NOMPROPIO(ESPACIOS(B2))",
+      "duracion": 1.8
+     }
+    },
+    {
+     "voz": "Ferretería El Tornillo. La copio, y las doce filas quedan prolijas.",
+     "acciones": [
+      {
+       "tipo": "calcular",
+       "celda": "C2",
+       "valor": "Ferretería El Tornillo",
+       "derecha": false
+      },
+      {
+       "tipo": "zoom_fuera",
+       "retraso": 1.0,
+       "duracion": 0.8
+      },
+      {
+       "tipo": "rellenar",
+       "rango": "C2:C13",
+       "valores": [
+        "Ferretería El Tornillo",
+        "Librería San Martín Srl",
+        "Kiosco La Esquina",
+        "Ferretería El Tornillo",
+        "Colegio Nuevo Horizonte",
+        "Kiosco La Esquina",
+        "Librería San Martín Srl",
+        "Hotel Mirador",
+        "Colegio Nuevo Horizonte",
+        "Hotel Mirador",
+        "Kiosco La Esquina",
+        "Ferretería El Tornillo"
+       ],
+       "retraso": 1.6
+      }
+     ]
+    },
+    {
+     "voz": "Veredicto honesto: la sigla SRL quedó en minúsculas. La propia IA me lo advirtió; las siglas, revísalas a mano.",
+     "voz_tts": "Veredicto honesto: la sigla ese, erre, ele, quedó en minúsculas. La propia IA me lo advirtió; las siglas, revísalas a mano.",
+     "acciones": [
+      {
+       "tipo": "resaltar",
+       "rango": "C3",
+       "color": "#e5484d",
+       "etiqueta": "Srl",
+       "retraso": 0.3
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "plantilla": "capitulo",
+   "datos": {
+    "numero": 3,
+    "total": 10,
+    "titulo": "TEXTODESPUES: separar el vendedor"
+   },
+   "beats": [
+    {
+     "voz": "Fórmula tres: separar al vendedor de su código."
+    }
+   ],
+   "capitulo": "3. TEXTODESPUES: separar texto pegado"
+  },
+  {
+   "plantilla": "excel",
+   "datos": {
+    "archivo": "Distribuidora Sur.xlsx",
+    "hoja": "Pedidos",
+    "anchos": [
+     2,
+     2,
+     330,
+     300,
+     250,
+     150,
+     100,
+     140,
+     2,
+     2,
+     2,
+     2,
+     2
+    ],
+    "seleccion_inicial": "E2",
+    "celdas": [
+     [
+      "",
+      "",
+      "Cliente",
+      "Vendedor (sistema)",
+      "Vendedor",
+      "Código",
+      "Cant.",
+      "Precio",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "",
+      "",
+      "Ferretería El Tornillo",
+      "V01 | Diego Paz",
+      "",
+      "LIM-010",
+      "40",
+      "2.400",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "",
+      "",
+      "Librería San Martín Srl",
+      "V02 | Carla Ruiz",
+      "",
+      "PAP-200",
+      "120",
+      "4.500",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "",
+      "",
+      "Kiosco La Esquina",
+      "V03 | Tomás Gil",
+      "",
+      "LIM-020",
+      "15",
+      "3.100",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "",
+      "",
+      "Ferretería El Tornillo",
+      "V01 | Diego Paz",
+      "",
+      "PAP-210",
+      "60",
+      "6.200",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "",
+      "",
+      "Colegio Nuevo Horizonte",
+      "V02 | Carla Ruiz",
+      "",
+      "PAP-200",
+      "300",
+      "4.500",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "",
+      "",
+      "Kiosco La Esquina",
+      "V03 | Tomás Gil",
+      "",
+      "LIM-030",
+      "25",
+      "1.150",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "",
+      "",
+      "Librería San Martín Srl",
+      "V01 | Diego Paz",
+      "",
+      "PAP-220",
+      "40",
+      "3.900",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "",
+      "",
+      "Hotel Mirador",
+      "V01 | Diego Paz",
+      "",
+      "LIM-040",
+      "12",
+      "9.800",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "",
+      "",
+      "Colegio Nuevo Horizonte",
+      "V02 | Carla Ruiz",
+      "",
+      "PAP-220",
+      "150",
+      "3.900",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "",
+      "",
+      "Hotel Mirador",
+      "V03 | Tomás Gil",
+      "",
+      "LIM-040",
+      "30",
+      "9.800",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "",
+      "",
+      "Kiosco La Esquina",
+      "V01 | Diego Paz",
+      "",
+      "PAP-210",
+      "10",
+      "6.200",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "",
+      "",
+      "Ferretería El Tornillo",
+      "V02 | Carla Ruiz",
+      "",
+      "LIM-020",
+      "50",
+      "3.100",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ]
+    ]
+   },
+   "beats": [
+    {
+     "voz": "Viene así: código, una barra y el nombre.",
+     "acciones": [
+      {
+       "tipo": "zoom",
+       "rango": "C1:E5",
+       "escala": 1.45
+      },
+      {
+       "tipo": "resaltar",
+       "rango": "D2",
+       "color": "#3b6fd8",
+       "retraso": 1.0,
+       "hasta": 3
+      }
+     ]
+    },
+    {
+     "voz": "La IA conoce una función de 2022 que casi nadie usa: texto después. Todo lo que viene después de la barra.",
+     "voz_tts": "La IA conoce una función de dos mil veintidós que casi nadie usa: texto después. Todo lo que viene después de la barra.",
+     "accion": {
+      "tipo": "escribir",
+      "celda": "E2",
+      "texto": "=TEXTODESPUES(D2;\"| \")",
+      "duracion": 1.6
+     }
+    },
+    {
+     "voz": "Diego Paz. Su gemela, texto antes, te da el código.",
+     "acciones": [
+      {
+       "tipo": "calcular",
+       "celda": "E2",
+       "valor": "Diego Paz",
+       "derecha": false
+      },
+      {
+       "tipo": "nota",
+       "celda": "E2",
+       "texto": "TEXTOANTES(D2;\" |\") → *V01*",
+       "retraso": 0.8
+      }
+     ]
+    },
+    {
+     "voz": "Copio hacia abajo. ¿Y sin la IA? Habría terminado con extrae y hallar, o separando a mano.",
+     "voz_tts": "Copio hacia abajo. ¿Y sin la IA? Habría terminado con extrae y hallar, o separando a mano.",
+     "acciones": [
+      {
+       "tipo": "quitar_nota"
+      },
+      {
+       "tipo": "zoom_fuera",
+       "duracion": 0.8
+      },
+      {
+       "tipo": "rellenar",
+       "rango": "E2:E13",
+       "valores": [
+        "Diego Paz",
+        "Carla Ruiz",
+        "Tomás Gil",
+        "Diego Paz",
+        "Carla Ruiz",
+        "Tomás Gil",
+        "Diego Paz",
+        "Diego Paz",
+        "Carla Ruiz",
+        "Tomás Gil",
+        "Diego Paz",
+        "Carla Ruiz"
+       ],
+       "retraso": 0.5
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "plantilla": "titular",
+   "datos": {
+    "etiqueta": "Plantilla gratis",
+    "icono": "file-spreadsheet",
+    "lineas": [
+     "Los 10 prompts,",
+     {
+      "texto": "con *qué revisar*",
+      "beat": 0
+     }
+    ],
+    "sub": "Hoja «Prompts» · enlace en la descripción",
+    "sub_beat": 1
+   },
+   "beats": [
+    {
+     "voz": "Las diez consignas completas están en la plantilla gratis, en la hoja Prompts, con una columna de qué revisar."
+    },
+    {
+     "voz": "Y en un rato vas a ver la fórmula que le cobraba dos veces a un cliente, y cómo la atrapé con una sola pregunta."
+    }
+   ]
+  },
+  {
+   "plantilla": "capitulo",
+   "datos": {
+    "numero": 4,
+    "total": 10,
+    "titulo": "SI.CONJUNTO: descuentos por tramos"
+   },
+   "beats": [
+    {
+     "voz": "Fórmula cuatro: descuentos por tramos."
+    }
+   ],
+   "capitulo": "4. SI.CONJUNTO: descuentos por tramos"
+  },
+  {
+   "plantilla": "chat",
+   "datos": {
+    "app": "Claude",
+    "modelo": "versión gratuita"
+   },
+   "beats": [
+    {
+     "voz": "La política de descuentos, escrita como la diría mi jefe: diez por ciento desde cien mil, cinco desde cuarenta mil.",
+     "accion": {
+      "tipo": "prompt",
+      "texto": "En I2 quiero el descuento según el total de la compra (G2*H2): 10 % si llega a 100.000; 5 % si llega a 40.000; si no, 0 %."
+     }
+    },
+    {
+     "voz": "Ojo con el orden: la IA pone los tramos de mayor a menor, y cierra con verdadero, que significa en cualquier otro caso.",
+     "accion": {
+      "tipo": "respuesta",
+      "texto": "Las condiciones se evalúan en orden, por eso va primero el tramo más alto. El VERDADERO del final funciona como \"en cualquier otro caso\". Dale formato de porcentaje a la columna I:",
+      "formula": "=SI.CONJUNTO(G2*H2>=100000;10%;G2*H2>=40000;5%;VERDADERO;0)"
+     }
+    }
+   ]
+  },
+  {
+   "plantilla": "excel",
+   "datos": {
+    "archivo": "Distribuidora Sur.xlsx",
+    "hoja": "Pedidos",
+    "anchos": [
+     2,
+     2,
+     330,
+     2,
+     2,
+     150,
+     100,
+     140,
+     130,
+     190,
+     2,
+     2,
+     2
+    ],
+    "seleccion_inicial": "I2",
+    "celdas": [
+     [
+      "",
+      "",
+      "Cliente",
+      "",
+      "",
+      "Código",
+      "Cant.",
+      "Precio",
+      "Desc.",
+      "Neto",
+      "",
+      "",
+      ""
+     ],
+     [
+      "",
+      "",
+      "Ferretería El Tornillo",
+      "",
+      "",
+      "LIM-010",
+      "40",
+      "2.400",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "",
+      "",
+      "Librería San Martín Srl",
+      "",
+      "",
+      "PAP-200",
+      "120",
+      "4.500",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "",
+      "",
+      "Kiosco La Esquina",
+      "",
+      "",
+      "LIM-020",
+      "15",
+      "3.100",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "",
+      "",
+      "Ferretería El Tornillo",
+      "",
+      "",
+      "PAP-210",
+      "60",
+      "6.200",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "",
+      "",
+      "Colegio Nuevo Horizonte",
+      "",
+      "",
+      "PAP-200",
+      "300",
+      "4.500",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "",
+      "",
+      "Kiosco La Esquina",
+      "",
+      "",
+      "LIM-030",
+      "25",
+      "1.150",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "",
+      "",
+      "Librería San Martín Srl",
+      "",
+      "",
+      "PAP-220",
+      "40",
+      "3.900",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "",
+      "",
+      "Hotel Mirador",
+      "",
+      "",
+      "LIM-040",
+      "12",
+      "9.800",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "",
+      "",
+      "Colegio Nuevo Horizonte",
+      "",
+      "",
+      "PAP-220",
+      "150",
+      "3.900",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "",
+      "",
+      "Hotel Mirador",
+      "",
+      "",
+      "LIM-040",
+      "30",
+      "9.800",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "",
+      "",
+      "Kiosco La Esquina",
+      "",
+      "",
+      "PAP-210",
+      "10",
+      "6.200",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "",
+      "",
+      "Ferretería El Tornillo",
+      "",
+      "",
+      "LIM-020",
+      "50",
+      "3.100",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ]
+    ]
+   },
+   "beats": [
+    {
+     "voz": "La pego en la columna del descuento.",
+     "voz_tts": "La pego en la columna del descuento.",
+     "acciones": [
+      {
+       "tipo": "zoom",
+       "rango": "F1:J4",
+       "escala": 1.4
+      },
+      {
+       "tipo": "escribir",
+       "celda": "I2",
+       "texto": "=SI.CONJUNTO(G2*H2>=100000;10%;G2*H2>=40000;5%;VERDADERO;0)",
+       "duracion": 2.4,
+       "retraso": 1.0
+      }
+     ]
+    },
+    {
+     "voz": "Cuarenta bidones de cloro suman noventa y seis mil: cinco por ciento.",
+     "accion": {
+      "tipo": "calcular",
+      "celda": "I2",
+      "valor": "5 %"
+     }
+    },
+    {
+     "voz": "Abajo, cada pedido cae en su tramo.",
+     "accion": {
+      "tipo": "rellenar",
+      "rango": "I2:I13",
+      "valores": [
+       "5 %",
+       "10 %",
+       "5 %",
+       "10 %",
+       "10 %",
+       "0 %",
+       "10 %",
+       "10 %",
+       "10 %",
+       "10 %",
+       "5 %",
+       "10 %"
+      ]
+     }
+    },
+    {
+     "voz": "El neto es una multiplicación simple. Esa no cuenta entre las diez.",
+     "accion": {
+      "tipo": "escribir",
+      "celda": "J2",
+      "texto": "=G2*H2*(1-I2)",
+      "duracion": 1.2
+     }
+    },
+    {
+     "voz": "Noventa y un mil doscientos, y toda la columna lista.",
+     "acciones": [
+      {
+       "tipo": "calcular",
+       "celda": "J2",
+       "valor": "91.200"
+      },
+      {
+       "tipo": "zoom_fuera",
+       "retraso": 0.5,
+       "duracion": 0.8
+      },
+      {
+       "tipo": "rellenar",
+       "rango": "J2:J13",
+       "valores": [
+        "91.200",
+        "486.000",
+        "44.175",
+        "334.800",
+        "1.215.000",
+        "28.750",
+        "140.400",
+        "105.840",
+        "526.500",
+        "264.600",
+        "58.900",
+        "139.500"
+       ],
+       "retraso": 1.0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "plantilla": "capitulo",
+   "datos": {
+    "numero": 5,
+    "total": 10,
+    "titulo": "FIN.MES: vencimientos sin errores de calendario"
+   },
+   "beats": [
+    {
+     "voz": "Fórmula cinco: el vencimiento."
+    }
+   ],
+   "capitulo": "5. FIN.MES: fechas de vencimiento"
+  },
+  {
+   "plantilla": "excel",
+   "datos": {
+    "archivo": "Distribuidora Sur.xlsx",
+    "hoja": "Pedidos",
+    "anchos": [
+     170,
+     2,
+     330,
+     2,
+     2,
+     2,
+     2,
+     2,
+     2,
+     170,
+     190,
+     2,
+     2
+    ],
+    "seleccion_inicial": "K2",
+    "celdas": [
+     [
+      "Fecha",
+      "",
+      "Cliente",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "Neto",
+      "Vence",
+      "",
+      ""
+     ],
+     [
+      "04/08/2026",
+      "",
+      "Ferretería El Tornillo",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "91.200",
+      "",
+      "",
+      ""
+     ],
+     [
+      "12/08/2026",
+      "",
+      "Librería San Martín Srl",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "486.000",
+      "",
+      "",
+      ""
+     ],
+     [
+      "21/08/2026",
+      "",
+      "Kiosco La Esquina",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "44.175",
+      "",
+      "",
+      ""
+     ],
+     [
+      "02/09/2026",
+      "",
+      "Ferretería El Tornillo",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "334.800",
+      "",
+      "",
+      ""
+     ],
+     [
+      "09/09/2026",
+      "",
+      "Colegio Nuevo Horizonte",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "1.215.000",
+      "",
+      "",
+      ""
+     ],
+     [
+      "15/09/2026",
+      "",
+      "Kiosco La Esquina",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "28.750",
+      "",
+      "",
+      ""
+     ],
+     [
+      "23/09/2026",
+      "",
+      "Librería San Martín Srl",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "140.400",
+      "",
+      "",
+      ""
+     ],
+     [
+      "30/09/2026",
+      "",
+      "Hotel Mirador",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "105.840",
+      "",
+      "",
+      ""
+     ],
+     [
+      "06/10/2026",
+      "",
+      "Colegio Nuevo Horizonte",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "526.500",
+      "",
+      "",
+      ""
+     ],
+     [
+      "14/10/2026",
+      "",
+      "Hotel Mirador",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "264.600",
+      "",
+      "",
+      ""
+     ],
+     [
+      "22/10/2026",
+      "",
+      "Kiosco La Esquina",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "58.900",
+      "",
+      "",
+      ""
+     ],
+     [
+      "28/10/2026",
+      "",
+      "Ferretería El Tornillo",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "139.500",
+      "",
+      "",
+      ""
+     ]
+    ]
+   },
+   "beats": [
+    {
+     "voz": "La condición de pago es a fin del mes siguiente. Casi todos suman treinta días, y fallan con los meses de treinta y uno.",
+     "accion": {
+      "tipo": "zoom",
+      "rango": "A1:K4",
+      "escala": 1.4
+     }
+    },
+    {
+     "voz": "Se lo dije así a la IA, y me dio fin punto mes.",
+     "voz_tts": "Se lo dije así a la IA, y me dio fin punto mes.",
+     "accion": {
+      "tipo": "escribir",
+      "celda": "K2",
+      "texto": "=FIN.MES(A2;1)",
+      "duracion": 1.2
+     }
+    },
+    {
+     "voz": "Pedido del 4 de agosto: vence el 30 de septiembre.",
+     "voz_tts": "Pedido del cuatro de agosto: vence el treinta de septiembre.",
+     "accion": {
+      "tipo": "calcular",
+      "celda": "K2",
+      "valor": "30/09/2026"
+     }
+    },
+    {
+     "voz": "Ojo: si ves un número como 46.295, a la celda le falta formato de fecha.",
+     "voz_tts": "Ojo: si ves un número como cuarenta y seis mil doscientos noventa y cinco, a la celda le falta formato de fecha.",
+     "acciones": [
+      {
+       "tipo": "mover",
+       "celda": "C6"
+      },
+      {
+       "tipo": "nota",
+       "celda": "K2",
+       "texto": "¿Ves *46295*? Dale formato de fecha",
+       "retraso": 0.4
+      }
+     ]
+    },
+    {
+     "voz": "La copio hacia abajo, y cada pedido tiene su vencimiento.",
+     "acciones": [
+      {
+       "tipo": "quitar_nota"
+      },
+      {
+       "tipo": "zoom_fuera",
+       "duracion": 0.8
+      },
+      {
+       "tipo": "rellenar",
+       "rango": "K2:K13",
+       "valores": [
+        "30/09/2026",
+        "30/09/2026",
+        "30/09/2026",
+        "31/10/2026",
+        "31/10/2026",
+        "31/10/2026",
+        "31/10/2026",
+        "31/10/2026",
+        "30/11/2026",
+        "30/11/2026",
+        "30/11/2026",
+        "30/11/2026"
+       ],
+       "retraso": 0.5
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "plantilla": "titular",
+   "datos": {
+    "etiqueta": "Lo que viene",
+    "icono": "triangle-alert",
+    "lineas": [
+     "Una fórmula *perfecta*",
+     "que cobraba dos veces"
+    ],
+    "sub": "Si te sirve, suscríbete: una planilla resuelta con IA cada semana",
+    "sub_beat": 1
+   },
+   "beats": [
+    {
+     "voz": "Lo que viene es lo que más me sirvió: una fórmula que escribí yo, que parecía perfecta, y la parte del método que la atrapó."
+    },
+    {
+     "voz": "Si te está sirviendo, suscríbete: cada semana resuelvo una planilla nueva con IA."
+    }
+   ]
+  },
+  {
+   "plantilla": "capitulo",
+   "datos": {
+    "numero": 6,
+    "total": 10,
+    "titulo": "SUMAR.SI.CONJUNTO: ventas por vendedor"
+   },
+   "beats": [
+    {
+     "voz": "Fórmula seis: ventas por vendedor y por mes."
+    }
+   ],
+   "capitulo": "6. SUMAR.SI.CONJUNTO: ventas por vendedor y mes"
+  },
+  {
+   "plantilla": "chat",
+   "datos": {
+    "app": "Claude",
+    "modelo": "versión gratuita"
+   },
+   "beats": [
+    {
+     "voz": "Para la reunión de ventas: cuánto vendió cada vendedor en el mes que elijo.",
+     "accion": {
+      "tipo": "prompt",
+      "texto": "En Resumen tengo los vendedores en A3:A5 y en B2 el primer día del mes que quiero ver. En B3 quiero el neto vendido por ese vendedor en ese mes. Una fórmula para copiar hacia abajo."
+     }
+    },
+    {
+     "voz": "Aquí todos se traban: el criterio de fechas y los signos de dólar. La IA los pone, y explica por qué.",
+     "accion": {
+      "tipo": "respuesta",
+      "texto": "Suma el neto (J) donde el vendedor (E) es el de A3 y la fecha (A) está entre el primer y el último día del mes de B2. Los $ dejan fija B2 al copiar; A3 sí cambia.",
+      "formula": "=SUMAR.SI.CONJUNTO(Pedidos!J:J;Pedidos!E:E;A3;Pedidos!A:A;\">=\"&$B$2;Pedidos!A:A;\"<=\"&FIN.MES($B$2;0))"
+     }
+    }
+   ]
+  },
+  {
+   "plantilla": "excel",
+   "datos": {
+    "archivo": "Distribuidora Sur.xlsx",
+    "hoja": "Resumen",
+    "anchos": [
+     310,
+     180,
+     30,
+     310,
+     160,
+     160
+    ],
+    "seleccion_inicial": "B3",
+    "celdas": [
+     [
+      "Fecha de corte",
+      "04/11/2026",
+      "",
+      "Cliente",
+      "Vence",
+      "Neto"
+     ],
+     [
+      "Ventas del mes",
+      "01/09/2026",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "Diego Paz",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "Carla Ruiz",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "Tomás Gil",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "Cliente",
+      "Vencidas",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ]
+    ]
+   },
+   "beats": [
+    {
+     "voz": "En la hoja Resumen, el mes va arriba: septiembre.",
+     "acciones": [
+      {
+       "tipo": "zoom",
+       "rango": "A1:B5",
+       "escala": 1.35
+      },
+      {
+       "tipo": "resaltar",
+       "rango": "B2",
+       "color": "#3b6fd8",
+       "retraso": 0.9,
+       "hasta": 2.6
+      }
+     ]
+    },
+    {
+     "voz": "Pego la fórmula en el primer vendedor.",
+     "accion": {
+      "tipo": "escribir",
+      "celda": "B3",
+      "texto": "=SUMAR.SI.CONJUNTO(Pedidos!J:J;Pedidos!E:E;A3;Pedidos!A:A;\">=\"&$B$2;Pedidos!A:A;\"<=\"&FIN.MES($B$2;0))",
+      "duracion": 3.2
+     }
+    },
+    {
+     "voz": "Diego Paz vendió 581.040 en septiembre.",
+     "voz_tts": "Diego Paz vendió quinientos ochenta y un mil cuarenta en septiembre.",
+     "accion": {
+      "tipo": "calcular",
+      "celda": "B3",
+      "valor": "581.040"
+     }
+    },
+    {
+     "voz": "La copio: Carla Ruiz, un millón doscientos quince mil.",
+     "accion": {
+      "tipo": "rellenar",
+      "rango": "B3:B5",
+      "valores": [
+       "581.040",
+       "1.215.000",
+       "28.750"
+      ]
+     }
+    },
+    {
+     "voz": "¿Y si cambio el mes a octubre? La tabla se recalcula sola.",
+     "acciones": [
+      {
+       "tipo": "escribir",
+       "celda": "B2",
+       "texto": "01/10/2026",
+       "duracion": 1.0
+      },
+      {
+       "tipo": "calcular",
+       "celda": "B3",
+       "valor": "58.900",
+       "retraso": 2.0
+      },
+      {
+       "tipo": "calcular",
+       "celda": "B4",
+       "valor": "666.000",
+       "retraso": 2.15
+      },
+      {
+       "tipo": "calcular",
+       "celda": "B5",
+       "valor": "264.600",
+       "retraso": 2.3
+      }
+     ]
+    },
+    {
+     "voz": "Fíjate en una pieza: fin punto mes, otra vez. Aquí marca el último día del mes elegido, así que suma del primero al treinta y uno.",
+     "acciones": [
+      {
+       "tipo": "mover",
+       "celda": "A10"
+      },
+      {
+       "tipo": "nota",
+       "celda": "B4",
+       "texto": "FIN.MES($B$2;0) → *31/10/2026*",
+       "lado": "abajo",
+       "retraso": 0.3
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "plantilla": "capitulo",
+   "datos": {
+    "numero": 7,
+    "total": 10,
+    "titulo": "La IA como *revisora* de tus fórmulas"
+   },
+   "beats": [
+    {
+     "voz": "Fórmula siete: la IA como revisora."
+    }
+   ],
+   "capitulo": "7. La IA como revisora de tus fórmulas"
+  },
+  {
+   "plantilla": "excel",
+   "datos": {
+    "archivo": "Distribuidora Sur.xlsx",
+    "hoja": "Pedidos",
+    "anchos": [
+     2,
+     2,
+     330,
+     2,
+     2,
+     2,
+     2,
+     2,
+     2,
+     170,
+     180,
+     120,
+     200
+    ],
+    "seleccion_inicial": "M2",
+    "celdas": [
+     [
+      "",
+      "",
+      "Cliente",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "Neto",
+      "Vence",
+      "Pagado",
+      "Estado"
+     ],
+     [
+      "",
+      "",
+      "Ferretería El Tornillo",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "91.200",
+      "30/09/2026",
+      "Sí",
+      ""
+     ],
+     [
+      "",
+      "",
+      "Librería San Martín Srl",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "486.000",
+      "30/09/2026",
+      "No",
+      ""
+     ],
+     [
+      "",
+      "",
+      "Kiosco La Esquina",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "44.175",
+      "30/09/2026",
+      "Sí",
+      ""
+     ],
+     [
+      "",
+      "",
+      "Ferretería El Tornillo",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "334.800",
+      "31/10/2026",
+      "Sí",
+      ""
+     ],
+     [
+      "",
+      "",
+      "Colegio Nuevo Horizonte",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "1.215.000",
+      "31/10/2026",
+      "No",
+      ""
+     ],
+     [
+      "",
+      "",
+      "Kiosco La Esquina",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "28.750",
+      "31/10/2026",
+      "No",
+      ""
+     ],
+     [
+      "",
+      "",
+      "Librería San Martín Srl",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "140.400",
+      "31/10/2026",
+      "Sí",
+      ""
+     ],
+     [
+      "",
+      "",
+      "Hotel Mirador",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "105.840",
+      "31/10/2026",
+      "No",
+      ""
+     ],
+     [
+      "",
+      "",
+      "Colegio Nuevo Horizonte",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "526.500",
+      "30/11/2026",
+      "No",
+      ""
+     ],
+     [
+      "",
+      "",
+      "Hotel Mirador",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "264.600",
+      "30/11/2026",
+      "No",
+      ""
+     ],
+     [
+      "",
+      "",
+      "Kiosco La Esquina",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "58.900",
+      "30/11/2026",
+      "No",
+      ""
+     ],
+     [
+      "",
+      "",
+      "Ferretería El Tornillo",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "139.500",
+      "30/11/2026",
+      "Sí",
+      ""
+     ]
+    ]
+   },
+   "beats": [
+    {
+     "voz": "El estado de cada factura. Esta es corta, así que la escribí yo.",
+     "accion": {
+      "tipo": "zoom",
+      "rango": "J1:M4",
+      "escala": 1.4
+     }
+    },
+    {
+     "voz": "Si vence antes de la fecha de corte, vencido; si no, al día.",
+     "acciones": [
+      {
+       "tipo": "escribir",
+       "celda": "M2",
+       "texto": "=SI(K2<Resumen!$B$1;\"Vencido\";\"Al día\")",
+       "duracion": 2.2
+      },
+      {
+       "tipo": "nota",
+       "celda": "K3",
+       "texto": "Escrita *a mano*, como la escribe casi todo el mundo",
+       "lado": "abajo",
+       "retraso": 2.6
+      }
+     ]
+    },
+    {
+     "voz": "No da error.",
+     "accion": {
+      "tipo": "calcular",
+      "celda": "M2",
+      "valor": "Vencido",
+      "derecha": false
+     }
+    },
+    {
+     "voz": "La copio, y la cobranza sale sola: ocho facturas vencidas, dos millones cuatrocientos cuarenta y seis mil por cobrar.",
+     "acciones": [
+      {
+       "tipo": "quitar_nota"
+      },
+      {
+       "tipo": "zoom_fuera",
+       "duracion": 0.8
+      },
+      {
+       "tipo": "rellenar",
+       "rango": "M2:M13",
+       "valores": [
+        "Vencido",
+        "Vencido",
+        "Vencido",
+        "Vencido",
+        "Vencido",
+        "Vencido",
+        "Vencido",
+        "Vencido",
+        "Al día",
+        "Al día",
+        "Al día",
+        "Al día"
+       ],
+       "retraso": 0.5
+      },
+      {
+       "tipo": "resaltar",
+       "rango": "M2:M9",
+       "color": "#e5484d",
+       "etiqueta": "8 vencidas · 2.446.165",
+       "retraso": 2.2
+      }
+     ]
+    },
+    {
+     "voz": "Parece perfecta, ¿no? Ahora viene la tercera parte del método.",
+     "accion": {
+      "tipo": "formato",
+      "rango": "M2:M9",
+      "fondo": "#ffd6d6"
+     }
+    }
+   ]
+  },
+  {
+   "plantilla": "lista",
+   "datos": {
+    "titulo": "El prompt de 3 partes",
+    "items": [
+     {
+      "texto": "*Mapa*",
+      "detalle": "qué hay en cada columna y qué Excel usas",
+      "icono": "map"
+     },
+     {
+      "texto": "*Meta*",
+      "detalle": "qué quieres, con la regla en palabras",
+      "icono": "target"
+     },
+     {
+      "texto": "*Prueba*",
+      "detalle": "qué casos darían mal sin error, y qué debe dar en dos filas",
+      "icono": "shield-check"
+     }
+    ]
+   },
+   "beats": [
+    {
+     "voz": "Mapa: dónde está cada dato."
+    },
+    {
+     "voz": "Meta: qué quieres, en palabras."
+    },
+    {
+     "voz": "Y la que casi nadie usa, la prueba: qué casos darían un resultado equivocado sin mostrar error, y qué debería dar en dos filas concretas."
+    }
+   ]
+  },
+  {
+   "plantilla": "chat",
+   "datos": {
+    "app": "Claude",
+    "modelo": "versión gratuita"
+   },
+   "beats": [
+    {
+     "voz": "Pego mi fórmula en el chat, con la prueba.",
+     "accion": {
+      "tipo": "prompt",
+      "texto": "Escribí esta fórmula para M2: =SI(K2<Resumen!$B$1;\"Vencido\";\"Al día\"). ¿Qué casos pueden hacer que dé un resultado equivocado sin mostrar error? ¿Qué debería dar la fila 2 (vence 30/09/2026, Pagado: Sí) y la fila 6 (vence 31/10/2026, Pagado: No), con corte 04/11/2026?",
+      "duracion": 3.5
+     }
+    },
+    {
+     "voz": "Y va directo al problema: mi fórmula no mira la columna Pagado. La fila dos ya estaba pagada, y dice vencido.",
+     "accion": {
+      "tipo": "respuesta",
+      "texto": "1. Facturas pagadas: la fórmula no mira la columna L. Si ya se pagó pero su vencimiento pasó, dice \"Vencido\".<br>2. Si K está vacía, cuenta como 0 y también dice \"Vencido\".<br>Fila 2: da \"Vencido\", pero ya está pagada.<br>Fila 6: da \"Vencido\", y es correcto.<br>Fórmula corregida:",
+      "formula": "=SI(L2=\"Sí\";\"Cobrado\";SI(K2<Resumen!$B$1;\"Vencido\";\"Al día\"))",
+      "duracion": 5.5
+     }
+    }
+   ]
+  },
+  {
+   "plantilla": "aviso",
+   "datos": {
+    "titulo": "3 clientes · 4 facturas *ya pagadas*",
+    "nivel": "rojo",
+    "icono": "phone-off",
+    "texto": "Ferretería El Tornillo, Kiosco La Esquina y Librería San Martín figuraban como deudores."
+   },
+   "beats": [
+    {
+     "voz": "El lunes habría llamado a tres clientes para cobrarles cuatro facturas que ya habían pagado."
+    }
+   ]
+  },
+  {
+   "plantilla": "cifra",
+   "datos": {
+    "valor": 610575,
+    "etiqueta": "de más en la lista de cobranza",
+    "fuente": "cálculo sobre la planilla ficticia del video"
+   },
+   "beats": [
+    {
+     "voz": "610.575 de más en la lista de cobranza.",
+     "voz_tts": "Seiscientos diez mil quinientos setenta y cinco de más en la lista de cobranza."
+    }
+   ]
+  },
+  {
+   "plantilla": "excel",
+   "datos": {
+    "archivo": "Distribuidora Sur.xlsx",
+    "hoja": "Pedidos",
+    "anchos": [
+     2,
+     2,
+     330,
+     2,
+     2,
+     2,
+     2,
+     2,
+     2,
+     170,
+     180,
+     120,
+     200
+    ],
+    "seleccion_inicial": "M2",
+    "celdas": [
+     [
+      "",
+      "",
+      "Cliente",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "Neto",
+      "Vence",
+      "Pagado",
+      "Estado"
+     ],
+     [
+      "",
+      "",
+      "Ferretería El Tornillo",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "91.200",
+      "30/09/2026",
+      "Sí",
+      "Vencido"
+     ],
+     [
+      "",
+      "",
+      "Librería San Martín Srl",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "486.000",
+      "30/09/2026",
+      "No",
+      "Vencido"
+     ],
+     [
+      "",
+      "",
+      "Kiosco La Esquina",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "44.175",
+      "30/09/2026",
+      "Sí",
+      "Vencido"
+     ],
+     [
+      "",
+      "",
+      "Ferretería El Tornillo",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "334.800",
+      "31/10/2026",
+      "Sí",
+      "Vencido"
+     ],
+     [
+      "",
+      "",
+      "Colegio Nuevo Horizonte",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "1.215.000",
+      "31/10/2026",
+      "No",
+      "Vencido"
+     ],
+     [
+      "",
+      "",
+      "Kiosco La Esquina",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "28.750",
+      "31/10/2026",
+      "No",
+      "Vencido"
+     ],
+     [
+      "",
+      "",
+      "Librería San Martín Srl",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "140.400",
+      "31/10/2026",
+      "Sí",
+      "Vencido"
+     ],
+     [
+      "",
+      "",
+      "Hotel Mirador",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "105.840",
+      "31/10/2026",
+      "No",
+      "Vencido"
+     ],
+     [
+      "",
+      "",
+      "Colegio Nuevo Horizonte",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "526.500",
+      "30/11/2026",
+      "No",
+      "Al día"
+     ],
+     [
+      "",
+      "",
+      "Hotel Mirador",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "264.600",
+      "30/11/2026",
+      "No",
+      "Al día"
+     ],
+     [
+      "",
+      "",
+      "Kiosco La Esquina",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "58.900",
+      "30/11/2026",
+      "No",
+      "Al día"
+     ],
+     [
+      "",
+      "",
+      "Ferretería El Tornillo",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "139.500",
+      "30/11/2026",
+      "Sí",
+      "Al día"
+     ]
+    ]
+   },
+   "beats": [
+    {
+     "voz": "Pego la corregida: primero mira si está pagada.",
+     "acciones": [
+      {
+       "tipo": "zoom",
+       "rango": "J1:M4",
+       "escala": 1.4
+      },
+      {
+       "tipo": "escribir",
+       "celda": "M2",
+       "texto": "=SI(L2=\"Sí\";\"Cobrado\";SI(K2<Resumen!$B$1;\"Vencido\";\"Al día\"))",
+       "duracion": 2.6,
+       "retraso": 0.9
+      }
+     ]
+    },
+    {
+     "voz": "La fila dos ahora dice cobrado.",
+     "accion": {
+      "tipo": "calcular",
+      "celda": "M2",
+      "valor": "Cobrado",
+      "derecha": false
+     }
+    },
+    {
+     "voz": "La copio: cuatro vencidas de verdad, un millón ochocientos treinta y cinco mil quinientos noventa.",
+     "acciones": [
+      {
+       "tipo": "zoom_fuera",
+       "duracion": 0.8
+      },
+      {
+       "tipo": "rellenar",
+       "rango": "M2:M13",
+       "valores": [
+        "Cobrado",
+        "Vencido",
+        "Cobrado",
+        "Cobrado",
+        "Vencido",
+        "Vencido",
+        "Cobrado",
+        "Vencido",
+        "Al día",
+        "Al día",
+        "Al día",
+        "Cobrado"
+       ],
+       "retraso": 0.4
+      },
+      {
+       "tipo": "formato",
+       "celdas": {
+        "M2": "#ffffff",
+        "M3": "#ffd6d6",
+        "M4": "#ffffff",
+        "M5": "#ffffff",
+        "M6": "#ffd6d6",
+        "M7": "#ffd6d6",
+        "M8": "#ffffff",
+        "M9": "#ffd6d6",
+        "M10": "#ffffff",
+        "M11": "#ffffff",
+        "M12": "#ffffff",
+        "M13": "#ffffff"
+       },
+       "retraso": 1.8
+      },
+      {
+       "tipo": "resaltar",
+       "rango": "M3",
+       "color": "#107c41",
+       "etiqueta": "4 vencidas · 1.835.590",
+       "retraso": 2.4
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "plantilla": "titular",
+   "datos": {
+    "etiqueta": "Hallazgo honesto",
+    "icono": "search-check",
+    "tamano": 88,
+    "lineas": [
+     "A veces la IA te avisa sola.",
+     {
+      "texto": "La Prueba hace que",
+      "beat": 1
+     },
+     {
+      "texto": "te lo diga *sí o sí*.",
+      "beat": 1
+     }
+    ]
+   },
+   "beats": [
+    {
+     "voz": "A veces la IA te avisa sola: cuando le pedí esta fórmula con el mapa completo, me habló de la columna Pagado. Por eso el mapa nombra todas las columnas."
+    },
+    {
+     "voz": "Pero no siempre pasa. La prueba hace que te lo diga sí o sí, aunque la fórmula la hayas escrito tú."
+    }
+   ]
+  },
+  {
+   "plantilla": "titular",
+   "datos": {
+    "tamano": 92,
+    "lineas": [
+     "Un error que *se ve*, se arregla.",
+     {
+      "texto": "El peligroso es el *creíble*.",
+      "beat": 1
+     }
+    ]
+   },
+   "beats": [
+    {
+     "voz": "Una fórmula que da error es fácil de arreglar."
+    },
+    {
+     "voz": "La peligrosa es la que da un resultado creíble y equivocado."
+    }
+   ]
+  },
+  {
+   "plantilla": "capitulo",
+   "datos": {
+    "numero": 8,
+    "total": 10,
+    "titulo": "FILTRAR: la cobranza del lunes en una celda"
+   },
+   "beats": [
+    {
+     "voz": "Fórmula ocho: el reporte de cobranza del lunes."
+    }
+   ],
+   "capitulo": "8. FILTRAR: cobranza en Excel, el reporte del lunes"
+  },
+  {
+   "plantilla": "chat",
+   "datos": {
+    "app": "Claude",
+    "modelo": "versión gratuita"
+   },
+   "beats": [
+    {
+     "voz": "Desde ahora, el prompt va con las tres partes: mapa, meta y prueba.",
+     "accion": {
+      "tipo": "prompt",
+      "texto": "Mapa: el de antes. Meta: en Resumen!D2, una lista que se actualice sola con Cliente (C), Vence (K) y Neto (J) de las facturas \"Vencido\", de mayor a menor neto. Prueba: antes de darme la fórmula, dime qué casos darían un resultado equivocado sin error y qué debería salir arriba.",
+      "duracion": 3.5
+     }
+    },
+    {
+     "voz": "Mira lo que encuentra la prueba antes de darme nada: si no hay vencidas, la fórmula fallaría. Y lo cubre.",
+     "accion": {
+      "tipo": "respuesta",
+      "texto": "1. Si no hay ninguna vencida, FILTRAR no tiene nada que devolver y ORDENAR daría error. Lo cubro con SI.ERROR.<br>2. Los pedidos debajo de la fila 13 quedan afuera: amplía los rangos.<br>Arriba debería salir la vencida con el neto más alto.",
+      "formula": "=SI.ERROR(ORDENAR(FILTRAR(ELEGIRCOLS(Pedidos!A2:M13;3;11;10);Pedidos!M2:M13=\"Vencido\");3;-1);\"Sin vencidos\")",
+      "duracion": 5
+     }
+    }
+   ]
+  },
+  {
+   "plantilla": "excel",
+   "datos": {
+    "archivo": "Distribuidora Sur.xlsx",
+    "hoja": "Resumen",
+    "anchos": [
+     310,
+     180,
+     30,
+     310,
+     160,
+     160
+    ],
+    "seleccion_inicial": "D2",
+    "celdas": [
+     [
+      "Fecha de corte",
+      "04/11/2026",
+      "",
+      "Cliente",
+      "Vence",
+      "Neto"
+     ],
+     [
+      "Ventas del mes",
+      "01/10/2026",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "Diego Paz",
+      "58.900",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "Carla Ruiz",
+      "666.000",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "Tomás Gil",
+      "264.600",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "Cliente",
+      "Vencidas",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ]
+    ]
+   },
+   "beats": [
+    {
+     "voz": "Lo pego en la hoja Resumen, en una sola celda.",
+     "acciones": [
+      {
+       "tipo": "zoom",
+       "rango": "D1:F5",
+       "escala": 1.3
+      },
+      {
+       "tipo": "resaltar",
+       "rango": "D1:F1",
+       "color": "#107c41",
+       "etiqueta": "Cobranza del lunes",
+       "retraso": 0.9,
+       "hasta": 2.6
+      }
+     ]
+    },
+    {
+     "voz": "Tres funciones, de adentro hacia afuera. Elegir columnas toma cliente, vencimiento y neto.",
+     "voz_tts": "Tres funciones, de adentro hacia afuera. Elegir columnas toma cliente, vencimiento y neto.",
+     "accion": {
+      "tipo": "escribir",
+      "celda": "D2",
+      "texto": "=SI.ERROR(ORDENAR(FILTRAR(ELEGIRCOLS(Pedidos!A2:M13;3;11;10);Pedidos!M2:M13=\"Vencido\");3;-1);\"Sin vencidos\")",
+      "duracion": 3.2
+     }
+    },
+    {
+     "voz": "Filtrar deja solo las vencidas, y ordenar pone la más grande arriba.",
+     "accion": {
+      "tipo": "nota",
+      "celda": "D3",
+      "texto": "ELEGIRCOLS → FILTRAR → ORDENAR",
+      "lado": "abajo"
+     }
+    },
+    {
+     "voz": "Y la lista se desborda sola: cuatro facturas.",
+     "acciones": [
+      {
+       "tipo": "quitar_nota"
+      },
+      {
+       "tipo": "calcular",
+       "celda": "D2",
+       "valor": "Colegio Nuevo Horizonte",
+       "derecha": false,
+       "retraso": 0.1
+      },
+      {
+       "tipo": "calcular",
+       "celda": "E2",
+       "valor": "31/10/2026",
+       "derecha": true,
+       "retraso": 0.22
+      },
+      {
+       "tipo": "calcular",
+       "celda": "F2",
+       "valor": "1.215.000",
+       "derecha": true,
+       "retraso": 0.33999999999999997
+      },
+      {
+       "tipo": "calcular",
+       "celda": "D3",
+       "valor": "Librería San Martín Srl",
+       "derecha": false,
+       "retraso": 0.45999999999999996
+      },
+      {
+       "tipo": "calcular",
+       "celda": "E3",
+       "valor": "30/09/2026",
+       "derecha": true,
+       "retraso": 0.58
+      },
+      {
+       "tipo": "calcular",
+       "celda": "F3",
+       "valor": "486.000",
+       "derecha": true,
+       "retraso": 0.7
+      },
+      {
+       "tipo": "calcular",
+       "celda": "D4",
+       "valor": "Hotel Mirador",
+       "derecha": false,
+       "retraso": 0.82
+      },
+      {
+       "tipo": "calcular",
+       "celda": "E4",
+       "valor": "31/10/2026",
+       "derecha": true,
+       "retraso": 0.94
+      },
+      {
+       "tipo": "calcular",
+       "celda": "F4",
+       "valor": "105.840",
+       "derecha": true,
+       "retraso": 1.06
+      },
+      {
+       "tipo": "calcular",
+       "celda": "D5",
+       "valor": "Kiosco La Esquina",
+       "derecha": false,
+       "retraso": 1.1800000000000002
+      },
+      {
+       "tipo": "calcular",
+       "celda": "E5",
+       "valor": "31/10/2026",
+       "derecha": true,
+       "retraso": 1.3
+      },
+      {
+       "tipo": "calcular",
+       "celda": "F5",
+       "valor": "28.750",
+       "derecha": true,
+       "retraso": 1.42
+      }
+     ]
+    },
+    {
+     "voz": "Un millón ochocientos treinta y cinco mil quinientos noventa. Ese es tu lunes: a quién llamar, y por cuánto.",
+     "accion": {
+      "tipo": "resaltar",
+      "rango": "F2:F5",
+      "color": "#ffd400",
+      "etiqueta": "Total 1.835.590"
+     }
+    },
+    {
+     "voz": "Y no tienes que volver a armarla: el lunes que viene cambias la fecha de corte, y la lista se rehace sola.",
+     "acciones": [
+      {
+       "tipo": "zoom",
+       "rango": "A1:B2",
+       "escala": 1.4
+      },
+      {
+       "tipo": "resaltar",
+       "rango": "B1",
+       "color": "#3b6fd8",
+       "etiqueta": "fecha de corte",
+       "retraso": 1.0,
+       "hasta": 4.0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "plantilla": "capitulo",
+   "datos": {
+    "numero": 9,
+    "total": 10,
+    "titulo": "UNICOS + CONTAR.SI.CONJUNTO: el tablero de clientes"
+   },
+   "beats": [
+    {
+     "voz": "Fórmulas nueve y diez: el tablero de clientes."
+    }
+   ],
+   "capitulo": "9 y 10. UNICOS y CONTAR.SI.CONJUNTO: clientes y deudas"
+  },
+  {
+   "plantilla": "excel",
+   "datos": {
+    "archivo": "Distribuidora Sur.xlsx",
+    "hoja": "Resumen",
+    "anchos": [
+     310,
+     180,
+     30,
+     310,
+     160,
+     160
+    ],
+    "seleccion_inicial": "A8",
+    "celdas": [
+     [
+      "Fecha de corte",
+      "04/11/2026",
+      "",
+      "Cliente",
+      "Vence",
+      "Neto"
+     ],
+     [
+      "Ventas del mes",
+      "01/10/2026",
+      "",
+      "Colegio Nuevo Horizonte",
+      "31/10/2026",
+      "1.215.000"
+     ],
+     [
+      "Diego Paz",
+      "58.900",
+      "",
+      "Librería San Martín Srl",
+      "30/09/2026",
+      "486.000"
+     ],
+     [
+      "Carla Ruiz",
+      "666.000",
+      "",
+      "Hotel Mirador",
+      "31/10/2026",
+      "105.840"
+     ],
+     [
+      "Tomás Gil",
+      "264.600",
+      "",
+      "Kiosco La Esquina",
+      "31/10/2026",
+      "28.750"
+     ],
+     [
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "Cliente",
+      "Vencidas",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ],
+     [
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+     ]
+    ]
+   },
+   "beats": [
+    {
+     "voz": "Primero, la lista de clientes sin repetidos: únicos, dentro de ordenar.",
+     "acciones": [
+      {
+       "tipo": "zoom",
+       "rango": "A6:B12",
+       "escala": 1.4
+      },
+      {
+       "tipo": "escribir",
+       "celda": "A8",
+       "texto": "=ORDENAR(UNICOS(Pedidos!C2:C13))",
+       "duracion": 1.8,
+       "retraso": 1.0
+      }
+     ]
+    },
+    {
+     "voz": "Cinco clientes. Con los nombres sucios del principio habrían salido diez, porque únicos distingue un espacio de más. Por eso valió la pena limpiarlos.",
+     "acciones": [
+      {
+       "tipo": "calcular",
+       "celda": "A8",
+       "valor": "Colegio Nuevo Horizonte",
+       "derecha": false,
+       "retraso": 0.0
+      },
+      {
+       "tipo": "calcular",
+       "celda": "A9",
+       "valor": "Ferretería El Tornillo",
+       "derecha": false,
+       "retraso": 0.12
+      },
+      {
+       "tipo": "calcular",
+       "celda": "A10",
+       "valor": "Hotel Mirador",
+       "derecha": false,
+       "retraso": 0.24
+      },
+      {
+       "tipo": "calcular",
+       "celda": "A11",
+       "valor": "Kiosco La Esquina",
+       "derecha": false,
+       "retraso": 0.36
+      },
+      {
+       "tipo": "calcular",
+       "celda": "A12",
+       "valor": "Librería San Martín Srl",
+       "derecha": false,
+       "retraso": 0.48
+      }
+     ]
+    },
+    {
+     "voz": "Fórmula diez: cuántas facturas vencidas tiene cada uno. Contar si conjunto, con dos condiciones.",
+     "voz_tts": "Fórmula diez: cuántas facturas vencidas tiene cada uno. Contar si punto conjunto, con dos condiciones.",
+     "accion": {
+      "tipo": "escribir",
+      "celda": "B8",
+      "texto": "=CONTAR.SI.CONJUNTO(Pedidos!C:C;A8;Pedidos!M:M;\"Vencido\")",
+      "duracion": 2.6
+     }
+    },
+    {
+     "voz": "Cuatro clientes deben una factura cada uno. La ferretería, ninguna: con la fórmula escrita a mano, le habría contado dos.",
+     "acciones": [
+      {
+       "tipo": "calcular",
+       "celda": "B8",
+       "valor": "1"
+      },
+      {
+       "tipo": "rellenar",
+       "rango": "B8:B12",
+       "valores": [
+        "1",
+        "0",
+        "1",
+        "1",
+        "1"
+       ],
+       "retraso": 0.7
+      },
+      {
+       "tipo": "resaltar",
+       "rango": "A9:B9",
+       "color": "#ffd400",
+       "etiqueta": "pagó todo",
+       "retraso": 2.0
+      }
+     ]
+    },
+    {
+     "voz": "Y con eso, la hoja Resumen queda completa, con su gráfico.",
+     "acciones": [
+      {
+       "tipo": "zoom_fuera",
+       "duracion": 0.8
+      },
+      {
+       "tipo": "grafico",
+       "titulo": "Ventas · octubre",
+       "etiquetas": [
+        "Diego Paz",
+        "Carla Ruiz",
+        "Tomás Gil"
+       ],
+       "valores": [
+        58900,
+        666000,
+        264600
+       ],
+       "textos": [
+        "58.900",
+        "666.000",
+        "264.600"
+       ],
+       "destacar": 1,
+       "x": 1222,
+       "y": 262,
+       "ancho": 310,
+       "retraso": 0.6
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "plantilla": "comparar",
+   "datos": {
+    "titulo": "¿Cuándo *no* pedírsela a la IA?",
+    "columnas": [
+     "Si…",
+     "Entonces"
+    ],
+    "filas": [
+     [
+      "La fórmula es más corta que el prompt",
+      "Escríbela tú, y pásala por la *Prueba*"
+     ],
+     [
+      "No sabes ni qué función existe",
+      "Pídesela a la IA"
+     ],
+     [
+      "Combina tres funciones o más",
+      "Pídesela a la IA"
+     ],
+     [
+      "Tienes datos reales de clientes",
+      "No los pegues: el Mapa solo lleva *columnas*"
+     ]
+    ]
+   },
+   "beats": [
+    {
+     "voz": "¿Cuándo no usar la IA? Si la fórmula es más corta que el prompt, escríbela tú, y pásala por la prueba."
+    },
+    {
+     "voz": "Si no sabes ni qué función existe, pídesela."
+    },
+    {
+     "voz": "Si combina tres funciones o más, también."
+    },
+    {
+     "voz": "Y nunca pegues datos reales de clientes en un chat gratis: el mapa solo necesita los nombres de las columnas."
+    }
+   ]
+  },
+  {
+   "plantilla": "titular",
+   "datos": {
+    "etiqueta": "Gratis",
+    "icono": "download",
+    "lineas": [
+     "Distribuidora Sur",
+     "*10 fórmulas con IA*"
+    ],
+    "sub": "Pedidos, Resumen, Prompts y una hoja para practicar",
+    "sub_beat": 1
+   },
+   "beats": [
+    {
+     "voz": "¿Usas ChatGPT o Copilot? El prompt de tres partes es el mismo. La planilla completa, con las diez fórmulas, está gratis en la descripción."
+    },
+    {
+     "voz": "Trae la hoja Prompts con las tres partes de cada consigna, y una hoja para practicar sin fórmulas."
+    }
+   ]
+  },
+  {
+   "plantilla": "final",
+   "datos": {
+    "titulo": "Sigue con *este atajo*"
+   },
+   "beats": [
+    {
+     "voz": "Y si en tu trabajo también te llegan informes largos en pe de efe, mira este video: cómo resumirlos con IA sin que invente datos."
+    }
+   ]
+  }
+ ]
+}

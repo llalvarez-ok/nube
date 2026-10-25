@@ -1,0 +1,8 @@
+{"agente": "investigador-mercado", "puntajes": {"demanda": 6, "rpm": 7, "diferenciacion": 7},
+ "objeciones": [
+  "Sin datos de la API (faltan credenciales en la sesión): demanda máx. 6 → correr investigar.py nicho/outliers o anotar a mano el top 5 de YouTube.",
+  "'WebSearch no devolvió videos' no prueba un hueco (WebSearch casi no indexa YouTube) → quitar ese argumento.",
+  "La búsqueda intuitiva es 'con ChatGPT' → si gana con claridad, correr los prompts en ChatGPT y usarlo en el A/B.",
+  "Título 1 es el formato de lista más saturado → principal el 3 (giro) o el 2 (método) con miniatura C.",
+  "Aprovechar RPM de cobranza: 'cuentas por cobrar', 'cobranza en Excel', 'plantilla Excel pyme' en metadatos y un capítulo.",
+  "Se pisa con el video 3 (BUSCARX) → otro caso/error en el video 3 o cambiar la fórmula 1."]}

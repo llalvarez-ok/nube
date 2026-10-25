@@ -1,0 +1,11 @@
+{"agente": "critico-retencion", "puntajes": {"empaque": 6},
+ "objeciones": [
+  "[Título 1] Genérico en resultados; 'horas' es vago; lo distintivo (planilla que se llena sola, cobrar dos veces) no aparece → usar el cronómetro medido: 'Fórmulas de Excel con IA: tu planilla se llena sola en [N] min'.",
+  "[Miniatura A] '=BUSCARX(' ilegible a 120 px, rompe la firma (protagonista = hoja terminada) y canibaliza el video 3 → hoja Resumen terminada a lo grande + 'MAÑANA → [N] MIN'; mismo cuadro que el hook.",
+  "[Miniatura C + título 3] Dependen de un giro no asegurado; con plan B, 'te mintió' sería clickbait → correr la fórmula 7 real antes; con plan B usar '¿VENCIDO?'.",
+  "[C / 6:20] Quien entra por 'te mintió' ve la mentira recién al 70 % → mostrar 'Vencido'+'PAGADO' 2 s en el hook y nombrarlo en el reenganche de 3:30.",
+  "[Título 2] 'no fallan' contradice el veredicto honesto → 'Fórmulas de Excel con IA: el paso que casi nadie pide'.",
+  "[Miniatura B] Sobrecargada y 'gratis' dos veces → un solo contraste (#N/A gris vs. hoja terminada), texto 'SIN #N/A'.",
+  "[Palabra clave] 'con ia' sin verificar; Laura escribe 'con chatgpt' → verificar con investigar.py; si gana 'con chatgpt', correr los prompts en ChatGPT y usarlo en un título A/B.",
+  "[Frente a competidores] Ninguna miniatura muestra IA → burbuja de chat chica que 'escupe' la hoja terminada."],
+ "punto_de_abandono": "En la página de resultados: título 1 + miniatura A es una lista genérica con texto ilegible."}

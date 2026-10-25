@@ -1,0 +1,47 @@
+{
+ "evaluaciones": [
+  {
+   "agente": "investigador-mercado",
+   "puntajes": {
+    "demanda": 6,
+    "rpm": 7,
+    "diferenciacion": 7
+   },
+   "objeciones": [
+    "Demanda 6 solo por falta de datos de la API en el entorno → condición del creador con umbral: en el top 10 de YouTube, ≥2 videos de los últimos 12 meses con ≥30 mil vistas o ≥1 outlier 3x; si 'con chatgpt' duplica la mediana, alternativa ChatGPT.",
+    "Sumar señales de interés de 2026 (Cámara de Sevilla 07/2026, NYSSCPA 14/07/2026, Genbeta, ClickUp, Platzi, DataCamp, Ámbito).",
+    "Renombrar 'Ángulo propio (top 5 de guías y videos)' → 'guías en texto revisadas; YouTube se verifica con la condición'.",
+    "Plan B: nombrar el hallazgo 'la IA como revisora de tus fórmulas' en el capítulo 7."
+   ]
+  },
+  {
+   "agente": "critico-retencion",
+   "puntajes": {
+    "empaque": 7
+   },
+   "objeciones": [
+    "Miniatura A depende de [N] sin medir → respaldo con cifra verificada ('4 H → 1 CELDA'), nada sin cifra.",
+    "Miniatura B 'SIN #N/A' contradice al título 2 (error silencioso) → celda verde con check y grieta roja, texto 'PARECE BIEN'.",
+    "Miniatura A: 5 elementos → protagonista único, el gráfico de barras; burbuja chica; sin tabla.",
+    "Miniatura C: '¿VENCIDO?' repite la imagen → '610.575 DE MÁS', sin alerta en la burbuja.",
+    "Título 1: 'se llena sola' suena a macro → descripción línea 1 'sin macros, con 10 fórmulas que le pides a una IA gratis'; pasar a 'lista en [N] min' cuando [N] se mida.",
+    "Hook: sello 'PAGADO' como destello de 1 s en el primer cuadro.",
+    "Burbuja genérica sin logo, para que sirva si el título cambia a ChatGPT."
+   ]
+  },
+  {
+   "agente": "espectador",
+   "puntajes": {
+    "empaque": 8,
+    "encaje": 9
+   },
+   "objeciones": [
+    "'MAÑANA → [N] MIN' se lee como 'el día de mañana' → '4 HORAS → [N] MIN'.",
+    "'SIN #N/A' pega fuerte para Laura → probarla de verdad en el A/B.",
+    "Hook: '10 fórmulas que le pedí a una IA' vs. la 7 a mano → 'casi todas' o aclarar que la IA la revisó.",
+    "Giro: decir en una frase que la IA a veces avisa sola y cerrar con 'la Prueba hace que te lo diga sí o sí'.",
+    "Promesa: 'cualquier fórmula' → 'las fórmulas que usas en la oficina'."
+   ]
+  }
+ ]
+}

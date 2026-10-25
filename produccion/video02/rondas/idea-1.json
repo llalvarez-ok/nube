@@ -1,0 +1,58 @@
+{
+ "evaluaciones": [
+  {
+   "agente": "investigador-mercado",
+   "puntajes": {
+    "demanda": 6,
+    "rpm": 7,
+    "diferenciacion": 7
+   },
+   "objeciones": [
+    "Sin datos de la API (faltan credenciales en la sesión): demanda máx. 6 → correr investigar.py nicho/outliers o anotar a mano el top 5 de YouTube.",
+    "'WebSearch no devolvió videos' no prueba un hueco (WebSearch casi no indexa YouTube) → quitar ese argumento.",
+    "La búsqueda intuitiva es 'con ChatGPT' → si gana con claridad, correr los prompts en ChatGPT y usarlo en el A/B.",
+    "Título 1 es el formato de lista más saturado → principal el 3 (giro) o el 2 (método) con miniatura C.",
+    "Aprovechar RPM de cobranza: 'cuentas por cobrar', 'cobranza en Excel', 'plantilla Excel pyme' en metadatos y un capítulo.",
+    "Se pisa con el video 3 (BUSCARX) → otro caso/error en el video 3 o cambiar la fórmula 1."
+   ]
+  },
+  {
+   "agente": "critico-retencion",
+   "puntajes": {
+    "empaque": 6
+   },
+   "objeciones": [
+    "[Título 1] Genérico en resultados; 'horas' es vago; lo distintivo (planilla que se llena sola, cobrar dos veces) no aparece → usar el cronómetro medido: 'Fórmulas de Excel con IA: tu planilla se llena sola en [N] min'.",
+    "[Miniatura A] '=BUSCARX(' ilegible a 120 px, rompe la firma (protagonista = hoja terminada) y canibaliza el video 3 → hoja Resumen terminada a lo grande + 'MAÑANA → [N] MIN'; mismo cuadro que el hook.",
+    "[Miniatura C + título 3] Dependen de un giro no asegurado; con plan B, 'te mintió' sería clickbait → correr la fórmula 7 real antes; con plan B usar '¿VENCIDO?'.",
+    "[C / 6:20] Quien entra por 'te mintió' ve la mentira recién al 70 % → mostrar 'Vencido'+'PAGADO' 2 s en el hook y nombrarlo en el reenganche de 3:30.",
+    "[Título 2] 'no fallan' contradice el veredicto honesto → 'Fórmulas de Excel con IA: el paso que casi nadie pide'.",
+    "[Miniatura B] Sobrecargada y 'gratis' dos veces → un solo contraste (#N/A gris vs. hoja terminada), texto 'SIN #N/A'.",
+    "[Palabra clave] 'con ia' sin verificar; Laura escribe 'con chatgpt' → verificar con investigar.py; si gana 'con chatgpt', correr los prompts en ChatGPT y usarlo en un título A/B.",
+    "[Frente a competidores] Ninguna miniatura muestra IA → burbuja de chat chica que 'escupe' la hoja terminada."
+   ],
+   "punto_de_abandono": "En la página de resultados: título 1 + miniatura A es una lista genérica con texto ilegible."
+  },
+  {
+   "agente": "espectador",
+   "puntajes": {
+    "empaque": 7,
+    "encaje": 9
+   },
+   "objeciones": [
+    "[título 1] Igual a cualquier lista de '10 fórmulas'; no dice qué tiene de distinto → algo concreto: 'la planilla que se completa sola' o 'el reporte del lunes en una celda'.",
+    "[título 3 + miniatura C] 'la que casi me engaña' con 'Vencido' + sello 'PAGADO' es la única que habla a Martín → ponerla como principal o sumar 'cobranza'/'cobrar dos veces' a la miniatura A.",
+    "[miniatura A] '=BUSCARX(' no se lee en el celular y Laura usa BUSCARV → protagonista que se entienda sin leer código.",
+    "[promesa] 'sin errores' choca con el giro de la fórmula que miente → prometer 'fórmulas que puedes comprobar' o 'sin que te engañe'.",
+    "[Claude en la demo] Laura tiene ChatGPT; ver otra app la aleja → correr los prompts en ChatGPT o mostrar al menos una vez el mismo prompt en ChatGPT.",
+    "[fórmulas 3, 8, 9] Excel 2016/2019 no las tiene → avisarlo en los primeros 30 s junto con 'gratis'.",
+    "[separador] Mostrar en 5 s cómo saber si uso ';' o ','.",
+    "[ritmo] Las fáciles más cortas; las de matriz con un momento de explicación pieza por pieza; repetir que está en la plantilla.",
+    "[hook] Si el cronómetro no impresiona, empezar por el error de cobranza.",
+    "[plantilla] Mencionar la hoja 'Prompts' con 'Qué revisar' en el hook o a mitad."
+   ],
+   "haria_clic": true,
+   "lo_terminaria": true
+  }
+ ]
+}

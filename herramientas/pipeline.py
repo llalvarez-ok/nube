@@ -151,7 +151,10 @@ def cmd_evaluar(video, etapa, archivo):
     evaluaciones = ronda["evaluaciones"]
     nota, por_criterio, motivos = calificar(etapa, evaluaciones)
     n = sum(1 for h in e["historial"] if h["etapa"] == etapa and h["resultado"] != "forzado") + 1
-    if not motivos:
+    provisional = ETAPAS.index(etapa) > ETAPAS.index(e["etapa"])
+    if provisional:  # una etapa anterior espera decisión: se registra, pero no se avanza
+        resultado = ("provisional-aprobado" if not motivos else "provisional-revisar")
+    elif not motivos:
         resultado = "aprobado"
         avanzar(e, etapa)
     elif n >= RUBRICAS["max_rondas"]:
@@ -167,6 +170,8 @@ def cmd_evaluar(video, etapa, archivo):
         print(f"  {k:<14} {v}")
     for m in motivos:
         print(f"  ✗ {m}")
+    if provisional:
+        print(f"  → provisional: la etapa actual es «{e['etapa']}». Se aplica cuando esa etapa se apruebe o se fuerce.")
     if resultado == "escalado":
         print(f"  → {RUBRICAS['max_rondas']} rondas sin aprobar: decide el creador (pipeline.py forzar ...) o se descarta.")
     return resultado
@@ -176,6 +181,13 @@ def cmd_forzar(video, etapa, motivo):
     e = cargar(video)
     e["historial"].append({"fecha": ahora(), "etapa": etapa, "resultado": "forzado", "motivos": [motivo]})
     avanzar(e, etapa)
+    # las etapas siguientes ya aprobadas en provisional avanzan en cadena
+    while True:
+        previas = [h for h in e["historial"] if h["etapa"] == e["etapa"]]
+        if previas and previas[-1]["resultado"] == "provisional-aprobado":
+            avanzar(e, e["etapa"])
+        else:
+            break
     guardar(video, e)
     print(f"✔ {etapa} aprobado a mano · etapa actual: {e['etapa']}")
 

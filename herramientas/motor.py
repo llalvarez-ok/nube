@@ -283,6 +283,9 @@ def main():
                     duraciones[id(b)] = w.getnframes() / w.getframerate()
             else:
                 duraciones[id(b)] = max(1.0, palabras(b.get("voz", "")) / PALABRAS_POR_SEG)
+    for es in guion["escenas"]:  # rutas de imágenes relativas a la raíz del repo
+        if es["plantilla"] == "imagen" and not os.path.isabs(es["datos"]["imagen"]):
+            es["datos"]["imagen"] = os.path.join(RAIZ, es["datos"]["imagen"])
     armar_tiempos(guion, duraciones)
     iconos = set(ICONOS_BASE)
     recolectar_iconos(guion, iconos)

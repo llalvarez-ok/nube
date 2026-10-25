@@ -13,7 +13,7 @@ Actúas como **orquestador**. No escribes el contenido tú: lo delegas a los age
 
 ## 1. Ciclo de cada etapa con debate (idea, guion, visual, qc, empaque)
 1. **Autor.** Llama al agente autor con: video, etapa, ruta del artefacto y, desde la ronda 2, el brief del showrunner de `produccion/<video>/debate.md`. Pídele que responda cada objeción (aceptada/rechazada con argumento).
-2. **Controles objetivos.** guion: `puntuar_guion.py` ≥ 80 (si no, vuelve al autor sin gastar críticos). qc: `qc_video.py` sin errores.
+2. **Controles objetivos.** guion: `puntuar_guion.py` ≥ 80 y `plantilla_xlsx.py <video> --verificar` sin diferencias (si no, vuelve al autor sin gastar críticos). qc: `qc_video.py` sin errores.
 3. **Críticos en paralelo** (un solo mensaje con varias llamadas al Agent tool). Cada uno recibe el artefacto y la rúbrica de la etapa, **no** ve las notas de los otros. Cada uno devuelve un JSON.
 4. **Ronda.** Junta los JSON en `produccion/<video>/rondas/<etapa>-<n>.json` como `{"evaluaciones": [...]}` y corre `python3 herramientas/pipeline.py evaluar <video> <etapa> <archivo>`.
 5. **Showrunner.** Si el resultado es REVISAR, llama al showrunner con las evaluaciones: resuelve contradicciones y escribe el brief en debate.md. Vuelve al paso 1.

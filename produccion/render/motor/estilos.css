@@ -127,7 +127,7 @@ html, body { width: 1920px; height: 1080px; overflow: hidden; background: var(--
 .xl-ftexto { padding-left: 16px; font-family: "Inter", monospace; white-space: pre; }
 .xl-hoja { position: absolute; left: 0; right: 0; top: 260px; bottom: 44px; overflow: hidden; background: #fff; }
 .xl-celda { position: absolute; border-right: 1px solid #e3e3e3; border-bottom: 1px solid #e3e3e3; font-size: 24px; display: flex; align-items: center;
-  padding: 0 14px; white-space: nowrap; overflow: hidden; font-variant-numeric: tabular-nums; }
+  padding: 0 14px; white-space: pre; overflow: hidden; font-variant-numeric: tabular-nums; box-sizing: border-box; }
 .xl-celda.num { justify-content: flex-end; }
 .xl-celda.cab { background: #f3f3f3; color: #555; justify-content: center; font-size: 19px; padding: 0; }
 .xl-celda.enc { font-weight: 700; background: #f7faf8; }
@@ -142,7 +142,7 @@ html, body { width: 1920px; height: 1080px; overflow: hidden; background: var(--
 .xl-nota { position: absolute; z-index: 20; background: #12141b; color: #fff; font-size: 30px; font-weight: 700; padding: 22px 30px; border-radius: 18px;
   border-left: 8px solid var(--acento); box-shadow: 0 20px 60px rgba(0,0,0,.45); max-width: 620px; line-height: 1.25; white-space: normal; }
 .xl-grafico { position: absolute; z-index: 15; background: #fff; border: 1px solid #ddd; border-radius: 14px; box-shadow: 0 20px 60px rgba(0,0,0,.18); padding: 26px 30px; }
-.xl-grafico h4 { font-size: 24px; color: #333; margin-bottom: 18px; }
+.xl-grafico h4 { font-size: 24px; color: #333; margin-bottom: 46px; }
 .xl-barras { display: flex; align-items: flex-end; gap: 18px; height: 300px; border-bottom: 2px solid #ccc; }
 .xl-barras .b { flex: 1; background: var(--verde-claro); border-radius: 6px 6px 0 0; transform-origin: 50% 100%; position: relative; }
 .xl-barras .b span { position: absolute; top: -32px; left: 0; right: 0; text-align: center; font-size: 18px; font-weight: 700; color: #333; }
@@ -169,7 +169,7 @@ html, body { width: 1920px; height: 1080px; overflow: hidden; background: var(--
 .chat-msgs { flex: 1; padding: 36px 70px; display: flex; flex-direction: column; gap: 28px; overflow: hidden; }
 .chat-u { align-self: flex-end; background: #2b2d36; font-size: 30px; line-height: 1.4; padding: 20px 28px; border-radius: 22px; max-width: 980px; }
 .chat-ia { font-size: 30px; line-height: 1.5; color: #e9e9ee; white-space: pre-wrap; max-width: 1180px; }
-.chat-ia code { background: #23262e; color: #8ef0b5; }
+.chat-ia code { background: #23262e; color: #8ef0b5; overflow-wrap: anywhere; word-break: break-all; }
 .chat-ia b { color: var(--acento); }
 .chat-input { margin: 0 70px 34px; min-height: 76px; border-radius: 22px; background: #22242b; border: 1.5px solid rgba(255,255,255,.1); font-size: 28px; padding: 20px 28px; color: #ddd; }
 

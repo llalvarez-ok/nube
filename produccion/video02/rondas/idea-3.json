@@ -1,0 +1,44 @@
+{
+ "evaluaciones": [
+  {
+   "agente": "investigador-mercado",
+   "puntajes": {
+    "demanda": 6,
+    "rpm": 7,
+    "diferenciacion": 7
+   },
+   "objeciones": [
+    "Demanda 6 solo por falta de datos de la API en el entorno → condición del creador con umbral: en el top 10 de YouTube, ≥2 videos de los últimos 12 meses con ≥30 mil vistas o ≥1 outlier 3x; si 'con chatgpt' duplica la mediana, alternativa ChatGPT.",
+    "Sumar señales de interés de 2026 (Cámara de Sevilla 07/2026, NYSSCPA 14/07/2026, Genbeta, ClickUp, Platzi, DataCamp, Ámbito).",
+    "Renombrar 'Ángulo propio (top 5 de guías y videos)' → 'guías en texto revisadas; YouTube se verifica con la condición'.",
+    "Plan B: nombrar el hallazgo 'la IA como revisora de tus fórmulas' en el capítulo 7."
+   ]
+  },
+  {
+   "agente": "critico-retencion",
+   "puntajes": {
+    "empaque": 8
+   },
+   "objeciones": [
+    "Medir [N] y las '4 horas' antes de cerrar el empaque; respaldo de una sola unidad ('4 H → 10 MIN' o 'LUNES RESUELTO').",
+    "Hook: partir la primera frase ('Esta planilla se completa sola... 10 fórmulas, [N] minutos con una IA gratis; a mano, unas 4 horas'); 'la que escribí yo' va al giro.",
+    "Primer cuadro = gráfico de Resumen (como la miniatura A), con el sello PAGADO en una esquina, sin corte.",
+    "Descripción línea 1 con la frase exacta 'Fórmulas de Excel con IA gratis: ...'.",
+    "Miniatura B: sumar '2.446.165' con la grieta.",
+    "Miniatura C: sello 'COBRADO' o un teléfono; verificar 610.575 en Excel."
+   ]
+  },
+  {
+   "agente": "espectador",
+   "puntajes": {
+    "empaque": 9,
+    "encaje": 9
+   },
+   "objeciones": [
+    "Hook: trabalenguas → partir en dos frases.",
+    "Las '4 horas' declaradas como estimación.",
+    "Promesa: 'comprobarlas' y no repetir 'oficina'."
+   ]
+  }
+ ]
+}

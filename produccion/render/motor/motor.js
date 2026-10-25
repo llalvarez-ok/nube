@@ -19,6 +19,7 @@
   }
   const icono = (n) => (G.iconos && G.iconos[n]) || "";
   const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  const escBr = (s) => esc(s).replace(/&lt;br&gt;/g, "<br>"); // texto animado: el "<" de una fórmula no es HTML; <br> sí es salto de línea
   const marcar = (s) => esc(s).replace(/\*([^*]+)\*/g, '<span class="resaltado">$1</span>');
   function sonido(n, t, dur) { if (t >= 0) SFX.push({ n, t: +t.toFixed(3), dur: dur ? +dur.toFixed(3) : undefined }); }
   const fmtNum = (v, dec) => Number(v).toLocaleString("es-ES", { minimumFractionDigits: dec || 0, maximumFractionDigits: dec || 0 });
@@ -184,6 +185,25 @@
     return tl;
   };
 
+  P.imagen = function (cam, es, c) {
+    // foto a pantalla completa con movimiento lento (Ken Burns), degradado y leyenda; "imagen" = ruta absoluta (la resuelve motor.py)
+    const d = es.datos, tl = gsap.timeline();
+    const img = el("img", "", null, cam);
+    img.src = "file://" + d.imagen;
+    Object.assign(img.style, { position: "absolute", inset: "0", width: "100%", height: "100%", objectFit: "cover", transformOrigin: d.foco || "50% 50%" });
+    el("div", "", null, cam).style.cssText = "position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,13,18,.15) 30%,rgba(11,13,18,.92))";
+    tl.fromTo(img, { scale: 1.12 }, { scale: 1, duration: es.dur + 0.7, ease: "none" }, 0);
+    if (d.titulo || d.texto) {
+      const caja = el("div", "", null, cam);
+      caja.style.cssText = "position:absolute;left:140px;right:140px;bottom:120px";
+      if (d.titulo) tl.from(el("div", "titular", marcar(d.titulo), caja), { y: 50, opacity: 0, duration: 0.8, ease: "power3.out" }, c.B(0, 0.2));
+      if (d.texto) tl.from(el("div", "sub", marcar(d.texto), caja), { y: 30, opacity: 0, duration: 0.7 }, c.B(d.texto_beat || 0, 0.6));
+      caja.querySelector(".titular") && (caja.querySelector(".titular").style.fontSize = "88px");
+    }
+    if (d.credito) el("div", "fuente", esc(d.credito), cam).style.cssText += "position:absolute;right:28px;bottom:18px;color:rgba(255,255,255,.6)";
+    return tl;
+  };
+
   // ---------- réplica de Excel ----------
   const FILA = 48, CAB_H = 36, CAB_W = 64, HOJA_Y = 210, XL_X = 160, XL_Y = 120;
   const colNum = (s) => s.split("").reduce((n, ch) => n * 26 + ch.charCodeAt(0) - 64, 0) - 1;
@@ -292,7 +312,7 @@
     const quitarRefs = (t) => { refs.forEach((x) => tl.to(x, { opacity: 0, duration: 0.3 }, t)); refs = []; };
     const mostrarRefs = (formula, t) => {
       const colores = ["#3b6fd8", "#d24726", "#8e44ad", "#16a085"];
-      [...new Set((formula.match(/\$?[A-Z]{1,2}\$?\d+(:\$?[A-Z]{1,2}\$?\d+)?/g) || []).map((x) => x.replace(/\$/g, "")))].forEach((ref, i) => {
+      [...new Set((formula.replace(/[A-Za-zÁÉÍÓÚáéíóúñÑ_]+!\$?[A-Z]{1,2}\$?\d*(:\$?[A-Z]{1,2}\$?\d*)?/g, " ").match(/\$?[A-Z]{1,2}\$?\d+(:\$?[A-Z]{1,2}\$?\d+)?/g) || []).map((x) => x.replace(/\$/g, "")))].forEach((ref, i) => {
         const r = rect(ref.replace(/\$/g, ""));
         const b = el("div", "xl-ref", null, xl);
         Object.assign(b.style, { left: r.x + "px", top: r.y + "px", width: r.w + "px", height: r.h + "px", borderColor: colores[i % 4], background: colores[i % 4] + "14" });
@@ -312,8 +332,8 @@
         tl.set(cel, { justifyContent: "flex-start", overflow: "visible", zIndex: 2 }, tt);
         tl.set(span, { text: "" }, tt);
         tl.set(ftexto, { text: "" }, tt);
-        tl.to(span, { text: { value: a.texto }, duration: dur, ease: "none" }, tt);
-        tl.to(ftexto, { text: { value: a.texto }, duration: dur, ease: "none" }, tt);
+        tl.to(span, { text: { value: esc(a.texto) }, duration: dur, ease: "none" }, tt);
+        tl.to(ftexto, { text: { value: esc(a.texto) }, duration: dur, ease: "none" }, tt);
         c.sonido("tecleo", tt, dur);
         mostrarRefs(a.texto, tt + dur * 0.6);
         tl.to(sel, { borderColor: "#3b6fd8", duration: 0.1 }, tt);
@@ -322,7 +342,7 @@
       calcular: (a, t) => {
         const { span, cel } = celdas[a.celda];
         quitarRefs(t);
-        tl.set(span, { text: a.valor }, t);
+        tl.set(span, { text: esc(a.valor) }, t);
         tl.set(cel, { overflow: "hidden", zIndex: 0 }, t);
         if (a.derecha !== false) tl.set(cel, { justifyContent: "flex-end" }, t);
         tl.fromTo(cel, { backgroundColor: "#fff3a6" }, { backgroundColor: "rgba(255,255,255,0)", duration: 1.2, ease: "power2.out", immediateRender: false }, t);
@@ -341,7 +361,7 @@
           const ref = colLetra(R.c1) + (R.r1 + i);
           if (!celdas[ref]) return;
           const tc = t + 0.55 + (dur * (i + 1)) / a.valores.length;
-          tl.set(celdas[ref].span, { text: String(v) }, tc);
+          tl.set(celdas[ref].span, { text: esc(String(v)) }, tc);
           tl.set(celdas[ref].cel, { justifyContent: /^[-+$€\d]/.test(String(v)) ? "flex-end" : "flex-start" }, tc);
           tl.fromTo(celdas[ref].cel, { backgroundColor: "#fff3a6" }, { backgroundColor: "rgba(255,255,255,0)", duration: 0.8, immediateRender: false }, tc);
         });
@@ -428,7 +448,7 @@
         clic(tt);
         const dp = a.duracion_prompt || Math.min(3, Math.max(1, a.prompt.length / 24));
         tl.set(panelInput, { text: "" }, tt);
-        tl.to(panelInput, { text: { value: a.prompt }, duration: dp, ease: "none" }, tt + 0.1);
+        tl.to(panelInput, { text: { value: esc(a.prompt) }, duration: dp, ease: "none" }, tt + 0.1);
         c.sonido("tecleo", tt + 0.1, dp);
         tt += dp + 0.35;
         const bu = el("div", "burbuja-u", esc(a.prompt), panelMsgs);
@@ -439,12 +459,12 @@
         const bi = el("div", "burbuja-ia", "", panelMsgs);
         tl.fromTo(bi, { opacity: 0 }, { opacity: 1, duration: 0.2, immediateRender: true }, tt);
         const dr = a.duracion_respuesta || Math.min(5, Math.max(1.2, a.respuesta.split(" ").length / 9));
-        tl.to(bi, { text: { value: a.respuesta, delimiter: " " }, duration: dr, ease: "none" }, tt + 0.1);
+        tl.to(bi, { text: { value: escBr(a.respuesta), delimiter: " " }, duration: dr, ease: "none" }, tt + 0.1);
         tt += dr + 0.2;
         if (a.formula) {
           const f = el("div", "", `<code></code>`, bi);
           tl.fromTo(f, { opacity: 0 }, { opacity: 1, duration: 0.2, immediateRender: true }, tt);
-          tl.to(f.firstChild, { text: { value: a.formula }, duration: Math.min(1.5, a.formula.length / 25), ease: "none" }, tt);
+          tl.to(f.firstChild, { text: { value: esc(a.formula) }, duration: Math.min(1.5, a.formula.length / 25), ease: "none" }, tt);
           tt += 0.8;
           if (a.boton !== false) {
             const btn = el("span", "boton-insertar", "Insertar", bi);
@@ -461,9 +481,9 @@
         const r = rect(a.celda);
         tl.to(sel, { left: r.x, top: r.y, width: r.w, height: r.h, duration: 0.25 }, t + 0.6);
         tl.set(nombre, { text: a.celda }, t + 0.6);
-        tl.set(ftexto, { text: a.formula }, t + 0.6);
+        tl.set(ftexto, { text: esc(a.formula) }, t + 0.6);
         tl.set(cel, { justifyContent: a.derecha === false ? "flex-start" : "flex-end" }, t + 0.6);
-        tl.set(span, { text: a.valor || a.formula }, t + 0.6);
+        tl.set(span, { text: esc(a.valor || a.formula) }, t + 0.6);
         tl.fromTo(cel, { backgroundColor: "#fff3a6" }, { backgroundColor: "rgba(255,255,255,0)", duration: 1.2, immediateRender: false }, t + 0.6);
         mostrarRefs(a.formula, t + 0.7);
         c.sonido("pop", t + 0.6);
@@ -500,7 +520,7 @@
       if (a.tipo === "prompt") {
         const dp = a.duracion || Math.min(3.5, Math.max(1, a.texto.length / 22));
         tl.set(input, { text: "" }, t);
-        tl.to(input, { text: { value: a.texto }, duration: dp, ease: "none" }, t);
+        tl.to(input, { text: { value: esc(a.texto) }, duration: dp, ease: "none" }, t);
         c.sonido("tecleo", t, dp);
         const bu = el("div", "chat-u", esc(a.texto), msgs);
         tl.fromTo(bu, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.35, immediateRender: true }, t + dp + 0.3);
@@ -510,12 +530,12 @@
         const bi = el("div", "chat-ia", "", msgs);
         const dr = a.duracion || Math.min(6, Math.max(1.5, a.texto.split(" ").length / 8));
         tl.fromTo(bi, { opacity: 0 }, { opacity: 1, duration: 0.2, immediateRender: true }, t);
-        tl.to(bi, { text: { value: a.texto, delimiter: " " }, duration: dr, ease: "none" }, t + 0.1);
+        tl.to(bi, { text: { value: escBr(a.texto), delimiter: " " }, duration: dr, ease: "none" }, t + 0.1);
         c.sonido("respuesta", t, 0.6);
         if (a.formula) {
           const f = el("div", "chat-ia", "<code></code>", msgs);
           tl.fromTo(f, { opacity: 0 }, { opacity: 1, duration: 0.2, immediateRender: true }, t + dr + 0.2);
-          tl.to(f.firstChild, { text: { value: a.formula }, duration: Math.min(1.6, a.formula.length / 22), ease: "none" }, t + dr + 0.2);
+          tl.to(f.firstChild, { text: { value: esc(a.formula) }, duration: Math.min(1.6, a.formula.length / 22), ease: "none" }, t + dr + 0.2);
         }
       }
     });
