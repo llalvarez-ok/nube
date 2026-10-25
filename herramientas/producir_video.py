@@ -5,8 +5,13 @@
     python3 herramientas/producir_video.py video01 --sin-voz  # vista previa muda
 
 Pipeline: escenas HTML -> PNG (Chromium) · voz por paso (Google Cloud TTS) ·
-segmentos con zoom suave (ffmpeg) · video final normalizado a -14 LUFS ·
-subtítulos .srt · capítulos para la descripción.
+segmentos con zoom suave y revelado progresivo de listas (ffmpeg) · música con
+ducking opcional · video final normalizado a -14 LUFS · subtítulos .srt · capítulos.
+
+Opciones de escenas.json (además de "titulo" y "pasos"):
+    "total_pasos": 4                      la etiqueta "Paso N de 4"
+    "marca": {"nombre": "Atajos IA", "acento": "#ffd400"}
+    "musica": "produccion/musica/tema.mp3"  (Biblioteca de audio de YouTube; va a -26 dB bajo la voz)
 
 Variables de entorno:
     GOOGLE_TTS_API_KEY   clave de API con Cloud Text-to-Speech habilitada
@@ -27,6 +32,7 @@ RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 FUENTES = os.path.join(RAIZ, "produccion", "render", "fonts")
 FPS = 30
 PAUSA = 0.35  # silencio al final de cada paso
+XFADE = 0.25  # fundido entre cuadros del revelado progresivo
 VOZ_PREFERIDA = ["es-US-Chirp3-HD-Charon", "es-US-Chirp3-HD-Orus", "es-US-Chirp3-HD-Puck"]
 
 CSS = f"""
@@ -44,6 +50,9 @@ html,body{{margin:0;width:1920px;height:1080px;overflow:hidden;background:#0f0f1
 .grande{{font-weight:900;font-size:110px;letter-spacing:-3px;line-height:1.05}}
 .chico{{margin-top:34px;font-size:46px;color:#cfcfcf;font-weight:600;line-height:1.3;white-space:pre-line}}
 .amarillo{{color:#ffd400}}
+.oculto{{opacity:0!important}}
+.cifra{{font-weight:900;font-size:300px;letter-spacing:-10px;line-height:1;color:#ffd400}}
+.mitad{{position:absolute;top:150px;bottom:100px;width:820px;display:flex;flex-direction:column;justify-content:center}}
 .tarjeta{{background:#1a1a1d;border:2px solid #2c2c31;border-radius:28px;padding:48px 56px;text-align:left}}
 .etiqueta{{font-size:26px;font-weight:800;color:#9a9aa3;text-transform:uppercase;letter-spacing:2px;margin-bottom:22px}}
 .pag{{display:inline-block;background:#ffd400;color:#0f0f10;font-weight:800;border-radius:10px;padding:0 12px;font-size:.8em;margin-left:6px}}
@@ -61,12 +70,29 @@ def pags(texto):
     return re.sub(r"\((págs?\. [^)]+)\)", r'<span class="pag">\1</span>', t)
 
 
-def escena_html(p, build):
+LISTAS = {"herramientas": "items", "respuesta": "items", "lista": "items", "tabla": "filas", "comparar": "filas"}
+MARCA = {"nombre": "Atajos IA", "acento": "#ffd400"}
+TOTAL_PASOS = 4
+
+
+def estados(p):
+    """Cuántos cuadros tiene la escena: las listas se revelan de a un elemento."""
+    clave = LISTAS.get(p["tipo"])
+    if clave and p.get("revelar", True) and len(p[clave]) > 1:
+        return len(p[clave])
+    return 1
+
+
+def escena_html(p, build, revelar=None):
     tipo = p["tipo"]
     g, c = p.get("grande", ""), p.get("chico", "")
-    cab = f'<div class="grid"></div><div class="marca">{ICONO}Atajos IA</div>'
+
+    def oc(i):  # clase para los elementos todavía no revelados
+        return " oculto" if revelar is not None and i >= revelar else ""
+
+    cab = f'<div class="grid"></div><div class="marca">{ICONO}{html.escape(MARCA["nombre"])}</div>'
     if p.get("paso"):
-        cab += f'<div class="paso">Paso {p["paso"]} de 4</div>'
+        cab += f'<div class="paso">Paso {p["paso"]} de {TOTAL_PASOS}</div>'
 
     def centro(interior):
         return f'<div class="centro">{interior}</div>'
@@ -91,7 +117,7 @@ def escena_html(p, build):
         cuerpo = (imgs + f'<div style="position:absolute;left:120px;top:330px;width:820px"><div class="grande">{html.escape(g)}</div>'
                   f'<div class="chico" style="text-align:left">{html.escape(c)}</div></div>')
     elif tipo == "herramientas":
-        chips = "".join(f'<div class="tarjeta" style="font-size:56px;font-weight:800;text-align:center">{html.escape(x)}</div>' for x in p["items"])
+        chips = "".join(f'<div class="tarjeta{oc(i)}" style="font-size:56px;font-weight:800;text-align:center">{html.escape(x)}</div>' for i, x in enumerate(p["items"]))
         cuerpo = centro(f'<div class="grande" style="font-size:84px">{html.escape(g)}</div>'
                         f'<div style="display:grid;grid-template-columns:1fr 1fr;gap:34px;margin-top:60px;width:1300px">{chips}</div>')
     elif tipo == "aviso":
@@ -105,11 +131,11 @@ def escena_html(p, build):
                         f'<div style="font-size:42px;line-height:1.45;white-space:pre-line">{html.escape(p["texto"])}</div></div>')
     elif tipo == "respuesta":
         color = "#ffb020" if p.get("ambar") else "#ffd400"
-        items = "".join(f"<li>{pags(x)}</li>" for x in p["items"])
+        items = "".join(f'<li class="{oc(i)}">{pags(x)}</li>' for i, x in enumerate(p["items"]))
         cuerpo = centro(f'<div class="tarjeta" style="width:1560px;border-left:10px solid {color}"><div class="etiqueta">Respuesta de Claude · {html.escape(p["titulo"])}</div>'
                         f'<ul style="font-size:44px;line-height:1.35">{items}</ul></div>')
     elif tipo == "tabla":
-        filas = "".join(f'<tr><td>{html.escape(a)}</td><td style="font-weight:800">{html.escape(b)}</td><td><span class="pag">pág. {html.escape(n)}</span></td></tr>' for a, b, n in p["filas"])
+        filas = "".join(f'<tr class="{oc(i)}"><td>{html.escape(a)}</td><td style="font-weight:800">{html.escape(b)}</td><td><span class="pag">pág. {html.escape(n)}</span></td></tr>' for i, (a, b, n) in enumerate(p["filas"]))
         cuerpo = centro(f'<div class="tarjeta" style="width:1500px"><div class="etiqueta">Respuesta de Claude · {html.escape(p["titulo"])}</div>'
                         f'<table><tr><th>Dato</th><th>Valor</th><th>Página</th></tr>{filas}</table></div>')
     elif tipo == "verificar":
@@ -118,20 +144,44 @@ def escena_html(p, build):
                   f'<div class="grande" style="font-size:96px">{html.escape(p["dato"])} <span class="pag" style="font-size:48px">pág. {p["pagina"]}</span></div>'
                   f'<div class="grande amarillo" style="font-size:90px;margin-top:60px">✔ Verificado</div></div>')
     elif tipo == "lista":
-        items = "".join(f"<li>{html.escape(x)}</li>" for x in p["items"])
+        items = "".join(f'<li class="{oc(i)}">{html.escape(x)}</li>' for i, x in enumerate(p["items"]))
         cuerpo = centro(f'<div class="tarjeta" style="width:1560px"><div class="etiqueta">{html.escape(p["titulo"])}</div>'
                         f'<ol style="font-size:50px;line-height:1.35">{items}</ol></div>')
     elif tipo == "comparar":
-        filas = "".join(f'<tr><td>{html.escape(a)}</td><td class="amarillo" style="font-weight:800">{html.escape(b)}</td></tr>' for a, b in p["filas"])
+        filas = "".join(f'<tr class="{oc(i)}"><td>{html.escape(a)}</td><td class="amarillo" style="font-weight:800">{html.escape(b)}</td></tr>' for i, (a, b) in enumerate(p["filas"]))
         cuerpo = centro(f'<div class="grande" style="font-size:84px;margin-bottom:40px">{html.escape(g)}</div>'
                         f'<div class="tarjeta" style="width:1600px"><table><tr><th>Si tienes…</th><th>Usa</th></tr>{filas}</table></div>')
     elif tipo == "final":
         cuerpo = ('<div style="position:absolute;left:150px;top:330px;width:900px;height:506px;border:4px dashed #3a3a40;border-radius:20px;display:flex;align-items:center;justify-content:center;color:#55555c;font-size:34px"></div>'
                   '<div style="position:absolute;left:1250px;top:380px;width:400px;height:400px;border:4px dashed #3a3a40;border-radius:50%"></div>'
                   f'<div style="position:absolute;left:150px;top:160px" class="grande">{html.escape(g)}</div>')
+    elif tipo == "cifra":  # un número enorme con su contexto: "40 %" / "de los correos se pueden automatizar"
+        cuerpo = centro(f'<div class="cifra">{html.escape(g)}</div><div class="chico" style="font-size:58px;color:#fff">{html.escape(c)}</div>'
+                        + (f'<div class="chico" style="font-size:30px;color:#77777f">Fuente: {html.escape(p["fuente"])}</div>' if p.get("fuente") else ""))
+    elif tipo == "antes_despues":  # {"antes": {"titulo","texto"}, "despues": {...}}
+        a, d = p["antes"], p["despues"]
+        cuerpo = (f'<div class="mitad" style="left:120px"><div class="etiqueta" style="color:#ff3b3b">Antes</div>'
+                  f'<div class="grande" style="font-size:96px;color:#8a8a93;text-decoration:line-through;text-decoration-color:#ff3b3b">{html.escape(a["titulo"])}</div>'
+                  f'<div class="chico" style="text-align:left">{html.escape(a.get("texto", ""))}</div></div>'
+                  f'<div style="position:absolute;left:958px;top:200px;bottom:150px;width:4px;background:#2c2c31"></div>'
+                  f'<div class="mitad" style="left:1000px"><div class="etiqueta amarillo">Después</div>'
+                  f'<div class="grande amarillo" style="font-size:96px">{html.escape(d["titulo"])}</div>'
+                  f'<div class="chico" style="text-align:left">{html.escape(d.get("texto", ""))}</div></div>')
+    elif tipo == "cita":
+        cuerpo = centro(f'<div style="font-size:200px;line-height:.6;color:#ffd400;font-weight:900">“</div>'
+                        f'<div class="grande" style="font-size:76px;font-weight:800;max-width:1500px">{html.escape(g)}</div>'
+                        f'<div class="chico" style="font-size:36px">— {html.escape(c)}</div>')
+    elif tipo == "imagen":  # imagen de apoyo a pantalla completa (ruta relativa a la raíz del repo), con leyenda y crédito
+        src = os.path.join(RAIZ, p["imagen"])
+        cuerpo = (f'<img src="file://{src}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">'
+                  '<div style="position:absolute;inset:0;background:linear-gradient(transparent 45%,#0f0f10ee)"></div>'
+                  f'<div style="position:absolute;left:120px;right:120px;bottom:110px"><div class="grande" style="font-size:90px">{html.escape(g)}</div>'
+                  f'<div class="chico" style="text-align:left;margin-top:16px">{html.escape(c)}</div></div>'
+                  + (f'<div style="position:absolute;right:24px;bottom:16px;font-size:20px;color:#ffffff99">{html.escape(p["credito"])}</div>' if p.get("credito") else ""))
     else:
         raise ValueError(f"tipo de escena desconocido: {tipo}")
-    return f'<!doctype html><html><head><meta charset="utf-8"><style>{CSS}</style></head><body>{cab}{cuerpo}</body></html>'
+    pagina = f'<!doctype html><html><head><meta charset="utf-8"><style>{CSS}</style></head><body>{cab}{cuerpo}</body></html>'
+    return pagina.replace("#ffd400", MARCA["acento"])
 
 
 def ejecutar(cmd):
@@ -192,6 +242,9 @@ def main():
     os.makedirs(build, exist_ok=True)
     spec = json.load(open(os.path.join(base, "escenas.json"), encoding="utf-8"))
     pasos = spec["pasos"]
+    global TOTAL_PASOS
+    MARCA.update(spec.get("marca", {}))
+    TOTAL_PASOS = spec.get("total_pasos", TOTAL_PASOS)
 
     pdf = os.path.join(base, "documento", "informe.pdf")
     if os.path.exists(pdf):
@@ -201,12 +254,18 @@ def main():
             if m and f != f"pag-{m.group(1)}.png":
                 os.replace(os.path.join(build, f), os.path.join(build, f"pag-{m.group(1)}.png"))
 
-    trabajos = []
+    trabajos, cuadros = [], []
     for i, p in enumerate(pasos):
-        h = os.path.join(build, f"escena-{i:02}.html")
-        with open(h, "w", encoding="utf-8") as f:
-            f.write(escena_html(p, build))
-        trabajos.append({"html": h, "out": os.path.join(build, f"escena-{i:02}.png"), "w": 1920, "h": 1080})
+        n = estados(p)
+        cuadros.append([])
+        for k in range(1, n + 1):
+            sufijo = f"-{k}" if n > 1 else ""
+            h = os.path.join(build, f"escena-{i:02}{sufijo}.html")
+            with open(h, "w", encoding="utf-8") as f:
+                f.write(escena_html(p, build, k if n > 1 else None))
+            png = os.path.join(build, f"escena-{i:02}{sufijo}.png")
+            trabajos.append({"html": h, "out": png, "w": 1920, "h": 1080})
+            cuadros[i].append(png)
     with open(os.path.join(build, "trabajos.json"), "w") as f:
         json.dump(trabajos, f)
     render = os.path.join(RAIZ, "produccion", "render")
@@ -233,9 +292,22 @@ def main():
         d = duracion(wav) + PAUSA
         frames = int(round(d * FPS))
         mp4 = os.path.join(build, f"seg-{i:02}.mp4")
-        zoom = f"zoompan=z='min(1+0.00025*on,1.04)':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d={frames}:s=1920x1080:fps={FPS}"
-        ejecutar(["ffmpeg", "-y", "-loop", "1", "-i", os.path.join(build, f"escena-{i:02}.png"), "-i", wav,
-                  "-filter_complex", f"[0:v]scale=3840:-1,{zoom},fade=t=in:st=0:d=0.2,format=yuv420p[v];[1:a]apad=pad_dur={PAUSA}[a]",
+        # revelado progresivo: los elementos aparecen repartidos en el primer 80 % de la locución
+        imgs = cuadros[i]
+        marcas = [k * 0.8 * (d - PAUSA) / len(imgs) for k in range(len(imgs))] + [frames / FPS]
+        tramos = [marcas[k + 1] - marcas[k] for k in range(len(imgs))]
+        entradas, filtros, previo = [], [], "[c0]"
+        for k, img in enumerate(imgs):
+            largo = tramos[k] + (XFADE if k < len(imgs) - 1 else 0)
+            entradas += ["-loop", "1", "-framerate", str(FPS), "-t", f"{largo:.3f}", "-i", img]
+            filtros.append(f"[{k}:v]format=yuv420p,setsar=1[c{k}]")
+        for k in range(1, len(imgs)):
+            filtros.append(f"{previo}[c{k}]xfade=transition=fade:duration={XFADE}:offset={marcas[k]:.3f}[x{k}]")
+            previo = f"[x{k}]"
+        zoom = f"zoompan=z='min(1+0.00025*on,1.04)':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d=1:s=1920x1080:fps={FPS}"
+        filtros.append(f"{previo}scale=3840:-1,{zoom},fade=t=in:st=0:d=0.2,format=yuv420p[v]")
+        filtros.append(f"[{len(imgs)}:a]apad=pad_dur={PAUSA}[a]")
+        ejecutar(["ffmpeg", "-y", *entradas, "-i", wav, "-filter_complex", ";".join(filtros),
                   "-map", "[v]", "-map", "[a]", "-t", f"{frames / FPS:.3f}", "-c:v", "libx264", "-preset", "medium",
                   "-crf", "18", "-c:a", "pcm_s16le", "-ar", "48000", mp4])
         segmentos.append(mp4)
@@ -256,13 +328,29 @@ def main():
     with open(lista, "w") as f:
         f.writelines(f"file '{s}'\n" for s in segmentos)
     salida = os.path.join(base, f"{nombre}{'-preview' if sin_voz else ''}.mp4")
-    ejecutar(["ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", lista, "-c:v", "copy",
-              "-af", "loudnorm=I=-14:TP=-1.5:LRA=11", "-c:a", "aac", "-b:a", "192k", "-movflags", "+faststart", salida])
+    musica = spec.get("musica")
+    if musica and os.path.exists(os.path.join(RAIZ, musica)):
+        # la música baja sola cuando habla la voz (sidechain) y queda ~-26 dB por debajo
+        mezcla = ("[0:a]asplit=2[voz][guia];[1:a]volume=0.18,afade=t=in:d=2[m];"
+                  "[m][guia]sidechaincompress=threshold=0.03:ratio=10:attack=15:release=450[mduck];"
+                  f"[voz][mduck]amix=inputs=2:duration=first:normalize=0,afade=t=out:st={max(0, t - 2.5):.2f}:d=2.5,"
+                  "loudnorm=I=-14:TP=-1.5:LRA=11[a]")
+        ejecutar(["ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", lista, "-stream_loop", "-1", "-i", os.path.join(RAIZ, musica),
+                  "-filter_complex", mezcla, "-map", "0:v", "-map", "[a]", "-c:v", "copy", "-c:a", "aac", "-b:a", "192k",
+                  "-shortest", "-movflags", "+faststart", salida])
+        print(f"✔ Música: {musica}")
+    else:
+        if musica:
+            print(f"⚠ No existe {musica}: el video sale sin música")
+        ejecutar(["ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", lista, "-c:v", "copy",
+                  "-af", "loudnorm=I=-14:TP=-1.5:LRA=11", "-c:a", "aac", "-b:a", "192k", "-movflags", "+faststart", salida])
 
-    with open(os.path.join(base, f"{nombre}.srt"), "w", encoding="utf-8") as f:
+    # la vista previa muda tiene tiempos estimados: no pisa los subtítulos ni capítulos reales
+    destino = build if sin_voz else base
+    with open(os.path.join(destino, f"{nombre}.srt"), "w", encoding="utf-8") as f:
         for n, (a, b, o) in enumerate(srt, 1):
             f.write(f"{n}\n{tiempo_srt(a)} --> {tiempo_srt(b)}\n{o}\n\n")
-    with open(os.path.join(base, "capitulos.txt"), "w", encoding="utf-8") as f:
+    with open(os.path.join(destino, "capitulos.txt"), "w", encoding="utf-8") as f:
         f.write("0:00 Introducción\n")
         for s, n in capitulos:
             f.write(f"{int(s // 60)}:{int(s % 60):02} Paso {n}\n")

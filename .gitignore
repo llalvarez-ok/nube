@@ -4,3 +4,4 @@ __pycache__/
 node_modules/
 produccion/*/build/
 produccion/*/*.mp4
+produccion/*/shorts/*.mp4

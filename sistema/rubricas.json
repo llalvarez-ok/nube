@@ -1,0 +1,69 @@
+{
+  "_doc": "Rúbricas del protocolo de debate. pipeline.py las usa para aprobar o devolver cada etapa. Puntajes de 0 a 10. Ver sistema/protocolo-debate.md.",
+  "max_rondas": 3,
+  "etapas": {
+    "idea": {
+      "artefacto": "idea.md",
+      "autor": "ideador",
+      "criticos": ["investigador-mercado", "critico-retencion", "espectador"],
+      "umbral": 8.0,
+      "criterios": {
+        "demanda":        {"peso": 0.25, "minimo": 7, "que_mide": "Hay búsqueda o videos outlier recientes que prueban interés (con datos de investigar.py)"},
+        "empaque":        {"peso": 0.25, "minimo": 8, "que_mide": "Hay un título + miniatura que darías clic en una página llena de competidores"},
+        "diferenciacion": {"peso": 0.20, "minimo": 7, "que_mide": "Ángulo propio: qué tiene este video que no tiene el top 5 actual"},
+        "rpm":            {"peso": 0.15, "minimo": 5, "que_mide": "Atrae anunciantes de software, finanzas o educación"},
+        "encaje":         {"peso": 0.15, "minimo": 7, "que_mide": "Encaja con la promesa del canal y se puede producir con el formato animado"}
+      }
+    },
+    "guion": {
+      "artefacto": "escenas.json",
+      "autor": "guionista",
+      "criticos": ["critico-retencion", "verificador", "espectador"],
+      "umbral": 8.5,
+      "objetivo": "puntuar_guion.py debe dar >= 80 antes de pasar a los críticos",
+      "criterios": {
+        "hook":         {"peso": 0.25, "minimo": 8, "que_mide": "Los primeros 15 s muestran el resultado, generan una pregunta y no tienen saludo"},
+        "ritmo":        {"peso": 0.20, "minimo": 8, "que_mide": "Sin relleno; cada escena aporta algo nuevo; reenganches cada 60-90 s"},
+        "promesa":      {"peso": 0.20, "minimo": 8, "que_mide": "Cumple exactamente lo que promete el título, y antes del final"},
+        "claridad":     {"peso": 0.15, "minimo": 8, "que_mide": "Un espectador no técnico lo entiende y lo puede repetir"},
+        "veracidad":    {"peso": 0.20, "minimo": 9, "veto": true, "que_mide": "Cada cifra y afirmación tiene fuente o está marcada como ejemplo ficticio"}
+      }
+    },
+    "visual": {
+      "artefacto": "escenas.json + miniatura.html",
+      "autor": "director-visual",
+      "criticos": ["critico-retencion", "editor-qc"],
+      "umbral": 8.0,
+      "criterios": {
+        "variedad":     {"peso": 0.30, "minimo": 7, "que_mide": "Cambio visual al menos cada 8-12 s; no más de 2 escenas seguidas del mismo tipo"},
+        "legibilidad":  {"peso": 0.30, "minimo": 8, "que_mide": "Texto legible en un celular; máximo ~12 palabras en pantalla por escena"},
+        "coherencia":   {"peso": 0.20, "minimo": 8, "que_mide": "Lo que se ve refuerza lo que se dice en ese momento"},
+        "marca":        {"peso": 0.20, "minimo": 7, "que_mide": "Respeta la identidad visual del canal"}
+      }
+    },
+    "qc": {
+      "artefacto": "<video>.mp4",
+      "autor": "productor",
+      "criticos": ["editor-qc"],
+      "umbral": 9.0,
+      "objetivo": "qc_video.py sin errores (solo advertencias justificadas)",
+      "criterios": {
+        "tecnico":      {"peso": 0.40, "minimo": 9, "veto": true, "que_mide": "1080p, 30 fps, -14 LUFS ±1, sin cortes de audio, sin frames negros"},
+        "sincronia":    {"peso": 0.30, "minimo": 8, "que_mide": "Voz, escena y subtítulos van juntos"},
+        "pronunciacion":{"peso": 0.30, "minimo": 8, "que_mide": "La voz sintética no pronuncia mal nombres, siglas ni cifras"}
+      }
+    },
+    "empaque": {
+      "artefacto": "metadatos.json + miniatura.png",
+      "autor": "seo-empaquetador",
+      "criticos": ["critico-retencion", "verificador", "espectador"],
+      "umbral": 8.5,
+      "criterios": {
+        "ctr":          {"peso": 0.35, "minimo": 8, "que_mide": "Título + miniatura generan curiosidad sin repetir las mismas palabras"},
+        "busqueda":     {"peso": 0.20, "minimo": 7, "que_mide": "Palabra clave al principio del título y en las 2 primeras líneas de la descripción"},
+        "honestidad":   {"peso": 0.25, "minimo": 9, "veto": true, "que_mide": "El video cumple lo que promete el empaque; IA y ejemplos ficticios declarados"},
+        "completitud":  {"peso": 0.20, "minimo": 8, "que_mide": "Capítulos, subtítulos, playlist, 3 títulos para A/B, enlaces"}
+      }
+    }
+  }
+}

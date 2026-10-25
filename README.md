@@ -19,4 +19,8 @@ Plan completo para crear y hacer crecer un canal de YouTube en español sobre **
 | 09 | [Plan de 90 días](youtube/09-plan-90-dias.md) | Checklist de setup y calendario concreto |
 | — | [Plantillas](youtube/plantillas/) | Planilla de seguimiento y revisiones |
 
+## Sistema de creación automatizada con agentes
+
+[`sistema/`](sistema/README.md): 13 agentes que investigan, crean el canal, idean, escriben, diseñan, producen, verifican, empaquetan y aprenden, y que se critican entre sí con rúbricas antes de avanzar. Incluye el análisis de [IATube y los nichos con mejor RPM](sistema/investigacion/2026-10-iatube-y-nichos.md).
+
 **Siguiente paso:** la semana 0 del [plan de 90 días](youtube/09-plan-90-dias.md#semana-0--setup-511-oct).

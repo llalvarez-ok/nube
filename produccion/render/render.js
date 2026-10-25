@@ -3,7 +3,8 @@
 const { chromium } = require('playwright-core');
 const fs = require('fs');
 const path = require('path');
-const CHROME = process.env.CHROME_PATH || '/opt/pw-browsers/chromium-1194/chrome-linux/chrome';
+const CHROME = [process.env.CHROME_PATH, '/opt/pw-browsers/chromium', '/opt/pw-browsers/chromium-1194/chrome-linux/chrome']
+  .find((p) => p && fs.existsSync(p));
 
 (async () => {
   const trabajos = JSON.parse(fs.readFileSync(process.argv[2], 'utf8'));

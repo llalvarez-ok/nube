@@ -9,6 +9,12 @@ Canal en español sobre IA práctica para el trabajo. Nombre real del canal: **A
 - Flujo de publicación: el usuario sube el MP4 a mano (privado), Claude completa título, descripción, miniatura, subtítulos y playlists con `herramientas/completar_video.py <video>`, y el usuario publica o programa.
 - Los guiones van en `youtube/guiones/` y las revisiones en `youtube/revisiones/AAAA-MM-DD.md`.
 
+## Sistema de agentes (desde el 25/10/2026)
+- Arquitectura y uso: `sistema/README.md`. Protocolo de debate: `sistema/protocolo-debate.md`; rúbricas: `sistema/rubricas.json`.
+- 13 agentes en `.claude/agents/` y flujos en `.claude/skills/`: `/producir-video`, `/investigar-nicho`, `/nuevo-canal`, `/piloto-automatico`.
+- Cada canal tiene `canales/<slug>/ficha.md` (fuente única para los agentes) y `aprendizajes.md` (memoria que escribe el analista).
+- Estado de cada video: `python3 herramientas/pipeline.py estado`. Ninguna etapa avanza sin pasar la rúbrica (`pipeline.py evaluar`).
+
 ## Estado
 - API conectada y verificada el 03/10/2026 (Data API y Analytics responden).
 - Rutina semanal de los lunes creada (sesión nueva en cada disparo).
