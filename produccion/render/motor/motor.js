@@ -28,6 +28,15 @@
     const h = Math.floor(seg / 3600), m = Math.floor((seg % 3600) / 60), s = seg % 60;
     return h ? `${h}:${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}` : `${m}:${String(s).padStart(2, "0")}`;
   }
+  // zócalo grande en espacio de pantalla (no le afecta el zoom de la cámara)
+  function rotulo(cam, tl, c, a, t) {
+    const r = el("div", "rotulo", `<span class="rot-num">${esc(a.numero || "")}</span><div><b>${marcar(a.texto)}</b>${a.sub ? `<small>${marcar(a.sub)}</small>` : ""}</div>`, cam);
+    if (!a.numero) r.querySelector(".rot-num").remove();
+    tl.fromTo(r, { xPercent: -110, opacity: 0 }, { xPercent: 0, opacity: 1, duration: 0.55, ease: "power4.out", immediateRender: true }, t);
+    tl.from(r.querySelectorAll("b, small, .rot-num"), { x: -30, opacity: 0, duration: 0.4, stagger: 0.07, ease: "power3.out" }, t + 0.15);
+    tl.to(r, { xPercent: -110, opacity: 0, duration: 0.45, ease: "power3.in" }, t + (a.hasta || 3.2));
+    c.sonido("whoosh_suave", t);
+  }
   const PUNTERO = '<svg viewBox="0 0 24 24"><path d="M4 2 L4 19 L8.5 15 L11.5 22 L14.5 20.7 L11.6 14 L18 14 Z" fill="#fff" stroke="#111" stroke-width="1.4" stroke-linejoin="round"/></svg>';
   const LOGO = `<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="48" fill="${ACENTO}"/><path d="M28 30 L50 50 L28 70 Z M50 30 L72 50 L50 70 Z" fill="#0b0d12"/></svg>`;
 
@@ -491,6 +500,7 @@
       cerrar_panel: (a, t) => { if (panel) { tl.to(panel, { x: 600, duration: 0.5, ease: "power3.in" }, t); c.sonido("whoosh_suave", t); } },
       quitar_refs: (a, t) => quitarRefs(t),
       mover: (a, t) => { const r = rect(a.celda); mover(r.x + r.w / 2, r.y + r.h / 2, t); },
+      rotulo: (a, t) => rotulo(cam, tl, c, a, t),
     };
 
     // acciones ordenadas por tiempo absoluto dentro de la escena
@@ -517,6 +527,7 @@
     es.beats.forEach((b) => [].concat(b.accion || [], b.acciones || []).forEach((a) => acciones.push({ a, t: b.t + (a.retraso || 0) })));
     acciones.sort((x, y) => x.t - y.t).forEach(({ a, t }) => {
       t = Math.max(0.8, t);
+      if (a.tipo === "rotulo") { rotulo(cam, tl, c, a, t); return; }
       if (a.tipo === "prompt") {
         const dp = a.duracion || Math.min(3.5, Math.max(1, a.texto.length / 22));
         tl.set(input, { text: "" }, t);
@@ -595,7 +606,8 @@
     master.fromTo("#progreso .barra", { scaleX: 0 }, { scaleX: 1, duration: dur, ease: "none" }, 0);
     G.escenas.forEach((es) => { if (es.capitulo) el("div", "marca-cap", null, document.getElementById("progreso")).style.left = (es.inicio / dur) * 100 + "%"; });
   } else document.getElementById("progreso").style.display = "none";
-  document.getElementById("marca").innerHTML = LOGO + esc((G.marca && G.marca.nombre) || "Atajos IA");
+  // la marca de agua la pone YouTube (configurar_canal.py); en el video solo si se pide, porque choca con los zooms
+  if (G.marca && G.marca.visible) document.getElementById("marca").innerHTML = LOGO + esc(G.marca.nombre || "Atajos IA");
   if (G.subtitulos) {
     const span = el("span", "", "", document.getElementById("subtitulos"));
     gsap.set(span, { opacity: 0 });

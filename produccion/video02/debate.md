@@ -151,3 +151,69 @@ Entregables: `guion.json` (motor v2, 38 escenas, 1.435 palabras de locución, ~1
 - **La plantilla generada** tiene Pedidos, Productos y Resumen, pero no las hojas Prompts ni Práctica que promete la voz: hay que agregarlas al armar el lead magnet. Además, openpyxl guarda FILTRAR/UNICOS sin los metadatos de matriz dinámica, y Excel podría abrirlas con `@` (un solo valor). Hay que probarlas en Excel para la web; si pasa, se vuelven a escribir a mano en el archivo.
 - La fila 13 de Pedidos no entra en pantalla (el motor muestra 12 filas): el relleno baja una fila más allá de lo visible. Es menor y no cambia ningún valor mostrado.
 - [N] y las 4 horas siguen sin medir (condición del creador).
+
+## Guion · ronda 1 · decisión del showrunner
+
+**Etapa:** guion · **Resultado de `pipeline.py evaluar`:** PROVISIONAL-REVISAR · **Nota:** 6,33 (umbral 8,5)
+Criterios: hook 6,0 (mín. 8) · ritmo 6,0 (mín. 8) · promesa 7,5 (mín. 8) · claridad 7,5 (mín. 8) · **veracidad 5,0 (mín. 9, veto del verificador)**.
+Lectura: la estructura, los datos y el giro funcionan. El veto viene de afirmaciones que no se pueden sostener (el plan gratuito, ChatGPT/Copilot, las 4 horas, Excel 2021, FIN.MES). Hook y ritmo fallan por dos motivos: la fórmula 1 aparece recién en 1:12 y hay tramos largos de Excel sin ningún corte visual. Todo se arregla en el guion: no hace falta volver a la idea.
+
+### Decisiones del orquestador (firmes, se aplican tal cual)
+- Rótulo de los chats: `"app": "Claude"` sin `modelo`. Ninguna frase de la voz dice que se usó el plan gratuito. Descripción: "Respuestas generadas con Claude el 25/10/2026". Si el creador corre los prompts en claude.ai gratis, se vuelve a poner el plan.
+- Frase de ChatGPT/Copilot reformulada como propone el verificador (ver obligatoria 2).
+- Fuera "unas cuatro horas, estimación mía". El hook no lleva cifras sin medir.
+- `antes_despues` permitido solo con cifras verificadas de la planilla ("10 clientes → 5", "8 vencidas → 4"). Nada de tiempos.
+
+### Contradicciones resueltas (prioridad: veracidad y políticas > promesa > retención > estilo)
+1. **Retención pide saltear el chat en 2 de cada 3 fórmulas, pero el título promete "con IA".** Gana la promesa, con un ajuste. El chat completo queda en 1, 4, 7 (el giro) y 8. Ya está fuera en 2, 3, 5, 9 y 10, y ahí no hace falta sacar más. Lo que se corrige es la duración: ningún chat dura más de 12 s, salvo el 7b (giro), que puede llegar a 20 s. Las fórmulas sin chat no pueden quedar sin rastro de IA: se abren con un `rotulo` (p. ej. "02 · Se la pedí a Claude · prompt en la hoja Prompts"). Así cada fórmula prueba que hubo IA sin repetir el patrón capítulo→chat→excel.
+2. **Retención propone "Nueve se las pedí a una IA gratis" y el orquestador quita "gratis".** Gana la veracidad. Queda: "Nueve se las pedí a una IA. La décima la escribí yo… y casi le cobro dos veces a un cliente que ya había pagado." Así se resuelve también la objeción [0:05 vs 5:28].
+3. **Retención pide recortar desvíos de la fórmula 1, el espectador pide más aclaraciones (el $, la fecha de corte, el 1 de FIN.MES, el formato de fecha, HOY()).** Ninguna se descarta, pero no van todas en la voz. Cada aclaración entra como `nota` o `rotulo` de ≤ 4 s, con voz solo si cabe en ≤ 8 palabras. Van en voz el $ ("el signo de dólar deja fija la celda") y "fecha de corte = hoy, con =HOY() en B1", porque sin eso no se entiende el giro. En nota sin voz van el separador coma/punto y coma, el formato de fecha y el 0/1 de FIN.MES.
+4. **Retención quiere 6 s de moraleja tras el giro, el espectador quiere "a veces la IA avisa sola".** Las dos cosas se pueden cumplir. El titular 29 y el 30 se funden en un beat de ≤ 12 s que diga las dos ideas y abra bucle hacia la 8 ("y en la fórmula ocho la prueba me salvó otra vez"). Es verdad: la 8 sí tiene una detección real (el SI.ERROR cuando no hay vencidas).
+5. **"La propia IA me lo advirtió" sin mostrarlo (espectador).** Se muestra en 3–4 s (respuesta real 7a de `respuestas-ia.md`, como `rotulo` o chat corto) o se saca. No se deja como afirmación sin imagen.
+6. **Verificador: "abrir la plantilla en Excel para la web antes de aprobar".** No bloquea la reescritura del guion, pero **sí bloquea la aprobación del guion**. Queda como condición del creador (ver más abajo) y el guionista no puede darla por cumplida.
+
+### Correcciones obligatorias (en este orden)
+
+**A. Veracidad (levantan el veto)**
+1. **Plan y rótulos:** todos los `chat` con `"app": "Claude"` sin `modelo`. Cambiar en la voz cada "una IA gratis" que se refiera a lo que usé yo por "una IA" o "Claude". "Gratis" solo puede ir junto a Excel para la web y la plantilla.
+2. **ChatGPT/Copilot (escena 37):** "Puedes pegar el mismo prompt en ChatGPT o Copilot. La respuesta puede cambiar, y por eso existe la prueba."
+3. **Hook sin cifras sin medir:** quitar las 4 horas y "en minutos". Primera frase de la escena 1 según la contradicción 2.
+4. **Versiones de Excel (escena 2):** "Excel para la web, que es gratis, Microsoft 365 o Excel 2024. En 2021 fallan la 3 y la 8; en 2016 y 2019, varias más." Va como `rotulo` o `lista` de ≤ 6 s (ver C).
+5. **FIN.MES (escena 17):** sacar "fallan con los meses de treinta y uno". Poner: "Sumar treinta días no te da el fin del mes siguiente: del 4 de agosto llegas al 3 de septiembre."
+6. **Chat 7b recortado:** indicarlo en pantalla, "(y 2 casos más)", y que la parte visible no cambie el sentido de la respuesta real.
+7. **`fuentes` en guion.json:** agregar entradas con URL de Microsoft Support para Excel para la web gratis, la disponibilidad de BUSCARX/FILTRAR/UNICOS/ORDENAR (2021+), TEXTODESPUES/ELEGIRCOLS (365/2024) y el separador de listas según la configuración regional. Si una URL no se puede comprobar en la sesión, se marca "pendiente" y la frase no se afirma.
+8. **Descripción (se pasa a `completar_video.py`):** "Respuestas generadas con Claude el 25/10/2026. Documentos y empresa de ejemplo ficticios. Voz sintética: la primera persona del guion es un recurso narrativo." Corregir en este debate las rutas `build/guion/` por `produccion/video02/fuente/` (lo hace el guionista en sus notas de la ronda 2).
+
+**B. Hook (meta: fórmula 1 escribiéndose antes de 0:40)**
+9. **0:00–0:04:** planilla con columnas vacías que se llenan en cascada (3 s, `rellenar` encadenados), sin plano fijo. **0:04:** `zoom` 1,8x al sello PAGADO + voz con el nombre del cliente y el cobro doble ("Esta fórmula marcaba como vencida una factura de [cliente] que ya estaba pagada"). Usar el cliente real de la fila del giro, no Ferretería El Tornillo si no corresponde: verificarlo contra la planilla. "Ojo con ese sello" va en el mismo beat que el sello, no 12 s después.
+10. **Requisitos (escena 2):** de 24 s a un `rotulo`/`lista` de ≤ 6 s. Nada del texto de requisitos se lee en voz salvo "Excel para la web, gratis" (lo demás va en pantalla y en la descripción). Escena 3 (Distribuidora Sur) ≤ 12 s. Promesa ("al final vas a poder pedir tus fórmulas y comprobarlas") antes de 0:25.
+
+**C. Ritmo y variedad visual (metas medibles, se comprueban con `motor.py --sin-voz`)**
+11. **Excel ≤ 60 % del tiempo total** (hoy está en ~55 % por escenas, pero con hook y fórmulas alargadas el riesgo es pasarse). El guionista informa el porcentaje medido en sus notas.
+12. **Un cambio visual fuerte (`capitulo`, `antes_despues`, `cifra`, `aviso`) cada 60–90 s, sin huecos de más de 90 s.** Ninguna escena `excel` dura más de 45 s seguidos: el tramo 1:30–3:05 se parte. Hay que sumar al menos dos `antes_despues` con cifras verificadas: "10 clientes → 5" (fórmulas 2 y 9) y "8 vencidas → 4" (giro, junto a la cifra 610.575). Cada fórmula se abre con un `rotulo` dentro de la hoja.
+13. **Fórmula 1 ≤ 35 s de hoja:** fusionar escenas 6 y 7. Coma/punto y coma como `nota` sin voz y PAP-201 en ≤ 4 s.
+14. **Reenganche antes del corte de 5:10:** FIN.MES como nota de 3 s. Antes del corte va la frase "Después viene la fórmula que casi le cobra dos veces a un cliente" (reemplaza o resume el titular 18, que no debe pasar de 10 s).
+15. **Legibilidad en celular:** `zoom` ≥ 1,6x antes de cada `escribir`/`calcular` y de cada `nota` con fórmula. El `zoom_fuera` solo va para mostrar resultados completos.
+16. **Cierre en un solo beat de ≤ 12 s antes de `final`:** plantilla + video recomendado. La regla de "no pegues datos reales de clientes" pasa a la escena del prompt de 3 partes (24 o 32). La escena 36 (cuándo no usar la IA) queda, pero ≤ 25 s.
+
+**D. Claridad (todas obligatorias, son cortas)**
+17. Aplicar las aclaraciones del espectador según la contradicción 3: "está entero en la hoja Prompts" (mapa ilegible), "en la misma conversación, así no lo repites", capítulo 7 → "7. SI: el estado de cada factura" (el subtítulo "la IA como revisora" puede ir en el `rotulo`), "desborda" → "ocupa las celdas de abajo: déjalas vacías". En la fórmula 2 no se narra "la copio hacia abajo". "Gratis, a cambio de tu email" solo si el lead magnet efectivamente pide email (confirmar con el creador; si no se sabe, decir solo "gratis en la descripción").
+
+### Opcionales
+- Un `antes_despues` adicional en la fórmula 3 (texto pegado → vendedor separado) si sobra tiempo dentro de los 10,5 min.
+- Un único plano de `panel_ia` dentro de la hoja para una fórmula sin chat, como variedad. Solo si el panel se puede rotular "Claude" y no "Copilot". Si no, no.
+- Duración final entre 9 y 10,5 min. Recortar es preferible a alargar.
+
+### No tocar (funciona)
+- Datos de Distribuidora Sur, las cifras verificadas (8 → 4 vencidas, 2.446.165 → 1.835.590, 610.575, Carla Ruiz 1.215.000, 5/10 clientes) y el orden de las 10 fórmulas.
+- El giro de la fórmula 7 (escribirla yo, pasarla por la prueba, la respuesta real 7b) y la secuencia `aviso` "tres clientes, cuatro facturas" + `cifra` 610.575.
+- El método mapa/meta/prueba y su `lista` (escena 24).
+- La fórmula 8 con SI.ERROR como segunda prueba real y el agrupado de las fórmulas 9 y 10.
+- La escena `comparar` "¿Cuándo no usar la IA?" (se recorta, no se saca) y el `final` al video 1.
+- Los cambios de herramientas del guionista (plantilla_xlsx.py, motor.js, estilos.css). Se aceptan: no se revierten.
+
+### Condiciones del creador (no las cumple el guionista; bloquean la publicación, no la ronda 2)
+- Abrir `produccion/video02/plantilla/Distribuidora Sur.xlsx` en Excel para la web en español y confirmar: las fórmulas 1, 3, 8 y 9; que D2 y A8 desborden sin `@`; el orden de ORDENAR con tildes; que UNICOS no distinga mayúsculas. Si falla el desborde, agregar metadatos de matriz dinámica en `plantilla_xlsx.py` o reescribir esas celdas a mano.
+- Opcional: correr en claude.ai gratis los prompts 1, 2, 4, 6, 7a, 7b y 8 de `respuestas-ia.md`. Si coinciden en sentido, se puede volver a poner el plan en el rótulo. Si la 7b no menciona "Pagado", el giro vuelve a debate.
+- Agregar las hojas Prompts y Práctica a la plantilla antes de publicarla (la voz las promete).
+- Siguen abiertas la condición de demanda y la medición de [N] de la etapa de idea.

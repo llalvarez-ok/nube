@@ -128,6 +128,57 @@ def estado_final(escena):
     return datos, escritas, esperados
 
 
+DINAMICAS = ("_xlfn._xlws.FILTER", "_xlfn._xlws.SORT", "_xlfn.UNIQUE", "_xlfn.SORTBY", "_xlfn.SEQUENCE", "_xlfn.CHOOSECOLS",
+             "_xlfn.CHOOSEROWS", "_xlfn.TEXTSPLIT", "_xlfn.VSTACK", "_xlfn.HSTACK")
+METADATA = ('<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<metadata xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" '
+            'xmlns:xda="http://schemas.microsoft.com/office/spreadsheetml/2017/dynamicarray"><metadataTypes count="1"><metadataType name="XLDAPR" '
+            'minSupportedVersion="120000" copy="1" pasteAll="1" pasteValues="1" merge="1" splitFirst="1" rowColShift="1" clearFormats="1" '
+            'clearComments="1" assign="1" coerce="1" cellMeta="1"/></metadataTypes><futureMetadata name="XLDAPR" count="1"><bk><extLst>'
+            '<ext uri="{bdbb8cdc-fa1e-496e-a857-3c3f30c029c3}"><xda:dynamicArrayProperties fDynamic="1" fCollapsed="0"/></ext></extLst></bk>'
+            '</futureMetadata><cellMetadata count="1"><bk><rc t="1" v="0"/></bk></cellMetadata></metadata>')
+
+
+def marcar_matrices_dinamicas(ruta):
+    """openpyxl guarda FILTRAR/UNICOS como fórmulas comunes y Excel 365 las abre con @ (un solo valor, sin desbordar).
+    Se reescribe el .xlsx: esas celdas pasan a fórmula de matriz dinámica (cm="1" + xl/metadata.xml), como las guarda Excel."""
+    import zipfile
+    tmp = ruta + ".tmp"
+    hay = False
+    with zipfile.ZipFile(ruta) as zin, zipfile.ZipFile(tmp, "w", zipfile.ZIP_DEFLATED) as zout:
+        for item in zin.infolist():
+            datos = zin.read(item.filename)
+            if item.filename.startswith("xl/worksheets/sheet") and item.filename.endswith(".xml"):
+                xml = datos.decode("utf-8")
+
+                def celda(m):
+                    nonlocal hay
+                    attrs, ref, formula = m.group(1), m.group(2), m.group(3)
+                    if not any(f in formula for f in DINAMICAS) or "cm=" in attrs:
+                        return m.group(0)
+                    hay = True
+                    return f'<c{attrs} cm="1"><f t="array" ref="{ref}">{formula}</f>'
+                xml = re.sub(r'<c( r="([A-Z]+\d+)"[^>]*)><f>([^<]*)</f>', celda, xml)
+                datos = xml.encode("utf-8")
+            zout.writestr(item, datos)
+        if hay:
+            zout.writestr("xl/metadata.xml", METADATA)
+    os.replace(tmp, ruta)
+    if not hay:
+        return
+    with zipfile.ZipFile(ruta) as zin:
+        partes = {i.filename: zin.read(i.filename) for i in zin.infolist()}
+    tipos = partes["[Content_Types].xml"].decode()
+    if "metadata.xml" not in tipos:
+        tipos = tipos.replace("</Types>", '<Override PartName="/xl/metadata.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheetMetadata+xml"/></Types>')
+    rels = partes["xl/_rels/workbook.xml.rels"].decode()
+    if "sheetMetadata" not in rels:
+        rels = rels.replace("</Relationships>", '<Relationship Id="rIdMeta1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/sheetMetadata" Target="metadata.xml"/></Relationships>')
+    partes["[Content_Types].xml"], partes["xl/_rels/workbook.xml.rels"] = tipos.encode(), rels.encode()
+    with zipfile.ZipFile(ruta, "w", zipfile.ZIP_DEFLATED) as zout:
+        for nombre, datos in partes.items():
+            zout.writestr(nombre, datos)
+
+
 def main():
     args = [a for a in sys.argv[1:] if not a.startswith("--")]
     if not args:
@@ -182,6 +233,7 @@ def main():
     os.makedirs(destino, exist_ok=True)
     ruta = os.path.join(destino, archivo)
     wb.save(ruta)
+    marcar_matrices_dinamicas(ruta)
     print(f"✔ {os.path.relpath(ruta, RAIZ)} · hojas: {', '.join(hojas)}")
 
     if "--verificar" in sys.argv:

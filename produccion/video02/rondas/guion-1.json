@@ -1,0 +1,64 @@
+{
+ "evaluaciones": [
+  {
+   "agente": "critico-retencion",
+   "puntajes": {
+    "hook": 6,
+    "ritmo": 6,
+    "promesa": 7,
+    "claridad": 8
+   },
+   "objeciones": [
+    "[0:00-0:54] Hook de 30 s con plano fijo de la planilla terminada; 'se completa sola' no se ve; 'Ojo con ese sello' llega 12 s después del sello; 24 s de 'Lo que necesitas'; fórmula 1 recién en 1:12 → abrir con planilla vacía + rellenar en cascada de 3 s, zoom 1,8x al sello PAGADO en 0:04 con el cobro doble, sacar 'estimación mía', requisitos como rótulo de 5 s; fórmula 1 antes de 0:40.",
+    "[0:05 vs 5:28] 'Diez fórmulas que le pedí a una IA' vs la 7 escrita a mano → 'Nueve se las pedí a una IA gratis. La décima la escribí yo, y casi le cobro dos veces a un cliente que ya había pagado.'",
+    "[1:30-3:05] 95 s seguidos de Excel; Excel 55 % del video; patrón capítulo→chat→excel repetido 10 veces → antes/después o cifra por fórmula ('10 clientes → 5'); fusionar escenas 6 y 7; en 2 de cada 3 fórmulas saltear el chat y mostrar la respuesta como nota.",
+    "[1:12-2:12] Fórmula 1 dura 60 s con 3 desvíos → coma/punto y coma como nota sin voz, PAP-201 en 4 s; meta 35 s.",
+    "[6:35-7:02] 27 s de moraleja sin bucle nuevo → un beat de 6 s y abrir bucle: 'en la fórmula diez la prueba me salvó otra vez'.",
+    "[vista completa] Letra chica en celular → zoom 1,6-1,8x por defecto en cada calcular y nota; hook ya acercado.",
+    "[8:24-9:12] Cierre repartido en 3 escenas → un beat de 10 s con plantilla + video recomendado; la regla de datos reales va a la escena del prompt de 3 partes.",
+    "[4:51-5:15] Explicación densa antes del corte de anuncios → nota de 3 s para FIN.MES y reenganche antes del corte: 'después viene la fórmula que casi le cobra dos veces a un cliente'."
+   ]
+  },
+  {
+   "agente": "verificador",
+   "puntajes": {
+    "veracidad": 5
+   },
+   "objeciones": [
+    "Rótulo 'Claude · versión gratuita' falso: las respuestas no salieron de claude.ai gratis → (a) el creador corre los prompts 1, 2, 4, 6, 7a, 7b y 8 en claude.ai gratis, o (b) rótulo 'Claude' sin plan y la voz no afirma el plan gratuito. Si la 7b real no menciona 'Pagado', vuelve a debate.",
+    "'Funciona en ChatGPT o Copilot gratis' no se probó → reformular: 'puedes pegar el mismo prompt en ChatGPT o Copilot; la respuesta puede cambiar, por eso existe la Prueba'.",
+    "Falta Excel 2021: tiene BUSCARX/FILTRAR/ORDENAR/UNICOS pero no TEXTODESPUES ni ELEGIRCOLS (llegaron en 2024) → 'Excel para la web, Microsoft 365 o Excel 2024; en 2021 fallan la 3 y la 8'.",
+    "Faltan fuentes: Excel para la web gratis, funciones ausentes en 2016/2019, TEXTODESPUES de 2022, separador en México.",
+    "'Unas cuatro horas, estimación mía' → quitar o medir.",
+    "FIN.MES: 'fallan con los meses de 31' es razonamiento falso → 'Sumar treinta días no te da el fin del mes siguiente: del 4 de agosto llegas al 3 de septiembre'.",
+    "--verificar: 72 diferencias por LibreOffice 24.2; equivalencias válidas para BUSCARX y TEXTODESPUES; los desbordes FILTRAR/UNICOS se validaron con un cálculo independiente, no ejecutando la fórmula → abrir la plantilla en Excel para la web antes de aprobar.",
+    "Plantilla: D2 y A8 guardadas sin metadatos de matriz dinámica → riesgo de @ y sin desborde en Excel 365; comprobar o agregar metadatos en plantilla_xlsx.py.",
+    "Chat 7b recortado sin indicarlo → agregar '(y 2 casos más)'.",
+    "Primera persona inventada con voz sintética → declararlo en la descripción.",
+    "debate.md cita rutas build/guion/ → ahora en produccion/video02/fuente/."
+   ]
+  },
+  {
+   "agente": "espectador",
+   "puntajes": {
+    "claridad": 7,
+    "promesa": 8
+   },
+   "objeciones": [
+    "Sello PAGADO: decir el nombre del cliente.",
+    "Mapa del chat 3,5 s ilegible → decir 'está entero en la hoja Prompts'.",
+    "'En la misma conversación, así no lo repites'.",
+    "Explicar 'fecha de corte' la primera vez.",
+    "FIN.MES: qué significa el 1 (y el 0).",
+    "Formato de fecha: 'Inicio, Formato de número, Fecha corta'.",
+    "Decir en voz alta para qué sirve el $.",
+    "Capítulo 7: 'SI: el estado de cada factura'.",
+    "'Desborda' es jerga → 'ocupa las celdas de abajo; déjalas vacías'.",
+    "Una línea sobre =HOY() en B1.",
+    "'La propia IA me lo advirtió' sin mostrarlo → mostrar o sacar.",
+    "No narrar 'la copio hacia abajo' después de la fórmula 2.",
+    "'Gratis, a cambio de tu email' si es así."
+   ]
+  }
+ ]
+}
