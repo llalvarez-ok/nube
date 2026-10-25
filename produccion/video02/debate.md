@@ -138,7 +138,7 @@ Entregables: `guion.json` (motor v2, 38 escenas, 1.435 palabras de locución, ~1
 
 ### Exactitud y verificación
 - `python3 herramientas/plantilla_xlsx.py video02 --verificar` **sigue marcando 72 diferencias, todas por la versión de LibreOffice del entorno (24.2.7)**, que no tiene BUSCARX, TEXTODESPUES, FILTRAR, ORDENAR, UNICOS ni ELEGIRCOLS (llegan en 24.8/25.x). Da `#NAME?` en H y E, y eso arrastra I, J, las ventas del Resumen y los desbordes. No pude instalar una versión nueva: el proxy bloqueó la descarga (403).
-- **Cómo lo comprobé:** `produccion/video02/build/guion/verificar_lo242.py` usa la misma reconstrucción y comparación que `--verificar`, pero en una copia de la plantilla cambia BUSCARX por SI.ERROR(INDICE(COINCIDIR)), TEXTODESPUES por EXTRAE(HALLAR) y los desbordes de FILTRAR/ORDENAR y UNICOS/ORDENAR por fórmulas clásicas (K.ESIMO.MAYOR, SUMAPRODUCTO, MMULT) calculadas sobre los mismos datos. Resultado: **109/109 valores del video coinciden.** Chequeos extra con LibreOffice: 5 clientes distintos con nombres limpios y **10 con los nombres sucios** (CONTAR.SI, que no distingue mayúsculas y sí espacios, como UNICOS); con la fórmula escrita a mano, **8 vencidas y 2.446.165**; corregida, **4 y 1.835.590** (diferencia 610.575). Además, el generador del guion (`build/guion/armar_guion.py`) calcula todos los valores en Python desde los datos crudos, de forma independiente.
+- **Cómo lo comprobé:** `produccion/video02/fuente/verificar_lo242.py` usa la misma reconstrucción y comparación que `--verificar`, pero en una copia de la plantilla cambia BUSCARX por SI.ERROR(INDICE(COINCIDIR)), TEXTODESPUES por EXTRAE(HALLAR) y los desbordes de FILTRAR/ORDENAR y UNICOS/ORDENAR por fórmulas clásicas (K.ESIMO.MAYOR, SUMAPRODUCTO, MMULT) calculadas sobre los mismos datos. Resultado: **109/109 valores del video coinciden.** Chequeos extra con LibreOffice: 5 clientes distintos con nombres limpios y **10 con los nombres sucios** (CONTAR.SI, que no distingue mayúsculas y sí espacios, como UNICOS); con la fórmula escrita a mano, **8 vencidas y 2.446.165**; corregida, **4 y 1.835.590** (diferencia 610.575). Además, el generador del guion (`produccion/video02/fuente/armar_guion.py`) calcula todos los valores en Python desde los datos crudos, de forma independiente.
 - **Pendiente para el verificador:** confirmar en Excel para la web en español las fórmulas 1, 3, 8 y 9, el orden de ORDENAR con tildes y que UNICOS no distinga "KIOSCO" de "kiosco".
 
 ### Cambios en herramientas (necesarios para este video; revisar si el coordinador los acepta)
@@ -217,3 +217,62 @@ Lectura: la estructura, los datos y el giro funcionan. El veto viene de afirmaci
 - Opcional: correr en claude.ai gratis los prompts 1, 2, 4, 6, 7a, 7b y 8 de `respuestas-ia.md`. Si coinciden en sentido, se puede volver a poner el plan en el rótulo. Si la 7b no menciona "Pagado", el giro vuelve a debate.
 - Agregar las hojas Prompts y Práctica a la plantilla antes de publicarla (la voz las promete).
 - Siguen abiertas la condición de demanda y la medición de [N] de la etapa de idea.
+
+## Respuesta del guionista a la ronda 1
+
+Archivos: `produccion/video02/guion.json` (34 escenas, 1.082 palabras), el generador `produccion/video02/fuente/armar_guion.py`, la verificación `produccion/video02/fuente/verificar_lo242.py` y la medición de metas `produccion/video02/fuente/metas.py`. Las rutas `build/guion/` de mis notas de la ronda 1 ya apuntan a `produccion/video02/fuente/`.
+
+### Metas medibles (tiempos estimados por el motor sin voz, `fuente/metas.py`)
+
+| Meta | Resultado | ¿Cumple? |
+|---|---|---|
+| Fórmula 1 en pantalla antes de 0:40 | 0:38 (respuesta del chat con BUSCARX); el prompt empieza en 0:31 | Sí |
+| Excel ≤ 60 % del tiempo | 59 % | Sí, justo |
+| Ninguna escena excel de más de 45 s seguidos | La más larga dura 34 s (fórmula 8) | Sí |
+| Cambio visual fuerte cada 60–90 s | El mayor hueco entre `capitulo`/`antes_despues`/`cifra`/`aviso` es de 70 s | Sí |
+| Zoom ≥ 1,6x en cada `calcular` y `nota` | 0 casos por debajo (el hook va a 1,8x en el sello) | Sí |
+| Cierre ≤ 12 s | 11 s (un beat: plantilla + video del PDF), después la pantalla final | Sí |
+| Chats ≤ 12 s (7b ≤ 20 s) | 9,5 / 10,2 / 11,4 / 11,9 s; 7b, 12,7 s | Sí |
+| `puntuar_guion.py` ≥ 85 | 100/100 | Sí |
+| `verificar_lo242.py` sin diferencias | 109/109 valores coinciden | Sí |
+| Duración 9–10,5 min (opcional) | 8:19 estimada sin voz; con `voz_tts` debería quedar en unos 8:40 | No: lo que limita es la meta de Excel (59 %). El brief prefiere recortar a alargar |
+
+### Correcciones obligatorias
+1. **Plan y rótulos: aceptada.** Todos los chats llevan `"app": "Claude"` sin `modelo`. Ninguna frase de la voz dice que la IA es gratis. "Gratis" solo va con Excel para la web y la plantilla. `respuestas-ia.md` está actualizado.
+2. **ChatGPT/Copilot: aceptada** con el texto del verificador ("Puedes pegar el mismo prompt en ChatGPT o Copilot. La respuesta puede cambiar, y por eso existe la prueba."), como cuarta fila de `comparar`.
+3. **Hook sin cifras sin medir: aceptada.** Ya no están las 4 horas ni "en minutos". Queda: "Esta planilla se completa sola, con diez fórmulas. Nueve se las pedí a una IA. / La décima la escribí yo. Ojo con ese sello: marcaba vencida una factura de Ferretería El Tornillo que ya estaba pagada."
+4. **Versiones de Excel: aceptada con una salvedad.** Va como `rotulo` de 5,5 s, sin voz salvo "Excel para la web, que es gratis". **Excel 2024 no aparece:** confirmé con Microsoft que TEXTODESPUES se aplica a 2024, pero no pude confirmar ELEGIRCOLS en 2024 (support.microsoft.com no resuelve desde la sesión; solo vi el texto en resultados de búsqueda). Por la regla de la obligatoria 7, no lo afirmo. El rótulo dice: "o Microsoft 365 · en Excel 2021 fallan la 3 y la 8 · en 2016/2019, varias más · empresa y datos ficticios".
+5. **FIN.MES: aceptada** con el texto del verificador ("del 4 de agosto llegas al 3 de septiembre").
+6. **Chat 7b recortado: aceptada.** Dice "(y 2 casos más)". En la 8 también.
+7. **`fuentes`: aceptada.** BUSCARX (2021+, no 2016/2019) y TEXTODESPUES (365 y 2024), con URL de Microsoft Support. Excel para la web gratis, con la página de Microsoft de plantillas gratuitas para Excel para la web. ELEGIRCOLS en 2024 y el separador de listas quedan **"pendiente"**, y la voz no los afirma: la nota dice "¿Tu Excel usa coma? Dilo en el mapa". También saqué "una función de 2022", que no tenía fuente en pantalla.
+8. **Descripción: aceptada.** El texto va en `guion.json` → `descripcion_avisos` para `completar_video.py`.
+9. **Hook visual: aceptada.** De 0:00 a 0:04, las columnas Precio, Neto, Vence y Estado de Pedidos se llenan en cascada (cuatro `rellenar`). En el segundo beat (~0:05), `zoom` 1,8x al sello PAGADO sobre L2:M2, con el nombre del cliente en la voz. **Fila del sello comprobada (punto 5 del coordinador):** es la fila 2, Ferretería El Tornillo, vence 30/09/2026, Pagado "Sí", y la fórmula escrita a mano la marca "Vencido". El generador lo controla con un `assert`. "Ojo con ese sello" está en el mismo beat que el sello.
+10. **Requisitos y promesa: aceptada.** Saqué las escenas "Lo que necesitas" y "Distribuidora Sur": los requisitos van en el rótulo del hook y la suciedad de los datos se muestra en las fórmulas 2 y 3. La promesa ("Al final vas a poder pedir tus fórmulas y comprobarlas antes de confiar en ellas") empieza en ~0:22.
+11. **Excel ≤ 60 %: aceptada.** 59 % medido.
+12. **Variedad: aceptada.** Ninguna escena excel pasa de 34 s. Sumé dos `antes_despues` con cifras verificadas: "10 → 5 clientes" después de la fórmula 2 y "8 → 4 vencidas · 1.835.590" en el giro, junto a la cifra 610.575. Para eso agregué a `antes_despues` la opción `valor` + `sufijo` (cifra en vez de reloj; documentada en `sistema/motor-v2.md`). Cada fórmula se abre con un `rotulo` ("02 · Se la pedí a Claude · el prompt está en la hoja Prompts", etc.). Las fórmulas 1, 3 y 5 llevan el capítulo como campo de escena, sin pantalla de capítulo aparte.
+13. **Fórmula 1 ≤ 35 s de hoja: aceptada.** Uní el chat con Productos y Pedidos, y Productos pasó a la plantilla. La hoja de la fórmula 1 dura 27 s. Coma/punto y coma va como nota sin voz y PAP-201 en ~4 s.
+14. **Reenganche antes del corte: aceptada.** FIN.MES se explica con notas de 3 s (el 1/0 y el formato de fecha, sin voz). El titular previo al corte dura 8 s: "Después viene la fórmula que casi le cobra dos veces a un cliente. Si te está sirviendo, suscríbete."
+15. **Zoom: aceptada** (ver la tabla).
+16. **Cierre: aceptada.** Un beat de 11 s (plantilla + video del PDF). La regla de los datos reales pasó a la lista del prompt de 3 partes. `comparar` dura 23 s y va precedido de un `aviso` de 3 s ("Antes de cerrar: cuándo no usar la IA"), que también corta el último tramo largo.
+17. **Claridad: aceptada.** Ahora se dice: "está entero en la hoja Prompts", "en la misma conversación, así no repito el mapa", el capítulo 7 se llama "SI: el estado de cada factura" (con "La IA como revisora" en el rótulo) y "ocupa las celdas de abajo: déjalas vacías". En la fórmula 2 no se narra la copia hacia abajo. En la voz van el $ ("deja fija la celda del mes al copiar") y "En tu planilla, pon =HOY() en B1; aquí la dejo fija". **Corrijo la contradicción 3:** el orquestador proponía "fecha de corte = hoy, con =HOY() en B1", pero la plantilla tiene B1 fijo (04/11/2026), porque si no los números del video no coincidirían. Por eso la voz dice "en tu planilla, pon igual a hoy" y el Léeme de la plantilla lo explica. "A cambio de tu email" no aparece: solo "gratis en la descripción".
+- **Contradicción 5 ("la propia IA me lo advirtió"): aceptada.** Se muestra durante 4 s como `rotulo` con la cita real de la respuesta 2: "Claude: «las siglas también cambian: SRL queda Srl»".
+- **Contradicción 4: aceptada.** La moraleja es un solo beat de 9 s que abre bucle hacia la 8 ("y en la fórmula ocho me salvó otra vez").
+
+### Punto 4 del coordinador: hojas Prompts y Práctica
+Elegí la opción del bloque `plantilla_extra` en `guion.json`, que lee `herramientas/plantilla_xlsx.py`. Hacerlo en el generador después de la herramienta obligaba a reabrir el .xlsx con openpyxl, y eso borra los metadatos de matriz dinámica de FILTRAR y UNICOS. Formato: `{"hojas": [{"nombre", "celdas", "anchos", "formulas": false}], "leeme": "..."}`. Con `"formulas": false`, las celdas que empiezan con "=" se guardan como texto. Además agregué `datos.celdas_plantilla` (datos completos de la hoja que no se ven en pantalla): sin la escena de la planilla sucia, las columnas crudas de Pedidos solo existían ocultas. La plantilla queda con las hojas Léeme, Pedidos, Resumen, Productos, Prompts y Práctica:
+- **Prompts:** los 11 prompts textuales de `respuestas-ia.md` (el generador los lee de ahí), con la fórmula que dio Claude y la columna "Qué revisar".
+- **Práctica:** Pedidos con los datos sucios y sin fórmulas, incluido el PAP-201.
+- **Léeme:** versiones de Excel (sin afirmar 2024), fecha de corte fija con =HOY() para uso real, y "Respuestas generadas con Claude el 25/10/2026".
+
+### Capturas revisadas (≈ 40, `motor.py --sin-voz --cuadros`)
+Las corregí después de revisarlas:
+- El zoom a PAP-201 mostraba fondo negro bajo la hoja.
+- La fórmula del chat 7b tocaba la caja de texto.
+
+Lo demás está bien en pantalla: el sello PAGADO a 1,8x, los rótulos, los dos `antes_despues` con cifras, las notas a 1,6x, el gráfico final y la pantalla final.
+
+### Pendientes (no los puede cerrar el guionista)
+- Condiciones del creador: abrir la plantilla en Excel para la web (desbordes D2 y A8, ORDENAR con tildes, UNICOS y mayúsculas, fórmulas 1, 3, 8 y 9) y, si quiere el rótulo con el plan, correr los prompts en claude.ai gratis.
+- `plantilla_xlsx.py` guarda las matrices dinámicas con `ref` de una sola celda (`D2`, `A8`). Excel suele guardar el rango desbordado; hay que confirmarlo al abrir el archivo.
+- Confirmar ELEGIRCOLS en Excel 2024 y conseguir una URL oficial del separador de listas, si se quiere decir en el video.
+- La duración queda por debajo de 9 min (ver la tabla). Si el showrunner prefiere 9 min o más, hay que relajar la meta de Excel o agregar escenas que no sean de Excel.

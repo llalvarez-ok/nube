@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""Arma produccion/video02/guion.json. Los valores de la planilla se calculan aquí, de forma independiente."""
+"""Arma produccion/video02/guion.json (ronda 2). Los valores de la planilla se calculan aquí, de forma independiente.
+
+    python3 produccion/video02/fuente/armar_guion.py && python3 herramientas/plantilla_xlsx.py video02
+"""
 import json
 from datetime import date, timedelta
 import calendar
@@ -155,252 +158,246 @@ def b(voz, accion=None, tts=None, **kw):
     return x
 
 
-# ---------------------------------------------------------------- HOOK
-esc("excel", {"archivo": ARCH, "hoja": "Resumen", "anchos": RES_ANCHOS, "solo_video": True, "seleccion_inicial": "B1",
-              "celdas": resumen(OCT, True, True, True, "01/10/2026")}, [
-    b("Esta planilla se completa sola: precios, vencimientos, cobranza y el resumen del lunes.",
-      [dict(GRAF, x=1222, y=262, ancho=310, retraso=0), {"tipo": "resaltar", "rango": "B9", "color": "#ffd400", "etiqueta": "PAGADO", "retraso": 1.4}]),
-    b("Diez fórmulas que le pedí a una IA gratis, en minutos. A mano me llevaban unas cuatro horas; es una estimación mía.",
-      {"tipo": "resaltar", "rango": "D2:F5", "color": "#107c41", "hasta": 3.5},
-      tts="Diez fórmulas que le pedí a una IA gratis, en minutos. A mano me llevaban unas cuatro horas; es una estimación mía."),
-    b("Ojo con ese sello: una fórmula casi le cobra dos veces a un cliente que ya había pagado. Te muestro cuál, y cómo la atrapé.",
-      {"tipo": "zoom", "rango": "A7:B12", "escala": 1.5}),
-    b("Uso un prompt de tres partes. Casi nadie usa la tercera, y es la que encontró el error.",
-      {"tipo": "zoom_fuera"}),
+
+
+# ================================================================ RONDA 2
+CLAUDE = {"app": "Claude"}  # sin "modelo": las respuestas no salieron de claude.ai gratis (decisión del orquestador)
+Z = 1.65  # zoom mínimo antes de escribir, calcular o mostrar una nota
+NAIVE = "=SI(K2<Resumen!$B$1;\"Vencido\";\"Al día\")"
+GOOD = "=SI(L2=\"Sí\";\"Cobrado\";SI(K2<Resumen!$B$1;\"Vencido\";\"Al día\"))"
+PEDIDOS_COMPLETOS = pedidos(set(), filas_cod)  # datos crudos de Pedidos para la plantilla (columnas ocultas en pantalla)
+
+# ---------------------------------------------------------------- HOOK (solo video)
+VIS_H = {"C": 330, "H": 140, "J": 170, "K": 180, "L": 120, "M": 180}
+assert filas[0]["L"] == "Sí" and filas[0]["M0"] == "Vencido" and filas[0]["C"] == "Ferretería El Tornillo"  # fila del sello PAGADO
+esc("excel", {"archivo": ARCH, "hoja": "Pedidos", "solo_video": True, "anchos": anchos(VIS_H), "seleccion_inicial": "H2",
+              "celdas": ocultar(pedidos({"C"}), VIS_H)}, [
+    b("Esta planilla se completa sola, con diez fórmulas. Nueve se las pedí a una IA.",
+      [{"tipo": "rellenar", "rango": "H2:H13", "valores": col("H", "H", n), "duracion": 0.45, "retraso": 0},
+       {"tipo": "rellenar", "rango": "J2:J13", "valores": col("J", "J", n), "duracion": 0.45, "retraso": 0.75},
+       {"tipo": "rellenar", "rango": "K2:K13", "valores": [f(r["K"]) for r in filas], "duracion": 0.45, "retraso": 1.5},
+       {"tipo": "rellenar", "rango": "M2:M13", "valores": [r["M0"] for r in filas], "duracion": 0.45, "retraso": 2.25}]),
+    b("La décima la escribí yo. Ojo con ese sello: marcaba vencida una factura de Ferretería El Tornillo que ya estaba pagada.",
+      [{"tipo": "zoom", "rango": "K1:M3", "escala": 1.8, "duracion": 0.9},
+       {"tipo": "formato", "celdas": {"M2": "#ffd6d6"}, "retraso": 0.6},
+       {"tipo": "resaltar", "rango": "L2:M2", "color": "#ffd400", "etiqueta": "PAGADO", "retraso": 0.8}]),
+    b("Casi le cobro dos veces. La atrapé con la tercera parte de un prompt que casi nadie usa.",
+      {"tipo": "zoom", "rango": "C1:M7", "escala": 1.2}),
+    b("Al final vas a poder pedir tus fórmulas y comprobarlas antes de confiar en ellas. Solo necesitas Excel para la web, que es gratis.",
+      [{"tipo": "zoom_fuera"},
+       {"tipo": "rotulo", "texto": "Excel para la web · *gratis*", "sub": "o Microsoft 365 · en Excel 2021 fallan la 3 y la 8 · en 2016/2019, varias más · empresa y datos ficticios",
+        "hasta": 5.5, "retraso": 2.2}]),
 ], transicion="corte", entrada=0.1)
 
-esc("lista", {"titulo": "Lo que necesitas", "items": [
-    {"texto": "Excel para la web *gratis*", "detalle": "o Microsoft 365 · no sirve Excel 2016 ni 2019", "icono": "sheet"},
-    {"texto": "Una IA gratis", "detalle": "uso Claude · el mismo prompt va en ChatGPT o Copilot", "icono": "sparkles"},
-    {"texto": "Datos *ficticios*", "detalle": "la distribuidora es inventada", "icono": "file-spreadsheet"}]}, [
-    b("Lo que necesitas: Excel para la web, que es gratis, o Microsoft 365. Varias de estas fórmulas no existen en Excel 2016 ni 2019."),
-    b("Una IA gratis. Yo uso Claude; el mismo prompt funciona en ChatGPT o en Copilot gratis."),
-    b("Y la empresa es inventada: los datos son ficticios. Al final vas a poder pedir tus fórmulas y comprobarlas antes de confiar en ellas."),
-])
-
-# ---------------------------------------------------------------- PLANILLA SUCIA
-esc("excel", {"archivo": ARCH, "hoja": "Pedidos", "seleccion_inicial": "A1",
-              "anchos": [175, 340, 250, 230, 190, 140, 100, 120, 100, 140, 150, 100, 130],
-              "celdas": pedidos(set(), filas_cod)}, [
-    b("Esta es Distribuidora Sur. Así exporta su sistema los pedidos: nombres con espacios y mayúsculas mezcladas.",
-      {"tipo": "resaltar", "rango": "B2:B13", "color": "#e5484d", "etiqueta": "nombres sucios", "retraso": 0.3}),
-    b("El vendedor viene pegado a su código. Y las columnas vacías las va a llenar cada fórmula, una detrás de otra: cada una usa el resultado de la anterior.",
-      [{"tipo": "resaltar", "rango": "D2:D13", "color": "#e5484d", "retraso": 0.1}, {"tipo": "seleccionar", "rango": "C2:C13", "retraso": 1.6}]),
-])
-
 # ---------------------------------------------------------------- F1 BUSCARX
-esc("capitulo", {"numero": 1, "total": 10, "titulo": "BUSCARX: el precio del catálogo"},
-    [b("Fórmula uno: traer el precio de cada pedido.")], capitulo="1. BUSCARX: traer precios del catálogo")
-
 M1 = ("Excel para la web en español, separador punto y coma. Hoja Pedidos, filas 2 a 13: A Fecha, B Cliente, C Cliente limpio, "
       "D Vendedor, E Vendedor limpio, F Código, G Cantidad, H Precio, I Descuento, J Neto, K Vence, L Pagado (Sí/No), M Estado. "
       "Catálogo en la hoja Productos: A Código, C Precio. Fecha de corte en Resumen!B1. "
       "En H2 quiero el precio de cada código; si no existe, que diga \"Código no existe\". Una fórmula para copiar hacia abajo.")
-esc("chat", {"app": "Claude", "modelo": "versión gratuita"}, [
-    b("Primero, el mapa: qué hay en cada columna, y que mi Excel está en español con punto y coma. Después, la meta, en palabras.",
-      {"tipo": "prompt", "texto": M1, "duracion": 3.5}),
-    b("Y la respuesta: una fórmula, buscar equis, lista para pegar. Hasta aquí, dos partes del método.",
+esc("chat", CLAUDE, [
+    b("Fórmula uno: el precio. Le paso el mapa, entero en la hoja Prompts, y la meta.",
+      [{"tipo": "rotulo", "numero": "01", "texto": "BUSCARX", "sub": "traer el precio del catálogo", "hasta": 3.0},
+       {"tipo": "prompt", "texto": M1, "duracion": 3.0, "retraso": 0.3}]),
+    b("Y me da buscar equis.",
       {"tipo": "respuesta", "texto": "Escribe esto en H2 y cópialo hasta H13. El último argumento es lo que muestra si no encuentra el código, así que no verás #N/A:",
-       "formula": "=BUSCARX(F2;Productos!A:A;Productos!C:C;\"Código no existe\")"},
-      tts="Y la respuesta: una fórmula, buscar equis, lista para pegar. Hasta aquí, dos partes del método."),
-])
+       "formula": "=BUSCARX(F2;Productos!A:A;Productos!C:C;\"Código no existe\")", "duracion": 1.6},
+      tts="Y me da buscar equis."),
+], capitulo="1. BUSCARX: traer precios del catálogo")
 
-esc("excel", {"archivo": ARCH, "hoja": "Productos", "anchos": [190, 320, 170], "seleccion_inicial": "A1",
-              "celdas": [["Código", "Producto", "Precio"]] + [[c, p, n(v)] for c, p, v in PRODUCTOS]}, [
-    b("El catálogo vive en otra hoja: el código en la columna A y el precio en la C. Por eso el mapa lo dice.",
-      [{"tipo": "resaltar", "rango": "A2:A8", "color": "#3b6fd8", "etiqueta": "busca aquí", "retraso": 0.2},
-       {"tipo": "resaltar", "rango": "C2:C8", "color": "#107c41", "etiqueta": "devuelve esto", "retraso": 1.6}]),
-])
-
-VIS_V1 = {"B": 330, "F": 170, "G": 120, "H": 300}
-V1 = anchos(VIS_V1)
-esc("excel", {"archivo": ARCH, "hoja": "Pedidos", "anchos": V1, "seleccion_inicial": "H2", "celdas": ocultar(pedidos(set(), filas_cod), VIS_V1)}, [
-    b("Buscar equis es la versión nueva de buscar uve: no se rompe si agregas columnas.",
-      {"tipo": "zoom", "rango": "F1:H4", "escala": 1.5}, tts="Buscar equis es la versión nueva de buscar uve: no se rompe si agregas columnas."),
-    b("La pego en la primera fila.",
-      {"tipo": "escribir", "celda": "H2", "texto": "=BUSCARX(F2;Productos!A:A;Productos!C:C;\"Código no existe\")", "duracion": 2.6}),
-    b("Dos mil cuatrocientos: el precio del cloro.", {"tipo": "calcular", "celda": "H2", "valor": "2.400"}),
-    b("¿Tu Excel usa coma en vez de punto y coma? Mira cualquier fórmula que ya tengas. En México suele ser coma: dilo en el mapa.",
-      [{"tipo": "mover", "celda": "B4"}, {"tipo": "nota", "celda": "H2", "texto": "¿*;* o *,*? Mira una fórmula que ya tengas", "retraso": 0.4}]),
-    b("Ahora la arrastro hacia abajo.",
-      [{"tipo": "quitar_nota"}, {"tipo": "zoom_fuera", "duracion": 0.8},
-       {"tipo": "rellenar", "rango": "H2:H13", "valores": [("Código no existe" if r["F"] == "PAP-201" else n(r["H"])) for r in filas_cod], "retraso": 0.6}]),
-    b("Pero fíjate en la fila doce. No es un error, es un aviso: el código PAP-201 no existe.",
-      [{"tipo": "resaltar", "rango": "F12:H12", "color": "#e5484d", "etiqueta": "aviso, no error"}],
-      tts="Pero fíjate en la fila doce. No es un error, es un aviso: el código pe, a, pe, dos, cero, uno, no existe."),
-    b("Era PAP-210. Lo corrijo, y el precio aparece solo.",
-      [{"tipo": "escribir", "celda": "F12", "texto": "PAP-210", "duracion": 1.0}, {"tipo": "calcular", "celda": "H12", "valor": "6.200", "retraso": 2.2}],
-      tts="Era pe, a, pe, dos, uno, cero. Lo corrijo, y el precio aparece solo."),
+VIS_V1 = {"B": 340, "F": 170, "G": 120, "H": 300}
+esc("excel", {"archivo": ARCH, "hoja": "Pedidos", "anchos": anchos(VIS_V1), "seleccion_inicial": "H2",
+              "celdas": ocultar(pedidos(set(), filas_cod), VIS_V1), "celdas_plantilla": PEDIDOS_COMPLETOS}, [
+    b("Buscar equis es la versión nueva de buscar uve. La pego en la columna Precio.",
+      [{"tipo": "zoom", "rango": "F1:H4", "escala": 1.7},
+       {"tipo": "escribir", "celda": "H2", "texto": "=BUSCARX(F2;Productos!A:A;Productos!C:C;\"Código no existe\")", "duracion": 2.2, "retraso": 1.1}],
+      tts="Buscar equis es la versión nueva de buscar uve. La pego en la columna Precio."),
+    b("Dos mil cuatrocientos: el precio del cloro.",
+      [{"tipo": "calcular", "celda": "H2", "valor": "2.400"}, {"tipo": "mover", "celda": "B4", "retraso": 0.3}]),
+    b("Primero, el código que busca. Después, dónde buscarlo, de dónde traer el precio, y qué decir si no lo encuentra.",
+      [{"tipo": "nota", "celda": "H2", "texto": "BUSCARX(*qué*; *dónde*; *qué traer*; *si no está*)", "retraso": 0.2},
+       {"tipo": "nota", "celda": "H2", "texto": "¿Tu Excel usa *coma*? Dilo en el mapa", "retraso": 5.6}], pausa=1.8),
+    b("La copio hacia abajo.",
+      [{"tipo": "quitar_nota"}, {"tipo": "zoom_fuera", "duracion": 0.7},
+       {"tipo": "rellenar", "rango": "H2:H13", "valores": [("Código no existe" if r["F"] == "PAP-201" else n(r["H"])) for r in filas_cod], "retraso": 0.4}]),
+    b("PAP-201 no existe: era PAP-210. Lo corrijo, y el precio aparece.",
+      [{"tipo": "zoom", "rango": "F5:H9", "escala": 1.6, "duracion": 0.8},
+       {"tipo": "resaltar", "rango": "F12:H12", "color": "#e5484d", "etiqueta": "aviso, no error", "retraso": 0.5, "hasta": 2.4},
+       {"tipo": "escribir", "celda": "F12", "texto": "PAP-210", "duracion": 0.8, "retraso": 1.2},
+       {"tipo": "calcular", "celda": "H12", "valor": "6.200", "retraso": 2.9}],
+      tts="Pe, a, pe, dos, cero, uno, no existe: era pe, a, pe, dos, uno, cero. Lo corrijo, y el precio aparece.", pausa=0.8),
 ])
 
 # ---------------------------------------------------------------- F2 NOMPROPIO + ESPACIOS
 esc("capitulo", {"numero": 2, "total": 10, "titulo": "NOMPROPIO + ESPACIOS: nombres prolijos"},
     [b("Fórmula dos: limpiar los nombres.")], capitulo="2. NOMPROPIO y ESPACIOS: limpiar nombres")
-VIS_V2 = {"B": 360, "C": 360, "F": 150, "G": 100, "H": 140}
-V2 = anchos(VIS_V2)
-esc("excel", {"archivo": ARCH, "hoja": "Pedidos", "anchos": V2, "seleccion_inicial": "C2", "celdas": ocultar(pedidos({"H"}), VIS_V2)}, [
-    b("Con el mapa ya enviado, le pido solo la meta: el nombre prolijo, sin espacios de más y con mayúscula inicial.",
-      {"tipo": "zoom", "rango": "B1:C5", "escala": 1.45}),
-    b("Me da dos funciones, una dentro de otra: espacios quita los espacios sobrantes; nompropio arregla las mayúsculas.",
-      {"tipo": "escribir", "celda": "C2", "texto": "=NOMPROPIO(ESPACIOS(B2))", "duracion": 1.8},
-      tts="Me da dos funciones, una dentro de otra: espacios quita los espacios sobrantes; nom propio arregla las mayúsculas."),
-    b("Ferretería El Tornillo. La copio, y las doce filas quedan prolijas.",
+VIS_V2 = {"B": 370, "C": 370, "F": 150, "G": 100, "H": 140}
+esc("excel", {"archivo": ARCH, "hoja": "Pedidos", "anchos": anchos(VIS_V2), "seleccion_inicial": "C2", "celdas": ocultar(pedidos({"H"}), VIS_V2)}, [
+    b("El sistema escribe a la misma ferretería de tres formas: con espacios de más y mayúsculas mezcladas. En la misma conversación, así no repito el mapa, le pido solo la meta: el nombre prolijo.",
+      [{"tipo": "zoom", "rango": "B1:C5", "escala": 1.6},
+       {"tipo": "rotulo", "numero": "02", "texto": "Se la pedí a Claude", "sub": "el prompt está en la hoja Prompts", "retraso": 0.4}]),
+    b("Dos funciones, una dentro de otra: espacios quita los sobrantes y nompropio arregla las mayúsculas.",
+      {"tipo": "escribir", "celda": "C2", "texto": "=NOMPROPIO(ESPACIOS(B2))", "duracion": 1.6},
+      tts="Dos funciones, una dentro de otra: espacios quita los sobrantes y nom propio arregla las mayúsculas."),
+    b("Ferretería El Tornillo. Y las doce filas, prolijas.",
       [{"tipo": "calcular", "celda": "C2", "valor": filas[0]["C"], "derecha": False},
-       {"tipo": "zoom_fuera", "retraso": 1.0, "duracion": 0.8},
-       {"tipo": "rellenar", "rango": "C2:C13", "valores": col("C", "C"), "retraso": 1.6}]),
-    b("Veredicto honesto: la sigla SRL quedó en minúsculas. La propia IA me lo advirtió; las siglas, revísalas a mano.",
-      [{"tipo": "resaltar", "rango": "C3", "color": "#e5484d", "etiqueta": "Srl", "retraso": 0.3}],
-      tts="Veredicto honesto: la sigla ese, erre, ele, quedó en minúsculas. La propia IA me lo advirtió; las siglas, revísalas a mano."),
+       {"tipo": "rellenar", "rango": "C2:C13", "valores": col("C", "C"), "retraso": 1.0}]),
+    b("Y me avisó de algo: la sigla SRL queda en minúsculas. Esas, a mano.",
+      [{"tipo": "resaltar", "rango": "C3", "color": "#e5484d", "retraso": 0.2},
+       {"tipo": "rotulo", "texto": "Claude: «las siglas también cambian: SRL queda Srl»", "sub": "respuesta real (prompt 2 de la hoja Prompts)", "retraso": 0.3, "hasta": 4.0}],
+      tts="Y me avisó de algo: la sigla ese, erre, ele, queda en minúsculas. Esas, a mano.", pausa=1.2),
+])
+esc("antes_despues", {"antes": {"valor": 10, "sufijo": "", "texto": "«clientes» con los nombres *sucios*"},
+                      "despues": {"valor": 5, "sufijo": "", "texto": "clientes con los nombres *limpios*"}}, [
+    b("Con los nombres sucios, una lista sin repetidos daba diez clientes."),
+    b("Limpios, son cinco."),
 ])
 
 # ---------------------------------------------------------------- F3 TEXTODESPUES
-esc("capitulo", {"numero": 3, "total": 10, "titulo": "TEXTODESPUES: separar el vendedor"},
-    [b("Fórmula tres: separar al vendedor de su código.")], capitulo="3. TEXTODESPUES: separar texto pegado")
-VIS_V3 = {"C": 330, "D": 300, "E": 250, "F": 150, "G": 100, "H": 140}
-V3 = anchos(VIS_V3)
-esc("excel", {"archivo": ARCH, "hoja": "Pedidos", "anchos": V3, "seleccion_inicial": "E2", "celdas": ocultar(pedidos({"H", "C"}), VIS_V3)}, [
-    b("Viene así: código, una barra y el nombre.",
-      [{"tipo": "zoom", "rango": "C1:E5", "escala": 1.45}, {"tipo": "resaltar", "rango": "D2", "color": "#3b6fd8", "retraso": 1.0, "hasta": 3}]),
-    b("La IA conoce una función de 2022 que casi nadie usa: texto después. Todo lo que viene después de la barra.",
-      {"tipo": "escribir", "celda": "E2", "texto": "=TEXTODESPUES(D2;\"| \")", "duracion": 1.6},
-      tts="La IA conoce una función de dos mil veintidós que casi nadie usa: texto después. Todo lo que viene después de la barra."),
+VIS_V3 = {"C": 330, "D": 310, "E": 250, "F": 150, "G": 100, "H": 140}
+esc("excel", {"archivo": ARCH, "hoja": "Pedidos", "anchos": anchos(VIS_V3), "seleccion_inicial": "E2", "celdas": ocultar(pedidos({"H", "C"}), VIS_V3)}, [
+    b("Fórmula tres: el vendedor viene pegado a su código, con una barra.",
+      [{"tipo": "zoom", "rango": "C1:E4", "escala": 1.6},
+       {"tipo": "rotulo", "numero": "03", "texto": "TEXTODESPUES", "sub": "se la pedí a Claude · prompt en la hoja Prompts", "retraso": 0.3},
+       {"tipo": "resaltar", "rango": "D2", "color": "#3b6fd8", "retraso": 1.0, "hasta": 3}]),
+    b("La IA me dio texto después: todo lo que viene después de la barra.",
+      {"tipo": "escribir", "celda": "E2", "texto": "=TEXTODESPUES(D2;\"| \")", "duracion": 1.5}),
     b("Diego Paz. Su gemela, texto antes, te da el código.",
       [{"tipo": "calcular", "celda": "E2", "valor": "Diego Paz", "derecha": False},
-       {"tipo": "nota", "celda": "E2", "texto": "TEXTOANTES(D2;\" |\") → *V01*", "retraso": 0.8}]),
-    b("Copio hacia abajo. ¿Y sin la IA? Habría terminado con extrae y hallar, o separando a mano.",
-      [{"tipo": "quitar_nota"}, {"tipo": "zoom_fuera", "duracion": 0.8},
-       {"tipo": "rellenar", "rango": "E2:E13", "valores": col("E", "E"), "retraso": 0.5}],
-      tts="Copio hacia abajo. ¿Y sin la IA? Habría terminado con extrae y hallar, o separando a mano."),
-])
+       {"tipo": "mover", "celda": "C4", "retraso": 0.3},
+       {"tipo": "nota", "celda": "E2", "texto": "TEXTOANTES(D2;\" |\") → *V01*", "retraso": 0.7}], pausa=0.8),
+    b("Y abajo, todos los vendedores separados.",
+      [{"tipo": "quitar_nota"}, {"tipo": "zoom_fuera", "duracion": 0.7},
+       {"tipo": "rellenar", "rango": "E2:E13", "valores": col("E", "E"), "retraso": 0.4}]),
+], capitulo="3. TEXTODESPUES: separar texto pegado")
 
 esc("titular", {"etiqueta": "Plantilla gratis", "icono": "file-spreadsheet",
-                "lineas": ["Los 10 prompts,", {"texto": "con *qué revisar*", "beat": 0}],
-                "sub": "Hoja «Prompts» · enlace en la descripción", "sub_beat": 1}, [
-    b("Las diez consignas completas están en la plantilla gratis, en la hoja Prompts, con una columna de qué revisar."),
-    b("Y en un rato vas a ver la fórmula que le cobraba dos veces a un cliente, y cómo la atrapé con una sola pregunta."),
+                "lineas": ["Los 10 prompts,", "con *qué revisar*"], "sub": "Hoja «Prompts» · enlace en la descripción"}, [
+    b("Los diez prompts, con qué revisar en cada uno, están en la plantilla gratis: hoja Prompts."),
 ])
 
 # ---------------------------------------------------------------- F4 SI.CONJUNTO
 esc("capitulo", {"numero": 4, "total": 10, "titulo": "SI.CONJUNTO: descuentos por tramos"},
     [b("Fórmula cuatro: descuentos por tramos.")], capitulo="4. SI.CONJUNTO: descuentos por tramos")
-esc("chat", {"app": "Claude", "modelo": "versión gratuita"}, [
-    b("La política de descuentos, escrita como la diría mi jefe: diez por ciento desde cien mil, cinco desde cuarenta mil.",
-      {"tipo": "prompt", "texto": "En I2 quiero el descuento según el total de la compra (G2*H2): 10 % si llega a 100.000; 5 % si llega a 40.000; si no, 0 %."}),
-    b("Ojo con el orden: la IA pone los tramos de mayor a menor, y cierra con verdadero, que significa en cualquier otro caso.",
-      {"tipo": "respuesta", "texto": "Las condiciones se evalúan en orden, por eso va primero el tramo más alto. El VERDADERO del final funciona como \"en cualquier otro caso\". Dale formato de porcentaje a la columna I:",
-       "formula": "=SI.CONJUNTO(G2*H2>=100000;10%;G2*H2>=40000;5%;VERDADERO;0)"}),
+esc("chat", CLAUDE, [
+    b("Los descuentos, como los diría mi jefe.",
+      {"tipo": "prompt", "texto": "En I2 quiero el descuento según el total de la compra (G2*H2): 10 % si llega a 100.000; 5 % si llega a 40.000; si no, 0 %.", "duracion": 2.4}),
+    b("Ojo: tramos de mayor a menor, y verdadero al final, que significa en cualquier otro caso.",
+      {"tipo": "respuesta", "texto": "Las condiciones se evalúan en orden, por eso va primero el tramo más alto. El VERDADERO del final funciona como \"en cualquier otro caso\".",
+       "formula": "=SI.CONJUNTO(G2*H2>=100000;10%;G2*H2>=40000;5%;VERDADERO;0)", "duracion": 2.6}),
 ])
 VIS_V4 = {"C": 330, "F": 150, "G": 100, "H": 140, "I": 130, "J": 190}
-V4 = anchos(VIS_V4)
-esc("excel", {"archivo": ARCH, "hoja": "Pedidos", "anchos": V4, "seleccion_inicial": "I2", "celdas": ocultar(pedidos({"H", "C", "E"}), VIS_V4)}, [
+esc("excel", {"archivo": ARCH, "hoja": "Pedidos", "anchos": anchos(VIS_V4), "seleccion_inicial": "I2", "celdas": ocultar(pedidos({"H", "C", "E"}), VIS_V4)}, [
     b("La pego en la columna del descuento.",
-      [{"tipo": "zoom", "rango": "F1:J4", "escala": 1.4},
-       {"tipo": "escribir", "celda": "I2", "texto": "=SI.CONJUNTO(G2*H2>=100000;10%;G2*H2>=40000;5%;VERDADERO;0)", "duracion": 2.4, "retraso": 1.0}],
-      tts="La pego en la columna del descuento."),
+      [{"tipo": "zoom", "rango": "G1:J4", "escala": 1.7},
+       {"tipo": "escribir", "celda": "I2", "texto": "=SI.CONJUNTO(G2*H2>=100000;10%;G2*H2>=40000;5%;VERDADERO;0)", "duracion": 2.2, "retraso": 1.0}], pausa=0.9),
     b("Cuarenta bidones de cloro suman noventa y seis mil: cinco por ciento.", {"tipo": "calcular", "celda": "I2", "valor": "5 %"}),
-    b("Abajo, cada pedido cae en su tramo.",
-      {"tipo": "rellenar", "rango": "I2:I13", "valores": col("I", "I", pct)}),
-    b("El neto es una multiplicación simple. Esa no cuenta entre las diez.",
-      {"tipo": "escribir", "celda": "J2", "texto": "=G2*H2*(1-I2)", "duracion": 1.2}),
-    b("Noventa y un mil doscientos, y toda la columna lista.",
-      [{"tipo": "calcular", "celda": "J2", "valor": n(filas[0]["J"])}, {"tipo": "zoom_fuera", "retraso": 0.5, "duracion": 0.8},
-       {"tipo": "rellenar", "rango": "J2:J13", "valores": col("J", "J", n), "retraso": 1.0}]),
+    b("Y si no llega a cuarenta mil, como los veinticinco desinfectantes del kiosco, cero.",
+      [{"tipo": "mover", "celda": "C5"}, {"tipo": "nota", "celda": "I3", "texto": "25 × 1.150 = 28.750 → *0 %*", "lado": "abajo", "retraso": 0.3}]),
+    b("Cada pedido cae en su tramo. El neto es una multiplicación simple, que no cuenta entre las diez.",
+      [{"tipo": "quitar_nota"}, {"tipo": "rellenar", "rango": "I2:I13", "valores": col("I", "I", pct)},
+       {"tipo": "escribir", "celda": "J2", "texto": "=G2*H2*(1-I2)", "duracion": 1.1, "retraso": 2.4}]),
+    b("Noventa y un mil doscientos, y la columna completa.",
+      [{"tipo": "calcular", "celda": "J2", "valor": n(filas[0]["J"])}, {"tipo": "zoom_fuera", "retraso": 0.7, "duracion": 0.7},
+       {"tipo": "rellenar", "rango": "J2:J13", "valores": col("J", "J", n), "retraso": 1.2}]),
 ])
 
 # ---------------------------------------------------------------- F5 FIN.MES
-esc("capitulo", {"numero": 5, "total": 10, "titulo": "FIN.MES: vencimientos sin errores de calendario"},
-    [b("Fórmula cinco: el vencimiento.")], capitulo="5. FIN.MES: fechas de vencimiento")
-VIS_V5 = {"A": 170, "C": 330, "J": 170, "K": 190}
-V5 = anchos(VIS_V5)
-esc("excel", {"archivo": ARCH, "hoja": "Pedidos", "anchos": V5, "seleccion_inicial": "K2", "celdas": ocultar(pedidos({"H", "C", "E", "I", "J"}), VIS_V5)}, [
-    b("La condición de pago es a fin del mes siguiente. Casi todos suman treinta días, y fallan con los meses de treinta y uno.",
-      {"tipo": "zoom", "rango": "A1:K4", "escala": 1.4}),
-    b("Se lo dije así a la IA, y me dio fin punto mes.",
-      {"tipo": "escribir", "celda": "K2", "texto": "=FIN.MES(A2;1)", "duracion": 1.2}, tts="Se lo dije así a la IA, y me dio fin punto mes."),
-    b("Pedido del 4 de agosto: vence el 30 de septiembre.", {"tipo": "calcular", "celda": "K2", "valor": f(filas[0]["K"])},
-      tts="Pedido del cuatro de agosto: vence el treinta de septiembre."),
-    b("Ojo: si ves un número como 46.295, a la celda le falta formato de fecha.",
-      [{"tipo": "mover", "celda": "C6"}, {"tipo": "nota", "celda": "K2", "texto": "¿Ves *46295*? Dale formato de fecha", "retraso": 0.4}],
-      tts="Ojo: si ves un número como cuarenta y seis mil doscientos noventa y cinco, a la celda le falta formato de fecha."),
-    b("La copio hacia abajo, y cada pedido tiene su vencimiento.",
-      [{"tipo": "quitar_nota"}, {"tipo": "zoom_fuera", "duracion": 0.8},
-       {"tipo": "rellenar", "rango": "K2:K13", "valores": [f(r["K"]) for r in filas], "retraso": 0.5}]),
-])
+VIS_V5 = {"A": 175, "C": 330, "J": 170, "K": 190}
+esc("excel", {"archivo": ARCH, "hoja": "Pedidos", "anchos": anchos(VIS_V5), "seleccion_inicial": "K2", "celdas": ocultar(pedidos({"H", "C", "E", "I", "J"}), VIS_V5)}, [
+    b("Fórmula cinco: vence a fin del mes siguiente. Sumar treinta días no sirve: del 4 de agosto llegas al 3 de septiembre.",
+      [{"tipo": "zoom", "rango": "A1:K4", "escala": 1.6},
+       {"tipo": "rotulo", "numero": "05", "texto": "FIN.MES", "sub": "se la pedí a Claude · prompt en la hoja Prompts", "retraso": 0.3}],
+      tts="Fórmula cinco: vence a fin del mes siguiente. Sumar treinta días no sirve: del cuatro de agosto llegas al tres de septiembre."),
+    b("La IA me dio fin punto mes.", {"tipo": "escribir", "celda": "K2", "texto": "=FIN.MES(A2;1)", "duracion": 1.1}, pausa=0.8),
+    b("Del 4 de agosto, al 30 de septiembre.",
+      [{"tipo": "calcular", "celda": "K2", "valor": f(filas[0]["K"])},
+       {"tipo": "mover", "celda": "C4", "retraso": 0.3},
+       {"tipo": "nota", "celda": "K2", "texto": "FIN.MES(A2;*1*): fin del mes siguiente · con *0*, fin de este mes", "retraso": 0.5},
+       {"tipo": "nota", "celda": "K2", "texto": "¿Ves *46295*? Inicio › Formato de número › Fecha corta", "retraso": 3.6}],
+      tts="Del cuatro de agosto, al treinta de septiembre.", pausa=4.2),
+    b("Y cada pedido, con su vencimiento.",
+      [{"tipo": "quitar_nota"}, {"tipo": "zoom_fuera", "duracion": 0.7},
+       {"tipo": "rellenar", "rango": "K2:K13", "valores": [f(r["K"]) for r in filas], "retraso": 0.4}]),
+], capitulo="5. FIN.MES: fechas de vencimiento")
 
 esc("titular", {"etiqueta": "Lo que viene", "icono": "triangle-alert",
-                "lineas": ["Una fórmula *perfecta*", "que cobraba dos veces"],
-                "sub": "Si te sirve, suscríbete: una planilla resuelta con IA cada semana", "sub_beat": 1}, [
-    b("Lo que viene es lo que más me sirvió: una fórmula que escribí yo, que parecía perfecta, y la parte del método que la atrapó."),
-    b("Si te está sirviendo, suscríbete: cada semana resuelvo una planilla nueva con IA."),
+                "lineas": ["La fórmula que", "*cobraba dos veces*"], "sub": "Si te sirve, suscríbete: una planilla resuelta con IA cada semana", "sub_beat": 1}, [
+    b("Después viene la fórmula que casi le cobra dos veces a un cliente."),
+    b("Si te está sirviendo, suscríbete."),
 ])
 
 # ---------------------------------------------------------------- F6 SUMAR.SI.CONJUNTO
 esc("capitulo", {"numero": 6, "total": 10, "titulo": "SUMAR.SI.CONJUNTO: ventas por vendedor"},
-    [b("Fórmula seis: ventas por vendedor y por mes.")], capitulo="6. SUMAR.SI.CONJUNTO: ventas por vendedor y mes")
+    [b("Fórmula seis: ventas por vendedor.")], capitulo="6. SUMAR.SI.CONJUNTO: ventas por vendedor y mes")
 F6 = "=SUMAR.SI.CONJUNTO(Pedidos!J:J;Pedidos!E:E;A3;Pedidos!A:A;\">=\"&$B$2;Pedidos!A:A;\"<=\"&FIN.MES($B$2;0))"
-esc("chat", {"app": "Claude", "modelo": "versión gratuita"}, [
-    b("Para la reunión de ventas: cuánto vendió cada vendedor en el mes que elijo.",
-      {"tipo": "prompt", "texto": "En Resumen tengo los vendedores en A3:A5 y en B2 el primer día del mes que quiero ver. En B3 quiero el neto vendido por ese vendedor en ese mes. Una fórmula para copiar hacia abajo."}),
-    b("Aquí todos se traban: el criterio de fechas y los signos de dólar. La IA los pone, y explica por qué.",
-      {"tipo": "respuesta", "texto": "Suma el neto (J) donde el vendedor (E) es el de A3 y la fecha (A) está entre el primer y el último día del mes de B2. Los $ dejan fija B2 al copiar; A3 sí cambia.",
-       "formula": F6}),
+esc("chat", CLAUDE, [
+    b("Para la reunión de ventas: cuánto vendió cada uno en el mes que elijo.",
+      {"tipo": "prompt", "texto": "En Resumen tengo los vendedores en A3:A5 y en B2 el primer día del mes que quiero ver. En B3 quiero el neto vendido por ese vendedor en ese mes. Una fórmula para copiar hacia abajo.", "duracion": 2.6}),
+    b("Y arma el criterio de fechas con fin punto mes, otra vez.",
+      {"tipo": "respuesta", "texto": "Suma el neto (J) donde el vendedor (E) es el de A3 y la fecha (A) está entre el primer y el último día del mes de B2. Los $ dejan fija B2 al copiar.",
+       "formula": F6, "duracion": 2.4}),
 ])
 esc("excel", {"archivo": ARCH, "hoja": "Resumen", "anchos": RES_ANCHOS, "seleccion_inicial": "B3", "celdas": resumen()}, [
-    b("En la hoja Resumen, el mes va arriba: septiembre.",
-      [{"tipo": "zoom", "rango": "A1:B5", "escala": 1.35}, {"tipo": "resaltar", "rango": "B2", "color": "#3b6fd8", "retraso": 0.9, "hasta": 2.6}]),
-    b("Pego la fórmula en el primer vendedor.", {"tipo": "escribir", "celda": "B3", "texto": F6, "duracion": 3.2}),
-    b("Diego Paz vendió 581.040 en septiembre.", {"tipo": "calcular", "celda": "B3", "valor": n(SEP[0])},
-      tts="Diego Paz vendió quinientos ochenta y un mil cuarenta en septiembre."),
-    b("La copio: Carla Ruiz, un millón doscientos quince mil.",
-      {"tipo": "rellenar", "rango": "B3:B5", "valores": [n(v) for v in SEP]}),
-    b("¿Y si cambio el mes a octubre? La tabla se recalcula sola.",
-      [{"tipo": "escribir", "celda": "B2", "texto": "01/10/2026", "duracion": 1.0}]
-      + [{"tipo": "calcular", "celda": f"B{3 + i}", "valor": n(v), "retraso": 2.0 + 0.15 * i} for i, v in enumerate(OCT)]),
-    b("Fíjate en una pieza: fin punto mes, otra vez. Aquí marca el último día del mes elegido, así que suma del primero al treinta y uno.",
-      [{"tipo": "mover", "celda": "A10"}, {"tipo": "nota", "celda": "B4", "texto": "FIN.MES($B$2;0) → *31/10/2026*", "lado": "abajo", "retraso": 0.3}]),
+    b("En la hoja Resumen, el mes va en B2: septiembre.",
+      [{"tipo": "zoom", "rango": "A1:B5", "escala": 1.6},
+       {"tipo": "rotulo", "numero": "06", "texto": "Ventas del mes", "sub": "una sola fórmula para toda la columna", "retraso": 0.3},
+       {"tipo": "resaltar", "rango": "B2", "color": "#3b6fd8", "retraso": 1.0, "hasta": 2.6}]),
+    b("Pego la fórmula. El signo de dólar deja fija la celda del mes al copiar.",
+      {"tipo": "escribir", "celda": "B3", "texto": F6, "duracion": 3.0}),
+    b("Diego Paz: 581.040 en septiembre.", {"tipo": "calcular", "celda": "B3", "valor": n(SEP[0])},
+      tts="Diego Paz: quinientos ochenta y un mil cuarenta en septiembre."),
+    b("Suma el neto cuando el vendedor coincide y la fecha cae entre el primero y el último día del mes.",
+      [{"tipo": "mover", "celda": "A9"}, {"tipo": "nota", "celda": "B4", "texto": "\">=\"&$B$2 y \"<=\"&FIN.MES($B$2;0)", "lado": "abajo", "retraso": 0.3}]),
+    b("Carla Ruiz, un millón doscientos quince mil.",
+      [{"tipo": "quitar_nota"}, {"tipo": "rellenar", "rango": "B3:B5", "valores": [n(v) for v in SEP]}]),
+    b("Cambio a octubre, y se recalcula sola.",
+      [{"tipo": "escribir", "celda": "B2", "texto": "01/10/2026", "duracion": 0.9}]
+      + [{"tipo": "calcular", "celda": f"B{3 + i}", "valor": n(v), "retraso": 1.8 + 0.15 * i} for i, v in enumerate(OCT)], pausa=0.8),
 ])
 
 # ---------------------------------------------------------------- F7 EL GIRO
-esc("capitulo", {"numero": 7, "total": 10, "titulo": "La IA como *revisora* de tus fórmulas"},
-    [b("Fórmula siete: la IA como revisora.")], capitulo="7. La IA como revisora de tus fórmulas")
+esc("capitulo", {"numero": 7, "total": 10, "titulo": "SI: el estado de cada factura"},
+    [b("Fórmula siete: el estado de cada factura.")], capitulo="7. SI: el estado de cada factura")
 VIS_V7 = {"C": 330, "J": 170, "K": 180, "L": 120, "M": 200}
-V7 = anchos(VIS_V7)
-NAIVE = "=SI(K2<Resumen!$B$1;\"Vencido\";\"Al día\")"
-GOOD = "=SI(L2=\"Sí\";\"Cobrado\";SI(K2<Resumen!$B$1;\"Vencido\";\"Al día\"))"
-esc("excel", {"archivo": ARCH, "hoja": "Pedidos", "anchos": V7, "seleccion_inicial": "M2", "celdas": ocultar(pedidos({"H", "C", "E", "I", "J", "K"}), VIS_V7)}, [
-    b("El estado de cada factura. Esta es corta, así que la escribí yo.", {"tipo": "zoom", "rango": "J1:M4", "escala": 1.4}),
-    b("Si vence antes de la fecha de corte, vencido; si no, al día.",
-      [{"tipo": "escribir", "celda": "M2", "texto": NAIVE, "duracion": 2.2},
-       {"tipo": "nota", "celda": "K3", "texto": "Escrita *a mano*, como la escribe casi todo el mundo", "lado": "abajo", "retraso": 2.6}]),
+esc("excel", {"archivo": ARCH, "hoja": "Pedidos", "anchos": anchos(VIS_V7), "seleccion_inicial": "M2", "celdas": ocultar(pedidos({"H", "C", "E", "I", "J", "K"}), VIS_V7)}, [
+    b("Esta es corta: la escribí yo. Compara el vencimiento con la fecha de corte, en Resumen B1.",
+      [{"tipo": "zoom", "rango": "J1:M4", "escala": 1.6},
+       {"tipo": "rotulo", "numero": "07", "texto": "La IA como revisora", "sub": "esta la escribí yo", "retraso": 0.3}]),
+    b("En tu planilla, pon igual a hoy en B1. Aquí la dejo fija, para que veas los mismos números.",
+      [{"tipo": "mover", "celda": "C4"}, {"tipo": "nota", "celda": "K2", "texto": "Fecha de corte: Resumen!B1 · en tu planilla, *=HOY()*", "retraso": 0.3}],
+      tts="En tu planilla, pon igual a hoy en be uno. Aquí la dejo fija, para que veas los mismos números."),
+    b("Si vence antes del corte, vencido; si no, al día.",
+      [{"tipo": "quitar_nota"}, {"tipo": "escribir", "celda": "M2", "texto": NAIVE, "duracion": 2.0, "retraso": 0.2},
+       {"tipo": "nota", "celda": "K3", "texto": "Escrita *a mano*, como la escribe casi todo el mundo", "lado": "abajo", "retraso": 2.6}], pausa=1.2),
     b("No da error.", {"tipo": "calcular", "celda": "M2", "valor": "Vencido", "derecha": False}),
-    b("La copio, y la cobranza sale sola: ocho facturas vencidas, dos millones cuatrocientos cuarenta y seis mil por cobrar.",
-      [{"tipo": "quitar_nota"}, {"tipo": "zoom_fuera", "duracion": 0.8},
-       {"tipo": "rellenar", "rango": "M2:M13", "valores": [r["M0"] for r in filas], "retraso": 0.5},
-       {"tipo": "resaltar", "rango": "M2:M9", "color": "#e5484d", "etiqueta": "8 vencidas · 2.446.165", "retraso": 2.2}]),
-    b("Parece perfecta, ¿no? Ahora viene la tercera parte del método.",
-      {"tipo": "formato", "rango": "M2:M9", "fondo": "#ffd6d6"}),
+    b("La copio: ocho facturas vencidas, dos millones cuatrocientos cuarenta y seis mil por cobrar.",
+      [{"tipo": "quitar_nota"}, {"tipo": "zoom_fuera", "duracion": 0.7},
+       {"tipo": "rellenar", "rango": "M2:M13", "valores": [r["M0"] for r in filas], "retraso": 0.4},
+       {"tipo": "formato", "rango": "M2:M9", "fondo": "#ffd6d6", "retraso": 1.6},
+       {"tipo": "resaltar", "rango": "M2:M9", "color": "#e5484d", "etiqueta": "8 vencidas · 2.446.165", "retraso": 2.0}]),
+    b("Parece perfecta, ¿no? Ahora, la tercera parte del método.",
+      {"tipo": "zoom", "rango": "J1:M5", "escala": 1.3}),
 ])
 
 esc("lista", {"titulo": "El prompt de 3 partes", "items": [
-    {"texto": "*Mapa*", "detalle": "qué hay en cada columna y qué Excel usas", "icono": "map"},
+    {"texto": "*Mapa*", "detalle": "qué hay en cada columna · nunca datos reales de clientes", "icono": "map"},
     {"texto": "*Meta*", "detalle": "qué quieres, con la regla en palabras", "icono": "target"},
     {"texto": "*Prueba*", "detalle": "qué casos darían mal sin error, y qué debe dar en dos filas", "icono": "shield-check"}]}, [
-    b("Mapa: dónde está cada dato."),
+    b("Mapa: dónde está cada dato. Solo nombres de columnas: nunca pegues datos reales de clientes."),
     b("Meta: qué quieres, en palabras."),
-    b("Y la que casi nadie usa, la prueba: qué casos darían un resultado equivocado sin mostrar error, y qué debería dar en dos filas concretas."),
+    b("Y la prueba, la que casi nadie usa: qué casos darían mal sin mostrar error, y qué debería dar en dos filas."),
 ])
 
 PRUEBA = ("Escribí esta fórmula para M2: =SI(K2<Resumen!$B$1;\"Vencido\";\"Al día\"). ¿Qué casos pueden hacer que dé un resultado equivocado "
           "sin mostrar error? ¿Qué debería dar la fila 2 (vence 30/09/2026, Pagado: Sí) y la fila 6 (vence 31/10/2026, Pagado: No), con corte 04/11/2026?")
-esc("chat", {"app": "Claude", "modelo": "versión gratuita"}, [
-    b("Pego mi fórmula en el chat, con la prueba.", {"tipo": "prompt", "texto": PRUEBA, "duracion": 3.5}),
+esc("chat", CLAUDE, [
+    b("Pego mi fórmula, con la prueba.", {"tipo": "prompt", "texto": PRUEBA, "duracion": 3.0}),
     b("Y va directo al problema: mi fórmula no mira la columna Pagado. La fila dos ya estaba pagada, y dice vencido.",
       {"tipo": "respuesta", "texto": "1. Facturas pagadas: la fórmula no mira la columna L. Si ya se pagó pero su vencimiento pasó, dice \"Vencido\".<br>"
-                                      "2. Si K está vacía, cuenta como 0 y también dice \"Vencido\".<br>"
+                                      "2. Si K está vacía, cuenta como 0 y también dice \"Vencido\". (y 2 casos más)<br>"
                                       "Fila 2: da \"Vencido\", pero ya está pagada.<br>Fila 6: da \"Vencido\", y es correcto.<br>Fórmula corregida:",
-       "formula": GOOD, "duracion": 5.5}),
+       "formula": GOOD, "duracion": 4.5}, pausa=1.2),
 ])
-
 esc("aviso", {"titulo": "3 clientes · 4 facturas *ya pagadas*", "nivel": "rojo", "icono": "phone-off",
               "texto": "Ferretería El Tornillo, Kiosco La Esquina y Librería San Martín figuraban como deudores."}, [
     b("El lunes habría llamado a tres clientes para cobrarles cuatro facturas que ya habían pagado."),
@@ -408,28 +405,27 @@ esc("aviso", {"titulo": "3 clientes · 4 facturas *ya pagadas*", "nivel": "rojo"
 esc("cifra", {"valor": 610575, "etiqueta": "de más en la lista de cobranza", "fuente": "cálculo sobre la planilla ficticia del video"}, [
     b("610.575 de más en la lista de cobranza.", tts="Seiscientos diez mil quinientos setenta y cinco de más en la lista de cobranza."),
 ])
-
-esc("excel", {"archivo": ARCH, "hoja": "Pedidos", "anchos": V7, "seleccion_inicial": "M2",
+esc("excel", {"archivo": ARCH, "hoja": "Pedidos", "anchos": anchos(VIS_V7), "seleccion_inicial": "M2",
               "celdas": ocultar(pedidos({"H", "C", "E", "I", "J", "K", "M"}, m_ingenuo=True), VIS_V7)}, [
     b("Pego la corregida: primero mira si está pagada.",
-      [{"tipo": "zoom", "rango": "J1:M4", "escala": 1.4},
-       {"tipo": "escribir", "celda": "M2", "texto": GOOD, "duracion": 2.6, "retraso": 0.9}]),
+      [{"tipo": "zoom", "rango": "J1:M4", "escala": 1.6},
+       {"tipo": "escribir", "celda": "M2", "texto": GOOD, "duracion": 2.4, "retraso": 0.9}], pausa=1.0),
     b("La fila dos ahora dice cobrado.", {"tipo": "calcular", "celda": "M2", "valor": "Cobrado", "derecha": False}),
-    b("La copio: cuatro vencidas de verdad, un millón ochocientos treinta y cinco mil quinientos noventa.",
-      [{"tipo": "zoom_fuera", "duracion": 0.8},
+    b("Y abajo, la ferretería, el kiosco y la librería pasan a cobrado.",
+      [{"tipo": "zoom_fuera", "duracion": 0.7},
        {"tipo": "rellenar", "rango": "M2:M13", "valores": [r["M"] for r in filas], "retraso": 0.4},
-       {"tipo": "formato", "celdas": {f"M{i + 2}": ("#ffd6d6" if r["M"] == "Vencido" else "#ffffff") for i, r in enumerate(filas)}, "retraso": 1.8},
-       {"tipo": "resaltar", "rango": "M3", "color": "#107c41", "etiqueta": "4 vencidas · 1.835.590", "retraso": 2.4}]),
+       {"tipo": "formato", "celdas": {f"M{i + 2}": ("#ffd6d6" if r["M"] == "Vencido" else "#ffffff") for i, r in enumerate(filas)}, "retraso": 1.6}]),
+    b("Y compruebo lo que la prueba dijo de la fila seis: vencida y sin pagar. Coincide.",
+      [{"tipo": "zoom", "rango": "J5:M7", "escala": 1.7}, {"tipo": "resaltar", "rango": "K6:M6", "color": "#107c41", "etiqueta": "lo que dijo la Prueba ✓", "retraso": 0.9}]),
 ])
-
-esc("titular", {"etiqueta": "Hallazgo honesto", "icono": "search-check",
-                "tamano": 88, "lineas": ["A veces la IA te avisa sola.", {"texto": "La Prueba hace que", "beat": 1}, {"texto": "te lo diga *sí o sí*.", "beat": 1}]}, [
-    b("A veces la IA te avisa sola: cuando le pedí esta fórmula con el mapa completo, me habló de la columna Pagado. Por eso el mapa nombra todas las columnas."),
-    b("Pero no siempre pasa. La prueba hace que te lo diga sí o sí, aunque la fórmula la hayas escrito tú."),
+esc("antes_despues", {"antes": {"valor": 8, "texto": "vencidas con la fórmula *escrita a mano*"},
+                      "despues": {"valor": 4, "texto": "vencidas *de verdad* · 1.835.590"}}, [
+    b("Ocho vencidas con la fórmula escrita a mano."),
+    b("Cuatro de verdad: un millón ochocientos treinta y cinco mil quinientos noventa."),
 ])
-esc("titular", {"tamano": 92, "lineas": ["Un error que *se ve*, se arregla.", {"texto": "El peligroso es el *creíble*.", "beat": 1}]}, [
-    b("Una fórmula que da error es fácil de arreglar."),
-    b("La peligrosa es la que da un resultado creíble y equivocado."),
+esc("titular", {"etiqueta": "Hallazgo honesto", "icono": "search-check", "tamano": 92,
+                "lineas": ["A veces la IA avisa sola.", "La Prueba, *siempre*."]}, [
+    b("A veces la IA te avisa sola, pero no siempre: la prueba hace que te lo diga. Y en la fórmula ocho me salvó otra vez."),
 ])
 
 # ---------------------------------------------------------------- F8 FILTRAR
@@ -438,31 +434,32 @@ esc("capitulo", {"numero": 8, "total": 10, "titulo": "FILTRAR: la cobranza del l
 P8 = ("Mapa: el de antes. Meta: en Resumen!D2, una lista que se actualice sola con Cliente (C), Vence (K) y Neto (J) de las facturas "
       "\"Vencido\", de mayor a menor neto. Prueba: antes de darme la fórmula, dime qué casos darían un resultado equivocado sin error y qué debería salir arriba.")
 F8 = "=SI.ERROR(ORDENAR(FILTRAR(ELEGIRCOLS(Pedidos!A2:M13;3;11;10);Pedidos!M2:M13=\"Vencido\");3;-1);\"Sin vencidos\")"
-esc("chat", {"app": "Claude", "modelo": "versión gratuita"}, [
-    b("Desde ahora, el prompt va con las tres partes: mapa, meta y prueba.", {"tipo": "prompt", "texto": P8, "duracion": 3.5}),
-    b("Mira lo que encuentra la prueba antes de darme nada: si no hay vencidas, la fórmula fallaría. Y lo cubre.",
+esc("chat", CLAUDE, [
+    b("Ahora el prompt va completo: mapa, meta y prueba.", {"tipo": "prompt", "texto": P8, "duracion": 2.6}),
+    b("Y la prueba encuentra un caso: sin vencidas, la fórmula fallaría. Lo cubre con si punto error.",
       {"tipo": "respuesta", "texto": "1. Si no hay ninguna vencida, FILTRAR no tiene nada que devolver y ORDENAR daría error. Lo cubro con SI.ERROR.<br>"
-                                      "2. Los pedidos debajo de la fila 13 quedan afuera: amplía los rangos.<br>"
+                                      "2. Los pedidos debajo de la fila 13 quedan afuera: amplía los rangos.<br>(y 2 casos más)<br>"
                                       "Arriba debería salir la vencida con el neto más alto.",
-       "formula": F8, "duracion": 5}),
+       "formula": F8, "duracion": 3.6}, pausa=0.8),
 ])
 esc("excel", {"archivo": ARCH, "hoja": "Resumen", "anchos": RES_ANCHOS, "seleccion_inicial": "D2",
               "celdas": resumen(OCT, mes_fecha="01/10/2026")}, [
-    b("Lo pego en la hoja Resumen, en una sola celda.",
-      [{"tipo": "zoom", "rango": "D1:F5", "escala": 1.3},
-       {"tipo": "resaltar", "rango": "D1:F1", "color": "#107c41", "etiqueta": "Cobranza del lunes", "retraso": 0.9, "hasta": 2.6}]),
-    b("Tres funciones, de adentro hacia afuera. Elegir columnas toma cliente, vencimiento y neto.",
-      {"tipo": "escribir", "celda": "D2", "texto": F8, "duracion": 3.2}, tts="Tres funciones, de adentro hacia afuera. Elegir columnas toma cliente, vencimiento y neto."),
-    b("Filtrar deja solo las vencidas, y ordenar pone la más grande arriba.",
-      {"tipo": "nota", "celda": "D3", "texto": "ELEGIRCOLS → FILTRAR → ORDENAR", "lado": "abajo"}),
-    b("Y la lista se desborda sola: cuatro facturas.",
+    b("La pego en Resumen, en una sola celda.",
+      [{"tipo": "zoom", "rango": "D1:F5", "escala": 1.6},
+       {"tipo": "rotulo", "numero": "08", "texto": "Cobranza del lunes", "sub": "ELEGIRCOLS → FILTRAR → ORDENAR", "retraso": 0.3}]),
+    b("De adentro hacia afuera: elegir columnas toma cliente, vencimiento y neto.",
+      {"tipo": "escribir", "celda": "D2", "texto": F8, "duracion": 3.0}),
+    b("Filtrar deja las vencidas, y ordenar pone la más grande arriba.",
+      [{"tipo": "mover", "celda": "B10"}, {"tipo": "nota", "celda": "D3", "texto": "ELEGIRCOLS → FILTRAR → ORDENAR", "lado": "abajo", "retraso": 0.2}]),
+    b("El resultado ocupa las celdas de abajo: déjalas vacías.",
       [{"tipo": "quitar_nota"}]
-      + [{"tipo": "calcular", "celda": f"{c}{2 + i}", "valor": v, "derecha": c != "D", "retraso": 0.1 + 0.12 * (3 * i + j)}
+      + [{"tipo": "calcular", "celda": f"{c}{2 + i}", "valor": v, "derecha": c != "D", "retraso": 0.1 + 0.1 * (3 * i + j)}
          for i, fila in enumerate(cobranza) for j, (c, v) in enumerate(zip("DEF", [fila[0], f(fila[1]), n(fila[2])]))]),
-    b("Un millón ochocientos treinta y cinco mil quinientos noventa. Ese es tu lunes: a quién llamar, y por cuánto.",
+    b("Un millón ochocientos treinta y cinco mil quinientos noventa: a quién llamar el lunes, y por cuánto.",
       {"tipo": "resaltar", "rango": "F2:F5", "color": "#ffd400", "etiqueta": "Total 1.835.590"}),
-    b("Y no tienes que volver a armarla: el lunes que viene cambias la fecha de corte, y la lista se rehace sola.",
-      [{"tipo": "zoom", "rango": "A1:B2", "escala": 1.4}, {"tipo": "resaltar", "rango": "B1", "color": "#3b6fd8", "etiqueta": "fecha de corte", "retraso": 1.0, "hasta": 4.0}]),
+    b("Y si alguien paga, cambias su Pagado a sí, y sale de la lista. Lo mismo con la fecha de corte: la lista se rehace sola.",
+      [{"tipo": "zoom", "rango": "A1:B2", "escala": 1.6},
+       {"tipo": "resaltar", "rango": "B1", "color": "#3b6fd8", "etiqueta": "fecha de corte", "retraso": 0.9, "hasta": 3.4}]),
 ])
 
 # ---------------------------------------------------------------- F9 y F10
@@ -472,49 +469,111 @@ F9 = "=ORDENAR(UNICOS(Pedidos!C2:C13))"
 F10 = "=CONTAR.SI.CONJUNTO(Pedidos!C:C;A8;Pedidos!M:M;\"Vencido\")"
 esc("excel", {"archivo": ARCH, "hoja": "Resumen", "anchos": RES_ANCHOS, "seleccion_inicial": "A8",
               "celdas": resumen(OCT, True, mes_fecha="01/10/2026")}, [
-    b("Primero, la lista de clientes sin repetidos: únicos, dentro de ordenar.",
-      [{"tipo": "zoom", "rango": "A6:B12", "escala": 1.4},
-       {"tipo": "escribir", "celda": "A8", "texto": F9, "duracion": 1.8, "retraso": 1.0}]),
-    b("Cinco clientes. Con los nombres sucios del principio habrían salido diez, porque únicos distingue un espacio de más. Por eso valió la pena limpiarlos.",
+    b("La lista de clientes sin repetidos: únicos, dentro de ordenar.",
+      [{"tipo": "zoom", "rango": "A6:B12", "escala": 1.6},
+       {"tipo": "rotulo", "numero": "09", "texto": "UNICOS + ORDENAR", "sub": "prompt con las 3 partes en la hoja Prompts", "retraso": 0.3},
+       {"tipo": "escribir", "celda": "A8", "texto": F9, "duracion": 1.6, "retraso": 1.0}]),
+    b("Cinco clientes, gracias a la limpieza de la fórmula dos.",
       [{"tipo": "calcular", "celda": f"A{8 + i}", "valor": c, "derecha": False, "retraso": 0.12 * i} for i, c in enumerate(clientes)]),
-    b("Fórmula diez: cuántas facturas vencidas tiene cada uno. Contar si conjunto, con dos condiciones.",
-      {"tipo": "escribir", "celda": "B8", "texto": F10, "duracion": 2.6},
-      tts="Fórmula diez: cuántas facturas vencidas tiene cada uno. Contar si punto conjunto, con dos condiciones."),
-    b("Cuatro clientes deben una factura cada uno. La ferretería, ninguna: con la fórmula escrita a mano, le habría contado dos.",
+    b("Fórmula diez: cuántas vencidas tiene cada uno. Contar si conjunto, con dos condiciones.",
+      [{"tipo": "rotulo", "numero": "10", "texto": "CONTAR.SI.CONJUNTO", "sub": "dos condiciones: cliente y «Vencido»"},
+       {"tipo": "escribir", "celda": "B8", "texto": F10, "duracion": 2.4, "retraso": 0.4}],
+      tts="Fórmula diez: cuántas vencidas tiene cada uno. Contar si punto conjunto, con dos condiciones.", pausa=0.6),
+    b("Cuatro clientes deben una factura. La ferretería, ninguna: con mi fórmula a mano, le habría contado dos.",
       [{"tipo": "calcular", "celda": "B8", "valor": str(cuenta[0])},
        {"tipo": "rellenar", "rango": "B8:B12", "valores": [str(k) for k in cuenta], "retraso": 0.7},
        {"tipo": "resaltar", "rango": "A9:B9", "color": "#ffd400", "etiqueta": "pagó todo", "retraso": 2.0}]),
-    b("Y con eso, la hoja Resumen queda completa, con su gráfico.",
+    b("Y la hoja Resumen queda completa, con su gráfico.",
       [{"tipo": "zoom_fuera", "duracion": 0.8}, dict(GRAF, x=1222, y=262, ancho=310, retraso=0.6)]),
 ])
 
 # ---------------------------------------------------------------- cierre
+esc("aviso", {"titulo": "Antes de cerrar: cuándo *no* usar la IA", "icono": "hand", "texto": "Y qué pasa si usas otra herramienta."}, [
+    b("Antes de cerrar, un aviso honesto."),
+])
 esc("comparar", {"titulo": "¿Cuándo *no* pedírsela a la IA?", "columnas": ["Si…", "Entonces"],
                  "filas": [["La fórmula es más corta que el prompt", "Escríbela tú, y pásala por la *Prueba*"],
-                           ["No sabes ni qué función existe", "Pídesela a la IA"],
+                           ["No sabes qué función existe", "Pídesela a la IA"],
                            ["Combina tres funciones o más", "Pídesela a la IA"],
-                           ["Tienes datos reales de clientes", "No los pegues: el Mapa solo lleva *columnas*"]]}, [
-    b("¿Cuándo no usar la IA? Si la fórmula es más corta que el prompt, escríbela tú, y pásala por la prueba."),
-    b("Si no sabes ni qué función existe, pídesela."),
-    b("Si combina tres funciones o más, también."),
-    b("Y nunca pegues datos reales de clientes en un chat gratis: el mapa solo necesita los nombres de las columnas."),
+                           ["Usas ChatGPT o Copilot", "Mismo prompt · la respuesta puede cambiar: *Prueba*"]]}, [
+    b("¿Cuándo no usar la IA? Si la fórmula es más corta que el prompt: escríbela tú, y pásala por la prueba."),
+    b("Si no sabes qué función existe, pídesela."),
+    b("Si combina tres o más, también."),
+    b("Y puedes pegar el mismo prompt en ChatGPT o Copilot. La respuesta puede cambiar, y por eso existe la prueba."),
 ])
 esc("titular", {"etiqueta": "Gratis", "icono": "download",
-                "lineas": ["Distribuidora Sur", "*10 fórmulas con IA*"], "sub": "Pedidos, Resumen, Prompts y una hoja para practicar", "sub_beat": 1}, [
-    b("¿Usas ChatGPT o Copilot? El prompt de tres partes es el mismo. La planilla completa, con las diez fórmulas, está gratis en la descripción."),
-    b("Trae la hoja Prompts con las tres partes de cada consigna, y una hoja para practicar sin fórmulas."),
+                "lineas": ["Distribuidora Sur", "*10 fórmulas con IA*"], "sub": "Pedidos, Resumen, Prompts y Práctica · en la descripción"}, [
+    b("La planilla, con las diez fórmulas y la hoja Prompts, está gratis en la descripción. Y si te llegan informes en pe de efe, mira este video."),
 ])
 esc("final", {"titulo": "Sigue con *este atajo*"}, [
-    b("Y si en tu trabajo también te llegan informes largos en pe de efe, mira este video: cómo resumirlos con IA sin que invente datos."),
+    b("Te lo dejo en pantalla."),
 ])
+
+# ---------------------------------------------------------------- hojas extra de la plantilla
+QUE_REVISAR = {
+    "1": "Que el último argumento cubra los códigos mal escritos; si tu Excel no tiene BUSCARX, pide BUSCARV.",
+    "2": "Siglas (SRL queda Srl) y tildes que faltan: NOMPROPIO no las arregla.",
+    "3": "Filas sin la barra devuelven #N/A: usa el sexto argumento para dejar el texto original.",
+    "4": "El orden de los tramos (de mayor a menor) y que un precio con error da #¡VALOR!.",
+    "5": "Formato de fecha en la columna (si no, ves 46295); con 0 es fin de este mes.",
+    "6": "Fechas guardadas como texto no se suman y no avisan: compruébalo con un filtro.",
+    "7": "Que mire la columna Pagado; vencimientos vacíos; vence el mismo día del corte.",
+    "8": "Sin vencidas, SI.ERROR; pedidos debajo de la fila 13; deja libres las celdas de abajo.",
+    "9": "Usa la columna limpia: un espacio de más duplica un cliente.",
+    "10": "Un espacio de más en el estado o en el nombre cuenta 0 sin avisar.",
+}
+
+
+def prompts_reales():
+    """Lee respuestas-ia.md: número, prompt y primera fórmula de cada respuesta."""
+    import re as _re
+    txt = open(f"{RAIZ}/produccion/video02/respuestas-ia.md", encoding="utf-8").read()
+    filas_p = []
+    for bloque in _re.split(r"\n## ", txt)[1:]:
+        cab = bloque.splitlines()[0]
+        num = cab.split(" ")[0]
+        prompt = _re.search(r"\*\*Prompt\*\*\n\n((?:> .*\n?)+)", bloque).group(1)
+        prompt = " ".join(l[2:].strip() for l in prompt.strip().splitlines())
+        resp = bloque.split("**Respuesta**", 1)[1]
+        formulas = _re.findall(r"`(=[^`]+)`", resp)
+        formula = formulas[-1] if num.startswith("7b") else formulas[0]
+        filas_p.append([num, cab.split("·")[1].strip() if "·" in cab else cab, prompt, formula,
+                        QUE_REVISAR.get(num.rstrip("ab"), "Es la versión sin Prueba: compárala con la 7b.") if num != "7a" else
+                        "Es la versión sin Prueba: compárala con la 7b."])
+    return filas_p
+
+
+PLANTILLA_EXTRA = {
+    "leeme": ("Funciona en Excel para la web (gratis) y en Microsoft 365. En Excel 2021 fallan TEXTODESPUES (fórmula 3) y ELEGIRCOLS (fórmula 8); "
+              "en 2016/2019, varias más. La fecha de corte de Resumen!B1 está fija (04/11/2026) para que veas los números del video: "
+              "en tu planilla, escribe =HOY(). Sin macros ni vínculos externos. Respuestas generadas con Claude el 25/10/2026."),
+    "hojas": [
+        {"nombre": "Productos", "anchos": [190, 320, 170],
+         "celdas": [["Código", "Producto", "Precio"]] + [[c, p, n(v)] for c, p, v in PRODUCTOS]},
+        {"nombre": "Prompts", "formulas": False, "anchos": [60, 260, 900, 700, 520],
+         "celdas": [["#", "Fórmula", "Prompt (Mapa · Meta · Prueba)", "Fórmula que dio Claude", "Qué revisar"]] + prompts_reales()},
+        {"nombre": "Práctica", "anchos": [175, 340, 250, 230, 190, 140, 100, 120, 100, 140, 150, 100, 130],
+         "celdas": pedidos(set(), filas_cod)},
+    ]}
 
 guion = {"titulo": "10 fórmulas de Excel con IA: tu planilla se llena sola", "duracion_objetivo_min": 10,
          "marca": {"nombre": "Atajos IA", "acento": "#ffd400"}, "subtitulos": False, "progreso": True,
-         "fuentes": [{"dato": "610.575, 2.446.165, 1.835.590 y el resto de las cifras de la planilla",
-                      "fuente": "Cálculo propio sobre la planilla ficticia «Distribuidora Sur» (produccion/video02/guion.json, verificado con plantilla_xlsx.py)",
-                      "fecha": "2026-10"},
-                     {"dato": "«Unas cuatro horas a mano» (estimación, pendiente de medir por el creador)",
-                      "fuente": "Estimación propia; ver produccion/video02/idea.md", "fecha": "2026-10"}],
+         "descripcion_avisos": ("Respuestas generadas con Claude el 25/10/2026. Documentos y empresa de ejemplo ficticios. "
+                                "Voz sintética: la primera persona del guion es un recurso narrativo."),
+         "fuentes": [
+             {"dato": "610.575, 2.446.165, 1.835.590 y el resto de las cifras de la planilla",
+              "fuente": "Cálculo propio sobre la planilla ficticia «Distribuidora Sur» (produccion/video02/fuente/verificar_lo242.py)", "fecha": "2026-10"},
+             {"dato": "BUSCARX existe en Excel 2021, 2024 y Microsoft 365; no en Excel 2016 ni 2019",
+              "fuente": "https://support.microsoft.com/es-ES/Excel/functions/xlookup-function", "fecha": "2026-10"},
+             {"dato": "TEXTODESPUES: Microsoft 365 y Excel 2024 (no Excel 2021)",
+              "fuente": "https://support.microsoft.com/es-ES/Excel/functions/textafter-function", "fecha": "2026-10"},
+             {"dato": "ELEGIRCOLS: Microsoft 365 y Excel para la web; Excel 2024 PENDIENTE de confirmar (no se afirma en el video)",
+              "fuente": "https://support.microsoft.com/office/choosecols-function-bf117976-2722-4466-9b9a-1c01ed9aebff", "fecha": "2026-10"},
+             {"dato": "Excel para la web, gratis con cuenta Microsoft (página de plantillas gratuitas de Excel para la web)",
+              "fuente": "https://support.microsoft.com/en-us/excel/free-excel-for-the-web-templates", "fecha": "2026-10"},
+             {"dato": "Separador de listas (coma o punto y coma) según la configuración regional: PENDIENTE de URL oficial; el video solo dice «¿tu Excel usa coma? dilo en el mapa»",
+              "fuente": "pendiente", "fecha": "2026-10"}],
+         "plantilla_extra": PLANTILLA_EXTRA,
          "escenas": E}
 json.dump(guion, open(f"{RAIZ}/produccion/video02/guion.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
 pal = sum(len(x["voz"].split()) for e in E for x in e["beats"])

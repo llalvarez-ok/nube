@@ -36,7 +36,7 @@
 |---|---|---|
 | `titular` | `etiqueta`, `icono`, `lineas: ["...", {"texto": "...", "beat": 1}]`, `sub`, `sub_beat`, `tamano` | Las líneas entran en el beat 0 (o en su `beat`); el `sub` en el beat 1 |
 | `cifra` | `valor`, `prefijo`, `sufijo`, `decimales`, `etiqueta`, `fuente` | Cuenta de 0 al valor al empezar |
-| `antes_despues` | `antes: {segundos, texto, beat}`, `despues: {segundos, texto, beat}` | Antes en el beat 0, después en el 1; los relojes corren |
+| `antes_despues` | `antes: {segundos, texto, beat}`, `despues: {segundos, texto, beat}`; en lugar de `segundos`, `valor` + `sufijo` muestra una cifra ("10" → "5 clientes") | Antes en el beat 0, después en el 1; los relojes (o las cifras) corren |
 | `lista` | `titulo`, `items: [{texto, detalle, icono, beat}]` | Un elemento por beat (o el de su `beat`) |
 | `capitulo` | `numero`, `total`, `titulo` | Entra con barrido; dura al menos 2,2 s |
 | `aviso` | `titulo`, `texto`, `nivel: "rojo"`, `icono` | Sacudida del ícono y sonido de alerta |

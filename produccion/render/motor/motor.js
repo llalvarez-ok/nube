@@ -104,12 +104,14 @@
     const lado = (k, x) => {
       const o = d[k], caja = el("div", "ad tarjeta " + k, null, cam);
       el("div", "etq", k === "antes" ? "Antes" : "Después", caja);
-      const r = el("div", "reloj", reloj(0), caja);
+      const num = o.valor != null; // cifra en vez de reloj: {valor, sufijo}
+      const fmt = (v) => (num ? fmtNum(v) + (o.sufijo || "") : reloj(v));
+      const r = el("div", "reloj", fmt(0), caja);
       el("div", "det", marcar(o.texto || ""), caja);
       const t = c.B(o.beat != null ? o.beat : (k === "antes" ? 0 : 1), 0.2);
       tl.from(caja, { x, opacity: 0, duration: 0.7, ease: "power3.out" }, t);
       const p = { v: 0 };
-      tl.to(p, { v: o.segundos, duration: 1.2, ease: "power2.out", onUpdate: () => { r.textContent = reloj(p.v); } }, t + 0.3);
+      tl.to(p, { v: num ? o.valor : o.segundos, duration: 1.2, ease: "power2.out", onUpdate: () => { r.textContent = fmt(p.v); } }, t + 0.3);
       c.sonido(k === "antes" ? "tic" : "ding", t + (k === "antes" ? 0.3 : 1.5), k === "antes" ? 1.2 : undefined);
       return t;
     };

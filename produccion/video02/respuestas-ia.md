@@ -1,6 +1,6 @@
 # video02 · Prompts y respuestas de IA usados en el video
 
-- **Herramienta:** Claude. Las respuestas las generó Claude (el mismo modelo que escribe este guion) el 25/10/2026, en la sesión del guionista. **No se corrieron en claude.ai con el plan gratuito.** El rótulo del chat en pantalla dice "Claude · versión gratuita". Antes de publicar, el creador tiene que pegar estos prompts en claude.ai gratis y confirmar que la respuesta dice lo mismo (sobre todo la 7b, que sostiene el giro). Si alguna cambia de sentido, se reemplaza el texto en `guion.json` (ver debate.md).
+- **Herramienta:** Claude. Las respuestas las generó Claude (el mismo modelo que escribe este guion) el 25/10/2026, en la sesión del guionista. **No se corrieron en claude.ai con el plan gratuito.** Desde la ronda 2 del guion, el rótulo del chat dice solo "Claude", sin plan, y la voz no menciona el plan gratuito. Antes de publicar, el creador tiene que pegar estos prompts en claude.ai gratis y confirmar que la respuesta dice lo mismo (sobre todo la 7b, que sostiene el giro). Si alguna cambia de sentido, se reemplaza el texto en `guion.json` (ver debate.md).
 - **Formato:** es una sola conversación. El primer mensaje lleva el Mapa completo y los demás mensajes dan por sabido ese Mapa. Desde la fórmula 8, cada prompt lleva las tres partes (Mapa · Meta · Prueba).
 - **Qué se muestra:** en `guion.json` las respuestas aparecen recortadas para que entren en pantalla, sin cambiar el sentido. Aquí está el texto completo.
 - Los datos son de la planilla ficticia "Distribuidora Sur".

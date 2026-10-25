@@ -14,7 +14,11 @@ muestra el video no coincide con lo que da la fórmula: un error así es veto de
 
 Las fechas "dd/mm/aaaa" se guardan como fechas reales. Las celdas de "datos" de una escena
 no pisan una fórmula que ya se escribió en una escena anterior de la misma hoja, ni las
-celdas de desborde de una matriz dinámica (las que se muestran con "calcular" sin fórmula). Una escena
+celdas de desborde de una matriz dinámica (las que se muestran con "calcular" sin fórmula).
+"datos": {"celdas_plantilla": [...]} reemplaza a "celdas" solo para la plantilla (por ejemplo, con las
+columnas ocultas en pantalla completas). "plantilla_extra": {"hojas": [{"nombre", "celdas", "anchos", "formulas": false}], "leeme": "..."} en guion.json
+agrega hojas de apoyo que no salen en el video (por ejemplo, Prompts y Práctica); con "formulas": false
+las celdas que empiezan con "=" se guardan como texto. Una escena
 con "datos": {"solo_video": true} (por ejemplo, el adelanto del resultado en el hook) no se
 usa para armar la plantilla. LibreOffice 24.2 no calcula BUSCARX, TEXTODESPUES, FILTRAR,
 ORDENAR, UNICOS ni ELEGIRCOLS (llegan en 24.8/25.x): esas celdas hay que verificarlas aparte.
@@ -99,7 +103,7 @@ def valor_celda(v):
 def estado_final(escena):
     """Celdas finales de una escena excel: datos + fórmulas de escribir/insertar + valores de rellenar."""
     celdas, datos = {}, {}
-    for r, fila in enumerate(escena["datos"].get("celdas", []), 1):
+    for r, fila in enumerate(escena["datos"].get("celdas_plantilla") or escena["datos"].get("celdas", []), 1):  # celdas_plantilla: datos completos que no se ven (columnas ocultas)
         for c, v in enumerate(fila, 1):
             if v not in (None, ""):
                 datos[f"{get_column_letter(c)}{r}"] = v
@@ -223,11 +227,33 @@ def main():
         for i, w in enumerate(h["anchos"] or [], 1):
             ws.column_dimensions[get_column_letter(i)].width = max(10, w / 8)
         ws.freeze_panes = "A2"
+    for extra in guion.get("plantilla_extra", {}).get("hojas", []):  # hojas de apoyo: texto tal cual (Prompts, Práctica…)
+        ws = wb.create_sheet(extra["nombre"][:31])
+        for r, fila in enumerate(extra.get("celdas", []), 1):
+            for c, v in enumerate(fila, 1):
+                if v in (None, ""):
+                    continue
+                if extra.get("formulas") is False or not (isinstance(v, str) and v.startswith("=")):
+                    val, fmt = valor_celda(v) if not (isinstance(v, str) and v.startswith("=")) else (v, None)
+                else:
+                    val, fmt = valor_celda(v)
+                cel = ws.cell(row=r, column=c, value=val)
+                if isinstance(v, str) and v.startswith("=") and extra.get("formulas") is False:
+                    cel.data_type = "s"  # la fórmula se muestra como texto, no se calcula
+                if fmt:
+                    cel.number_format = fmt
+                cel.alignment = Alignment(wrap_text=True, vertical="top")
+                if r == 1:
+                    cel.font = Font(bold=True, color="FFFFFF")
+                    cel.fill = verde
+        for i, w in enumerate(extra.get("anchos") or [], 1):
+            ws.column_dimensions[get_column_letter(i)].width = max(10, w / 8)
+        ws.freeze_panes = "A2"
     ws = wb.create_sheet("Léeme", 0)
     ws["A1"] = guion.get("titulo", "")
     ws["A1"].font = Font(bold=True, size=14)
     ws["A3"] = "Plantilla de Atajos IA (youtube.com/@AtajosIAoficial). Los datos son ficticios: reemplázalos por los tuyos."
-    ws["A4"] = "Las fórmulas funcionan en Excel para la web (gratis) y en Excel 2021/365. No tiene macros ni vínculos externos."
+    ws["A4"] = guion.get("plantilla_extra", {}).get("leeme", "Las fórmulas funcionan en Excel para la web (gratis), Microsoft 365 y Excel 2024. No tiene macros ni vínculos externos.")
     ws.column_dimensions["A"].width = 110
     destino = os.path.join(base, "plantilla")
     os.makedirs(destino, exist_ok=True)

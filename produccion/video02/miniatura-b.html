@@ -1,0 +1,42 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:Inter;font-weight:400;src:url(file:///home/user/nube/produccion/render/fonts/inter-latin-400-normal.woff2)}
+@font-face{font-family:Inter;font-weight:600;src:url(file:///home/user/nube/produccion/render/fonts/inter-latin-600-normal.woff2)}
+@font-face{font-family:Inter;font-weight:800;src:url(file:///home/user/nube/produccion/render/fonts/inter-latin-800-normal.woff2)}
+@font-face{font-family:Inter;font-weight:900;src:url(file:///home/user/nube/produccion/render/fonts/inter-latin-900-normal.woff2)}
+@font-face{font-family:Inter;font-weight:900;src:url(file:///home/user/nube/produccion/render/fonts/inter-latin-ext-900-normal.woff2);unicode-range:U+0100-024F}
+*{box-sizing:border-box}
+html,body{margin:0;width:1280px;height:720px;overflow:hidden;background:#0f0f10;font-family:Inter,sans-serif;color:#fff}
+.bubble{position:absolute;width:150px;height:112px;background:#ffffff;border-radius:30px;box-shadow:0 18px 40px #000a, 0 0 0 6px #0f0f10;display:flex;align-items:center;justify-content:center;gap:14px}
+.bubble:after{content:"";position:absolute;left:26px;bottom:-22px;border:16px solid transparent;border-top:24px solid #fff;border-left:6px solid #fff;transform:skewX(-10deg)}
+.bubble i{width:22px;height:22px;border-radius:50%;background:#0f0f10;display:block}
+.bubble svg{position:absolute;right:-22px;top:-26px;width:58px;height:58px;filter:drop-shadow(0 4px 8px #000a)}
+body{background:radial-gradient(800px 520px at 50% 66%,#1d2a22 0%,#121513 50%,#0f0f10 80%)}
+.t{position:absolute;left:0;right:0;top:34px;text-align:center;font-weight:900;font-size:168px;line-height:1;letter-spacing:-7px;text-shadow:0 10px 30px #000}
+.t b{color:#ffd400}
+.stage{position:absolute;left:150px;top:250px;width:980px;height:420px;perspective:1400px}
+.sheet{position:absolute;inset:0;transform:rotateX(12deg) rotateZ(-3deg);transform-origin:50% 60%}
+.ghost{position:absolute;inset:-40px;background-image:linear-gradient(#ffffff14 2px,transparent 2px),linear-gradient(90deg,#ffffff14 2px,transparent 2px);background-size:100% 105px,245px 100%;background-position:0 -10px,-25px 0;-webkit-mask:radial-gradient(closest-side,#000 40%,transparent)}
+.cellbox{position:absolute;left:110px;top:60px;width:760px;height:300px}
+.shadow{position:absolute;inset:0;border-radius:16px;box-shadow:0 40px 80px #000c,0 0 90px #21a36655}
+.cell{position:absolute;inset:0;background:linear-gradient(#22a560,#107C41);border:7px solid #fff;border-radius:16px;display:flex;align-items:center;gap:26px;padding-left:40px}
+.cell.l{clip-path:polygon(0 0,420px 0,392px 52px,452px 104px,368px 160px,440px 212px,356px 262px,380px 300px,0 300px);transform:translate(-9px,5px) rotate(-1.2deg)}
+.cell.r{clip-path:polygon(420px 0,100% 0,100% 100%,380px 300px,356px 262px,440px 212px,368px 160px,452px 104px,392px 52px);transform:translate(9px,-4px) rotate(1deg)}
+.chk{width:102px;height:102px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;flex:none;box-shadow:0 8px 20px #0005}
+.chk svg{width:72px;height:72px}
+.num{font:900 112px Inter;letter-spacing:-5px;color:#fff;text-shadow:0 6px 16px #0006}
+.crack{position:absolute;left:0;top:0;overflow:visible}
+</style></head><body>
+<div class="t">PARECE <b>BIEN</b></div>
+<div class="stage"><div class="sheet"><div class="ghost"></div>
+<div class="cellbox"><div class="shadow"></div>
+<div class="cell"><div class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="#107C41" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div><div class="num">2.446.165</div></div>
+<svg class="crack" width="760" height="300" style="overflow:visible"><defs><filter id="g" x="-50%" y="-20%" width="200%" height="140%"><feGaussianBlur stdDeviation="10"/></filter></defs>
+<polyline filter="url(#g)" fill="none" stroke="#ff1a1a" stroke-width="44" points="524,-24 496,46 516,96 500,150 514,204 480,262 508,328"/>
+<polyline fill="none" stroke="#ff3b30" stroke-width="24" stroke-linejoin="miter" points="524,-24 496,46 516,96 500,150 514,204 480,262 508,328"/>
+<polyline fill="none" stroke="#1a0000" stroke-width="11" stroke-linejoin="miter" points="524,-24 496,46 516,96 500,150 514,204 480,262 508,328"/>
+<polyline fill="none" stroke="#ff3b30" stroke-width="7" stroke-linecap="round" points="516,96 588,80 624,90"/>
+<polyline fill="none" stroke="#ff3b30" stroke-width="6" stroke-linecap="round" points="500,150 452,170 428,162"/>
+<polyline fill="none" stroke="#ff3b30" stroke-width="6" stroke-linecap="round" points="514,204 580,232"/></svg>
+</div></div></div>
+<div class="bubble" style="left:1080px;top:236px"><svg viewBox="0 0 24 24"><path fill="#FFD400" stroke="#0f0f10" stroke-width="1.2" d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"/></svg><i></i><i></i><i></i></div>
+</body></html>

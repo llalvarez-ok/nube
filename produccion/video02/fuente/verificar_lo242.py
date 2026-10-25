@@ -17,7 +17,7 @@ from openpyxl import load_workbook
 from datetime import datetime
 
 BASE = "/home/user/nube/produccion/video02"
-TMP = "/home/user/nube/produccion/video02/build/guion/lo242"
+TMP = BASE + "/build/lo242"
 os.makedirs(TMP, exist_ok=True)
 
 guion = json.load(open(BASE + "/guion.json", encoding="utf-8"))

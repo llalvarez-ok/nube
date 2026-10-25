@@ -1,0 +1,29 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:Inter;font-weight:400;src:url(file:///home/user/nube/produccion/render/fonts/inter-latin-400-normal.woff2)}
+@font-face{font-family:Inter;font-weight:600;src:url(file:///home/user/nube/produccion/render/fonts/inter-latin-600-normal.woff2)}
+@font-face{font-family:Inter;font-weight:800;src:url(file:///home/user/nube/produccion/render/fonts/inter-latin-800-normal.woff2)}
+@font-face{font-family:Inter;font-weight:900;src:url(file:///home/user/nube/produccion/render/fonts/inter-latin-900-normal.woff2)}
+@font-face{font-family:Inter;font-weight:900;src:url(file:///home/user/nube/produccion/render/fonts/inter-latin-ext-900-normal.woff2);unicode-range:U+0100-024F}
+*{box-sizing:border-box}
+html,body{margin:0;width:1280px;height:720px;overflow:hidden;background:#0f0f10;font-family:Inter,sans-serif;color:#fff}
+.bubble{position:absolute;width:150px;height:112px;background:#ffffff;border-radius:30px;box-shadow:0 18px 40px #000a, 0 0 0 6px #0f0f10;display:flex;align-items:center;justify-content:center;gap:14px}
+.bubble:after{content:"";position:absolute;left:26px;bottom:-22px;border:16px solid transparent;border-top:24px solid #fff;border-left:6px solid #fff;transform:skewX(-10deg)}
+.bubble i{width:22px;height:22px;border-radius:50%;background:#0f0f10;display:block}
+.bubble svg{position:absolute;right:-22px;top:-26px;width:58px;height:58px;filter:drop-shadow(0 4px 8px #000a)}
+body{background:radial-gradient(760px 520px at 70% 34%,#3a0f0f 0%,#1a1011 50%,#0f0f10 80%)}
+.stage{position:absolute;left:450px;top:26px;width:780px;height:400px;perspective:1400px}
+.sheet{position:absolute;inset:0;transform:rotateY(-12deg) rotateX(6deg) rotateZ(2deg)}
+.ghost{position:absolute;inset:-50px;background-image:linear-gradient(#ffffff14 2px,transparent 2px),linear-gradient(90deg,#ffffff14 2px,transparent 2px);background-size:100% 100px,250px 100%;-webkit-mask:radial-gradient(closest-side,#000 45%,transparent)}
+.cell{position:absolute;left:40px;top:70px;width:680px;height:286px;background:linear-gradient(#ff4b40,#d61f1f);border:7px solid #fff;border-radius:16px;box-shadow:0 40px 80px #000c,0 0 100px #ff2a2a55;display:flex;align-items:flex-start;padding-top:28px;justify-content:center;font:900 150px Inter;letter-spacing:-6px;color:#fff;text-shadow:0 6px 16px #0005}
+.stamp{position:absolute;left:170px;top:214px;transform:rotate(-11deg);border:12px solid #ffd400;border-radius:22px;padding:6px 34px 10px;font:900 104px Inter;letter-spacing:2px;color:#ffd400;background:#0f0f10e6;box-shadow:0 24px 50px #000c,inset 0 0 0 5px #0f0f10,inset 0 0 0 11px #ffd400;line-height:1}
+.t{position:absolute;left:44px;bottom:30px;font-weight:900;line-height:.9;text-shadow:0 10px 30px #000}
+.t .n{display:block;font-size:200px;letter-spacing:-9px;color:#fff}
+.t .m{display:block;font-size:132px;letter-spacing:-5px;color:#ffd400}
+</style></head><body>
+<div class="stage"><div class="sheet"><div class="ghost"></div>
+<div class="cell">Vencido</div>
+<div class="stamp">PAGADO</div>
+</div></div>
+<div class="t"><span class="n">610.575</span><span class="m">DE MÁS</span></div>
+<div class="bubble" style="left:60px;top:60px"><i></i><i></i><i></i><svg viewBox="0 0 24 24"><path fill="#FFD400" stroke="#0f0f10" stroke-width="1.2" d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0-1.594-1.594z"/></svg></div>
+</body></html>
