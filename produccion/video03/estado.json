@@ -177,6 +177,44 @@
         "[espectador] [Gancho y escena 1, 'yo uso Claude'] Laura usa ChatGPT y recién al final se entera de que sirve igual → 'funciona igual con ChatGPT o Copilot gratis' en el bloque 'Solo necesitas…'",
         "[espectador] [Fecha de corte B1] 'En tu plantilla dice igual a hoy' no se entiende → 'tiene la fórmula =HOY(), así se actualiza sola cada día'; la cifra de 46,5 millones se dice tres veces → una sola"
       ]
+    },
+    {
+      "fecha": "2026-10-26T19:07:58",
+      "etapa": "guion",
+      "ronda": 2,
+      "resultado": "revisar",
+      "nota": 8.1,
+      "criterios": {
+        "hook": 8.0,
+        "ritmo": 8.0,
+        "promesa": 7.5,
+        "claridad": 8.0,
+        "veracidad": 9.0
+      },
+      "motivos": [
+        "«promesa» 7.5 < mínimo 8",
+        "nota 8.10 < umbral 8.5"
+      ],
+      "objeciones": [
+        "[critico-retencion] [esc. 18 / ~5:07] El aviso de ELEGIRCOLS en Excel 2021 corta el impulso 15 s antes del giro → rótulo de 3 s sobre la fórmula, cerrar Q4 en 'casi 3 millones por cobrar' y cortar a la esc. 19",
+        "[critico-retencion] [esc. 20 / ~5:33] La voz neutra 'Su respuesta queda en pantalla, tal cual' es metanarración en el clímax → que la neutra nunca llegue al render: bloquear hasta elegir rama A o B; por defecto 'Mira qué contesta. Y ahora lo compruebo yo: cambio la fecha de corte.'",
+        "[critico-retencion] [esc. 2 / 0:28-0:40] El intento de 'un solo mensaje' nunca se retoma → en la esc. 24: 'Un dashboard rápido, como el del primer mensaje, no sirve si el número más grande engaña.'",
+        "[critico-retencion] [esc. 27 / ~7:12-7:25] Se dice dos veces que hay que mirar la grande → 'Y mira la chica: salta a +146 %. Con tres días, salta.' + 'La grande sigue en +8,6 %: ese es el número del lunes.'",
+        "[critico-retencion] [esc. 24-25 / ~6:35-6:44] Dos titulares seguidos tras otro en la 19: parece que el video terminó → fusionar 25 con 24 y cortar directo a Excel",
+        "[critico-retencion] [esc. 15 / ~4:17] El chat de la pregunta 3 muestra una respuesta pendiente sin voz que la retome → recortar a solo el prompt o 'La IA lo resuelve con un comodín; lo veo en la fórmula.'; si la respuesta real no usa el comodín, eliminar la escena",
+        "[verificador] [esc. 0, beat 3 y rótulo] 'sirve igual con ChatGPT' no está verificado → 'y el prompt también lo puedes usar en ChatGPT'; sub del rótulo 'datos inventados · el prompt sirve en otras IA'; o correr el prompt 2 en ChatGPT con captura",
+        "[verificador] [esc. 4, beats 0–3] El total en Pedidos!L248 está pegado a la columna K: Ctrl+T propondría incluir L → total en una celda separada (p. ej. N2) o mostrar que se selecciona A1:K251 con el rótulo 'revisa el rango que propone'",
+        "[verificador] [condición de cierre] Respuestas reales de Claude: texto honesto; antes de cerrar pegar respuestas con fecha y modelo, elegir rama de la esc. 19, no insinuar coincidencia si la fórmula difiere, completar [FECHA DE LA CORRIDA]",
+        "[verificador] [condición de cierre] 'pegas los pedidos y se rehace solo' depende de la captura con fecha en Excel para la web: Tabla A1:K251 → A1:K254 y B3/B4/B6/I12 a 47.156.820/253/1.011.600; verificar que K (Estado) se rellena sola",
+        "[verificador] [plantilla, menor] Con B1 =HOY() en 2027 el tablero da 0 con los pedidos de 2026 → en Tus datos: 'Si ves todo en 0, escribe 03/11/2026'",
+        "[verificador] [verificado] plantilla 0 diferencias en lo calculable; FILTRAR/ORDENAR/ELEGIRCOLS cotejadas; cifras y redondeos recalculados OK; fuente de Copilot oficial (RM569424) solo en la descripción; Ctrl+T en la web; plan Free con archivos (support.claude.com)",
+        "[espectador] [Gancho 'a mitad del video atrapamos ese número' vs. fin de Q2 'lo resolvemos después de las otras dos preguntas'] El −90 % se resuelve cerca del 70 %, tras Q3, Q4 y el CTA: siento que me estiran → resolverlo justo después de Q2 o cambiar el gancho a 'antes del final lo atrapamos'",
+        "[espectador] [Fecha de corte, 'En tu plantilla tiene igual a hoy'] No se entiende al oído → 'En tu plantilla, B1 tiene la fórmula =HOY(), así se actualiza sola cada día', con =HOY() en la celda",
+        "[espectador] [Gancho, 'Sin macros…'] La voz ya no dice que Excel para la web es gratis → recuperar 'Excel para la web, gratis' en la voz",
+        "[espectador] [Pregunta 2, 'Las fórmulas que uso son las de la plantilla'] Hace sospechar que la de Claude estaba mal → decir si la fórmula de la IA coincidía o qué se corrigió",
+        "[espectador] [La Prueba, 'Su respuesta queda en pantalla, tal cual'] La voz no dice qué detectó la IA y en el celular no se lee el chat → resumir en voz lo que contestó antes de comprobarlo",
+        "[espectador] [Pregunta 4] No se ve cómo se pide a la IA → 'el prompt está en la plantilla, mismo mapa; meta: los vencidos ordenados'"
+      ]
     }
   ]
 }
