@@ -529,10 +529,11 @@ esc("comparar", {"titulo": "¿Cuándo *no* pedírsela a la IA?", "columnas": ["S
 ])
 esc("titular", {"etiqueta": "Gratis", "icono": "download",
                 "lineas": ["Distribuidora Sur", "*10 fórmulas con IA*"], "sub": "Pedidos, Resumen, Prompts y Práctica · en la descripción"}, [
-    b("La planilla, con las diez fórmulas y la hoja Prompts, está gratis en la descripción. Y si te llegan informes en pe de efe, mira este video."),
+    b("La planilla, con las diez fórmulas y la hoja Prompts, está gratis en la descripción."),
 ])
-esc("final", {"titulo": "Sigue con *este atajo*"}, [
-    b("Te lo dejo en pantalla."),
+# primer video publicado del canal: el cierre invita a suscribirse (no hay otro video al que mandar todavía)
+esc("final", {"titulo": "Un atajo nuevo *cada semana*"}, [
+    b("Cada semana subo un atajo nuevo de Excel con inteligencia artificial. Suscríbete, y el próximo te llega a ti."),
 ])
 
 # ---------------------------------------------------------------- hojas extra de la plantilla

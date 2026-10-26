@@ -34,7 +34,7 @@
   - Idioma español. «Contenido alterado o sintético»: **no** hace falta marcarlo, porque la voz no imita a una persona real ni muestra hechos realistas falsos. Igual se declara en la descripción.
   - Capítulos: aparecen solos con la descripción (10 capítulos, el primero en 0:00).
   - Playlists: «Flujos paso a paso con IA» y «Empieza aquí: lo mejor de Atajos IA». Es el primer video del nicho Excel + IA, así que conviene que sea la puerta de entrada.
-  - Pantalla final (últimos 8 s): el video 1 («Cómo resumir cualquier PDF largo con IA…»), que es el que nombra la voz, más el botón de suscripción.
+  - Pantalla final (últimos 20 s): botón **Suscribirse** en el círculo de la derecha y, en el recuadro de la izquierda, **"Lo mejor para el espectador"** (es el primer video del canal: todavía no hay otro al que mandar). El cierre de la voz invita a suscribirse.
   - **Comentario fijado:** «¿Qué fórmula te gustaría pedirle a la IA? La plantilla gratis, sin registro: [enlace]».
 
 ## 3. Prueba A/B y horario

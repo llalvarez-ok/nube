@@ -4688,18 +4688,18 @@
    },
    "beats": [
     {
-     "voz": "La planilla, con las diez fórmulas y la hoja Prompts, está gratis en la descripción. Y si te llegan informes en pe de efe, mira este video."
+     "voz": "La planilla, con las diez fórmulas y la hoja Prompts, está gratis en la descripción."
     }
    ]
   },
   {
    "plantilla": "final",
    "datos": {
-    "titulo": "Sigue con *este atajo*"
+    "titulo": "Un atajo nuevo *cada semana*"
    },
    "beats": [
     {
-     "voz": "Te lo dejo en pantalla."
+     "voz": "Cada semana subo un atajo nuevo de Excel con inteligencia artificial. Suscríbete, y el próximo te llega a ti."
     }
    ]
   }
