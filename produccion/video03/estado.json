@@ -3,7 +3,7 @@
   "canal": "atajos-ia",
   "tema": "Dashboard en Excel con IA (por confirmar con la medición de demanda)",
   "creado": "2026-10-26T17:12:20",
-  "etapa": "guion",
+  "etapa": "visual",
   "historial": [
     {
       "fecha": "2026-10-26T17:22:40",
@@ -244,6 +244,14 @@
         "[espectador] [La Prueba, 'Dice que noviembre lleva tres días…'] El clímax depende de que Claude lo haya detectado de verdad → preparar la frase de la otra rama ('no lo vio; por eso la compruebo yo')",
         "[espectador] [Corrección, 'La corrección, en B7'] 'Mes cerrado vs. el anterior' tiene su fila (B8) y la voz dice B7 → 'reemplazo la fórmula de B7 por esta' o apuntar a la celda correcta",
         "[espectador] [Fecha de corte] 'tiene la fórmula igual a hoy' se entiende solo si en pantalla se ve =HOY() en B1 → confirmar que la celda lo muestra en ese beat"
+      ]
+    },
+    {
+      "fecha": "2026-10-26T21:51:12",
+      "etapa": "guion",
+      "resultado": "forzado",
+      "motivos": [
+        "Aprobado por el creador el 26/10/2026 tras escalada (8,2; todos los criterios en su mínimo, veracidad 9 sin veto). Se aplican los recortes de la ronda 3 sin nueva ronda. Cierre condicionado a respuestas reales de Claude y captura de Excel para la web."
       ]
     }
   ]
