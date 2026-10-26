@@ -1,0 +1,51 @@
+{
+ "evaluaciones": [
+  {
+   "agente": "investigador-mercado",
+   "puntajes": {
+    "demanda": 8,
+    "rpm": 7,
+    "diferenciacion": 8
+   },
+   "objeciones": [
+    "[Ángulo propio, viñeta de El Inge] Dice 'falta revisarlo' pero ya está revisado (descripción + 43 comentarios, certeza media): no trata el mes incompleto ni verifica KPI; sí hace 'probé a Claude y decepciona' → reemplazar la viñeta, el giro sigue exclusivo; el acto 'lo probé' no es diferencial (≤ 30 s)",
+    "[Diferenciador 1] 'Ningún video del top revisa si el número del tablero es cierto' exagera (EXCELeINFO xMYcEEaenqQ, El Inge 1pJqarOwgbA) → 'Ningún video del top trata el error del mes incompleto ni muestra cómo detectar un KPI correcto en lo literal pero engañoso'",
+    "[Evidencia del diferenciador 2] Falta la señal más directa: en 1pJqarOwgbA el comentario más votado (25) pide tarjetas que cambian con el mes 'todo con fórmulas'; otro (20) se queja de revisar lo que dio la IA → sumarlos como evidencia cualitativa, avisando que es una sola fuente",
+    "[Rótulo 'Claude gratis'] Comentarios dicen que Claude 'te pide comprar' o 'se acabaron los tokens' → condición dura antes del guion: correr el prompt en claude.ai gratis con el .xlsx; si falla, rótulo 'Claude' a secas y 'gratis' solo para Excel para la web",
+    "[RPM, no bloquea] Sin cifra de RPM con fuente y fecha → referencia antes del informe mensual de noviembre",
+    "[Demanda del título principal] 'error de cada inicio de mes' sin demanda medida; depende del CTR en sugeridos → a las 48–72 h comparar CTR A/B 1 vs A/B 2 y, si el 2 gana con claridad, cambiar el principal; dejarlo como regla en publicacion.md"
+   ]
+  },
+  {
+   "agente": "critico-retencion",
+   "puntajes": {
+    "empaque": 8
+   },
+   "objeciones": [
+    "[Miniatura B] En el celular el tablero de fondo desaparece; parece miniatura de bolsa/cripto, nada dice Excel → brillo del tablero al 35–45 %, franja de cuadrícula con encabezados A, B, C y verde de Excel en las barras; que la tarjeta tape el 50 % del tablero, no el 70 %",
+    "[Título 1 + miniatura B] El título responde la pregunta de la miniatura: 'inicio de mes' da la solución antes del clic → título con la consecuencia: 'Dashboard en Excel con IA: el número que asusta a tu jefe' o '…: no lo mandes sin esta prueba'; si se queda 'inicio de mes', que vaya como A/B contra una de esas",
+    "[Título 1, intención de búsqueda] No dice que enseña a armar el dashboard → 'tutorial completo + plantilla' en las primeras palabras visibles, o probar 'Dashboard en Excel con IA (y el error que todos cometen)'",
+    "[A/B 2] 'pegas pedidos y se rehace solo' + 'PEGAS Y LISTO' repiten palabra y promesa (regla de 04 §3); miniatura A sigue siendo tablero de frente → 'LUNES: 20 s' solo si se mide; si no 'SIN TOCAR NADA'; antes/después con cursor (barra vacía → llena)",
+    "[Hook 0:00–0:15] 'el día 3 de cada mes' revela la causa en el segundo 10 → cortar en '…y no es cierto. Así le llegaría a tu jefe.' y dejar la causa para 5:10; reenganche de 2:10: 'y la tarjeta que lo arregla no es la que piensas'",
+    "[Promesa, viabilidad] 'Gratis' y 'se rehace solo' dependen de pruebas del creador (Excel para la web con Tabla + referencias estructuradas + gráficos; Claude gratis lee el .xlsx; tiempos) → bloqueo explícito: el guion no se cierra sin las 3 pruebas con captura; si alguna falla, reescribir línea 1 y A/B 2"
+   ]
+  },
+  {
+   "agente": "espectador",
+   "puntajes": {
+    "empaque": 8,
+    "encaje": 8
+   },
+   "objeciones": [
+    "[miniatura B] El −90 % rojo y '¿ES REAL?' frenan, pero el dashboard de fondo está tan apagado que no se nota que es Excel: parece un video de economía o de bolsa → subir el brillo de las barras verdes o mostrar cuadrícula o pestañas de hoja detrás de la tarjeta, sin texto nuevo",
+    "[miniatura B, texto] '¿ES REAL?' es la frase genérica de miniaturas de hype → probar '¿CAYERON?' o '¿EN SERIO CAYÓ?'",
+    "[título 1] 'el error de cada inicio de mes' suena a arreglar un dashboard que ya tengo; Laura no tiene ninguno → línea 1 de la descripción 'Arma un dashboard de ventas en Excel con IA…'; si el A/B 2 gana en búsqueda, quedarse con él",
+    "[hook] 'Así le llegaría a tu jefe' no aplica a Martín, que ES el jefe → 'así le llegaría a tu jefe, o a ti un lunes' o 'y tomarías decisiones con ese número'",
+    "[resultado final, +146,8 %] Después del −90 % engañoso aparece otro número raro → decirlo en una frase con la tarjeta grande resaltada: 'el de 3 días salta como loco; el que miras el lunes es el del mes cerrado: +8,6 %'",
+    "[gratis / regla 7] 'Gratis' ya no está en título ni miniatura y 'IA en Excel' suena a Copilot de pago → 'Excel para la web gratis, Claude gratis' en pantalla desde 0:15 y en la línea 1 de la descripción"
+   ],
+   "haria_clic": true,
+   "lo_terminaria": true
+  }
+ ]
+}
