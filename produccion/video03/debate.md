@@ -677,3 +677,52 @@ Lectura: la marca y la estructura están bien. Bajan la nota los cuadros donde l
 - El gráfico de 12 meses con `max` fijo, la barra de noviembre destacada que crece en el final y la tarjeta `alarma` fija en la esquina durante Q3 y Q4.
 - El `=HOY()` visible en B1 (cuadro 124).
 - El corte de anuncios en ≈ 4:47 y todos los textos de voz, que ya están aprobados.
+
+## Visual · ronda 2 · decisión del showrunner
+
+**Etapa:** visual · **Resultado de `pipeline.py evaluar`:** REVISAR · **Nota:** 7,5 (umbral 8,0)
+Criterios: variedad 8 · marca 8 · legibilidad 7 (mín. 8) · coherencia 7 (mín. 8).
+Lectura: faltan 8 arreglos puntuales de sincronía y encuadre. **La ronda 3 es la última.** No se tocan voces ni duración. Sin contradicciones entre críticos esta vez: las de retención y las de `editor-qc` se suman.
+**Numeración:** escenas desde 0, como en `guion.json`. Cada corrección nombra el contenido para que no haya dudas de numeración.
+
+### Correcciones obligatorias (en orden)
+
+1. **Esc. 22, la corrección: la tarjeta grande cambia con B7** (`editor-qc`; es el error de coherencia más largo, ~19 s).
+   - **Beat 2,** en el mismo instante que el `calcular` de B7: `actualizar_tarjeta` con el título "Último mes cerrado vs. el anterior", el sub "octubre vs. septiembre" y el valor +8,6 % en color neutro, con `resaltar`.
+   - **Cuando la voz dice "subieron":** solo el verde, la salida del borde rojo y el zoom.
+   - Esta fue la corrección 1 de la ronda 1 y quedó a medias.
+2. **Esc. 17 (Q4, cobranza): edición, desborde y encuadre** (`editor-qc`).
+   - La edición de B12 queda recortada al ancho de la columna B (la fórmula entera, en la barra fx) o con zoom a A:B. Que no se encime con "Ferretería El Tornillo" en D12.
+   - Las filas del desborde entran con el mismo tamaño de celda que el resto: nada de letra mayor ni "iosco" cortado.
+   - Cuando la voz nombra el total, el encuadre muestra completos B11:B12, la columna Neto y la tarjeta 2.951.090.
+3. **Esc. 27 (plantilla: hojas Prompts y Tus datos)** (las dos, retención y `editor-qc`).
+   - Ajuste de texto en las columnas B y C.
+   - Zoom de 1,6 a 1,8× a **una sola fila o paso** por beat (la que nombra la voz, ≤ 12 palabras legibles a 168 px); el resto, atenuado.
+   - **En Prompts:** una fila con el rótulo "todos los prompts, listos".
+   - **En Tus datos:** un paso por vez, al ritmo de la voz.
+4. **Esc. 5, el beat de la Meta** (`editor-qc`): lupa "**Meta**: el año, los pedidos y el mes cerrado". La fórmula queda atenuada hasta la esc. 6, para que no haya tres bloques compitiendo.
+5. **Titular + capítulo fundidos (esc. 7–8 y 12–13)** (retención).
+   - Cada par pasa a una sola pantalla sobre el mismo fondo desenfocado: el titular en el beat 1 y el número de capítulo entrando en el beat 2.
+   - El titular nunca queda quieto más de ~4 s sin una entrada.
+   - Mantener los tiempos de voz.
+6. **Esc. 23, titular de la lección** (retención): pulso o resaltado sobre "*engaña*" a mitad del beat 0, para cortar los ~13,5 s de una sola entrada.
+
+### Control antes de la ronda 3
+- `--cuadros` de los instantes citados: 1:43–1:50, 2:39–2:52, 3:43–3:58, 4:30–4:40, 5:32–5:51, 6:21–6:34 y 7:12–7:55.
+- Revisar a 168 px los de las esc. 17 y 27.
+- La duración estimada no baja de la actual.
+
+### Condición de cierre del render (sin cambios)
+- Las respuestas reales de `respuestas-ia.md` reemplazan las maquetas, con el diseño de la corrección 5 de la ronda 1.
+- Ramas elegidas (esc. 1, 9 y 19).
+- Miniatura C solo con su captura real.
+
+### No tocar (funciona)
+- Todo lo que ya subió a 8: variedad, marca, el hook visual y la miniatura B.
+- Las sincronías ya corregidas de las esc. 20, 21 y 25.
+- Los zooms y rótulos reubicados de las esc. 4, 10, 11 y 22.
+- Las 3 tarjetas Mapa · Meta · Prueba.
+- Todas las voces y el corte de anuncios.
+
+### Si la ronda 3 no aprueba
+Recomendaré aprobar con las objeciones pendientes documentadas, salvo que siga algún error de coherencia número-voz (por ejemplo, la tarjeta de la esc. 22). Ese error sí bloquea, porque muestra un número que la voz contradice.
