@@ -78,3 +78,61 @@ El motor v2 (plantilla `excel`) ya tiene `grafico` con `id` (más `alto` y `max`
 - Las restricciones heredadas de video02 (regla 4, datos ficticios declarados, `;`, Excel para la web, sin VBA ni Power Query).
 - La palabra clave `dashboard en excel con ia` al inicio de todos los títulos, menos el A/B 3 condicional.
 - Riesgos de contenido inauténtico y de temas sensibles: bien resueltos.
+
+## Ronda 2 · decisión del showrunner
+
+**Etapa:** idea · **Resultado de `pipeline.py evaluar`:** REVISAR · **Nota:** 7,85 (umbral 8,0)
+Criterios: demanda 8 · empaque 8 · diferenciación 8 · rpm 7 · encaje 8. Todos están sobre su mínimo.
+Lectura: la ronda 1 se aplicó bien. Faltan 0,15 y salen de pulir el empaque, no de cambiar la idea. **La ronda 3 es la última**: no se abre nada nuevo.
+
+### Contradicciones resueltas (prioridad: veracidad y políticas > promesa cumplida > retención > estilo)
+
+1. **Título principal: consecuencia o causa.** Gana la **consecuencia**, con intención de tutorial. "Inicio de mes" responde la pregunta de la miniatura antes del clic (retención) y suena a arreglar un tablero que Laura no tiene (espectador). La causa no se descarta: queda como A/B, que es lo que propuso retención.
+2. **"El número que asusta a tu jefe" contra Martín, que es el jefe.** Gana la versión sin "jefe", que sirve para los dos perfiles.
+3. **"Y el error que todos cometen".** Se descarta por veracidad: "todos" no está medido.
+4. **"SIN TOCAR NADA" en la miniatura A.** Se descarta por promesa cumplida: hay que pegar los pedidos, y eso mismo pidió el espectador en la ronda 1.
+
+### Correcciones obligatorias (en orden)
+
+1. **Títulos.**
+   - Principal (A/B 1): `Dashboard en Excel con IA paso a paso: el número que asusta` (59), con la miniatura B. "Paso a paso" cubre la búsqueda de tutorial y es la idea 2 de `ideas.md`. "El número que asusta" es la consecuencia, no la causa.
+   - A/B 2: `Dashboard en Excel con IA: el error de cada inicio de mes` (57), con la misma miniatura B (se prueba el título, no la miniatura).
+   - A/B 3: `Dashboard en Excel con IA: pegas pedidos y se rehace solo` (57), con la miniatura A sin la palabra "pegas" en el texto: "LUNES: 20 s" si se midió; si no, el antes/después de la barra de noviembre (vacía → llena) sin texto. Si la corrida del mensaje único sale mal, el condicional "Le pedí a la IA un dashboard en 1 mensaje: esto salió" reemplaza a este A/B 3.
+   - Agregar en `publicacion.md` la regla del investigador: a las 48–72 h comparar el CTR de las variantes y, si una gana con claridad, pasarla a principal.
+2. **Miniatura B que se lea como Excel en el celular.**
+   - El tablero de fondo al 35–45 % de brillo, con barras en el verde de Excel y una franja de cuadrícula con los encabezados A, B, C y una pestaña de hoja.
+   - La tarjeta "−90 %" tapa como mucho el 50 % del tablero.
+   - El texto pasa de "¿ES REAL?" (genérico) a **`¿CAYERON?`**.
+   - Rehacer `miniatura-b.html` y `.png`, y revisarla a 168 px de ancho.
+3. **Hook sin la causa.**
+   - Se corta en: "…cayeron un 90 %, y no es cierto. Y con ese número decidirías el lunes."
+   - Fuera "el día 3 de cada mes" y "tu jefe".
+   - La causa aparece recién en el giro (pasados los 5:10).
+   - Reenganche de 2:10: "y la tarjeta que lo arregla no es la que piensas".
+4. **Intención de tutorial y "gratis" fuera del título.**
+   - Línea 1 de la descripción: "Arma paso a paso un dashboard de ventas en Excel con IA: pegas los pedidos y se rehace solo, en Excel para la web gratis, sin macros."
+   - Rótulo en pantalla desde 0:15: "Excel para la web gratis + Claude" (el plan de Claude según la corrección 5).
+   - En el resultado final, una frase sobre el +146,8 %: "el de 3 días salta como loco; el que miras el lunes es el del mes cerrado: +8,6 %", con la tarjeta grande resaltada.
+5. **Texto de diferenciación y RPM: cerrar lo que sigue abierto.**
+   - Reemplazar la viñeta "falta revisar a El Inge" por lo revisado: no trata el mes incompleto, así que el giro sigue siendo exclusivo.
+   - Diferenciador 1, textual: "Ningún video del top trata el error del mes incompleto ni muestra cómo detectar un KPI correcto en lo literal pero engañoso".
+   - Sumar los 2 comentarios de 1pJqarOwgbA (25 y 20 votos) como evidencia cualitativa de una sola fuente.
+   - RPM: una referencia con fuente y fecha si existe. Si no hay ninguna verificable, escribir "sin cifra verificada" y dejar `informe de ventas`, `cuentas por cobrar` y `Power BI` en los capítulos. No se inventa una cifra.
+
+### Condición dura: "Claude gratis" (creador, bloquea el cierre del guion, no la ronda 3)
+
+- **Antes de cerrar el guion**, el creador corre en claude.ai con el plan gratuito, con el .xlsx adjunto: (a) el mensaje único del acto "lo probé" y (b) la Prueba del bloque 2. Guarda las respuestas textuales con fecha y captura en `produccion/video03/respuestas-ia.md`. El orquestador no tiene acceso a claude.ai: no se simula.
+- **Si funciona:** el rótulo es "Claude · versión gratuita" y "Claude gratis" puede ir en la voz y la descripción.
+- **Si pide pagar, se agotan los mensajes o no lee el .xlsx:** se muestra tal cual en el acto "lo probé" (es un veredicto honesto y alimenta el A/B 3 condicional). El rótulo pasa a "Claude" a secas y "gratis" queda solo para Excel para la web. Los prompts Mapa · Meta · Prueba no necesitan el archivo (el Mapa describe las columnas), así que la demo principal no se cae.
+- **Plazo:** viernes 30/10, junto con las pruebas de Excel para la web (Tabla, referencias estructuradas, desplegable, gráficos) y la medición de tiempos. Sin las tres pruebas con captura, el guion puede escribirse con marcas de pendiente, pero no se cierra y la fecha del 03/11 se mueve.
+
+### No tocar (funciona)
+
+- La miniatura B como concepto: el −90 % rojo gigante sobre el tablero, sin sello y sin repetir la cifra en el título.
+- El giro con dos ramas, las cifras, la base y el gráfico de 12 meses con la barra de noviembre que crece.
+- La escaleta de la ronda 1: el acto "lo probé" en ≤ 30 s, la Tabla dentro de la pregunta 1 y el −90 % en la esquina.
+- La palabra clave al inicio de los títulos, la plantilla gratis y las restricciones heredadas de video02.
+
+### Si la ronda 3 no aprueba
+
+Recomendaré **aprobar con las objeciones pendientes documentadas**, salvo que falle la veracidad. La idea ya pasa todos los mínimos y lo que queda es pulido de empaque que se valida mejor con el CTR real que con otra ronda.
