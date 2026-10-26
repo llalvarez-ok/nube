@@ -415,6 +415,10 @@
         const r = rect(a.rango), s = a.escala || 1.6;
         const cx = r.x + r.w / 2, cy = r.y + r.h / 2;
         zs = s; zx = 960 - XL_X - cx * s; zy = 560 - XL_Y - cy * s;
+        // si la ventana ampliada cubre la pantalla, que no deje bandas negras en los bordes
+        const XL_W = 1600, XL_H = 880, lim = (v, a, b) => Math.min(b, Math.max(a, v));
+        if (XL_W * s >= 1920) zx = lim(zx, 1920 - XL_X - XL_W * s, -XL_X);
+        if (XL_H * s >= 1080) zy = lim(zy, 1080 - XL_Y - XL_H * s, -XL_Y);
         tl.to(xl, { scale: s, x: zx, y: zy, duration: a.duracion || 1.1, ease: "power3.inOut" }, t);
         c.sonido("zoom", t);
       },

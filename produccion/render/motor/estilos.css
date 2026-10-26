@@ -175,7 +175,7 @@ html, body { width: 1920px; height: 1080px; overflow: hidden; background: var(--
   border: 1.5px solid rgba(255,255,255,.1); box-shadow: 0 50px 140px rgba(0,0,0,.6); display: flex; flex-direction: column; }
 .chat-cab { height: 70px; display: flex; align-items: center; gap: 14px; padding: 0 30px; font-size: 26px; font-weight: 700; border-bottom: 1px solid rgba(255,255,255,.08); }
 .chat-cab .punto { width: 14px; height: 14px; border-radius: 50%; background: var(--verde-claro); }
-.chat-msgs { flex: 1; padding: 36px 70px; display: flex; flex-direction: column; justify-content: center; gap: 28px; overflow: hidden; }
+.chat-msgs { flex: 1; padding: 36px 70px; display: flex; flex-direction: column; justify-content: flex-end; gap: 28px; overflow: hidden; }
 .chat-u { align-self: flex-end; background: #2b2d36; font-size: 32px; line-height: 1.4; padding: 20px 28px; border-radius: 22px; max-width: 980px; }
 .chat-ia { font-size: 33px; line-height: 1.5; color: #e9e9ee; white-space: pre-wrap; max-width: 1180px; }
 .chat-ia code { background: #23262e; color: #8ef0b5; overflow-wrap: anywhere; word-break: break-all; }

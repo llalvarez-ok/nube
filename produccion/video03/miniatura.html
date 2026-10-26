@@ -1,0 +1,49 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:Inter;font-weight:500;src:url(file:///home/user/nube/produccion/render/fonts/inter-latin-600-normal.woff2)}
+@font-face{font-family:Inter;font-weight:600;src:url(file:///home/user/nube/produccion/render/fonts/inter-latin-600-normal.woff2)}
+@font-face{font-family:Inter;font-weight:800;src:url(file:///home/user/nube/produccion/render/fonts/inter-latin-800-normal.woff2)}
+@font-face{font-family:Inter;font-weight:900;src:url(file:///home/user/nube/produccion/render/fonts/inter-latin-900-normal.woff2)}
+@font-face{font-family:Inter;font-weight:900;src:url(file:///home/user/nube/produccion/render/fonts/inter-latin-ext-900-normal.woff2);unicode-range:U+0100-024F}
+*{box-sizing:border-box}
+html,body{margin:0;width:1280px;height:720px;overflow:hidden;font-family:Inter,sans-serif;color:#fff}
+body{background:#0f0f10}
+/* burbuja de chat de la serie */
+.bubble{position:absolute;width:150px;height:112px;background:#fff;border-radius:30px;box-shadow:0 18px 40px #000a,0 0 0 6px #0f0f10;display:flex;align-items:center;justify-content:center;gap:14px;z-index:9}
+.bubble:after{content:"";position:absolute;left:26px;bottom:-22px;border:16px solid transparent;border-top:24px solid #fff;border-left:6px solid #fff;transform:skewX(-10deg)}
+.bubble i{width:22px;height:22px;border-radius:50%;background:#0f0f10;display:block}
+.bubble svg{position:absolute;right:-22px;top:-26px;width:58px;height:58px;filter:drop-shadow(0 4px 8px #000a)}
+/* ventana de Excel */
+.xl{position:absolute;background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 30px 80px #000d,0 0 0 1px #ffffff22}
+.xl .top{position:absolute;left:0;right:0;top:0;height:44px;background:#107C41;display:flex;align-items:center;padding-left:18px;gap:10px}
+.xl .top i{width:13px;height:13px;border-radius:50%;background:#ffffff80;display:block}
+.xl .top b{margin-left:14px;font:800 19px Inter;color:#fff}
+.xl .cols{position:absolute;top:44px;left:40px;right:0;height:28px;background:#e9eceb;border-bottom:1px solid #c9cecc;display:flex}
+.xl .cols span{flex:1;border-left:1px solid #c9cecc;font:700 16px Inter;color:#555;text-align:center;line-height:28px}
+.xl .rows{position:absolute;top:72px;left:0;width:40px;bottom:40px;background:#e9eceb;border-right:1px solid #c9cecc}
+.xl .rows span{display:block;height:30px;font:600 13px Inter;color:#666;text-align:center;line-height:30px}
+.xl .grid{position:absolute;top:72px;left:40px;right:0;bottom:40px;background-image:linear-gradient(#dfe3e1 1px,transparent 1px),linear-gradient(90deg,#dfe3e1 1px,transparent 1px);background-size:100% 30px,calc(100%/8) 100%}
+.xl .tabs{position:absolute;left:0;right:0;bottom:0;height:40px;background:#e9eceb;border-top:1px solid #c9cecc}
+.xl .tabs span{position:absolute;left:56px;bottom:0;height:37px;padding:0 20px;background:#fff;border-bottom:4px solid #107C41;font:800 17px Inter;color:#107C41;line-height:35px}
+.xl .tabs span+span{left:196px;background:none;border:none;color:#666}
+.xl .cards{position:absolute;top:90px;left:58px;right:20px;display:flex;gap:14px}
+.xl .cards div{flex:1;height:88px;background:#fff;border:2px solid #cfd5d2;border-radius:10px;box-shadow:0 4px 10px #0002}
+.xl .cards div:before{content:"";display:block;margin:14px 14px 10px;width:55%;height:10px;border-radius:5px;background:#b9c0bd}
+.xl .cards div:after{content:"";display:block;margin:0 14px;width:72%;height:26px;border-radius:6px;background:#107C41}
+.xl .chart{position:absolute;left:58px;right:20px;top:194px;bottom:56px;background:#fff;border:2px solid #cfd5d2;border-radius:10px}
+.xl .chart h5{margin:12px 0 0 18px;font:800 17px Inter;color:#333}
+.xl .bars{position:absolute;left:18px;right:18px;bottom:30px;height:230px;display:flex;align-items:flex-end;gap:9px;border-bottom:3px solid #333}
+.xl .bars div{flex:1;background:#107C41;border-radius:4px 4px 0 0;position:relative}
+.xl .bars div b{position:absolute;left:50%;bottom:-27px;transform:translateX(-50%);font:700 14px Inter;color:#555}
+.xl .sombra{position:absolute;inset:0;background:#000;z-index:3}
+.alto{z-index:4}
+.t{position:absolute;font-weight:900;line-height:.92;letter-spacing:-5px;white-space:nowrap;text-shadow:0 8px 28px #000,0 0 2px #000;z-index:8}
+</style></head><body><div style="position:absolute;inset:0;background:radial-gradient(760px 560px at 30% 62%,#3a0f10 0%,#1a1012 45%,#0f0f10 78%)"></div><div class="xl" style="left:468px;top:150px;width:800px;height:556px;transform:rotate(-2deg)"><div class="top"><i></i><i></i><i></i><b>Excel · Dashboard de ventas</b></div>
+<div class="cols"><span>A</span><span>B</span><span>C</span><span>D</span><span>E</span><span>F</span><span>G</span><span>H</span></div><div class="rows"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span><span>18</span></div><div class="grid"></div>
+<div class="cards"><div></div><div></div><div></div></div>
+<div class="chart"><h5>Ventas por mes · 2026</h5><div class="bars"><div style="height:192px"><b>ene</b></div><div style="height:195px"><b>feb</b></div><div style="height:187px"><b>mar</b></div><div style="height:143px"><b>abr</b></div><div style="height:160px"><b>may</b></div><div style="height:164px"><b>jun</b></div><div style="height:213px"><b>jul</b></div><div style="height:178px"><b>ago</b></div><div style="height:162px"><b>sep</b></div><div style="height:175px"><b>oct</b></div><div class="alto" style="height:17px;background:#ff3b3b;box-shadow:0 0 0 3px #fff,0 0 26px 8px #ff3b3bcc"><b style="color:#fff;background:#d13438;border-radius:5px;padding:0 6px;bottom:-29px">nov</b></div><div style="height:3px"><b>dic</b></div></div></div>
+<div class="tabs"><span>Dashboard</span><span>Pedidos</span></div>
+<div class="sombra" style="opacity:0.56"></div></div><svg style="position:absolute;left:1078px;top:262px;width:92px;height:150px;z-index:7;transform:rotate(0deg);filter:drop-shadow(0 10px 16px #000c)" viewBox="0 0 100 160"><path d="M33 0h34v100h30L50 160 3 100h30z" fill="#e5252a" stroke="#0f0f10" stroke-width="5" stroke-linejoin="round"/></svg><div style="position:absolute;left:30px;top:270px;width:650px;height:372px;background:#fff;border-radius:28px;transform:rotate(-3deg);z-index:6;
+      box-shadow:0 30px 90px #000e,0 0 0 9px #e5252a,0 0 150px #e5252a77">
+   <div style="position:absolute;left:40px;top:26px;font:900 84px Inter;letter-spacing:-3px;color:#1b1b1b;line-height:1">VENTAS</div>
+   <div style="position:absolute;left:30px;top:132px;font:900 184px Inter;letter-spacing:-10px;color:#e5252a;line-height:1;white-space:nowrap">−90&#8239;%</div>
+  </div><div class="t" style="left:30px;top:30px;font-size:168px;color:#ffd400">¿CAYERON?</div><div class="bubble" style="left:1102px;top:18px"><i></i><i></i><i></i><svg viewBox="0 0 24 24"><path fill="#FFD400" stroke="#0f0f10" stroke-width="1.2" d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"/></svg></div></body></html>
