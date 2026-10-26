@@ -1,0 +1,45 @@
+{
+ "evaluaciones": [
+  {
+   "agente": "critico-retencion",
+   "puntajes": {
+    "hook": 8,
+    "ritmo": 8,
+    "promesa": 8,
+    "claridad": 8
+   },
+   "objeciones": [
+    "[esc. 1 / 0:14-0:25] La logística volvió a crecer (~11 s) tras el mejor momento del gancho → voz solo 'Con Excel para la web, gratis.'; el resto en el sub del rótulo",
+    "[esc. 1 / 0:25] 'Antes de terminar, la pregunta que atrapa ese número' invita a adelantar y el pago llega a 5:16 (62 %) → 'Te muestro el armado paso a paso, y la única pregunta a la IA que atrapa ese número.'",
+    "[esc. 18 / ~4:40-4:52] Q4 abre con dos frases de mantenimiento (~10 s) antes del corte y del giro → fusionarlas: 'Estado ya viene en la plantilla, igual que el prompt: mismo mapa, la meta son los vencidos.'",
+    "[esc. 24 / ~6:35-6:55] Titular de 3 beats (~18 s de texto) tras el pago → pasar 'mueve la fecha de corte al último día del mes anterior…' a la esc. 23 sobre Excel y dejar el titular en 2 beats"
+   ]
+  },
+  {
+   "agente": "verificador",
+   "puntajes": {
+    "veracidad": 9
+   },
+   "objeciones": [
+    "[plantilla, Pedidos!M1] 'Total del año (comprobación)' pero M2 =SUMA(Pedidos[Neto]) suma toda la Tabla sin filtrar por año → 'Total de la Tabla (comprobación)' y ajustar el paso 2 de Tus datos",
+    "[condición de cierre] Respuestas reales de Claude: trato honesto; antes de cerrar pegar respuestas con fecha y modelo, elegir la rama de la esc. 19 y completar [FECHA DE LA CORRIDA]",
+    "[condición de cierre] Captura con fecha en Excel para la web: Tabla A1:K251 → A1:K254 al pegar 3 filas, K se rellena sola, B3/B4/B6 = 47.156.820/253/1.011.600, Ctrl+T con A1:K251 no incluye M; registrar en fuentes"
+   ]
+  },
+  {
+   "agente": "espectador",
+   "puntajes": {
+    "claridad": 8,
+    "promesa": 8
+   },
+   "objeciones": [
+    "[Pregunta 4] Se perdió el aviso de voz 'ELEGIRCOLS no está en Excel 2021' → recuperarlo en voz o como rótulo sobre la fórmula: 'en Excel 2021 no funciona; usa la versión web o 365'",
+    "[La Prueba, 'Dice que noviembre lleva tres días…'] El clímax depende de que Claude lo haya detectado de verdad → preparar la frase de la otra rama ('no lo vio; por eso la compruebo yo')",
+    "[Corrección, 'La corrección, en B7'] 'Mes cerrado vs. el anterior' tiene su fila (B8) y la voz dice B7 → 'reemplazo la fórmula de B7 por esta' o apuntar a la celda correcta",
+    "[Fecha de corte] 'tiene la fórmula igual a hoy' se entiende solo si en pantalla se ve =HOY() en B1 → confirmar que la celda lo muestra en ese beat"
+   ],
+   "lo_terminaria": true,
+   "podria_armarlo_solo": true
+  }
+ ]
+}
