@@ -443,3 +443,65 @@ También se acepta el rechazo de "número falso" (veracidad).
 2. Captura con fecha de la Tabla expandiéndose en Excel para la web, para `fuentes`.
 3. Comprobar en Excel para la web `Pedidos[...]`, el desplegable, los 3 gráficos, la lista de cobranza y que `=HOY()` en B1 funcione.
 4. **Nuevo:** con 8,25 min estimados, quedan unos 15 s de margen sobre los 8 min que necesitan los anuncios a mitad de video. Si la voz real sale más rápida, hay que avisar antes de recortar algo más.
+
+## Guion · ronda 2 · decisión del showrunner
+
+**Etapa:** guion · **Resultado de `pipeline.py evaluar`:** REVISAR · **Nota:** 8,10 (umbral 8,5)
+Criterios: hook 8 · ritmo 8 · claridad 8 · veracidad 9 (veto levantado) · promesa 7,5 (mín. 8; espectador 7, retención 8).
+Lectura: la ronda 1 se aplicó bien. Falla una sola promesa: el gancho dice "a mitad del video atrapamos ese número" y la resolución llega cerca del 65–70 %, después de Q3, Q4, el CTA y un anuncio. **La ronda 3 es la última**: no se reabre la estructura.
+Escenas numeradas desde 0, como en `guion.json`. Retención cita desde 1 y el verificador desde 0.
+
+### Decisión central: se cambia la promesa del gancho, no se mueve la resolución
+
+Mover el giro justo después de Q2 obligaría a:
+- llevar el corte de anuncios al momento posterior al clímax (el peor lugar);
+- dejar Q3 y Q4 sin tensión después de la resolución;
+- reabrir la estructura aprobada en la idea ("no tocar", giro al 55–60 %).
+
+El CTA al 42 % y el corte antes del giro (el pico de expectativa) son lo que mejor funciona hoy. Por veracidad, el gancho tiene que prometer lo que el video cumple. Se reescribe la frase y se acorta el tramo de Q3 y Q4 para que la espera no se sienta estirada.
+
+### Correcciones obligatorias (en orden)
+
+1. **La promesa del gancho y de los reenganches coincide con la estructura.**
+   - **Esc. 0:** "Te muestro el armado paso a paso y, antes de terminar, la pregunta que atrapa ese número." No se da un tiempo concreto.
+   - **En todo el guion:** quitar "lo resolvemos después de las otras dos preguntas" o cualquier frase que cuente la espera. El reenganche de la esc. 12 ("la tarjeta roja vuelve, y la arregla una sola pregunta") se queda.
+   - **Misma escena (espectador y verificador):** en voz, "Solo necesitas Excel para la web, que es gratis. Sin macros, los datos son inventados, y el prompt también lo puedes usar en ChatGPT". Sub del rótulo: "datos inventados · el prompt sirve en otras IA". No se dice "sirve igual" sin una corrida en ChatGPT con captura.
+2. **Q3 y Q4 más cortos para llegar antes al giro (meta: corte de anuncios en ≤ 5:00).**
+   - **Esc. 14 (chat de Q3):** queda solo el prompt, con la voz "la IA lo resuelve con un comodín; lo veo en la fórmula". Si la respuesta real no usa el comodín, la escena se elimina.
+   - **Esc. 17 (Q4):**
+     - una línea "el prompt está en la plantilla: mismo mapa; meta, los vencidos ordenados";
+     - ELEGIRCOLS pasa a un rótulo de 3 s, sin voz;
+     - cierra en "casi 3 millones por cobrar" y corta a la esc. 18.
+   - **Esc. 23 y 24:** se fusionan los dos titulares seguidos en uno, que retoma el primer intento: "Un dashboard rápido, como el del primer mensaje, no sirve si el número más grande engaña". La referencia al primer mensaje va solo si la esc. 1 sobrevive. Después, corte directo a Excel.
+3. **Clímax sin metanarración (promesa del giro).**
+   - **Esc. 19:** la voz neutra "Su respuesta queda en pantalla, tal cual" **no llega nunca al render**. El render se bloquea hasta elegir la rama según `respuestas-ia.md`:
+     - **A:** resumir en voz lo que detectó ("dice que noviembre lleva tres días y octubre, treinta y uno");
+     - **B:** "esta vez no lo vio".
+     - En las dos ramas sigue "y ahora lo compruebo yo: cambio la fecha de corte".
+   - **Esc. 9:** se reemplaza "Las fórmulas que uso son las de la plantilla" por la variante que corresponda después de la corrida: "la de la IA coincide con la de la plantilla" o "la IA usó X; en la plantilla queda Y porque…". No se insinúa una coincidencia sin texto real.
+4. **Las dos del verificador, más la plantilla.**
+   - **Esc. 4:** el total de comprobación sale de `Pedidos!L248`, que está pegado a la columna K, y pasa a una celda separada por una columna vacía (por ejemplo, `N2`). Así Ctrl+T propone A1:K251 sin tocar el total. La plantilla y el guion tienen que coincidir.
+   - **Esc. 6:** "En tu plantilla, B1 tiene la fórmula =HOY(), así se actualiza sola cada día", con `=HOY()` visible en la celda.
+   - **Hoja Tus datos:** "Si ves todo en 0 (por ejemplo, en 2027), escribe 03/11/2026 en B1".
+
+### Opcional
+- **Esc. 26:** no repetir "mira la grande": "Y mira la chica: salta a +146 %. Con tres días, salta." + "La grande sigue en +8,6 %: ese es el número del lunes."
+
+### No tocar (funciona)
+- Las 3 primeras frases del hook y el −90 % a los ≈ 3,5 s.
+- El reenganche de 2:10.
+- El CTA al 42 % y el corte de anuncios justo antes del giro.
+- El giro con dos ramas y el corte al 31/10.
+- Las dos tarjetas de la corrección.
+- Todas las cifras y redondeos (verificados).
+- El rango contra Tabla con números.
+- El gráfico de 12 meses y la barra de noviembre.
+- "No es cierto".
+- Lo que se agregó para el paso a paso (fórmula reescrita, nombre de la Tabla, Insertar > Gráfico).
+
+### Condiciones de cierre (creador, viernes 30/10; sin cambios)
+- Respuestas reales con fecha y modelo en `respuestas-ia.md`, y elección de las ramas de las esc. 1, 9 y 19.
+- Captura con fecha en Excel para la web: la Tabla pasa de A1:K251 a A1:K254, B3/B4/B6/I12 llegan a 47.156.820/253/1.011.600 y la columna K (Estado) se rellena sola.
+
+### Si la ronda 3 no aprueba
+Recomendaré aprobar con las objeciones pendientes documentadas, siempre que la veracidad siga en ≥ 9 y sin veto. Las condiciones de cierre siguen bloqueando el render final.
