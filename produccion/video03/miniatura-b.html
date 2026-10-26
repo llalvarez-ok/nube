@@ -6,30 +6,43 @@
 @font-face{font-family:Inter;font-weight:900;src:url(file:///home/user/nube/produccion/render/fonts/inter-latin-ext-900-normal.woff2);unicode-range:U+0100-024F}
 *{box-sizing:border-box}
 html,body{margin:0;width:1280px;height:720px;overflow:hidden;font-family:Inter,sans-serif;color:#fff}
-body{background:radial-gradient(900px 640px at 70% 50%,#2a0d0d 0%,#161011 50%,#0f0f10 80%)}
+body{background:radial-gradient(900px 640px at 72% 50%,#2a0d0d 0%,#161011 50%,#0f0f10 80%)}
 .bubble{position:absolute;width:150px;height:112px;background:#ffffff;border-radius:30px;box-shadow:0 18px 40px #000a, 0 0 0 6px #0f0f10;display:flex;align-items:center;justify-content:center;gap:14px}
 .bubble:after{content:"";position:absolute;left:26px;bottom:-22px;border:16px solid transparent;border-top:24px solid #fff;border-left:6px solid #fff;transform:skewX(-10deg)}
 .bubble i{width:22px;height:22px;border-radius:50%;background:#0f0f10;display:block}
 .bubble svg{position:absolute;right:-22px;top:-26px;width:58px;height:58px;filter:drop-shadow(0 4px 8px #000a)}
 
-.dash{position:absolute;left:480px;top:40px;width:760px;height:640px;background:#17191a;border-radius:20px;border:2px solid #2a2e2c;filter:brightness(.8);transform:rotate(-2deg)}
-.cards{display:flex;gap:18px;padding:26px}
-.cards div{flex:1;height:110px;background:#222625;border-radius:14px;border:2px solid #303533}
-.cards div:before{content:"";display:block;margin:20px 18px 14px;width:60%;height:12px;border-radius:6px;background:#3b413e}
-.cards div:after{content:"";display:block;margin:0 18px;width:75%;height:30px;border-radius:8px;background:#4a524e}
-.chart{position:absolute;left:26px;right:26px;bottom:26px;height:440px;background:#222625;border-radius:14px;border:2px solid #303533}
-.bars{position:absolute;left:24px;right:24px;bottom:28px;height:340px;display:flex;align-items:flex-end;gap:12px;border-bottom:3px solid #4a524e}
-.bars div{flex:1;background:linear-gradient(#2fb36e,#107C41);border-radius:6px 6px 0 0}
-.kpi{position:absolute;left:510px;top:340px;width:560px;height:310px;background:#fff;border-radius:28px;transform:rotate(-4deg);box-shadow:0 30px 90px #000e,0 0 0 8px #e5252a,0 0 140px #e5252a66;overflow:visible}
-.kpi h4{margin:26px 0 0 40px;font:800 30px Inter;color:#6a726e;letter-spacing:-.5px}
-.kpi .v{position:absolute;left:28px;top:80px;font:900 184px Inter;color:#e5252a;letter-spacing:-14px;line-height:1;white-space:nowrap}
-.kpi svg.arrow{position:absolute;right:-120px;bottom:-60px;width:170px;height:240px;filter:drop-shadow(0 12px 20px #000c)}
-.t{position:absolute;left:44px;top:200px;font-weight:900;line-height:.88;letter-spacing:-6px;text-shadow:0 10px 30px #000}
-.t span{display:block;font-size:150px;color:#ffd400}
+.xl{position:absolute;left:400px;top:170px;width:850px;height:600px;background:#fff;border-radius:16px;overflow:hidden;transform:rotate(-2deg);filter:brightness(.45);box-shadow:0 30px 80px #000c}
+.top{height:44px;background:#107C41;display:flex;align-items:center;padding-left:18px;gap:10px}
+.top i{width:14px;height:14px;border-radius:50%;background:#ffffff80;display:block}
+.top b{margin-left:16px;font:800 20px Inter;color:#fff}
+.cols{position:absolute;top:44px;left:44px;right:0;height:30px;background:#e9eceb;border-bottom:1px solid #c9cecc;display:flex}
+.cols span{flex:1;border-left:1px solid #c9cecc;font:700 17px Inter;color:#555;text-align:center;line-height:30px}
+.rows{position:absolute;top:74px;left:0;width:44px;bottom:44px;background:#e9eceb;border-right:1px solid #c9cecc;display:flex;flex-direction:column}
+.rows span{height:30px;font:600 14px Inter;color:#666;text-align:center;line-height:30px}
+.grid{position:absolute;top:74px;left:44px;right:0;bottom:44px;background-image:linear-gradient(#dfe3e1 1px,transparent 1px),linear-gradient(90deg,#dfe3e1 1px,transparent 1px);background-size:100% 30px,92px 100%}
+.tabs{position:absolute;left:0;right:0;bottom:0;height:44px;background:#e9eceb;border-top:1px solid #c9cecc}
+.tabs span{position:absolute;left:60px;bottom:0;height:40px;padding:0 22px;background:#fff;border-bottom:4px solid #107C41;font:800 18px Inter;color:#107C41;line-height:38px}
+.tabs span+span{left:200px;background:none;border:none;color:#666}
+.cards{position:absolute;top:96px;left:70px;right:24px;display:flex;gap:16px}
+.cards div{flex:1;height:96px;background:#fff;border:2px solid #cfd5d2;border-radius:10px;box-shadow:0 4px 10px #0002}
+.cards div:before{content:"";display:block;margin:16px 16px 12px;width:55%;height:10px;border-radius:5px;background:#b9c0bd}
+.cards div:after{content:"";display:block;margin:0 16px;width:70%;height:28px;border-radius:6px;background:#107C41}
+.chart{position:absolute;left:70px;right:24px;top:212px;bottom:64px;background:#fff;border:2px solid #cfd5d2;border-radius:10px}
+.bars{position:absolute;left:22px;right:22px;bottom:22px;height:270px;display:flex;align-items:flex-end;gap:10px;border-bottom:3px solid #333}
+.bars div{flex:1;background:#107C41;border-radius:4px 4px 0 0}
+.kpi{position:absolute;left:250px;top:370px;width:540px;height:300px;background:#fff;border-radius:26px;transform:rotate(-4deg);box-shadow:0 30px 90px #000e,0 0 0 8px #e5252a,0 0 140px #e5252a66}
+.kpi h4{margin:24px 0 0 38px;font:800 30px Inter;color:#6a726e}
+.kpi .v{position:absolute;left:26px;top:72px;font:900 182px Inter;color:#e5252a;letter-spacing:-12px;line-height:1;white-space:nowrap}
+.kpi svg{position:absolute;right:-165px;bottom:-40px;width:160px;height:230px;filter:drop-shadow(0 12px 20px #000c)}
+.t{position:absolute;left:34px;top:22px;font-weight:900;line-height:1;letter-spacing:-6px;white-space:nowrap;text-shadow:0 10px 30px #000;color:#ffd400}
+.t span{display:block;font-size:150px}
 </style></head><body>
-<div class="dash"><div class="cards"><div></div><div></div><div></div></div><div class="chart"><div class="bars"><div style="height:296px"></div><div style="height:301px"></div><div style="height:289px"></div><div style="height:221px"></div><div style="height:247px"></div><div style="height:252px"></div><div style="height:330px"></div><div style="height:275px"></div><div style="height:249px"></div><div style="height:271px"></div><div style="height:26px"></div><div style="height:4px"></div></div></div></div></div>
+<div class="xl"><div class="top"><i></i><i></i><i></i><b>Excel</b></div><div class="cols"><span>A</span><span>B</span><span>C</span><span>D</span><span>E</span><span>F</span><span>G</span><span>H</span></div><div class="rows"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span><span>18</span></div><div class="grid"></div>
+<div class="cards"><div></div><div></div><div></div></div><div class="chart"><div class="bars"><div style="height:224px"></div><div style="height:228px"></div><div style="height:219px"></div><div style="height:167px"></div><div style="height:187px"></div><div style="height:191px"></div><div style="height:250px"></div><div style="height:208px"></div><div style="height:189px"></div><div style="height:205px"></div><div style="height:19px"></div><div style="height:5px"></div></div></div>
+<div class="tabs"><span>Dashboard</span><span>Pedidos</span></div></div>
 <div class="kpi"><h4>Ventas vs. mes anterior</h4><div class="v">−90 %</div>
-<svg class="arrow" viewBox="0 0 100 130"><path d="M35 0h30v78h28L50 130 7 78h28z" fill="#e5252a" stroke="#0f0f10" stroke-width="4"/></svg></div>
-<div class="t"><span>¿ES</span><span>REAL?</span></div>
-<div class="bubble" style="left:1090px;top:30px"><i></i><i></i><i></i><svg viewBox="0 0 24 24"><path fill="#FFD400" stroke="#0f0f10" stroke-width="1.2" d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"/></svg></div>
+<svg viewBox="0 0 100 130"><path d="M35 0h30v78h28L50 130 7 78h28z" fill="#e5252a" stroke="#0f0f10" stroke-width="4"/></svg></div>
+<div class="t"><span>¿CAYERON?</span></div>
+<div class="bubble" style="left:1100px;top:22px"><i></i><i></i><i></i><svg viewBox="0 0 24 24"><path fill="#FFD400" stroke="#0f0f10" stroke-width="1.2" d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"/></svg></div>
 </body></html>
