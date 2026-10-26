@@ -3,7 +3,7 @@
   "canal": "atajos-ia",
   "tema": "Fórmulas de Excel con IA: 10 que te ahorran horas",
   "creado": "2026-10-25T20:54:06",
-  "etapa": "idea",
+  "etapa": "publicado",
   "historial": [
     {
       "fecha": "2026-10-25T21:02:07",
@@ -241,6 +241,54 @@
         "[espectador] Excel 2021 en el rótulo (aplicado).",
         "[espectador] 'La empresa es inventada' en voz (aplicado).",
         "[espectador] Confirmar que la plantilla se baja sin email (condición del creador)."
+      ]
+    },
+    {
+      "fecha": "2026-10-26T17:12:10",
+      "etapa": "idea",
+      "resultado": "forzado",
+      "motivos": [
+        "El creador publicó el video el 26/10/2026 sin medir la demanda"
+      ]
+    },
+    {
+      "fecha": "2026-10-26T17:12:14",
+      "etapa": "visual",
+      "resultado": "forzado",
+      "motivos": [
+        "Publicado por el creador el 26/10/2026 (render final con voz, metadatos y Shorts listos)"
+      ]
+    },
+    {
+      "fecha": "2026-10-26T17:12:15",
+      "etapa": "render",
+      "resultado": "forzado",
+      "motivos": [
+        "Publicado por el creador el 26/10/2026 (render final con voz, metadatos y Shorts listos)"
+      ]
+    },
+    {
+      "fecha": "2026-10-26T17:12:15",
+      "etapa": "qc",
+      "resultado": "forzado",
+      "motivos": [
+        "Publicado por el creador el 26/10/2026 (render final con voz, metadatos y Shorts listos)"
+      ]
+    },
+    {
+      "fecha": "2026-10-26T17:12:15",
+      "etapa": "empaque",
+      "resultado": "forzado",
+      "motivos": [
+        "Publicado por el creador el 26/10/2026 (render final con voz, metadatos y Shorts listos)"
+      ]
+    },
+    {
+      "fecha": "2026-10-26T17:12:15",
+      "etapa": "listo",
+      "resultado": "forzado",
+      "motivos": [
+        "Publicado por el creador el 26/10/2026 (render final con voz, metadatos y Shorts listos)"
       ]
     }
   ]
