@@ -20,3 +20,5 @@ Canal en español sobre IA práctica para el trabajo. Nombre real del canal: **A
 - Rutina semanal de los lunes creada (sesión nueva en cada disparo).
 - Pendiente: auditoría de la API de YouTube (guía en `herramientas/auditoria-api.md`).
 - video02 (primer video Excel + IA, motor v2): idea escalada (falta medir la demanda), guion aprobado en provisional (8,65), vista previa sin voz renderizada, metadatos, miniaturas y `publicacion.md` listos. Falta: `GOOGLE_TTS_API_KEY`, probar la plantilla en Excel para la web y la decisión del creador sobre la idea.
+- video02 publicado el 26/10/2026 (https://youtu.be/drjrSlUxi78); Shorts programados 27, 29 y 31/10.
+- video03 (dashboard en Excel con IA): idea y guion aprobados por el creador tras escalada, visual aprobado (8,0), empaque en borrador. Bloqueado hasta que el creador corra los prompts de `produccion/video03/respuestas-ia.md` en claude.ai gratis y pruebe la plantilla en Excel para la web (plazo 30/10); después: elegir ramas (`rama_elegida`), render con voz, qc, empaque final. Publicación prevista 03/11/2026 13:00 CDMX.
