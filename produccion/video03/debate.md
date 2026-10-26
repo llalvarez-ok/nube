@@ -338,3 +338,108 @@ También se acepta el rechazo de "número falso" (veracidad).
 - "No es cierto" en lugar de "falso" o "mentira".
 - El CTA al 42 % y la marca del corte de anuncios.
 - Los cambios en las herramientas (`datos.filas` y `plantilla_xlsx.py`): aceptados, pendientes de que el coordinador los confirme.
+
+## Respuesta a la ronda 1 (guion · guionista, 26/10/2026)
+
+**Resultado de los controles:**
+- `puntuar_guion.py video03`: **100/100**.
+- `plantilla_xlsx.py video03 --verificar`: **sin diferencias** en las celdas calculables. Las 12 celdas de la lista de cobranza (FILTRAR, ORDENAR, ELEGIRCOLS) se informan aparte, como antes, y coinciden con `datos_base.py`.
+- Duración estimada: **8,25 min**, por debajo de la meta de ≤ 9,1 min. El giro empieza en **5:07** (62 %).
+- Revisé con `--cuadros` los cuadros 8, 80, 88, 200 y 208.
+
+**Prompts:** sus textos **no cambiaron**. En `respuestas-ia.md` solo se actualizaron los números de escena (los prompts 4 y 5 ahora están en las escenas 14 y 19) y las voces que dependen de cada respuesta.
+
+**Hoja Pedidos:** sin cambios. El CSV, la Tabla y la fórmula de Estado siguen igual, así que no regeneré `Distribuidora Sur - Pedidos 2026.xlsx`.
+
+### Correcciones obligatorias del showrunner
+1. **Veracidad de la plantilla y de la voz: aceptada.**
+   - **B1:** `=HOY()` en la plantilla. Lo aplica el campo nuevo `plantilla_extra.reemplazos` de `plantilla_xlsx.py`: el archivo entregado lleva `=HOY()` y `--verificar` recalcula la versión con 03/11/2026, que es lo que muestra el video.
+   - **Léeme y Tus datos (paso 1):** «Para ver los números del video, escribe 03/11/2026 en Dashboard!B1».
+   - **Escena 6:** «Aquí la dejo fija en el 3 de noviembre.» + «En tu plantilla tiene igual a hoy, así se actualiza sola cada día», con una nota `=HOY()` en B1.
+   - **Hoja Prompts:** las columnas ahora son «Fórmula de la plantilla (verificada)» y «Respuesta de Claude (fecha)», esta última con `[PENDIENTE: respuesta real]`.
+   - **B7 fuera del Dashboard:** la corrección se hace **en la misma celda**. En la escena 22, B7 pasa de `=B6/B5-1` a la fórmula del mes cerrado, con la etiqueta A7 reescrita, y B8 es el mismo tramo.
+     - La plantilla no tiene la variación ingenua. Así «la alarma roja se va» es cierto y el −77,9 % desaparece de la escena 26.
+     - La ingenua queda en Prompts como la fila 3b, «la ingenua, para que la veas».
+   - **Conteo:** la voz dice «todas las fórmulas están en la plantilla, verificadas». Prompts ahora trae B3–B8, B10–B12, D2, H2, I2, L2, O2 y Estado (Pedidos!K2).
+   - **Escena 12:** «suscríbete para el próximo atajo de Excel con IA», sin días.
+   - **Escena 27:** sin Copilot. Va a `descripcion_avisos` («Si tienes Copilot en Excel: … Excel canvas … RM569424») y a `fuentes`, con la entrada del Roadmap que reemplaza la fuente no oficial.
+2. **Nada atribuido a Claude antes de la respuesta real: aceptada.**
+   - **Escena 19, beat 2:** la voz por defecto es neutra («Su respuesta queda en pantalla, tal cual. Y lo compruebo yo, con la fecha de corte.»). `voz_rama_a` y `voz_rama_b` quedan escritas, con `elegir_rama` apuntando a `respuestas-ia.md`.
+   - **El asterisco:** lo explica el narrador sobre la fórmula de la plantilla (escena 15: «En la plantilla, el criterio del vendedor es este…»). El chat de la escena 14 solo muestra la respuesta pendiente.
+   - **Escenas 5 y 9:** la voz no describe lo que devolvió Claude («Su respuesta, tal cual. Las fórmulas que uso son las de la plantilla.»).
+   - **Escena 1:** sigue condicional, ahora también si la corrida «no dio un dashboard».
+   - **Rótulo:** «versión gratuita» solo con captura (`pendiente_verificar`).
+3. **«Paso a paso» sin alargar: aceptada.**
+   - Lo que se agrega:
+     - **Escena 4:** el total vive en L248. Se ve `=SUMA(Pedidos!H2:H250)`, pegar no lo cambia, se crea la Tabla («en Diseño de tabla le pongo de nombre Pedidos») y **se reescribe** a `=SUMA(Pedidos[Neto])`. El 46.586.220 aparece después de reescribir.
+     - **Escena 10, nueva y solo de video:** la tabla de meses H2:I13, «la seleccionas, Insertar, Gráfico de columnas», y el gráfico aparece.
+     - **Escena 6:** «una tarjeta es eso: una celda grande, con un solo número».
+     - **Escena 5:** «Copia este prompt de la plantilla y cambia solo los nombres de tus columnas», con un rótulo que menciona la coma.
+   - Lo que se quita:
+     - **Escena 0:** sale la logística. Queda el rótulo «Excel para la web gratis + Claude · datos inventados · sirve igual con ChatGPT» y la frase del brief en 2 beats. «La plantilla hace el resto» pasa a la escena 28.
+     - **Cifras en voz redondeadas:** 46,6 millones (dicho una sola vez, en la escena 4), 4,6 millones, 441 mil, un millón, 47,2 millones, 16,3 millones, 1,2 millones y casi 3 millones. En pantalla, la cifra exacta.
+     - **Pregunta 3:** unos 32 s (chat de 6 s + excel de 26 s). Salen Diego Paz y el papel higiénico en voz.
+     - **Giro:** sale «La fórmula no está mal…». El `aviso` y el `antes_despues` quedan fusionados en uno solo, con la consecuencia «frenarías compras por una caída que no existe».
+     - **Límites:** 2 frases.
+4. **Arranque y bucle abierto: aceptada.**
+   - Las 4 preguntas se presentan como «lo que tiene que contestar el tablero del lunes». El rótulo «Mapa · Meta · Prueba» salió de «lo probé»: el método aparece por primera vez en la escena 5.
+   - **Escena 12:** «La tarjeta roja vuelve, y la arregla una sola pregunta».
+   - **Tarjeta `alarma`:** fija en las escenas 15 y 17, sin nombrarla en voz. Salió «sigue ahí, esperando».
+   - **Giro:** empieza en 5:07, cumple el ≤ 5:10. Con el video más corto (8,25 min), el 5:07 cae en el 62 %, no en el 55–60 %. No lo fuerzo: para bajarlo habría que alargar el final o recortar las preguntas, y las dos cosas chocan con otras correcciones.
+5. **Video02 y cierre: aceptada.**
+   - **Escena 17:** «La columna Estado ya viene en la plantilla; cómo se arma, en el video del final», con la tarjeta de YouTube.
+   - **FILTRAR en una frase:** «se queda con los vencidos y los ordena».
+   - **En voz:** «Ojo: ELEGIRCOLS no está en Excel 2021; en la web y en 365, sí».
+   - **Escena 29:** «La columna Estado que viste hoy se arma en este video…», sin condicional.
+   - **Escena 26:** «Con tres días, salta; el lunes miras la grande».
+6. **Zoom de 0:08: aceptada.**
+   - El zoom pasa a `C1:E7` a 1,4x (antes `F1:F4` a 1,7x) y la tarjeta −90 % va en x = 1244.
+   - El cálculo de la cámara deja el centro en x = 909 y y = 414. Con eso la ventana cubre el cuadro: borde derecho en 1927 px, superior en −20 px e inferior en 1211 px.
+   - El cuadro 8 se sacó con `--cuadros`: sin negro y con las 3 tarjetas y el gráfico enteros. Falta la validación del director visual para la miniatura.
+
+### Objeciones de los críticos (`rondas/guion-1.json`)
+**Retención**
+1. **Logística de 0:19–0:32 y «la plantilla hace el resto»: aceptada.** Ver la corrección 3. El bucle queda en «Te muestro el armado paso a paso, y a mitad del video atrapamos ese número».
+2. **Zoom de 0:08: aceptada** (corrección 6).
+3. **Las 4 preguntas mezcladas con el método: aceptada.** Ver la corrección 4.
+   - Cerrar «lo probé» con «Pero mira este número»: **rechazada**. Supone que el dashboard de Claude trae esa tarjeta, y eso no se sabe hasta la corrida. Queda «¿cómo sabes si esos números están bien?», que sirve con cualquier resultado.
+4. **El bucle se paga tarde y los reenganches suenan a relleno: aceptada.** El giro pasa de 5:24 a 5:07, la pregunta 3 dura unos 32 s y los reenganches agregan algo.
+5. **Cifras completas en voz: aceptada** (corrección 3).
+6. **Tres escenas que repiten «tres días contra un mes»: aceptada.** Quedan dos: la demostración con el corte al 31/10 y un solo antes/después con la consecuencia.
+7. **«Lo vio» da por hecha la rama A: aceptada.** Voz neutra más las dos ramas escritas.
+8. **Unos 70 s de cierre:**
+   - **Aceptada:** límites en 2 frases, pantalla final sin condicional y la escena 17 sin excluir a quien no vio video02.
+   - **ChatGPT y Copilot a la descripción: aceptada en parte.** Copilot va a la descripción. «Sirve igual con ChatGPT» pasa al inicio, por la decisión 6 del showrunner. El cierre baja a unos 54 s.
+
+**Verificador**
+1. **«En tu plantilla dice igual a hoy» es falso: aceptada.** La plantilla trae `=HOY()` (corrección 1).
+2. **«Fórmula que dio Claude»: aceptada.** La columna se renombró y se agregó la de la respuesta, pendiente.
+3. **Fuente no oficial del modo dashboard: aceptada.** Ahora es RM569424 y solo está en la descripción, con «Si tienes Copilot en Excel».
+4. **Convertir en Tabla no reescribe la fórmula: aceptada.** Hay `escribir` de `=SUMA(Pedidos[Neto])` antes del 46.586.220.
+5. **Expansión de la Tabla sin captura: aceptada como bloqueo.** En `fuentes` figura como «PENDIENTE: captura con fecha». Sin ella, el guion no se cierra.
+6. **«Las 12 fórmulas»: aceptada.** La voz dice «todas las fórmulas» y Prompts las trae todas.
+7. **B7 y el −77,9 %: aceptada.** B7 se corrige en la misma celda y la ingenua sale del Dashboard.
+8. **«Martes y viernes»: aceptada.** Se quitó.
+9. **Escenas 14 y 19 atribuyen a Claude: aceptada** (corrección 2). «Gratis» para Claude sigue solo con captura.
+10. **Cifras verificadas: sin cambios.** No toqué ninguna cifra; solo cambió cómo se dicen en voz.
+
+**Espectador**
+1. **El gráfico y las tarjetas aparecen hechos: aceptada.** Hay una escena nueva con la tabla de meses y «Insertar › Gráfico de columnas», más la línea sobre qué es una tarjeta.
+2. **No se ve el cambio a `Pedidos[Neto]` ni el nombre de la Tabla: aceptada.**
+3. **El bloque del Mapa: aceptada.** «Copia este prompt de la plantilla y cambia solo los nombres de tus columnas», con el rótulo sobre la coma.
+4. **La cobranza excluye a quien no vio video02 y ELEGIRCOLS no se explica: aceptada,** salvo el aviso «en el minuto 1». Por la decisión 4 del showrunner, el aviso va en la pregunta 4.
+5. **El −90 % se resuelve tarde: aceptada en parte.** El giro adelanta 17 s y se acortan las preguntas 3 y 4. No lo muevo antes de la pregunta 3 porque el showrunner mantiene el orden y el corte de anuncios.
+6. **La tarjeta chica del +146,8 % confunde: aceptada.** Queda la regla «Con tres días, salta; el lunes miras la grande».
+7. **«Yo uso Claude» y Laura usa ChatGPT: aceptada.** «Sirve igual con ChatGPT» va en voz y en el rótulo desde 0:10. No se dice «Copilot gratis» (decisión 6).
+8. **B1 no se entiende y los 46,5 millones se dicen tres veces: aceptada.** Se dice «tiene igual a hoy, así se actualiza sola cada día», con la nota `=HOY()`, y el total se dice una sola vez.
+
+### Cambios en herramientas (ronda 2)
+- `herramientas/plantilla_xlsx.py`:
+  - `plantilla_extra.reemplazos` cambia celdas solo en el archivo entregado; `--verificar` usa los valores del video.
+  - `plantilla_extra.formatos` fija formatos de número (`mmm`, `0.0%`, `#,##0`, fechas).
+
+### Pendientes del creador (sin cambios)
+1. Respuestas reales de los prompts 1–5 y 5b, con la rama del giro y la de «lo probé».
+2. Captura con fecha de la Tabla expandiéndose en Excel para la web, para `fuentes`.
+3. Comprobar en Excel para la web `Pedidos[...]`, el desplegable, los 3 gráficos, la lista de cobranza y que `=HOY()` en B1 funcione.
+4. **Nuevo:** con 8,25 min estimados, quedan unos 15 s de margen sobre los 8 min que necesitan los anuncios a mitad de video. Si la voz real sale más rápida, hay que avisar antes de recortar algo más.

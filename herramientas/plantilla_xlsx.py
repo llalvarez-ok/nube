@@ -24,7 +24,9 @@ usa para armar la plantilla. Una hoja extra puede venir de un CSV ("csv", "csv_c
 "formulas_fila": {"K": "=SI(J{f}=...)"}) y convertirse en Tabla de Excel ("tabla": "Pedidos", para las referencias
 estructuradas como Pedidos[Neto]); "posicion" fija su orden. "plantilla_extra": {"graficos": [{"hoja", "titulo",
 "categorias", "valores", "ancla"}], "validaciones": [{"hoja", "celda", "lista"}]} agrega gráficos de barras y listas
-desplegables. LibreOffice 24.2 no calcula BUSCARX, TEXTODESPUES, FILTRAR,
+desplegables. "formatos": [{"hoja", "rango", "formato"}] fija formatos de número (p. ej. "mmm" o "0.0%").
+"reemplazos": [{"hoja", "celda", "valor", "formato"}] cambia celdas solo en el archivo que se entrega (p. ej. B1 =HOY()):
+--verificar recalcula la versión sin reemplazos, con los valores fijos que muestra el video. LibreOffice 24.2 no calcula BUSCARX, TEXTODESPUES, FILTRAR,
 ORDENAR, UNICOS ni ELEGIRCOLS (llegan en 24.8/25.x): esas celdas hay que verificarlas aparte.
 """
 
@@ -317,6 +319,10 @@ def main():
         dv = DataValidation(type="list", formula1='"' + ",".join(v["lista"]) + '"', allow_blank=False)
         wb[v["hoja"]].add_data_validation(dv)
         dv.add(v["celda"])
+    for f in guion.get("plantilla_extra", {}).get("formatos", []):
+        for fila in wb[f["hoja"]][f["rango"]]:
+            for cel in (fila if isinstance(fila, tuple) else (fila,)):
+                cel.number_format = f["formato"]
     ws = wb.create_sheet("Léeme", 0)
     ws["A1"] = guion.get("titulo", "")
     ws["A1"].font = Font(bold=True, size=14)
@@ -326,9 +332,22 @@ def main():
     destino = os.path.join(base, "plantilla")
     os.makedirs(destino, exist_ok=True)
     ruta = os.path.join(destino, archivo)
+    reemplazos = guion.get("plantilla_extra", {}).get("reemplazos", [])
+    ruta_verif = None
+    if reemplazos:  # versión con los valores del video, solo para --verificar
+        os.makedirs(os.path.join(base, "build"), exist_ok=True)
+        ruta_verif = os.path.join(base, "build", archivo)
+        wb.save(ruta_verif)
+        marcar_matrices_dinamicas(ruta_verif)
+        for r in reemplazos:
+            val, fmt = valor_celda(r["valor"])
+            wb[r["hoja"]][r["celda"]] = val
+            if r.get("formato") or fmt:
+                wb[r["hoja"]][r["celda"]].number_format = r.get("formato") or fmt
     wb.save(ruta)
     marcar_matrices_dinamicas(ruta)
-    print(f"✔ {os.path.relpath(ruta, RAIZ)} · hojas: {', '.join(hojas)}")
+    print(f"✔ {os.path.relpath(ruta, RAIZ)} · hojas: {', '.join(hojas)}"
+          + (f" · reemplazos solo en la plantilla: {', '.join(r['hoja'] + '!' + r['celda'] for r in reemplazos)}" if reemplazos else ""))
 
     if "--verificar" in sys.argv:
         soffice = shutil.which("soffice") or shutil.which("libreoffice")
@@ -336,7 +355,7 @@ def main():
             sys.exit("⚠ No hay LibreOffice para recalcular: verifica los valores a mano o instala libreoffice-calc.")
         tmp = os.path.join(base, "build", "recalculo")
         os.makedirs(tmp, exist_ok=True)
-        subprocess.run([soffice, "--headless", "--convert-to", "xlsx", "--outdir", tmp, ruta], check=True, capture_output=True)
+        subprocess.run([soffice, "--headless", "--convert-to", "xlsx", "--outdir", tmp, ruta_verif or ruta], check=True, capture_output=True)
         calc = load_workbook(os.path.join(tmp, archivo), data_only=True)
         errores, aparte = 0, []
         for nombre, h in hojas.items():
