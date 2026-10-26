@@ -106,7 +106,23 @@ def main():
             hechas.append(titulo)
         return ", ".join(hechas) or "ya estaba en todas"
 
-    ok = [paso("Textos", textos), paso("Miniatura", miniatura), paso("Subtítulos", subtitulos), paso("Playlists", playlists)]
+    def verificar_etiquetas():
+        # YouTube a veces descarta las etiquetas del primer PUT (pasó en video02 y en un Short): se releen al final
+        if simular:
+            return "se comprobarían al final"
+        snippet = get(DATA + "videos", {"part": "snippet", "id": video_id}, token)["items"][0]["snippet"]
+        if snippet.get("tags"):
+            return f"{len(snippet['tags'])} etiquetas"
+        nuevo = {k: snippet[k] for k in ("title", "description", "categoryId", "defaultLanguage", "defaultAudioLanguage") if k in snippet}
+        nuevo["tags"] = meta["etiquetas"]
+        enviar("PUT", DATA + "videos?part=snippet", token, {"id": video_id, "snippet": nuevo})
+        tags = get(DATA + "videos", {"part": "snippet", "id": video_id}, token)["items"][0]["snippet"].get("tags")
+        if not tags:
+            raise RuntimeError("YouTube no guardó las etiquetas: cárgalas a mano en Studio")
+        return f"faltaban y se reenviaron ({len(tags)} etiquetas)"
+
+    ok = [paso("Textos", textos), paso("Miniatura", miniatura), paso("Subtítulos", subtitulos), paso("Playlists", playlists),
+          paso("Etiquetas", verificar_etiquetas)]
     print(("Simulación" if simular else "Listo") + f": {sum(ok)}/{len(ok)} pasos OK. La privacidad no se modificó.")
 
 
