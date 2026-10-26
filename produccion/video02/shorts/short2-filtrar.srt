@@ -1,0 +1,43 @@
+1
+00:00:00,194 --> 00:00:04,713
+Fórmula ocho: el reporte de cobranza de la semana.
+
+2
+00:00:05,814 --> 00:00:10,974
+Ahora el prompt va completo: mapa, meta y prueba.
+
+3
+00:00:11,274 --> 00:00:13,479
+La prueba encuentra un caso.
+
+4
+00:00:13,479 --> 00:00:18,834
+Lo cubre: si no hay vencidas, muestra un mensaje en vez de un error.
+
+5
+00:00:20,435 --> 00:00:23,394
+La pego en Resumen, en una sola celda.
+
+6
+00:00:23,694 --> 00:00:29,214
+De adentro hacia afuera: elegir columnas toma cliente, vencimiento y neto.
+
+7
+00:00:29,514 --> 00:00:33,354
+Filtrar deja las vencidas, y ordenar pone la más grande arriba.
+
+8
+00:00:33,656 --> 00:00:37,855
+El resultado ocupa las celdas de abajo: déjalas vacías.
+
+9
+00:00:38,156 --> 00:00:45,435
+Un millón ochocientos treinta y cinco mil quinientos noventa: a quién llamar esta semana, y por cuánto.
+
+10
+00:00:45,735 --> 00:00:50,495
+Si alguien paga, cambias su Pagado a sí en Pedidos, y sale de esta lista.
+
+11
+00:00:50,795 --> 00:00:54,915
+Y si cambias la fecha de corte, la lista se rehace sola.

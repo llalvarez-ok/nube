@@ -1,0 +1,39 @@
+1
+00:00:00,186 --> 00:00:03,995
+Fórmula cinco: vence a fin del mes siguiente.
+
+2
+00:00:03,995 --> 00:00:06,110
+¿Y si sumas treinta días?
+
+3
+00:00:06,110 --> 00:00:09,665
+Del 4 de agosto llegas al 3 de septiembre.
+
+4
+00:00:09,966 --> 00:00:12,805
+Lo correcto es el 30 de septiembre.
+
+5
+00:00:13,906 --> 00:00:16,865
+Se lo pedí a la IA, y me dio fin punto mes.
+
+6
+00:00:17,466 --> 00:00:19,144
+Treinta de septiembre.
+
+7
+00:00:19,144 --> 00:00:23,945
+El uno es el mes siguiente; con cero, sería el fin de este mes.
+
+8
+00:00:24,246 --> 00:00:29,366
+Si ves un número raro, a la celda le falta formato de fecha.
+
+9
+00:00:29,668 --> 00:00:31,866
+Y cada pedido, con su vencimiento.
+
+10
+00:00:32,967 --> 00:00:37,606
+Después viene la fórmula que casi le cobra dos veces a un cliente.

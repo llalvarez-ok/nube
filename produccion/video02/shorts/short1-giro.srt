@@ -1,0 +1,47 @@
+1
+00:00:00,211 --> 00:00:06,971
+La copio: ocho facturas vencidas, dos millones cuatrocientos cuarenta y seis mil por cobrar.
+
+2
+00:00:07,271 --> 00:00:09,042
+Parece perfecta, ¿no?
+
+3
+00:00:09,042 --> 00:00:11,992
+Ahora, la tercera parte del método.
+
+4
+00:00:13,091 --> 00:00:15,358
+Mapa: dónde está cada dato.
+
+5
+00:00:15,358 --> 00:00:20,730
+Solo nombres de columnas: nunca pegues datos reales de clientes.
+
+6
+00:00:21,031 --> 00:00:23,870
+Meta: qué quieres, en palabras.
+
+7
+00:00:24,170 --> 00:00:31,850
+Y la prueba, la que casi nadie usa: qué casos darían mal sin mostrar error, y qué debería dar en dos filas.
+
+8
+00:00:32,951 --> 00:00:35,632
+Pego mi fórmula, con la prueba.
+
+9
+00:00:35,932 --> 00:00:40,668
+Y va directo al problema: mi fórmula no mira la columna Pagado.
+
+10
+00:00:40,668 --> 00:00:44,052
+La fila dos ya estaba pagada, y dice vencido.
+
+11
+00:00:46,052 --> 00:00:52,733
+Esta semana habría llamado a tres clientes para cobrarles cuatro facturas que ya habían pagado.
+
+12
+00:00:53,831 --> 00:00:58,591
+610.575 de más en la lista de cobranza.
