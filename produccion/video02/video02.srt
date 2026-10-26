@@ -483,14 +483,14 @@ Y puedes pegar el mismo prompt en ChatGPT o Copilot.
 La respuesta puede cambiar, y por eso existe la prueba.
 
 122
-00:09:17,860 --> 00:09:23,313
+00:09:17,860 --> 00:09:23,340
 La planilla, con las diez fórmulas y la hoja Prompts, está gratis en la descripción.
 
 123
-00:09:23,313 --> 00:09:26,819
-Y si te llegan informes en pe de efe, mira este video.
+00:09:24,440 --> 00:09:29,500
+Cada semana subo un atajo nuevo de Excel con inteligencia artificial.
 
 124
-00:09:27,920 --> 00:09:29,560
-Te lo dejo en pantalla.
+00:09:29,500 --> 00:09:32,360
+Suscríbete, y el próximo te llega a ti.
 
