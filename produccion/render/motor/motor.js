@@ -282,6 +282,7 @@
     const onda = el("div", "onda", null, xl);
     let px = 1250, py = 760;
     gsap.set(puntero, { x: px, y: py });
+    const objetos = {}; // gráficos y tarjetas con id, para actualizarlos después
     let notaActual = null, refs = [], panel = null, panelMsgs = null, panelInput = null, colsOn = [];
     let zs = 1, zx = 0, zy = 0; // estado de la cámara (escala y desplazamiento de la ventana)
     const enPantalla = (x, y) => ({ x: XL_X + zx + x * zs, y: XL_Y + zy + y * zs });
@@ -432,17 +433,88 @@
       grafico: (a, t) => {
         const g = el("div", "xl-grafico", `<h4>${esc(a.titulo || "")}</h4>`, xl);
         Object.assign(g.style, { left: (a.x || 860) + "px", top: (a.y || 290) + "px", width: (a.ancho || 640) + "px" });
+        if (a.alto) g.style.setProperty("--alto-barras", a.alto + "px");
         const bars = el("div", "xl-barras", null, g), ejes = el("div", "xl-ejes", null, g);
-        const max = Math.max(...a.valores);
+        const max = a.max || Math.max(...a.valores);
+        const barras = [];
         a.valores.forEach((v, i) => {
           const b = el("div", "b", `<span>${esc(a.textos ? a.textos[i] : v)}</span>`, bars);
           b.style.height = (v / max) * 100 + "%";
           if (a.destacar === i) b.style.background = "#f2b100";
           el("span", "", esc(a.etiquetas[i]), ejes);
+          barras.push(b);
           tl.fromTo(b, { scaleY: 0 }, { scaleY: 1, duration: 0.7, ease: "power3.out", immediateRender: true }, t + 0.3 + i * 0.08);
         });
+        if (a.id) objetos[a.id] = { caja: g, barras, ejes: [...ejes.children] };
         tl.fromTo(g, { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.5, immediateRender: true }, t);
         c.sonido("subida", t + 0.3, 0.8);
+      },
+      actualizar_grafico: (a, t) => {
+        // las barras crecen o bajan a los valores nuevos (p. ej. al pegar pedidos nuevos)
+        const o = objetos[a.id];
+        if (!o) throw new Error("actualizar_grafico: no hay un gráfico con id " + a.id);
+        const max = a.max || Math.max(...a.valores);
+        a.valores.forEach((v, i) => {
+          const b = o.barras[i];
+          if (!b) return;
+          tl.to(b, { height: (v / max) * 100 + "%", duration: 0.8, ease: "power3.inOut" }, t + i * 0.06);
+          if (a.textos) tl.set(b.firstChild, { text: esc(a.textos[i]) }, t + 0.4 + i * 0.06);
+          if (a.destacar != null) tl.to(b, { backgroundColor: a.destacar === i ? "#f2b100" : "#4caf7d", duration: 0.3 }, t + 0.5);
+        });
+        if (a.etiquetas) a.etiquetas.forEach((e, i) => o.ejes[i] && tl.set(o.ejes[i], { text: esc(e) }, t));
+        tl.fromTo(o.caja, { boxShadow: "0 0 0 6px " + ACENTO }, { boxShadow: "0 20px 60px rgba(0,0,0,.18)", duration: 1.2, immediateRender: false }, t);
+        c.sonido("subida", t, 0.8);
+      },
+      tarjeta: (a, t) => {
+        // tarjeta de KPI del dashboard: título, número grande y una línea de contexto
+        const k = el("div", "xl-tarjeta", `<h5>${esc(a.titulo || "")}</h5><b></b><small></small>`, xl);
+        Object.assign(k.style, { left: (a.x || 860) + "px", top: (a.y || 290) + "px", width: (a.ancho || 300) + "px" });
+        const [, valor, sub] = k.children;
+        valor.textContent = a.valor; sub.textContent = a.sub || "";
+        if (a.color) valor.style.color = a.color;
+        if (a.id) objetos[a.id] = { caja: k, valor, sub };
+        tl.fromTo(k, { opacity: 0, y: 30, scale: 0.94 }, { opacity: 1, y: 0, scale: 1, duration: 0.5, ease: "back.out(1.6)", immediateRender: true }, t);
+        c.sonido("pop", t);
+      },
+      actualizar_tarjeta: (a, t) => {
+        const o = objetos[a.id];
+        if (!o) throw new Error("actualizar_tarjeta: no hay una tarjeta con id " + a.id);
+        if (a.valor != null) tl.set(o.valor, { text: esc(a.valor) }, t);
+        if (a.sub != null) tl.set(o.sub, { text: esc(a.sub) }, t);
+        if (a.color) tl.set(o.valor, { color: a.color }, t);
+        tl.fromTo(o.valor, { scale: 1.25 }, { scale: 1, duration: 0.5, ease: "back.out(2)", immediateRender: false }, t);
+        tl.fromTo(o.caja, { backgroundColor: "#fff3a6" }, { backgroundColor: "#ffffff", duration: 1.2, immediateRender: false }, t);
+        c.sonido("pop", t);
+      },
+      desplegable: (a, t) => {
+        // lista desplegable (validación de datos): se abre bajo la celda y se elige una opción
+        const r = rect(a.celda);
+        let tt = seleccionar(a.celda, t);
+        const flecha = el("div", "xl-flecha", "▾", xl);
+        Object.assign(flecha.style, { left: r.x + r.w - 30 + "px", top: r.y + "px", height: r.h + "px" });
+        tl.fromTo(flecha, { opacity: 0 }, { opacity: 1, duration: 0.2, immediateRender: true }, tt);
+        tt = mover(r.x + r.w - 15, r.y + r.h / 2, tt, 0.4);
+        clic(tt);
+        const lista = el("div", "xl-lista", a.opciones.map((o) => `<div>${esc(o)}</div>`).join(""), xl);
+        Object.assign(lista.style, { left: r.x + "px", top: r.y + r.h + "px", minWidth: r.w + "px" });
+        tl.fromTo(lista, { opacity: 0, y: -10 }, { opacity: 1, y: 0, duration: 0.25, immediateRender: true }, tt + 0.1);
+        const i = typeof a.elegir === "number" ? a.elegir : Math.max(0, a.opciones.indexOf(a.elegir));
+        const item = lista.children[i];
+        const iy = r.y + r.h + 12 + i * 52 + 24;
+        tt = mover(r.x + 90, iy, tt + 0.5, 0.5);
+        tl.set(item, { backgroundColor: "#d3e9dc" }, tt);
+        clic(tt + 0.1);
+        tl.to(lista, { opacity: 0, duration: 0.2 }, tt + 0.35);
+        tl.to(flecha, { opacity: 0, duration: 0.2 }, tt + 0.35);
+        const { span, cel } = celdas[a.celda];
+        tl.set(span, { text: esc(a.valor || a.opciones[i]) }, tt + 0.35);
+        tl.set(ftexto, { text: esc(a.valor || a.opciones[i]) }, tt + 0.35);
+        tl.fromTo(cel, { backgroundColor: "#fff3a6" }, { backgroundColor: "rgba(255,255,255,0)", duration: 1.2, immediateRender: false }, tt + 0.35);
+      },
+      quitar: (a, t) => {
+        const o = objetos[a.id];
+        if (!o) throw new Error("quitar: no hay un objeto con id " + a.id);
+        tl.to(o.caja, { opacity: 0, y: 20, duration: 0.35 }, t);
       },
       panel_ia: (a, t) => {
         if (!panel) {

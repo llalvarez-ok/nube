@@ -61,7 +61,12 @@
 | `zoom_fuera` | `duracion` | Vuelve a la vista completa |
 | `nota` | `celda` o `rango`, `texto`, `lado` (auto) | Globo explicativo junto a la celda |
 | `quitar_nota` | — | |
-| `grafico` | `titulo`, `etiquetas`, `valores`, `textos`, `destacar`, `x`, `y`, `ancho` | Gráfico de barras que crece sobre la hoja |
+| `grafico` | `titulo`, `etiquetas`, `valores`, `textos`, `destacar`, `x`, `y`, `ancho`, `alto` (px de las barras, 300), `max`, `id` | Gráfico de barras que crece sobre la hoja |
+| `actualizar_grafico` | `id`, `valores`, `textos`, `destacar`, `etiquetas`, `max` | Las barras del gráfico con ese `id` crecen o bajan a los valores nuevos, con destello del recuadro |
+| `tarjeta` | `id`, `titulo`, `valor`, `sub`, `x`, `y`, `ancho` (300), `color` (del número) | Tarjeta de KPI de dashboard: título, número grande y una línea de contexto |
+| `actualizar_tarjeta` | `id`, `valor`, `sub`, `color` | Cambia el número de la tarjeta con un destello |
+| `desplegable` | `celda`, `opciones`, `elegir` (texto o índice), `valor` | Lista desplegable (validación de datos): se abre bajo la celda y el cursor elige una opción |
+| `quitar` | `id` | Retira un gráfico o una tarjeta |
 | `panel_ia` | `prompt`, `respuesta`, `formula`, `boton` | Panel lateral de IA: se escribe el prompt, se envía y la respuesta aparece palabra por palabra, con la fórmula y el botón "Insertar" |
 | `insertar` | `celda`, `formula`, `valor` | Clic en "Insertar": la fórmula queda en la celda con su resultado |
 | `rotulo` | `texto`, `sub`, `numero` ("01"), `hasta` (s, 3,2) | Zócalo grande que entra desde la izquierda, en espacio de pantalla (no lo afecta el zoom). Úsalo al empezar cada fórmula o idea clave: puntúa sin salir de la hoja. También existe en `chat` |

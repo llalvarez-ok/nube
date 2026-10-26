@@ -143,10 +143,19 @@ html, body { width: 1920px; height: 1080px; overflow: hidden; background: var(--
   border-left: 8px solid var(--acento); box-shadow: 0 20px 60px rgba(0,0,0,.45); max-width: 620px; line-height: 1.25; white-space: normal; }
 .xl-grafico { position: absolute; z-index: 15; background: #fff; border: 1px solid #ddd; border-radius: 14px; box-shadow: 0 20px 60px rgba(0,0,0,.18); padding: 26px 30px; }
 .xl-grafico h4 { font-size: 24px; color: #333; margin-bottom: 46px; }
-.xl-barras { display: flex; align-items: flex-end; gap: 18px; height: 300px; border-bottom: 2px solid #ccc; }
+.xl-barras { display: flex; align-items: flex-end; gap: 18px; height: var(--alto-barras, 300px); border-bottom: 2px solid #ccc; }
 .xl-barras .b { flex: 1; background: var(--verde-claro); border-radius: 6px 6px 0 0; transform-origin: 50% 100%; position: relative; }
 .xl-barras .b span { position: absolute; top: -32px; left: 0; right: 0; text-align: center; font-size: 18px; font-weight: 700; color: #333; }
 .xl-ejes { display: flex; gap: 18px; margin-top: 10px; } .xl-ejes span { flex: 1; text-align: center; font-size: 17px; color: #666; }
+
+/* dashboard: tarjetas de KPI y lista desplegable */
+.xl-tarjeta { position: absolute; z-index: 15; background: #fff; border: 1px solid #ddd; border-radius: 14px; box-shadow: 0 16px 44px rgba(0,0,0,.15); padding: 20px 26px; }
+.xl-tarjeta h5 { font-size: 20px; font-weight: 600; color: #666; margin: 0 0 8px; }
+.xl-tarjeta b { display: block; font-size: 52px; font-weight: 800; color: #1f1f1f; line-height: 1.05; transform-origin: 0% 50%; }
+.xl-tarjeta small { display: block; font-size: 19px; color: #777; margin-top: 8px; }
+.xl-flecha { position: absolute; z-index: 6; width: 30px; display: flex; align-items: center; justify-content: center; background: #f3f3f3; border-left: 1px solid #ccc; font-size: 22px; color: #444; }
+.xl-lista { position: absolute; z-index: 25; background: #fff; border: 1px solid #bbb; border-radius: 6px; box-shadow: 0 12px 30px rgba(0,0,0,.2); padding: 6px 0; font-size: 24px; }
+.xl-lista div { height: 52px; display: flex; align-items: center; padding: 0 22px; }
 
 /* panel de IA dentro de Excel */
 .xl-ia { position: absolute; top: 108px; right: 0; bottom: 44px; width: 560px; background: #fafbfd; border-left: 1px solid #ddd; z-index: 30;
