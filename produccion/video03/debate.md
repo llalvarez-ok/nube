@@ -136,3 +136,51 @@ Lectura: la ronda 1 se aplicó bien. Faltan 0,15 y salen de pulir el empaque, no
 ### Si la ronda 3 no aprueba
 
 Recomendaré **aprobar con las objeciones pendientes documentadas**, salvo que falle la veracidad. La idea ya pasa todos los mínimos y lo que queda es pulido de empaque que se valida mejor con el CTR real que con otra ronda.
+
+## Escalada · ronda 3 · recomendación del showrunner al creador
+
+**Resultado:** ESCALADO tras 3 rondas, con nota 7,85 (umbral 8,0). Criterios: demanda 8 · empaque 8 · diferenciación 8 · rpm 7 · encaje 8. Todos están sobre su mínimo y no hay vetos.
+
+**Recomendación: aprobar con las objeciones pendientes documentadas.**
+- La distancia al umbral es de 0,15 y la explica el RPM (7). Ese criterio solo sube con una cifra con fuente, que hoy no existe, y otra reescritura no la crea.
+- Las objeciones de la ronda 3 son de pulido de empaque y de guion, no de la idea. El espectador dice que la miniatura B es "la mejor de las tres rondas".
+- Rehacer costaría la fecha sin una mejora esperable. Descartar no se justifica con demanda 8 y un giro que sigue siendo exclusivo.
+
+Comando para el creador (forzar es una decisión humana; no la tomo yo):
+`python3 herramientas/pipeline.py forzar video03 idea "3 rondas, todos los criterios sobre el mínimo; RPM sin cifra con fuente; ajustes de empaque de la ronda 3 pasan a la etapa empaque; bloqueo de verificaciones antes de cerrar el guion"`
+
+### Contradicciones de la ronda 3
+
+1. **"(y el número falso)" (retención).** Se descarta por veracidad: el −90,4 % es correcto en lo literal. Es la misma decisión que con "mentira" en la ronda 1.
+2. **A/B 2 "inicio de mes": retención pide sacarlo y el espectador lo prefiere.** Lo decide el test, no una ronda más: se queda.
+3. **Criterio de la ganadora del A/B.** Gana la veracidad del dato (investigador): "Probar y comparar" elige por proporción de tiempo de visualización, no por CTR.
+
+### Ajustes para el seo-empaquetador (etapa empaque; no se rehace la idea)
+
+1. **Miniatura B.**
+   - La tarjeta lleva el título **"VENTAS"** grande (alrededor del 40 % del alto de la cifra), para que se lea "VENTAS −90 %" con "¿CAYERON?".
+   - La flecha apunta a la barra de noviembre, sin taparla.
+   - Revisarla otra vez a 168 px.
+2. **Títulos del A/B.**
+   - A/B 1: `Dashboard en Excel con IA paso a paso: el número que asusta` (59). Comprobar en la vista previa de Studio, en celular, que "asusta" no se trunque. Si se trunca, pasa a principal `Dashboard en Excel con IA: no lo mandes sin esta prueba` (55).
+   - A/B 2: `Dashboard en Excel con IA: el error de cada inicio de mes` (57).
+   - A/B 3: `Dashboard en Excel con IA: no lo mandes sin esta prueba` (55), con la **miniatura B**, salvo dos excepciones:
+     - si se midieron los 20 s, el A/B 3 es "pegas pedidos y se rehace solo" con la miniatura A "LUNES: 20 s";
+     - si el mensaje único falla, entra el condicional "Le pedí a la IA…".
+   - Nunca "falso" ni "mentira".
+3. **Regla del A/B en `publicacion.md`:** "si YouTube declara una ganadora por tiempo de visualización, pasa a principal; el CTR se anota como dato secundario para el analista".
+4. **Línea 1 alternativa en `publicacion.md`,** lista para usar si falla una prueba:
+   - sin "gratis" si falla Excel para la web gratis;
+   - sin "se rehace solo" (por ejemplo, "se actualiza al pegar los pedidos y pulsar Actualizar") si falla la expansión de la Tabla o de los gráficos;
+   - rótulo "Claude" a secas si falla claude.ai gratis.
+5. **Texto de `idea.md`, línea 32:** "no trata el mes incompleto ni muestra un método para verificar KPI; solo concluye, en general, que hay que revisar lo que da la IA".
+
+### Para el guionista (etapa guion)
+
+- Hook: "Y el lunes tomarías decisiones con ese número" (se lee mejor en voz sintética).
+- Reenganche de 2:10: "en un rato te muestro por qué ese −90 % no es cierto, y qué número sí mirar el lunes".
+
+### Pendientes documentados (no bloquean el forzado; sí el cierre del guion o la publicación)
+
+- **Condición dura de la ronda 2, sin cambios:** antes del viernes 30/10, el creador corre en claude.ai gratis el mensaje único y la Prueba con el .xlsx, prueba Excel para la web (Tabla, referencias estructuradas, desplegable, gráficos) y mide los tiempos, todo con captura. Sin eso, el guion no se cierra, la promesa no se publica y el 03/11 se mueve.
+- **RPM sin cifra con fuente:** queda como tarea del investigador para el informe de noviembre.
