@@ -126,6 +126,57 @@
       "motivos": [
         "Aprobada por el creador el 26/10/2026 tras escalada (7,85; RPM sin cifra con fuente). Ajustes de empaque de la ronda 3 pendientes para la etapa empaque (debate.md)"
       ]
+    },
+    {
+      "fecha": "2026-10-26T18:54:59",
+      "etapa": "guion",
+      "ronda": 1,
+      "resultado": "revisar",
+      "nota": 7.03,
+      "criterios": {
+        "hook": 7.0,
+        "ritmo": 7.0,
+        "promesa": 7.5,
+        "claridad": 6.5,
+        "veracidad": 7.0
+      },
+      "motivos": [
+        "«hook» 7.0 < mínimo 8",
+        "«ritmo» 7.0 < mínimo 8",
+        "«promesa» 7.5 < mínimo 8",
+        "«claridad» 6.5 < mínimo 8",
+        "«veracidad» 7.0 < mínimo 9",
+        "veto de verificador en «veracidad» (7)",
+        "nota 7.03 < umbral 8.5"
+      ],
+      "objeciones": [
+        "[critico-retencion] [esc. 1 / 0:19-0:32] Tras un gancho muy bueno vienen 13 s de logística y 'la plantilla, gratis, hace el resto' da permiso para irse → solo el rótulo fijo 'Excel para la web gratis + Claude · datos ficticios' y una frase: 'Lo armamos paso a paso, y en el minuto 5 atrapamos ese número.'; plantilla a la esc. 29",
+        "[critico-retencion] [esc. 1 / 0:08] El zoom a la tarjeta −90 % saca la ventana de Excel del cuadro (x≈1265–1920 negro); es el cuadro de la miniatura → centrar el zoom y volver a sacar el cuadro 8",
+        "[critico-retencion] [esc. 2-3 / 0:32-0:59] Mezcla 'cuatro preguntas' para comprobar con Mapa·Meta·Prueba; las 4 preguntas no comprueban nada y el resultado del mensaje único no se retoma → cerrar la esc. 2 con 'Rápido, sí. Pero mira este número' y presentar las 4 preguntas como 'qué tiene que contestar el tablero'; Mapa·Meta·Prueba solo en la esc. 6; si la corrida no dio dashboard, eliminar el acto",
+        "[critico-retencion] [esc. 3-17 / 0:50-5:10] El bucle del −90 % se paga a los ~5:45; Q3 y Q4 no se relacionan y los reenganches ('sigue ahí, esperando') suenan a relleno → reenganches que agreguen algo; tarjeta roja fija en una esquina en vez de nombrarla; Q3 a ~35 s",
+        "[critico-retencion] [esc. 5, 7, 15, 27] Cifras completas en voz (46.586.220 tres veces, 4.574.425, 1.011.600): 4-5 s cada una con TTS → redondear en voz y decir el total del año una sola vez",
+        "[critico-retencion] [esc. 20-22 / 5:30-5:55] Tres escenas seguidas repiten 'tres días contra un mes' en el pico de atención → fusionar 21 y 22 con antes/después y una consecuencia ('frenarías compras por un número que no existe'); quitar la última frase de la 20",
+        "[critico-retencion] [esc. 19 / 5:20] 'Lo vio: noviembre lleva tres días' da por hecha la Rama A → escribir ya las dos variantes de voz y elegir según respuestas-ia.md",
+        "[critico-retencion] [esc. 28-30 / 7:20-8:30] ~70 s de límites, plantilla y avisos tras el clímax y pantalla final con condicional; la esc. 17 excluye a quien no vio video02 → límites en 2 frases, Copilot/ChatGPT a la descripción, pantalla final sin condicional ('Esa columna Estado que viste hoy la armamos en este video…'); en la esc. 17 'la columna Estado (te dejo cómo se arma al final)'",
+        "[verificador] [esc. 7, beat 0] 'en tu plantilla dice igual a hoy' es falso: Dashboard!B1 es el valor fijo 03/11/2026 (sheet3.xml y Léeme); con B1 fijo, los pedidos pegados después del 03/11 no entran y 'se rehace solo' falla → voz 'en tu plantilla también viene fija; cambia B1 por =HOY(), es el paso 1 de Tus datos', o plantilla con =HOY() y Léeme corregido",
+        "[verificador] [plantilla_extra, hoja Prompts, 'Fórmula que dio Claude'] Atribuye a Claude fórmulas que no se corrieron → renombrar a 'Fórmula de la plantilla (verificada)' o dejar '[PENDIENTE]' hasta pegar la respuesta real",
+        "[verificador] [esc. 28, beat 2] Fuente no oficial del modo dashboard; en el Microsoft 365 Roadmap es 'Excel canvas' (RM569424, In development, est. sept 2026): https://mc.merill.net/message/RM569424 · https://windowsreport.com/microsoft-excel-canvas-turns-spreadsheet-data-into-interactive-dashboards/ → cambiar fuente y reformular; 'Si ya pagas Copilot' → 'Si tienes Copilot en Excel'",
+        "[verificador] [esc. 5, beat 2] Convertir en Tabla no reescribe una fórmula existente: =SUMA(Pedidos!H2:H250) seguiría dando 46.145.220 → mostrar con 'escribir' que se cambia a =SUMA(Pedidos[Neto]) y que 46.586.220 aparece después",
+        "[verificador] [esc. 5, 26, 27; fuente 'Tablas… a verificar'] La promesa depende de que la Tabla se expanda al pegar en Excel para la web; fuente 'a verificar' → no cerrar el guion sin captura con fecha en Excel para la web, registrada en fuentes",
+        "[verificador] [esc. 7, beat 4] 'Las 12 fórmulas: hoja Prompts' no coincide: la hoja trae 9 → número real o sumar B11, B12 y Estado",
+        "[verificador] [esc. 23, beat 4 y esc. 27] 'la alarma roja se va' pero en la plantilla B7 sigue =B6/B5-1 y en la esc. 27 muestra −77,9 % → cambiar el rótulo de B7 a 'Este mes (incompleto) vs. mes completo · no usar para decidir' o sacarlo; si queda, decirlo en voz",
+        "[verificador] [esc. 12, beat 0] 'cada martes y viernes subo un atajo' promete una cadencia sin historial → 'suscríbete para el próximo atajo de Excel con IA' o confirmar con el creador",
+        "[verificador] [esc. 2, 6, 10, 14, 19] Ramas honestas, pero las esc. 19 ('Lo vio…') y 14 ('asterisco') cuentan lo que dijo Claude antes de la respuesta → reemplazar con el texto real; el plan Free lee archivos (https://support.claude.com/en/articles/12111783-create-and-edit-files-with-claude), pero 'gratis' para Claude solo con captura",
+        "[verificador] [verificado, sin cambios] Cifras recalculadas OK (−90,4 %, +7,6 %, +8,6 %, +146,8 %, −77,9 %, 46.145.220/249 → 46.586.220/250 → 47.156.820/253, vendedores, productos, vencidos 16/2.951.090, corte 31/10 2/607.500); Ctrl+T en Excel para la web; ELEGIRCOLS no en Excel 2021 (sí en 2024); datos ficticios y voz sintética declarados",
+        "[espectador] [Pregunta 2, 'Primero, el gráfico'] El título dice 'paso a paso' pero el gráfico y las tarjetas aparecen hechos; no se ve de dónde salen los 12 meses (H2:I13 oculta) ni cómo se inserta el gráfico ni cómo se arman las tarjetas → 5 s de la tabla H:I, 'la seleccionas, Insertar > Gráfico de columnas', y una línea sobre qué son las tarjetas",
+        "[espectador] [Pregunta 1, escena Tabla] No se ve cómo cambia =SUMA(H2:H250) a Pedidos[Neto] ni dónde se nombra la Tabla → mostrar la fórmula reescrita y decir 'en Diseño de tabla le pones de nombre Pedidos'",
+        "[espectador] [Prompt del Mapa] Bloque largo con jerga y columnas que Laura no tiene → 'copia este prompt de la plantilla y cambia solo los nombres de tus columnas' y una frase de por qué el punto y coma",
+        "[espectador] [Pregunta 4, cobranza] 'La fórmula del video anterior' excluye a quien no vio video02; FILTRAR/ELEGIRCOLS se pega sin explicar → avisar en el minuto 1 que Estado viene en la plantilla, explicar la fórmula en una frase y decir en voz que ELEGIRCOLS no anda en Excel 2021",
+        "[espectador] [Del corte hasta la Prueba] El −90 % (promesa del título) se resuelve después de Q3, Q4, el CTA y un repaso; en el CTA salto o cierro → resolverlo antes o acortar Q3/Q4 (sacar 'Diego Paz va primero con 17,3M' y el papel higiénico)",
+        "[espectador] [Cierre, +146 %] La tarjeta chica confunde → sacarla o una regla clara: 'el lunes miras la grande; la chica, ignórala hasta el día 15'",
+        "[espectador] [Gancho y escena 1, 'yo uso Claude'] Laura usa ChatGPT y recién al final se entera de que sirve igual → 'funciona igual con ChatGPT o Copilot gratis' en el bloque 'Solo necesitas…'",
+        "[espectador] [Fecha de corte B1] 'En tu plantilla dice igual a hoy' no se entiende → 'tiene la fórmula =HOY(), así se actualiza sola cada día'; la cifra de 46,5 millones se dice tres veces → una sola"
+      ]
     }
   ]
 }
