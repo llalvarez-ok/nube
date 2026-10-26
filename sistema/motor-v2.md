@@ -74,6 +74,7 @@
 | `quitar` | `id` | Retira un gráfico o una tarjeta |
 | `panel_ia` | `prompt`, `respuesta`, `formula`, `boton` | Panel lateral de IA: se escribe el prompt, se envía y la respuesta aparece palabra por palabra, con la fórmula y el botón "Insertar" |
 | `insertar` | `celda`, `formula`, `valor` | Clic en "Insertar": la fórmula queda en la celda con su resultado |
+| `lupa` | `texto` (≤ 12 palabras, con `*marcador*`), `hasta`, `posicion` ("abajo" por defecto, o "arriba") | Recuadro grande de lectura en espacio de pantalla, legible en el celular; la siguiente `lupa` reemplaza a la anterior |
 | `hoja` | `hoja`, `hasta` | El cursor hace clic en esa pestaña del pie y se marca en amarillo (no cambia el contenido de la escena) |
 | `rotulo` | `texto`, `sub`, `numero` ("01"), `hasta` (s, 3,2), `posicion` ("arriba": arriba a la derecha, para no tapar las últimas filas ni el pie del gráfico) | Zócalo grande que entra desde la izquierda, en espacio de pantalla (no lo afecta el zoom). Úsalo al empezar cada fórmula o idea clave: puntúa sin salir de la hoja. También existe en `chat` |
 | `cerrar_panel`, `quitar_refs`, `mover` (`celda`) | | |
@@ -90,7 +91,7 @@ Cada acción admite `retraso` (segundos desde el inicio del beat). Las acciones 
 | `resaltar_prompt` | `frases` (índices de `frases` del último prompt), `lupa` (texto opcional), `hasta`: el prompt queda atenuado y esas frases se pintan de amarillo |
 | `lupa` | `texto` (con `*marcador*`), `hasta`, `falta` (borde rojo): recuadro grande de 52 px arriba del chat, legible en el celular, con 3–6 palabras clave |
 | `paso` | `n` (índice de `pasos`): enciende esa tarjeta del método; las anteriores quedan como "hechas" |
-| `respuesta` (más) | `formula_atenuada` (la fórmula queda en segundo plano), `frase_clave` (parte del texto que se resalta al terminar), `estilo_clave: "falta"` (recuadro rojo: la idea que no aparece), `clave_retraso`, `lupa`, `lupa_hasta`, `recorte: false` (por defecto se ven 3 líneas como máximo, con "…") |
+| `respuesta` (más) | `atenuada` (todo el texto en segundo plano, cuando la lupa lleva la idea), `formula_atenuada` (la fórmula queda en segundo plano), `frase_clave` (parte del texto que se resalta al terminar), `estilo_clave: "falta"` (recuadro rojo: la idea que no aparece), `clave_retraso`, `lupa`, `lupa_hasta`, `recorte: false` (por defecto se ven 3 líneas como máximo, con "…") |
 
 Prompts largos: en pantalla no se lee un prompt de 40–80 palabras. Se muestra completo pero atenuado, se resaltan 3–6 palabras por beat (las que dice la voz) con `resaltar_prompt` o `lupa`, y `etiqueta_fija` remite a la hoja Prompts.
 Respuestas aún no corridas: el texto de prueba va con `"maqueta": true` y `nota_maqueta` en el JSON (nunca "PENDIENTE" ni corchetes en pantalla). Al pegar la real se cambia `texto` y `frase_clave`; si hay ramas, la otra va en `rama_b` del mismo objeto.

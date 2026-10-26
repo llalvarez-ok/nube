@@ -220,3 +220,5 @@ html, body { width: 1920px; height: 1080px; overflow: hidden; background: var(--
 .xl-celda.ajuste { align-items: center; }
 .xl-celda.ajuste span { white-space: normal; font-size: 19px; line-height: 1.15; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 .chat-ia.atenuado code { opacity: .35; }
+.xl-lupa { z-index: 36; }
+.xl-lupa.abajo { top: auto; bottom: 70px; }

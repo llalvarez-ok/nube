@@ -977,7 +977,7 @@
               "tipo": "lupa",
               "texto": "*Meta*: el año, los pedidos y el mes cerrado",
               "retraso": 0.2,
-              "hasta": 3.0
+              "hasta": 6.6
             },
             {
               "tipo": "resaltar_prompt",
@@ -993,10 +993,10 @@
               "texto": "B3 suma el neto de la Tabla entre el 1 de enero y la fecha de corte; B4 cuenta esos pedidos y B5 suma el último mes cerrado antes del corte.",
               "formula": "=SUMAR.SI.CONJUNTO(Pedidos[Neto];Pedidos[Fecha];\">=\"&FECHA(AÑO(B1);1;1);Pedidos[Fecha];\"<=\"&B1)",
               "retraso": 2.6,
-              "frase_clave": "entre el 1 de enero y la fecha de corte",
               "maqueta": true,
               "nota_maqueta": "maqueta de diseño (ronda visual 2): reemplazar por la respuesta real de respuestas-ia.md, recortada a ≤ 3 líneas, sin cambiar el sentido",
-              "formula_atenuada": true
+              "formula_atenuada": true,
+              "atenuada": true
             }
           ]
         }
@@ -4664,8 +4664,8 @@
             },
             {
               "tipo": "zoom",
-              "rango": "B4:C4",
-              "escala": 1.75,
+              "rango": "A4:C4",
+              "escala": 1.7,
               "duracion": 1.0,
               "retraso": 5.0
             },
@@ -4676,6 +4676,11 @@
               "hasta": 2.6,
               "retraso": 5.4,
               "posicion": "arriba"
+            },
+            {
+              "tipo": "lupa",
+              "texto": "Pregunta 1: *el prompt y su fórmula*, listos para copiar",
+              "retraso": 5.6
             }
           ]
         }
@@ -4768,28 +4773,47 @@
             {
               "tipo": "hoja",
               "hoja": "Tus datos",
-              "retraso": 4.6,
+              "retraso": 5.0,
               "hasta": 1.2
             },
             {
-              "tipo": "formato",
+              "tipo": "zoom",
               "rango": "A2:B6",
+              "escala": 1.3,
+              "duracion": 1.0,
+              "retraso": 0.8
+            },
+            {
+              "tipo": "formato",
+              "rango": "A2:B3",
               "fondo": "#ffffff",
-              "texto": "#c2c2c2",
-              "retraso": 5.6
+              "texto": "#d0d0d0",
+              "retraso": 5.4
+            },
+            {
+              "tipo": "formato",
+              "rango": "A5:B6",
+              "fondo": "#ffffff",
+              "texto": "#d0d0d0",
+              "retraso": 5.5
             },
             {
               "tipo": "formato",
               "rango": "A4:B4",
               "fondo": "#fff8cc",
               "texto": "#1f1f1f",
-              "retraso": 6.0
+              "retraso": 5.4
             },
             {
               "tipo": "zoom",
-              "rango": "A4:B4",
-              "escala": 1.75,
+              "rango": "A2:B4",
+              "escala": 1.55,
               "duracion": 0.9,
+              "retraso": 5.4
+            },
+            {
+              "tipo": "lupa",
+              "texto": "Paso 3: *pega tus pedidos* con las mismas columnas",
               "retraso": 5.8
             }
           ]
@@ -4801,14 +4825,14 @@
               "tipo": "formato",
               "rango": "A4:B4",
               "fondo": "#ffffff",
-              "texto": "#c2c2c2"
+              "texto": "#d0d0d0"
             },
             {
               "tipo": "formato",
               "rango": "A3:B3",
               "fondo": "#ffe0e0",
               "texto": "#1f1f1f",
-              "retraso": 0.1
+              "retraso": 0.05
             },
             {
               "tipo": "zoom",
@@ -4817,10 +4841,15 @@
               "duracion": 0.6
             },
             {
+              "tipo": "lupa",
+              "texto": "Paso 2: *borra los pedidos de ejemplo*",
+              "retraso": 0.1
+            },
+            {
               "tipo": "formato",
               "rango": "A3:B3",
               "fondo": "#ffffff",
-              "texto": "#c2c2c2",
+              "texto": "#d0d0d0",
               "retraso": 2.2
             },
             {
@@ -4828,14 +4857,20 @@
               "rango": "A4:B4",
               "fondo": "#fff8cc",
               "texto": "#1f1f1f",
-              "retraso": 2.3
+              "retraso": 2.25
             },
             {
               "tipo": "zoom",
               "rango": "A4:B4",
               "escala": 1.75,
-              "duracion": 0.6,
+              "duracion": 1.0,
               "retraso": 2.2
+            },
+            {
+              "tipo": "lupa",
+              "texto": "Paso 3: *pega los tuyos*, mismas columnas",
+              "retraso": 2.3,
+              "hasta": 2.2
             },
             {
               "tipo": "zoom_fuera",

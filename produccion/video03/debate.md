@@ -726,3 +726,17 @@ Lectura: faltan 8 arreglos puntuales de sincronía y encuadre. **La ronda 3 es l
 
 ### Si la ronda 3 no aprueba
 Recomendaré aprobar con las objeciones pendientes documentadas, salvo que siga algún error de coherencia número-voz (por ejemplo, la tarjeta de la esc. 22). Ese error sí bloquea, porque muestra un número que la voz contradice.
+
+## Pulido tras aprobación visual (residuales de `rondas/visual-3.json`, sin ronda nueva)
+
+Sin cambios de voz ni de duración (estimado 477,8 s). `puntuar_guion` 100/100; `plantilla_xlsx --verificar` coincide.
+1. **Esc. 5 (Meta):** la lupa dura hasta el final del beat y la respuesta queda atenuada, sin la frase resaltada. Así no compiten tres bloques.
+2. **Esc. 27–28 (plantilla):**
+   - Nueva acción `lupa` en `excel`, con el paso en ≤ 12 palabras por beat.
+   - En Prompts, el encuadre es A:C.
+   - En Tus datos, zoom a los pasos 1–3 y al paso 3 resaltado cuando la voz nombra «Tus datos».
+   - Después, un solo recorrido descendente: fila 3 («borras») → fila 4 («pegas») → plano general. El resto de las filas queda más atenuado.
+3. **Titulares y capítulos fundidos (7–8, 12–13, 23):**
+   - El fondo desenfocado está más oscuro (blur 26 px, brillo 0,2).
+   - Sin espacio antes de la puntuación después de un `*marcador*` («90 %?»).
+4. **Capítulo como tercera línea del titular: no se hizo.** Exige fusionar escenas y mover la marca de capítulo de la descripción. Hoy el par ya es una sola pantalla, con un fundido del texto sobre el mismo fondo.

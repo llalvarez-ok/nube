@@ -68,7 +68,8 @@
     lineas.forEach((l, i) => {
       const ln = el("span", "linea", null, tit);
       ln.innerHTML = marcar(l.texto).split(/(<span class="resaltado">[^<]*<\/span>| )/).filter((x) => x && x !== " ")
-        .map((w) => (w.startsWith("<span") ? w.replace('class="resaltado"', 'class="palabra resaltado"') : `<span class="palabra">${w}</span>`)).join(" ");
+        .map((w) => (w.startsWith("<span") ? w.replace('class="resaltado"', 'class="palabra resaltado"') : `<span class="palabra">${w}</span>`))
+        .reduce((acc, w) => acc + (acc && !/^<span class="palabra">[?!.,:;»)…]/.test(w) ? " " : "") + w, "");
       const t = c.B(l.beat || 0, 0.25 + (l.beat ? 0 : i * 0.18));
       tl.from(ln.querySelectorAll(".palabra"), { yPercent: 115, rotate: 3, duration: 0.8, ease: "power4.out", stagger: 0.06 }, t);
       ln.querySelectorAll(".resaltado").forEach((r) => {
@@ -311,6 +312,7 @@
     gsap.set(puntero, { x: px, y: py });
     const objetos = {}; // gráficos y tarjetas con id, para actualizarlos después
     let notaActual = null, refs = [], panel = null, panelMsgs = null, panelInput = null, colsOn = [];
+    let lupaXl = null;
     let zs = 1, zx = 0, zy = 0; // estado de la cámara (escala y desplazamiento de la ventana)
     const enPantalla = (x, y) => ({ x: XL_X + zx + x * zs, y: XL_Y + zy + y * zs });
 
@@ -607,6 +609,15 @@
       cerrar_panel: (a, t) => { if (panel) { tl.to(panel, { x: 600, duration: 0.5, ease: "power3.in" }, t); c.sonido("whoosh_suave", t); } },
       quitar_refs: (a, t) => quitarRefs(t),
       mover: (a, t) => { const r = rect(a.celda); mover(r.x + r.w / 2, r.y + r.h / 2, t); },
+      // recuadro grande de lectura en espacio de pantalla (no le afecta el zoom); "posicion": "abajo" (por defecto) o "arriba"
+      lupa: (a, t) => {
+        if (lupaXl) tl.to(lupaXl, { opacity: 0, y: 20, duration: 0.25 }, t);
+        const l = el("div", "chat-lupa xl-lupa" + (a.posicion === "arriba" ? "" : " abajo"), marcar(a.texto), cam);
+        tl.fromTo(l, { opacity: 0, y: 30, scale: 0.94 }, { opacity: 1, y: 0, scale: 1, duration: 0.45, ease: "back.out(1.6)", immediateRender: true }, t);
+        if (a.hasta != null) tl.to(l, { opacity: 0, y: 20, duration: 0.3 }, t + a.hasta);
+        lupaXl = a.hasta != null ? null : l;
+        c.sonido("zoom", t);
+      },
       // clic en una pestaña de hoja del pie: se marca en amarillo (no cambia el contenido de la hoja)
       hoja: (a, t) => {
         const sp = [...pie.querySelectorAll("span")].find((x) => x.dataset.hoja === a.hoja);
@@ -707,7 +718,7 @@
         if (a.lupa) lupa(a.lupa, t + 0.15, a.hasta);
       } else if (a.tipo === "respuesta") {
         // "frase_clave": parte del texto que se resalta al terminar de escribirse ("estilo_clave": "falta" = rojo, la idea que no aparece)
-        const bi = el("div", "chat-ia" + (a.recorte !== false ? " recorte" : ""), "", msgs);
+        const bi = el("div", "chat-ia" + (a.recorte !== false ? " recorte" : "") + (a.atenuada ? " atenuado" : ""), "", msgs);
         const dr = a.duracion || Math.min(6, Math.max(1.5, a.texto.split(" ").length / 8));
         tl.fromTo(bi, { opacity: 0 }, { opacity: 1, duration: 0.2, immediateRender: true }, t);
         tl.to(bi, { text: { value: escBr(a.texto), delimiter: " " }, duration: dr, ease: "none" }, t + 0.1);
@@ -775,7 +786,7 @@
     }
     if (es.fondo_desenfocado && base[i] === i - 1) {
       // la escena anterior (Excel) queda de fondo, desenfocada y oscura
-      master.to(prev, { filter: "blur(18px) brightness(0.32)", scale: 1.04, duration: TR, ease: "power2.out" }, t);
+      master.to(prev, { filter: "blur(26px) brightness(0.2)", scale: 1.04, duration: TR, ease: "power2.out" }, t);
       if (tipo === "barrido") {
         const panel = el("div", "", `<div style="width:140px;height:140px">${LOGO}</div>`, document.getElementById("barridos"));
         Object.assign(panel.style, { position: "absolute", inset: 0, background: ACENTO, display: "flex", alignItems: "center", justifyContent: "center", zIndex: 60 });
