@@ -55,6 +55,18 @@ def generar():
     return sorted(filas, key=lambda r: r["fecha"])
 
 
+def pedidos_hoy():
+    """Los 3 pedidos del 03/11/2026 que se pegan en el resultado final (no son parte de los 250)."""
+    d = CORTE
+    return [fila(d, 3, 1, "PAP-200", 80, "No"), fila(d, 1, 2, "PAP-220", 60, "No"),
+            fila(d, 2, 0, "LIM-010", 15, "No")]
+
+
+def meses(filas):
+    """Gráfico mensual: rango fijo de 12 meses (ene-dic 2026), meses futuros en 0."""
+    return [total(filas, dt.date(2026, m, 1), fin_mes(dt.date(2026, m, 1), 0)) for m in range(1, 13)]
+
+
 def total(filas, desde, hasta):
     return sum(r["neto"] for r in filas if desde <= r["fecha"] <= hasta)
 
@@ -80,3 +92,12 @@ if __name__ == "__main__":
     print("acumulado año:", ytd)
     for v in VENDEDORES:
         print(v, sum(r["neto"] for r in filas if r["vendedor"] == v))
+    print("gráfico 12 meses (antes de pegar):", meses(filas))
+    hoy = pedidos_hoy()
+    print("pedidos de hoy (03/11):", [(r["cliente"], r["codigo"], r["cant"], r["neto"]) for r in hoy])
+    todo = filas + hoy
+    nov2 = total(todo, dt.date(2026, 11, 1), CORTE)
+    print("después de pegar: pedidos", len(todo), "acumulado", total(todo, dt.date(2026, 1, 1), CORTE),
+          "noviembre", nov2, f"mismo tramo {nov2/oct3-1:+.1%}")
+    print("gráfico 12 meses (después de pegar):", meses(todo))
+    print("pedidos en el año (antes):", sum(1 for r in filas if r["fecha"] <= CORTE))
