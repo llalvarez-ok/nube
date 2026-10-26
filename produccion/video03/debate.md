@@ -253,3 +253,88 @@ Mapa de tiempos (estimado): hook 0:00 · lo probé 0:33 · 4 preguntas 0:52 · P
    - que la lista de cobranza dé Colegio Nuevo Horizonte 1.215.000 arriba y 16 filas.
 3. Medir el armado y el lunes, si se quiere cronómetro.
 4. Fijar en Studio el corte de anuncios y la tarjeta hacia video02 (escena 16, beat 3; escenas y beats se cuentan desde 0).
+
+## Guion · ronda 1 · decisión del showrunner
+
+**Etapa:** guion · **Resultado de `pipeline.py evaluar`:** REVISAR · **Nota:** 7,03
+Criterios: hook 7 · ritmo 7 · promesa 7,5 · claridad 6,5 · veracidad 7, **con veto del verificador**.
+Lectura: la estructura, las cifras (todas recalculadas por el verificador, OK) y el giro con dos ramas funcionan. El veto viene de frases y de la plantilla que afirman cosas que no son ciertas o que todavía no se corrieron. La claridad baja porque el título promete "paso a paso" y varias piezas aparecen ya hechas. Todo se arregla sin alargar el video.
+Escenas numeradas desde 0, como en `guion.json`. Los críticos citan desde 1: la "esc. 1" de retención es la 0 de aquí.
+
+### Datos del orquestador (firmes)
+- El creador corre los prompts en claude.ai y prueba la plantilla en Excel para la web; el plazo es el viernes 30/10. Hasta entonces las respuestas siguen pendientes y con ramas, y nada se atribuye a Claude sin texto real.
+- La cadencia martes/viernes **no** está confirmada (video02 salió un lunes): no se promete.
+
+### Réplicas del guionista (desvíos de la escaleta)
+Se aceptan los 4:
+- el CTA al 42 % (regla del guionista);
+- el corte de anuncios en ≈ 5:24 con marca para Studio;
+- la pregunta 4 sin chat (un prompt menos sin respuesta real);
+- sin cronómetro mientras no haya medición.
+
+También se acepta el rechazo de "número falso" (veracidad).
+
+### Contradicciones resueltas (prioridad: veracidad > promesa > retención > estilo)
+
+1. **Más "paso a paso" (espectador) contra recortar (retención).** Gana la promesa, porque el título dice "paso a paso", pero se paga con recortes de relleno. Lo que se agrega suma unos 15 s y lo que se quita, unos 60 s (ver la corrección 3). La meta neta es ≤ 9,1 min.
+2. **B1 fija contra =HOY().** Gana la veracidad y la promesa. La plantilla trae `=HOY()` en B1, porque con B1 fija los pedidos pegados después del 03/11 no entran y el Estado tampoco se actualiza, así que "se rehace solo" sería falso para el espectador. El video usa la fecha fija y lo dice.
+3. **Modo dashboard de Copilot: en voz (idea, ronda 1) o a la descripción (retención).** Va a la descripción. Según el Microsoft 365 Roadmap está "en desarrollo" (Excel canvas, RM569424), así que en voz aporta poco y suma riesgo. Revierto mi pedido de la ronda 1.
+4. **Video02: avisar en el minuto 1 (espectador) o al final (retención).** Ni lo uno ni lo otro: una frase en la pregunta 4 ("la columna Estado ya viene en la plantilla; cómo se arma, en el video del final") y la pantalla final sin condicional.
+5. **"Datos inventados" solo en el rótulo (retención) o también en voz.** Gana la política: el canal los declara en voz al inicio. Queda en 3 palabras dentro de la frase del rótulo.
+6. **"ChatGPT o Copilot gratis" al inicio (espectador).** Entra como "sirve igual con ChatGPT", en 4 palabras. No se dice "Copilot gratis" porque Copilot en Excel es de pago y la frase confunde.
+
+### Correcciones obligatorias (en orden)
+
+1. **Veracidad de la plantilla y de la voz (levanta el veto).**
+   - **B1:** `=HOY()` en la plantilla. Léeme: "para ver los números del video, escribe 03/11/2026 en B1".
+   - **Voz de la esc. 6:** "Aquí la dejo fija en el 3 de noviembre; en tu plantilla tiene =HOY(), así se actualiza sola cada día."
+   - **Hoja Prompts:** la columna "Fórmula que dio Claude" pasa a "Fórmula de la plantilla (verificada)" y se agrega "Respuesta de Claude (fecha)", con `[PENDIENTE]` hasta pegar el texto real.
+   - **B7 (la variación ingenua):** sale del Dashboard de la plantilla, para que sea cierto que "la alarma roja se va" y no aparezca el −77,9 % en la esc. 26. La fórmula queda documentada en Prompts como "la ingenua, para que la veas".
+   - **Conteo:** sumar a Prompts B11, B12 y Estado, y que la voz diga "todas las fórmulas", no "12".
+   - **Esc. 11:** fuera "cada martes y viernes"; queda "suscríbete para el próximo atajo de Excel con IA".
+   - **Esc. 27:** fuera la frase de Copilot (va a la descripción con la fuente del Roadmap y la redacción "si tienes Copilot en Excel").
+2. **Nada atribuido a Claude antes de la respuesta real.**
+   - **Esc. 18 ("Lo vio…"):** escribir ya las dos voces (A: la IA lo señala; B: "esta vez no lo vio; lo compruebo yo") y elegir según `respuestas-ia.md`.
+   - **Esc. 13 (el asterisco):** lo explica el narrador, sobre la fórmula de la plantilla, no como "lo que dijo Claude".
+   - **Esc. 1:** sigue condicional: si la corrida no dio un dashboard, se elimina.
+   - **Rótulo:** "Claude · versión gratuita" solo con captura.
+3. **"Paso a paso" sin alargar.**
+   - **Se agrega (≈ 15 s):**
+     - esc. 4: con `escribir`, la fórmula pasa de `=SUMA(Pedidos!H2:H250)` a `=SUMA(Pedidos[Neto])`, más la línea "en Diseño de tabla le pones de nombre Pedidos". El 46.586.220 aparece después de reescribir, no antes;
+     - esc. 10: 5 s de la tabla de meses H:I y "la seleccionas, Insertar, Gráfico de columnas";
+     - una línea sobre qué es una tarjeta: "una celda grande con un solo número";
+     - esc. 5: "copia este prompt de la plantilla y cambia solo los nombres de tus columnas".
+   - **Se quita (≈ 60 s):**
+     - esc. 0: la logística (0:19–0:32) queda en el rótulo fijo "Excel para la web gratis + Claude · datos inventados" y una frase de voz: "Sin macros, los datos son inventados y sirve igual con ChatGPT. Lo armamos paso a paso, y a mitad del video atrapamos ese número". Fuera "la plantilla hace el resto", que pasa a la esc. 28;
+     - las cifras en voz van redondeadas ("46,6 millones", "4,6 millones", "1 millón") y el total del año se dice una sola vez; en pantalla, la cifra exacta;
+     - pregunta 3 en ≈ 35 s: fuera Diego Paz y el papel higiénico en voz (quedan en el gráfico);
+     - esc. 19 a 21: se quita "La fórmula no está mal…" y se fusionan el `aviso` y el `antes_despues` en un solo antes/después con la consecuencia ("frenarías compras por una caída que no existe");
+     - esc. 27: límites en 2 frases (volumen o varias fuentes → tabla dinámica o Power BI; con datos de clientes reales, solo el mapa).
+4. **Arranque y bucle abierto.**
+   - **Esc. 1–2:** las 4 preguntas se presentan como "lo que tiene que contestar el tablero", no como una forma de comprobar. Mapa · Meta · Prueba se nombra por primera vez en la esc. 5.
+   - **Esc. 7 y 11:** los reenganches agregan algo. Por ejemplo, la esc. 11: "la tarjeta roja vuelve, y la arregla una sola pregunta". Fuera "sigue ahí, esperando".
+   - **Tarjeta `alarma`:** queda fija en una esquina durante las preguntas 3 y 4, sin nombrarla en voz.
+   - **Objetivo:** el giro empieza en ≤ 5:10 gracias a los recortes. Se mantiene en la zona del 55–60 %.
+5. **Video02 y cierre.**
+   - **Esc. 16:** "la columna Estado ya viene en la plantilla; cómo se arma, en el video del final". La fórmula FILTRAR se explica en una frase ("se queda con los vencidos y los ordena") y en voz: "ELEGIRCOLS no está en Excel 2021; en la web y en 365, sí".
+   - **Esc. 29:** la pantalla final sin condicional: "La columna Estado que viste hoy se arma en este video".
+   - **Esc. 26:** la tarjeta chica del +146,8 % queda con la regla actual ("con tres días salta; el lunes miras la grande").
+6. **Cuadro roto del zoom a 0:08 (esc. 0).** Lo corrige el **guionista** en `guion.json`, porque los parámetros del zoom son del artefacto: centrar el zoom en la tarjeta para que la ventana de Excel no deje negro entre x≈1265 y 1920. El **director visual** valida el cuadro 8 con `--cuadros`, porque es la fuente de la miniatura B.
+
+### Bloqueos (creador, viernes 30/10; no impiden la ronda 2, sí el cierre del guion)
+- Respuestas reales en `respuestas-ia.md` (los 5 PENDIENTE, rama del giro y del "lo probé").
+- Captura con fecha en Excel para la web de que la Tabla se expande al pegar, registrada en `fuentes`. Sin ella, el verificador mantiene el veto en el cierre aunque la ronda 2 apruebe el texto.
+- Las referencias `Pedidos[...]`, el desplegable, los 3 gráficos y la lista de cobranza (Colegio Nuevo Horizonte 1.215.000 arriba, 16 filas).
+
+### No tocar (funciona)
+- El hook (las 3 primeras frases) y el reenganche de 2:10, textuales.
+- El −90 % en pantalla a los ≈ 3,5 s.
+- El giro con dos ramas y la comprobación con el corte al 31/10 en ambas.
+- Las dos tarjetas de la corrección: la grande en el mes cerrado (+8,6 %).
+- Todas las cifras (verificadas).
+- El antes/después rango contra Tabla con números (46.145.220 → 46.586.220).
+- El gráfico de 12 meses con `max` fijo y la barra de noviembre que crece.
+- El final "pegar, y listo" sin cronómetro inventado.
+- "No es cierto" en lugar de "falso" o "mentira".
+- El CTA al 42 % y la marca del corte de anuncios.
+- Los cambios en las herramientas (`datos.filas` y `plantilla_xlsx.py`): aceptados, pendientes de que el coordinador los confirme.
