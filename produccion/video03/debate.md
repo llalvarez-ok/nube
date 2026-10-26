@@ -1,0 +1,80 @@
+# video03 · Debate
+
+## Ronda 1 · decisión del showrunner
+
+**Etapa:** idea · **Resultado de `pipeline.py evaluar`:** REVISAR · **Nota:** 7,28 (umbral 8,0)
+Criterios: demanda 8,0 · empaque 6,5 (mín. 8) · diferenciación 7,0 · rpm 7,0 · encaje 8,0.
+Lectura: la idea es sólida (demanda probada, base y cifras reproducibles, giro que no depende de que la IA falle). Falla por una sola razón: el **empaque principal vende lo mismo que ya vende el top** ("se actualiza solo", dashboard de colores), mientras que lo único que nadie tiene (el −90 % del mes incompleto) quedó como variante. Los tres críticos coinciden: se invierte.
+
+Cifras recalculadas desde la tabla de idea.md: 441.000 / 4.574.425 = −90,4 %; 441.000 / 409.900 = +7,6 %; 4.574.425 / 4.213.090 = +8,6 %. Están bien. El 03/11/2026 cae en martes.
+
+### Dato nuevo del orquestador: el motor ya no es un bloqueo
+
+El motor v2 (plantilla `excel`) ya tiene `grafico` con `id` (más `alto` y `max`), `actualizar_grafico`, `tarjeta`, `actualizar_tarjeta`, `desplegable` y `quitar`. No hay gráfico de líneas. Quedan resueltas las objeciones de motor de retención y espectador, y cae el "sin 1 y 2, recomiendo no producir" de idea.md. La tendencia mensual va en barras.
+
+### Contradicciones resueltas (prioridad: veracidad y políticas > promesa cumplida > retención > estilo)
+
+1. **Título principal: el ideador propone el 1 y los tres críticos el giro.** Gana la retención con el respaldo de la diferenciación: el título 1 es casi el de EXCELeINFO y el giro es lo único que no está en el top. El giro pasa a principal y "se actualiza solo" queda como A/B 2.
+2. **"Dice −90 % y es mentira" (retención) contra "el error de cada inicio de mes" (retención y espectador).** Gana el segundo por veracidad: la propia idea dice que el −90,4 % es "correcto en lo literal y engañoso", así que llamarlo "mentira" en el título exagera. Además, el número ya va en la miniatura y no debe repetirse en el título.
+3. **Miniatura B: sello "FALSO" (la propuesta) contra "sin sello" (retención).** Gana la retención: el sello responde la pregunta antes del clic y una tarjeta sola no se lee como dashboard. El espectador elogió la B por el −90 %, no por el sello, así que no hay conflicto real.
+4. **Título 3 "¿un solo prompt? Lo probé": hipótesis (investigador), solo si la corrida sale mal (retención) o fuera del A/B (espectador).** Gana la veracidad: el título promete un veredicto que todavía no existe porque la corrida en claude.ai no se hizo. Sale del A/B y queda condicionado al resultado real (ver corrección 2).
+5. **Tabla en 10 s (retención) contra el antes/después rango contra Tabla (espectador).** Gana la promesa cumplida: "pegas y se rehace" depende de la Tabla, y ese contraste es la prueba. Se hace en ≤ 20 s y dentro de la pregunta 1, no como bloque aparte, así que la retención también queda cubierta.
+6. **El hook de retención incluye "casi lo mando así".** Gana la veracidad: es una anécdota inventada en primera persona con voz sintética. Se reemplaza por algo que no afirme un hecho que no pasó, por ejemplo "y así le llegaría a tu jefe".
+7. **Fecha del 03/11 contra "no fijarla hasta tener el motor".** El motor ya está, así que la fecha se mantiene, pero ahora la condicionan las verificaciones del creador (ver abajo). El giro no puede depender de publicar el día 3: la voz dice "el día 3 de cada mes", nunca un "hoy" suelto.
+
+### Correcciones obligatorias para el ideador (en orden)
+
+1. **Empaque principal = giro.**
+   - Título principal: `Dashboard en Excel con IA: el error de cada inicio de mes` (57).
+   - Miniatura principal = **B híbrida**: dashboard oscuro reconocible al fondo (tarjetas y barras, sin fórmulas legibles), una tarjeta gigante **"−90 %"** en rojo con la flecha hacia abajo que se sale del cuadro, **sin sello** y con el texto **`¿ES REAL?`**. Mantener la burbuja de chat chica de la serie.
+   - Reescribir "Por qué el principal" con este argumento y sacar de ahí la afirmación de que el título 3 es "el formato de los outliers".
+2. **Variantes A/B.**
+   - A/B 2: `Dashboard en Excel con IA: pegas pedidos y se rehace solo` (57) con la miniatura A rehecha. El texto debe ser concreto y no un eslogan ("LUNES RESUELTO" se descarta): por ejemplo, el cronómetro "LUNES: 20 s", pero **solo si los 20 s se midieron**. Si no se midieron, usar un texto sin cifra.
+   - A/B 3: queda vacío hasta la corrida real del "un solo prompt". Si sale mal o a medias, entra `Le pedí a la IA un dashboard en 1 mensaje: esto salió` (53) con la miniatura C que muestre lo que salió de verdad. Si sale bien, no hay título 3 y el acto se reduce a 20 s.
+   - Se elimina "¿EN SERIO?".
+   - El título 1 actual ("gratis: se actualiza solo") pasa a reserva.
+3. **Hook en 2 ideas, con el −90 % antes de los 8 s.**
+   - Base: "Pego los pedidos y este dashboard se rehace solo. Pero me dice que las ventas cayeron un 90 %, y no es cierto." Después, una línea que deje el bucle abierto sin "al final te muestro".
+   - "Gratis, sin macros, Excel para la web" y "datos inventados" van al rótulo y a la voz de 0:25.
+   - "Un solo prompt" sale del hook.
+4. **Promesa y fórmulas que cumplan "se rehace solo".**
+   - Siempre "pegas los pedidos y se rehace solo" (nunca "se actualiza solo" a secas), en la promesa, la línea 1 de la descripción y la voz.
+   - El gráfico mensual pasa a un **rango fijo de 12 meses (enero a diciembre)** con SUMAR.SI.CONJUNTO y los meses futuros en 0. Con el rango actual de enero a octubre, la barra de noviembre no existe y los pedidos pegados el 02/11 no se verían. En el resultado final se tiene que ver crecer la barra de noviembre (`actualizar_grafico`).
+5. **Escaleta para la retención.**
+   - El acto "lo probé" dura ≤ 30 s.
+   - El paso 0 desaparece como bloque: la Tabla entra dentro de la pregunta 1 con el antes/después (en un rango, pegas una fila y el total no cambia; en la Tabla, sí), en ≤ 20 s.
+   - La tarjeta "−90 %" queda visible en una esquina durante las preguntas 3 y 4 (`tarjeta` + `quitar` al resolverse el giro).
+   - La primera vez que aparece el método, una línea de explicación: "Mapa · Meta · Prueba".
+   - Sobre la fórmula del desplegable, decir: "no tienes que memorizarla: la escribe la IA y está en la plantilla".
+6. **Diferenciación, evidencia y producción, alineadas con lo verificado.**
+   - Sacar el punto 4 ("primero las preguntas") de los diferenciadores: lo tiene EXCELeINFO. Se queda como estructura del video.
+   - En "Lectura honesta", sumar las vistas por día en español (500–1.600/día, 0,0x–0,5x, ninguno nuevo en 60 días) y bajar la expectativa de búsqueda: el video depende de sugeridos y de video02.
+   - En "Límites", nombrar el modo dashboard nativo de Excel con Copilot (Insiders o de pago, a verificar el día del guion) y anotar un seguimiento en `ideas.md`.
+   - Reescribir la sección de producción con las acciones nuevas del motor (sin líneas) y quitar el riesgo de motor.
+
+### Opcionales
+
+- RPM: citar la ficha como fuente ("dashboards e informes de gestión", tema de RPM alto). Si se quiere una cifra, que sea con fuente y fecha; si no, no se inventa. Usar `informe de ventas`, `cuentas por cobrar` y `Power BI` en capítulos y descripción.
+- Densidad: una frase en 0:25 del tipo "te enseño el criterio; la plantilla hace el resto".
+- Reintentar `investigar.py sugerencias` o Google Trends para la palabra clave. No bloquea.
+
+### Condiciones fuera del ideador (no bloquean la ronda 2; sí bloquean el guion o la fecha)
+
+- **Investigador, antes de la ronda 2:** revisar El Inge Francisco, "¿Claude SIRVE?" (youtu.be/1pJqarOwgbA). Si ahí se revisa la exactitud de un KPI por un mes incompleto, el giro pierde exclusividad y el principal se reevalúa en la ronda 2. Los otros 4 del top ya quedaron confirmados por descripción (VBA, Gemini Canvas, Google Sheets, conversor de pago).
+- **Creador (el orquestador puede no tener acceso a claude.ai), antes del guion:**
+  - correr en claude.ai gratis el "un solo prompt" con el archivo y la Prueba del bloque 2, y guardar las respuestas textuales con fecha y captura en `respuestas-ia.md`;
+  - confirmar que el plan gratuito lee .xlsx;
+  - en Excel para la web gratis y en español, comprobar la expansión de la Tabla al pegar, las referencias estructuradas, la lista desplegable y que los gráficos conserven el formato;
+  - medir [N] y los "20 s".
+  - Lo que no se corra queda marcado como pendiente y no sale en el video.
+- **Fecha:** se mantiene el martes 03/11/2026, 13:00 CDMX, si esas verificaciones están el **viernes 30/10**. Si no, recomiendo que el creador la mueva antes de recortar la demostración.
+
+### No tocar (funciona)
+
+- La base Distribuidora Sur (250 pedidos, semilla fija, las 12 filas de video02), la tabla de cifras y la fecha de corte fija en `Dashboard!B1`.
+- El giro con dos ramas (la IA lo ve o lo ve la persona) y la regla de no inventar la respuesta. La corrección en dos tarjetas: mismo tramo y mes cerrado, con la tarjeta grande en el mes cerrado.
+- Las 4 preguntas como columna vertebral, el corte de anuncios en 5:00, el giro entre el 60 % y el 75 % y el desplegable "Carla Ruiz".
+- La plantilla gratis y sin registro (hojas `Pedidos`, `Dashboard`, `Prompts` y `Tus datos`) y lo de pago fuera del video.
+- Las restricciones heredadas de video02 (regla 4, datos ficticios declarados, `;`, Excel para la web, sin VBA ni Power Query).
+- La palabra clave `dashboard en excel con ia` al inicio de todos los títulos, menos el A/B 3 condicional.
+- Riesgos de contenido inauténtico y de temas sensibles: bien resueltos.
