@@ -611,3 +611,69 @@ Se aplicaron los 6 recortes pedidos, a partir de `rondas/guion-3.json`. No se to
 - `--verificar`: sin diferencias en lo calculable.
 - Tiempos estimados: 8,15 min, con el corte de anuncios en 4:47. Quedan unos 9 s de margen sobre los 8 min que necesitan los anuncios a mitad de video. Hay que confirmarlo con la voz real.
 - La plantilla de video02 no se regeneró.
+
+## Visual · ronda 1 · decisión del showrunner
+
+**Etapa:** visual · **Resultado de `pipeline.py evaluar`:** REVISAR · **Nota:** 6,85 (umbral 8,0)
+Criterios: variedad 7,5 · legibilidad 6 (mín. 8) · coherencia 6 (mín. 8) · marca 8.
+Lectura: la marca y la estructura están bien. Bajan la nota los cuadros donde la pantalla contradice a la voz y los textos ilegibles en el celular. Se arregla con sincronía y encuadre, sin tocar la voz.
+**Numeración:** escenas desde 0, como en `guion.json`. Los críticos citan desde 1: su "esc. 18" es la 17 de aquí.
+
+### Regla de duración (vale para toda la ronda)
+- Estimado actual: ~7,95 min. Hacen falta ≥ 8:00 con voz real para los anuncios a mitad del video.
+- **En esta etapa no se quita ni se acorta ninguna línea de voz.** Los cuadros quietos se resuelven con acciones dentro del mismo tiempo, no con recortes.
+- Si al fundir pantallas se pierden segundos de animación, se compensan alargando la acción en Excel (escribir, calcular, resaltar), nunca con relleno.
+- Si con la voz real da < 8:00, decide el guionista con contenido (por ejemplo, 1 frase más en los límites o en el paso a paso). El visual no estira.
+
+### Contradicciones resueltas (prioridad: coherencia número-voz > legibilidad en celular > variedad)
+1. **Retención pide titulares más cortos (esc. 23 a un beat de ~6 s) contra la duración mínima.** Gana la duración, porque es la condición de los anuncios a mitad del video: la voz queda igual y el titular se cambia por acción visual.
+2. **Retención pide fundir capítulos y titulares contra la marca de capítulos.** Se mantiene el rótulo de capítulo, pero entra sobre el Excel desenfocado de la escena anterior, en lugar de una pantalla negra aparte. Así cuenta como cambio de plano sin perder el tiempo de voz.
+
+### Correcciones obligatorias (en orden)
+
+1. **Coherencia número-voz (`editor-qc`).**
+   - **Esc. 17:** la voz dice "dieciséis facturas, casi 3 millones", pero el desborde muestra 4 filas (2.138.400). Hay que mostrar las 16 filas, o las que entren más el rótulo "+N filas" y una celda o tarjeta visible con el total, "16 facturas · 2.951.090". El rótulo de ELEGIRCOLS sale de la columna D y no tapa filas.
+   - **Esc. 20:** `actualizar_tarjeta` (de −90,4 % rojo a +8,6 %) en el mismo beat que el `calcular` de B7, para que no queden 1,5 s con la tarjeta vieja.
+   - **Esc. 21:** el `antes_despues` se rotula "NOVIEMBRE (hasta el corte) · 3 días" contra "OCTUBRE (completo) · 31 días", y la consecuencia ("frenarías compras…") va en una línea propia, no pegada a octubre.
+   - **Esc. 22:** la tarjeta pasa a verde y el zoom entra cuando la voz dice "subieron", no antes.
+   - **Esc. 25:** `actualizar_grafico` sale junto con los `calcular` de B3/B6 y el `actualizar_tarjeta`. No puede haber un cuadro con noviembre en 1,0 M mientras las tarjetas siguen en los valores viejos.
+2. **Encuadre y rótulos que no tapen lo que se nombra.**
+   - **Esc. 11 y 22:** zoom encuadrado con las tarjetas enteras (nada de "4.574.4…") y la barra de julio completa.
+   - **Esc. 4 ("Insertar › Tabla") y esc. 10 ("Insertar › Gráfico"):** los rótulos van arriba a la derecha, sin tapar la fila 251 ni las barras de noviembre y diciembre.
+   - Validar estos cuadros con `--cuadros`.
+3. **Prompts legibles en el celular (esc. 1, 5, 9 y 19).**
+   - El prompt completo queda atenuado y por cada beat se resaltan, con zoom, 3 a 6 palabras clave: las que nombra la voz.
+   - Rótulo fijo: "completo en la hoja Prompts".
+   - **Esc. 5:**
+     - el prompt se escribe en dos tiempos, Mapa y después Meta, a la velocidad de la voz y no en 2,4 s;
+     - "Mapa · Meta · Prueba" aparece como 3 tarjetas que se encienden una por una (la Prueba queda apagada hasta la esc. 19);
+     - los beats que hoy son solo rótulo sobre el chat quieto pasan a resaltar la parte del prompt que nombra la voz.
+4. **Tramos quietos, con la misma voz.**
+   - **Esc. 27:** la plantilla real se muestra en `excel`: pestañas Prompts y Tus datos, `seleccionar` y `resaltar` en los pasos que nombra la voz, y el rótulo "gratis, sin registro". Deja de ser una `lista`.
+   - **Esc. 26:** resaltar "Power BI" y "solo el mapa" cuando la voz los dice.
+   - **Esc. 6:** la acción se reparte en los ~10 s del beat: `nota` a mitad del beat y `resaltar` al final, no todo en el primer tercio.
+   - **Esc. 23:** de fondo, el dashboard corregido y desenfocado, en lugar de un negro liso.
+   - **Esc. 7–8 y 12–14:** los capítulos y titulares entran sobre el Excel desenfocado de la escena anterior.
+5. **Diseño de las respuestas pendientes, listo para pegar el texto (director visual).** Se define ahora para que, cuando lleguen las respuestas reales, solo haya que pegar.
+   - **Caja de respuesta de Claude:** como máximo 3 líneas visibles, recortadas por la parte relevante, con "…" honesto si se corta y la frase clave resaltada en amarillo con zoom. Nunca corchetes, "PENDIENTE" ni "[según la corrida real]" en pantalla.
+   - **Esc. 19, rama A:** se resalta la frase donde la IA nombra el mes incompleto.
+   - **Esc. 19, rama B:** se resalta la línea de la respuesta donde *falta* esa idea, con el rótulo "no lo menciona". Corte a Excel con "cambio la fecha de corte".
+   - **Esc. 1:**
+     - si la corrida dio un dashboard, va una captura recortada con el número dudoso marcado;
+     - si no lo dio, se elimina la escena, como ya estaba decidido.
+   - **Esc. 9:** el texto de la IA, con la fórmula resaltada y, al lado, la de la plantilla (igual o distinta, según la corrida).
+   - **Miniatura C (condicional):** el texto en 2 líneas sobre fondo limpio a la izquierda y la ventana a la derecha, sin solaparse. Se valida a 168 px con la captura real.
+   - Se deja documentado en `sistema/motor-v2.md` o en el guion como campos `respuesta_recorte` y `frase_clave` por escena. **Sin texto real no se renderiza el corte final.**
+
+### Condición de cierre del render (no del visual)
+- Los textos PENDIENTE y los corchetes de las esc. 1, 5, 9 y 19 se reemplazan por las respuestas reales de `respuestas-ia.md` (creador, viernes 30/10) y se elige la rama de las esc. 1, 9 y 19.
+- La miniatura C sale solo si la esc. 1 sobrevive, y con su captura real.
+- La ronda visual 2 puntúa el diseño de la corrección 5 con un texto de prueba **marcado como maqueta en el borrador interno**. No se baja la nota por la falta del texto real.
+
+### No tocar (funciona)
+- La marca (paleta #0F0F10 / #FFD400, burbuja de chat de la serie, capítulos) y la miniatura B principal.
+- El hook visual: el −90 % en pantalla a los ≈ 3,5 s y el zoom centrado ya corregido.
+- El antes/después rango contra Tabla con números.
+- El gráfico de 12 meses con `max` fijo, la barra de noviembre destacada que crece en el final y la tarjeta `alarma` fija en la esquina durante Q3 y Q4.
+- El `=HOY()` visible en B1 (cuadro 124).
+- El corte de anuncios en ≈ 4:47 y todos los textos de voz, que ya están aprobados.
