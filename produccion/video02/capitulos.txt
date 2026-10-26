@@ -1,0 +1,10 @@
+0:00 Introducción
+0:29 1. BUSCARX: traer precios del catálogo
+1:19 2. NOMPROPIO y ESPACIOS: limpiar nombres
+2:19 3. TEXTODESPUES: separar texto pegado
+2:51 4. SI.CONJUNTO: descuentos por tramos
+3:33 5. FIN.MES: fechas de vencimiento
+4:17 6. SUMAR.SI.CONJUNTO: ventas por vendedor y mes
+5:04 7. SI: el estado de cada factura
+7:12 8. FILTRAR: cobranza en Excel, el reporte de la semana
+8:10 9 y 10. UNICOS y CONTAR.SI.CONJUNTO: clientes y deudas

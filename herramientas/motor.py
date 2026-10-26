@@ -231,6 +231,27 @@ def pagina(build, guion):
     return ruta
 
 
+def ajustar_sonoridad(ruta, objetivo=-14.0, techo=-1.5):
+    """Segunda pasada: mide la sonoridad integrada y corrige la ganancia con un limitador (el loudnorm de una
+    pasada se queda corto con las pausas de la voz). Solo reprocesa el audio; el video se copia."""
+    r = subprocess.run(["ffmpeg", "-hide_banner", "-nostats", "-i", ruta, "-map", "0:a", "-af", "ebur128=peak=true", "-f", "null", "-"],
+                       capture_output=True, text=True)
+    medidas = re.findall(r"I:\s+(-?[\d.]+) LUFS", r.stderr)
+    if not medidas:
+        return None
+    actual = float(medidas[-1])
+    if abs(actual - objetivo) <= 0.5:
+        return actual
+    gan = objetivo - actual
+    tmp = ruta + ".tmp.mp4"
+    lim = 10 ** (techo / 20)
+    subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", ruta, "-map", "0:v", "-map", "0:a", "-c:v", "copy",
+                    "-af", f"volume={gan:.2f}dB,alimiter=limit={lim:.3f}:level=false:attack=5:release=80",
+                    "-c:a", "aac", "-b:a", "192k", "-movflags", "+faststart", tmp], check=True)
+    os.replace(tmp, ruta)
+    return actual
+
+
 def tiempo_srt(s):
     h, s = divmod(s, 3600)
     m, s = divmod(s, 60)
@@ -348,6 +369,13 @@ def main():
     subprocess.run(["ffmpeg", "-y", "-loglevel", "error", *entradas, "-filter_complex", filtro, "-map", "0:v", "-map", "[a]",
                     "-c:v", "copy", "-c:a", "aac", "-b:a", "192k", "-shortest", "-movflags", "+faststart", salida], check=True)
 
+    if not sin_voz:
+        antes = ajustar_sonoridad(salida)
+        for _ in range(2):  # el limitador recorta algo de ganancia: una o dos pasadas más la acercan a -14
+            if ajustar_sonoridad(salida) is None:
+                break
+        if antes is not None:
+            print(f"✔ Sonoridad ajustada a -14 LUFS (estaba en {antes:.1f})")
     # 4) subtítulos y capítulos (la vista previa los deja en build/)
     destino = build if sin_voz else base
     with open(os.path.join(destino, f"{nombre}.srt"), "w", encoding="utf-8") as f:
