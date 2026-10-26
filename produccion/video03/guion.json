@@ -974,6 +974,12 @@
               "n": 1
             },
             {
+              "tipo": "lupa",
+              "texto": "*Meta*: el año, los pedidos y el mes cerrado",
+              "retraso": 0.2,
+              "hasta": 3.0
+            },
+            {
               "tipo": "resaltar_prompt",
               "frases": [
                 2
@@ -989,7 +995,8 @@
               "retraso": 2.6,
               "frase_clave": "entre el 1 de enero y la fecha de corte",
               "maqueta": true,
-              "nota_maqueta": "maqueta de diseño (ronda visual 2): reemplazar por la respuesta real de respuestas-ia.md, recortada a ≤ 3 líneas, sin cambiar el sentido"
+              "nota_maqueta": "maqueta de diseño (ronda visual 2): reemplazar por la respuesta real de respuestas-ia.md, recortada a ≤ 3 líneas, sin cambiar el sentido",
+              "formula_atenuada": true
             }
           ]
         }
@@ -1607,6 +1614,12 @@
             "texto": "Y qué número *sí* mirar el lunes",
             "beat": 1
           }
+        ],
+        "pulso": [
+          {
+            "beat": 0,
+            "retraso": 3.2
+          }
         ]
       },
       "beats": [
@@ -1633,7 +1646,8 @@
           "voz": "Pregunta dos: ¿vamos mejor o peor?"
         }
       ],
-      "fondo_desenfocado": true
+      "fondo_desenfocado": true,
+      "transicion": "fundido"
     },
     {
       "plantilla": "chat",
@@ -2252,14 +2266,20 @@
         "icono": "bell",
         "tamano": 80,
         "lineas": [
-          "Dos preguntas listas",
+          "Dos preguntas *listas*",
           {
             "texto": "La tarjeta roja se arregla con *una pregunta*",
             "beat": 1
           }
         ],
         "sub": "Suscríbete para el próximo atajo de Excel con IA",
-        "sub_beat": 0
+        "sub_beat": 0,
+        "pulso": [
+          {
+            "beat": 0,
+            "retraso": 3.4
+          }
+        ]
       },
       "beats": [
         {
@@ -2284,7 +2304,8 @@
           "voz": "Pregunta tres: ¿quién vende, y qué?"
         }
       ],
-      "fondo_desenfocado": true
+      "fondo_desenfocado": true,
+      "transicion": "fundido"
     },
     {
       "plantilla": "chat",
@@ -2812,209 +2833,242 @@
               "celda": "D2",
               "valor": "Colegio Nuevo Horizonte",
               "derecha": false,
-              "retraso": 0.3
+              "retraso": 0.3,
+              "pop": false
             },
             {
               "tipo": "calcular",
               "celda": "E2",
               "valor": "31/10/2026",
-              "retraso": 0.35
+              "retraso": 0.35,
+              "pop": false
             },
             {
               "tipo": "calcular",
               "celda": "F2",
               "valor": "1.215.000",
-              "retraso": 0.4
+              "retraso": 0.4,
+              "pop": false
             },
             {
               "tipo": "calcular",
               "celda": "D3",
               "valor": "Librería San Martín Srl",
               "derecha": false,
-              "retraso": 0.52
+              "retraso": 0.52,
+              "pop": false
             },
             {
               "tipo": "calcular",
               "celda": "E3",
               "valor": "30/09/2026",
-              "retraso": 0.57
+              "retraso": 0.57,
+              "pop": false
             },
             {
               "tipo": "calcular",
               "celda": "F3",
               "valor": "486.000",
-              "retraso": 0.62
+              "retraso": 0.62,
+              "pop": false
             },
             {
               "tipo": "calcular",
               "celda": "D4",
               "valor": "Hotel Mirador",
               "derecha": false,
-              "retraso": 0.74
+              "retraso": 0.74,
+              "pop": false
             },
             {
               "tipo": "calcular",
               "celda": "E4",
               "valor": "31/10/2026",
-              "retraso": 0.79
+              "retraso": 0.79,
+              "pop": false
             },
             {
               "tipo": "calcular",
               "celda": "F4",
               "valor": "264.600",
-              "retraso": 0.84
+              "retraso": 0.84,
+              "pop": false
             },
             {
               "tipo": "calcular",
               "celda": "D5",
               "valor": "Ferretería El Tornillo",
               "derecha": false,
-              "retraso": 0.96
+              "retraso": 0.96,
+              "pop": false
             },
             {
               "tipo": "calcular",
               "celda": "E5",
               "valor": "31/10/2026",
-              "retraso": 1.01
+              "retraso": 1.01,
+              "pop": false
             },
             {
               "tipo": "calcular",
               "celda": "F5",
               "valor": "172.800",
-              "retraso": 1.06
+              "retraso": 1.06,
+              "pop": false
             },
             {
               "tipo": "calcular",
               "celda": "D6",
               "valor": "Ferretería El Tornillo",
               "derecha": false,
-              "retraso": 1.18
+              "retraso": 1.18,
+              "pop": false
             },
             {
               "tipo": "calcular",
               "celda": "E6",
               "valor": "31/10/2026",
-              "retraso": 1.23
+              "retraso": 1.23,
+              "pop": false
             },
             {
               "tipo": "calcular",
               "celda": "F6",
               "valor": "167.400",
-              "retraso": 1.28
+              "retraso": 1.28,
+              "pop": false
             },
             {
               "tipo": "calcular",
               "celda": "D7",
               "valor": "Kiosco La Esquina",
               "derecha": false,
-              "retraso": 1.4
+              "retraso": 1.4,
+              "pop": false
             },
             {
               "tipo": "calcular",
               "celda": "E7",
               "valor": "31/10/2026",
-              "retraso": 1.45
+              "retraso": 1.45,
+              "pop": false
             },
             {
               "tipo": "calcular",
               "celda": "F7",
               "valor": "132.300",
-              "retraso": 1.5
+              "retraso": 1.5,
+              "pop": false
             },
             {
               "tipo": "calcular",
               "celda": "D8",
               "valor": "Librería San Martín Srl",
               "derecha": false,
-              "retraso": 1.62
+              "retraso": 1.62,
+              "pop": false
             },
             {
               "tipo": "calcular",
               "celda": "E8",
               "valor": "28/02/2026",
-              "retraso": 1.67
+              "retraso": 1.67,
+              "pop": false
             },
             {
               "tipo": "calcular",
               "celda": "F8",
               "valor": "121.500",
-              "retraso": 1.72
+              "retraso": 1.72,
+              "pop": false
             },
             {
               "tipo": "calcular",
               "celda": "D9",
               "valor": "Hotel Mirador",
               "derecha": false,
-              "retraso": 1.84
+              "retraso": 1.84,
+              "pop": false
             },
             {
               "tipo": "calcular",
               "celda": "E9",
               "valor": "31/10/2026",
-              "retraso": 1.89
+              "retraso": 1.89,
+              "pop": false
             },
             {
               "tipo": "calcular",
               "celda": "F9",
               "valor": "105.840",
-              "retraso": 1.94
+              "retraso": 1.94,
+              "pop": false
             },
             {
               "tipo": "calcular",
               "celda": "D10",
               "valor": "Kiosco La Esquina",
               "derecha": false,
-              "retraso": 2.06
+              "retraso": 2.06,
+              "pop": false
             },
             {
               "tipo": "calcular",
               "celda": "E10",
               "valor": "31/10/2026",
-              "retraso": 2.11
+              "retraso": 2.11,
+              "pop": false
             },
             {
               "tipo": "calcular",
               "celda": "F10",
               "valor": "87.400",
-              "retraso": 2.16
+              "retraso": 2.16,
+              "pop": false
             },
             {
               "tipo": "calcular",
               "celda": "D11",
               "valor": "Colegio Nuevo Horizonte",
               "derecha": false,
-              "retraso": 2.28
+              "retraso": 2.28,
+              "pop": false
             },
             {
               "tipo": "calcular",
               "celda": "E11",
               "valor": "31/10/2026",
-              "retraso": 2.33
+              "retraso": 2.33,
+              "pop": false
             },
             {
               "tipo": "calcular",
               "celda": "F11",
               "valor": "58.900",
-              "retraso": 2.38
+              "retraso": 2.38,
+              "pop": false
             },
             {
               "tipo": "calcular",
               "celda": "D12",
               "valor": "Ferretería El Tornillo",
               "derecha": false,
-              "retraso": 2.5
+              "retraso": 2.5,
+              "pop": false
             },
             {
               "tipo": "calcular",
               "celda": "E12",
               "valor": "31/10/2026",
-              "retraso": 2.55
+              "retraso": 2.55,
+              "pop": false
             },
             {
               "tipo": "calcular",
               "celda": "F12",
               "valor": "42.750",
-              "retraso": 2.6
+              "retraso": 2.6,
+              "pop": false
             },
             {
               "tipo": "tarjeta",
@@ -3048,8 +3102,8 @@
           "accion": [
             {
               "tipo": "zoom",
-              "rango": "A10:B12",
-              "escala": 1.6,
+              "rango": "D9:F12",
+              "escala": 1.4,
               "duracion": 0.8
             },
             {
@@ -3057,7 +3111,8 @@
               "celda": "B11",
               "texto": "=SUMAR.SI.CONJUNTO(Pedidos[Neto];Pedidos[Estado];\"Vencido\")",
               "duracion": 1.0,
-              "retraso": 0.5
+              "retraso": 0.5,
+              "recortar": true
             },
             {
               "tipo": "calcular",
@@ -3070,7 +3125,8 @@
               "celda": "B12",
               "texto": "=CONTAR.SI(Pedidos[Estado];\"Vencido\")",
               "duracion": 0.8,
-              "retraso": 2.5
+              "retraso": 2.5,
+              "recortar": true
             },
             {
               "tipo": "calcular",
@@ -3551,6 +3607,14 @@
               "valor": "8,6 %"
             },
             {
+              "tipo": "actualizar_tarjeta",
+              "id": "var",
+              "titulo": "Último mes cerrado vs. el anterior",
+              "valor": "+8,6 %",
+              "sub": "octubre vs. septiembre",
+              "color": "#1f1f1f"
+            },
+            {
               "tipo": "formato",
               "celdas": {
                 "B7": "#d3e9dc"
@@ -3560,7 +3624,7 @@
             {
               "tipo": "zoom_fuera",
               "duracion": 0.7,
-              "retraso": 0.4
+              "retraso": 0.0
             },
             {
               "tipo": "resaltar",
@@ -3573,8 +3637,9 @@
               "tipo": "resaltar",
               "rango": "F1:F4",
               "color": "#ffd400",
-              "retraso": 2.8,
-              "hasta": 2.0
+              "etiqueta": "la tarjeta grande",
+              "retraso": 0.8,
+              "hasta": 3.6
             }
           ]
         },
@@ -3661,21 +3726,10 @@
               "duracion": 0.7
             },
             {
-              "tipo": "quitar",
+              "tipo": "actualizar_tarjeta",
               "id": "var",
-              "retraso": 1.0
-            },
-            {
-              "tipo": "tarjeta",
-              "id": "cerr_var",
-              "titulo": "Último mes cerrado vs. el anterior",
-              "valor": "+8,6 %",
-              "sub": "octubre vs. septiembre",
-              "x": 1244,
-              "y": 252,
-              "ancho": 315,
-              "retraso": 3.2,
-              "color": "#107c41"
+              "color": "#107c41",
+              "retraso": 3.2
             },
             {
               "tipo": "zoom",
@@ -3764,6 +3818,12 @@
           {
             "texto": "Antes de mandarlo: *¿qué puede salir mal?*",
             "beat": 1
+          }
+        ],
+        "pulso": [
+          {
+            "beat": 0,
+            "retraso": 3.0
           }
         ]
       },
@@ -4472,9 +4532,9 @@
         "solo_video": true,
         "anchos": [
           50,
-          330,
-          760,
-          600
+          260,
+          620,
+          560
         ],
         "seleccion_inicial": "A1",
         "celdas": [
@@ -4550,6 +4610,11 @@
             "",
             ""
           ]
+        ],
+        "ajuste": [
+          "B",
+          "C",
+          "D"
         ]
       },
       "beats": [
@@ -4577,23 +4642,40 @@
               "hasta": 1.0
             },
             {
-              "tipo": "seleccionar",
-              "rango": "C2:D9",
-              "retraso": 5.0
+              "tipo": "formato",
+              "rango": "A2:D3",
+              "fondo": "#ffffff",
+              "texto": "#c2c2c2",
+              "retraso": 4.8
             },
             {
-              "tipo": "resaltar",
-              "rango": "C2:D9",
-              "color": "#ffd400",
-              "retraso": 5.9,
-              "hasta": 1.6
+              "tipo": "formato",
+              "rango": "A5:D11",
+              "fondo": "#ffffff",
+              "texto": "#c2c2c2",
+              "retraso": 4.9
+            },
+            {
+              "tipo": "formato",
+              "rango": "A4:D4",
+              "fondo": "#fff8cc",
+              "texto": "#1f1f1f",
+              "retraso": 5.3
             },
             {
               "tipo": "zoom",
-              "rango": "B4:D8",
-              "escala": 1.6,
+              "rango": "B4:C4",
+              "escala": 1.75,
               "duracion": 1.0,
-              "retraso": 5.6
+              "retraso": 5.0
+            },
+            {
+              "tipo": "rotulo",
+              "texto": "Todos los prompts, *listos*",
+              "sub": "con la fórmula verificada al lado",
+              "hasta": 2.6,
+              "retraso": 5.4,
+              "posicion": "arriba"
             }
           ]
         }
@@ -4614,7 +4696,7 @@
         "solo_video": true,
         "anchos": [
           80,
-          1200
+          900
         ],
         "seleccion_inicial": "A1",
         "celdas": [
@@ -4666,6 +4748,9 @@
             "",
             ""
           ]
+        ],
+        "ajuste": [
+          "B"
         ]
       },
       "beats": [
@@ -4687,12 +4772,25 @@
               "hasta": 1.2
             },
             {
-              "tipo": "resaltar",
+              "tipo": "formato",
               "rango": "A2:B6",
-              "color": "#ffd400",
-              "etiqueta": "los pasos",
-              "retraso": 5.8,
-              "hasta": 3.0
+              "fondo": "#ffffff",
+              "texto": "#c2c2c2",
+              "retraso": 5.6
+            },
+            {
+              "tipo": "formato",
+              "rango": "A4:B4",
+              "fondo": "#fff8cc",
+              "texto": "#1f1f1f",
+              "retraso": 6.0
+            },
+            {
+              "tipo": "zoom",
+              "rango": "A4:B4",
+              "escala": 1.75,
+              "duracion": 0.9,
+              "retraso": 5.8
             }
           ]
         },
@@ -4700,44 +4798,54 @@
           "voz": "Borras los pedidos de ejemplo, pegas los tuyos con las mismas columnas, y el tablero se rehace.",
           "accion": [
             {
-              "tipo": "zoom",
-              "rango": "B2:B5",
-              "escala": 1.4,
-              "duracion": 0.8
+              "tipo": "formato",
+              "rango": "A4:B4",
+              "fondo": "#ffffff",
+              "texto": "#c2c2c2"
             },
             {
-              "tipo": "seleccionar",
+              "tipo": "formato",
               "rango": "A3:B3",
+              "fondo": "#ffe0e0",
+              "texto": "#1f1f1f",
               "retraso": 0.1
             },
             {
-              "tipo": "resaltar",
+              "tipo": "zoom",
               "rango": "A3:B3",
-              "color": "#d13438",
-              "retraso": 0.8,
-              "hasta": 1.6
+              "escala": 1.75,
+              "duracion": 0.6
             },
             {
-              "tipo": "seleccionar",
+              "tipo": "formato",
+              "rango": "A3:B3",
+              "fondo": "#ffffff",
+              "texto": "#c2c2c2",
+              "retraso": 2.2
+            },
+            {
+              "tipo": "formato",
               "rango": "A4:B4",
+              "fondo": "#fff8cc",
+              "texto": "#1f1f1f",
               "retraso": 2.3
             },
             {
-              "tipo": "resaltar",
+              "tipo": "zoom",
               "rango": "A4:B4",
-              "color": "#ffd400",
-              "retraso": 3.0,
-              "hasta": 2.0
-            },
-            {
-              "tipo": "hoja",
-              "hoja": "Dashboard",
-              "retraso": 5.0
+              "escala": 1.75,
+              "duracion": 0.6,
+              "retraso": 2.2
             },
             {
               "tipo": "zoom_fuera",
               "duracion": 0.8,
               "retraso": 4.6
+            },
+            {
+              "tipo": "hoja",
+              "hoja": "Dashboard",
+              "retraso": 5.0
             }
           ]
         }

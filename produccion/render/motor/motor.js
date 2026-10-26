@@ -77,6 +77,12 @@
       });
     });
     if (kicker) tl.from(kicker, { y: 30, opacity: 0, duration: 0.6 }, c.B(0, 0.1));
+    // "pulso": [{beat, retraso}] late el marcador amarillo para que el titular no quede quieto
+    (d.pulso || []).forEach((p) => {
+      const tp = c.B(p.beat || 0, p.retraso || 0);
+      tl.fromTo(tit.querySelectorAll(".resaltado"), { scale: 1 }, { scale: 1.14, duration: 0.25, yoyo: true, repeat: 3, ease: "power1.inOut", immediateRender: false }, tp);
+      c.sonido("pop", tp);
+    });
     if (d.sub) {
       const sub = el("div", "sub", marcar(d.sub), caja);
       tl.from(sub, { y: 40, opacity: 0, duration: 0.7 }, c.B(d.sub_beat != null ? d.sub_beat : Math.min(1, es.beats.length - 1), 0.2));
@@ -288,6 +294,7 @@
         const cel = el("div", "xl-celda" + (esNum ? " num" : "") + (r === 1 && d.encabezado !== false ? " enc" : ""), null, hoja);
         cel.style.cssText = `left:${colX[ci]}px;top:${CAB_H + (r - 1) * FILA}px;width:${anchos[ci]}px;height:${FILA}px`;
         const span = el("span", "", esc(v), cel);
+        if (d.ajuste && d.ajuste.includes(colLetra(ci)) && r > 1) cel.classList.add("ajuste"); // ajuste de texto: hasta 2 líneas
         celdas[colLetra(ci) + filasVis[r - 1]] = { cel, span };
       }
     }
@@ -361,7 +368,8 @@
         let tt = seleccionar(a.celda, t);
         const { span, cel } = celdas[a.celda];
         const dur = a.duracion || Math.min(3.2, Math.max(0.9, a.texto.length / 13));
-        tl.set(cel, { justifyContent: "flex-start", overflow: "visible", zIndex: 2 }, tt);
+        // "recortar": la edición no invade las celdas vecinas (la fórmula entera se lee en la barra fx)
+        tl.set(cel, { justifyContent: "flex-start", overflow: a.recortar ? "hidden" : "visible", zIndex: 2 }, tt);
         tl.set(span, { text: "" }, tt);
         tl.set(ftexto, { text: "" }, tt);
         tl.to(span, { text: { value: esc(a.texto) }, duration: dur, ease: "none" }, tt);
@@ -378,7 +386,7 @@
         tl.set(cel, { overflow: "hidden", zIndex: 0 }, t);
         if (a.derecha !== false) tl.set(cel, { justifyContent: "flex-end" }, t);
         tl.fromTo(cel, { backgroundColor: "#fff3a6" }, { backgroundColor: "rgba(255,255,255,0)", duration: 1.2, ease: "power2.out", immediateRender: false }, t);
-        tl.fromTo(span, { scale: 1.25 }, { scale: 1, duration: 0.5, ease: "back.out(2)", immediateRender: false }, t);
+        if (a.pop !== false) tl.fromTo(span, { scale: 1.25 }, { scale: 1, duration: 0.5, ease: "back.out(2)", immediateRender: false }, t);
         c.sonido("pop", t);
       },
       rellenar: (a, t) => {
@@ -503,6 +511,7 @@
       actualizar_tarjeta: (a, t) => {
         const o = objetos[a.id];
         if (!o) throw new Error("actualizar_tarjeta: no hay una tarjeta con id " + a.id);
+        if (a.titulo != null) tl.set(o.caja.firstChild, { text: esc(a.titulo) }, t);
         if (a.valor != null) tl.set(o.valor, { text: esc(a.valor) }, t);
         if (a.sub != null) tl.set(o.sub, { text: esc(a.sub) }, t);
         if (a.color) tl.set(o.valor, { color: a.color }, t);
@@ -705,7 +714,7 @@
         c.sonido("respuesta", t, 0.6);
         let tf = t + dr + 0.2;
         if (a.formula) {
-          const f = el("div", "chat-ia", "<code></code>", msgs);
+          const f = el("div", "chat-ia" + (a.formula_atenuada ? " atenuado" : ""), "<code></code>", msgs);
           tl.fromTo(f, { opacity: 0 }, { opacity: 1, duration: 0.2, immediateRender: true }, tf);
           tl.to(f.firstChild, { text: { value: esc(a.formula) }, duration: Math.min(1.6, a.formula.length / 22), ease: "none" }, tf);
           tf += Math.min(1.6, a.formula.length / 22);
@@ -757,6 +766,13 @@
     master.set(capa, { visibility: "visible" }, t);
     if (G.escenas[i + 1]) master.set(capa, { visibility: "hidden" }, (ocultar[i] || G.escenas[i + 1].inicio) + TR + 0.05);
     if (!prev) return;
+    if (es.fondo_desenfocado && base[i] != null && base[i] !== i - 1 && base[i - 1] === base[i]) {
+      // misma pantalla: el fondo desenfocado sigue y solo se cambia el texto de adelante
+      master.to(prev, { opacity: 0, y: -30, duration: TR * 0.7, ease: "power2.in" }, t);
+      master.fromTo(capa, { opacity: 0 }, { opacity: 1, duration: TR * 0.6, ease: "none", immediateRender: false }, t + TR * 0.3);
+      sonido("whoosh_suave", t);
+      return;
+    }
     if (es.fondo_desenfocado && base[i] === i - 1) {
       // la escena anterior (Excel) queda de fondo, desenfocada y oscura
       master.to(prev, { filter: "blur(18px) brightness(0.32)", scale: 1.04, duration: TR, ease: "power2.out" }, t);
