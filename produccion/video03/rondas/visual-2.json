@@ -1,0 +1,31 @@
+{
+ "evaluaciones": [
+  {
+   "agente": "critico-retencion",
+   "puntajes": {
+    "variedad": 8
+   },
+   "objeciones": [
+    "[esc. 8-9 y 13-14 / 2:39-2:52 y 3:43-3:58] Dos pares titular + capítulo con 10-13 s de cartel; el titular queda quieto 7 s → fundir cada par: titular en el beat 1 y el número de capítulo en el beat 2 sobre el mismo fondo desenfocado",
+    "[esc. 28-29 / ~7:20-7:55] Hojas Prompts y Tus datos con texto de ~14 px y columnas cortadas: pared gris en celular → zoom 1,6-1,8x a una columna y resaltar un paso por vez al ritmo de la voz; en Prompts, zoom a una fila con rótulo 'todos los prompts, listos'",
+    "[esc. 24 / ~6:21-6:34] Titular de la lección ~13,5 s con una sola entrada → pulso sobre '*engaña*' a mitad del beat 0"
+   ]
+  },
+  {
+   "agente": "editor-qc",
+   "puntajes": {
+    "legibilidad": 7,
+    "coherencia": 7,
+    "marca": 8,
+    "variedad": 8
+   },
+   "objeciones": [
+    "[esc. 22 / 5:32-5:51] ~19 s la voz dice '+8,6 %, esa es la tarjeta grande' y la tarjeta grande sigue roja en −90,4 % → en el beat 2, junto con el calcular de B7, actualizar_tarjeta a 'Último mes cerrado vs. el anterior', 'octubre vs. septiembre', +8,6 % neutro y resaltada; en 'subieron' solo el verde, la salida del borde rojo y el zoom",
+    "[esc. 17 / 4:38-4:40] La fórmula en edición de B12 se desborda sobre D12 y se encima con 'Ferretería El Tornillo' → recortar la edición al ancho de B (la fórmula entera en fx) o zoom a A:B",
+    "[esc. 17 / 4:30 y 4:36] Una fila del desborde entra con letra mayor y cortada ('iosco'); el zoom a B11:B12 corta Neto y deja fuera la tarjeta 2.951.090 cuando la voz la nombra → mismo tamaño de celda en el calcular del desborde y encuadre con B11:B12 y la tarjeta enteros",
+    "[esc. 27-28 / 7:12-7:37] Hojas Prompts y Tus datos con párrafos de ~13 px cortados y +40 palabras → ajuste de texto en B/C y zoom o lupa a la única fila que nombra la voz (≤ 12 palabras legibles), resto atenuado",
+    "[esc. 5 / 1:43-1:50] El beat de la Meta no tiene lupa y hay tres bloques en pantalla → lupa '*Meta*: el año, los pedidos y el mes cerrado' y atenuar la fórmula hasta la esc. 6"
+   ]
+  }
+ ]
+}
