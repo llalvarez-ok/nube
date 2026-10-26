@@ -1,0 +1,31 @@
+{
+ "evaluaciones": [
+  {
+   "agente": "critico-retencion",
+   "puntajes": {
+    "variedad": 8
+   },
+   "objeciones": [
+    "[esc. 8-9 y 13-14] Residual, no bloquea: los pares titular + capítulo siguen separados (dos cortes a fondo oscuro en 15 s) → que el capítulo entre como tercera línea del titular",
+    "[esc. 29, beat 2 / ~7:30-7:37] El zoom va y vuelve entre las filas 3 y 4 en 7,6 s: parece un temblor → un solo recorrido descendente (fila 3 'borras' → paneo a fila 4 'pegas') y zoom_fuera",
+    "[esc. 28-29 / 7:19-7:37] Las filas no resaltadas quedan en gris con texto de ~12 px y a 168 px son una mancha → atenuar más o recortar la vista a A2:B5"
+   ]
+  },
+  {
+   "agente": "editor-qc",
+   "puntajes": {
+    "legibilidad": 8,
+    "coherencia": 8,
+    "marca": 8,
+    "variedad": 8
+   },
+   "objeciones": [
+    "[esc. 5 / 1:44-1:50] La lupa de la Meta dura ~2 s y vuelven tres bloques → mantenerla hasta el final del beat y atenuar el resaltado de la respuesta (no bloqueante)",
+    "[esc. 27-28 / 7:19-7:35] La fila resaltada tiene ~25 palabras y en Prompts la columna D queda cortada → lupa por beat con el paso en ≤ 12 palabras y encuadrar A:C",
+    "[esc. 28 / 7:21-7:27 y 7:35-7:37] Plano general ilegible de Tus datos ~6 s → zoom al paso 3 apenas la voz nombra 'Tus datos'",
+    "[esc. 7-8 / 2:38-2:43] Hueco tras el 'sí' resaltado y manchas del Excel desenfocado detrás del texto → corregir el espaciado y capa oscura ~50 % en titulares y capítulos fundidos (7-8, 12-13, 23)",
+    "[resueltas] Esc. 22, 17 y 25 verificadas con cuadros: sin objeción abierta de coherencia número-voz"
+   ]
+  }
+ ]
+}

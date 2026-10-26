@@ -3,7 +3,7 @@
   "canal": "atajos-ia",
   "tema": "Dashboard en Excel con IA (por confirmar con la medición de demanda)",
   "creado": "2026-10-26T17:12:20",
-  "etapa": "visual",
+  "etapa": "render",
   "historial": [
     {
       "fecha": "2026-10-26T17:22:40",
@@ -314,6 +314,30 @@
         "[editor-qc] [esc. 17 / 4:30 y 4:36] Una fila del desborde entra con letra mayor y cortada ('iosco'); el zoom a B11:B12 corta Neto y deja fuera la tarjeta 2.951.090 cuando la voz la nombra → mismo tamaño de celda en el calcular del desborde y encuadre con B11:B12 y la tarjeta enteros",
         "[editor-qc] [esc. 27-28 / 7:12-7:37] Hojas Prompts y Tus datos con párrafos de ~13 px cortados y +40 palabras → ajuste de texto en B/C y zoom o lupa a la única fila que nombra la voz (≤ 12 palabras legibles), resto atenuado",
         "[editor-qc] [esc. 5 / 1:43-1:50] El beat de la Meta no tiene lupa y hay tres bloques en pantalla → lupa '*Meta*: el año, los pedidos y el mes cerrado' y atenuar la fórmula hasta la esc. 6"
+      ]
+    },
+    {
+      "fecha": "2026-10-26T22:33:32",
+      "etapa": "visual",
+      "ronda": 3,
+      "resultado": "aprobado",
+      "nota": 8.0,
+      "criterios": {
+        "variedad": 8.0,
+        "legibilidad": 8.0,
+        "coherencia": 8.0,
+        "marca": 8.0
+      },
+      "motivos": [],
+      "objeciones": [
+        "[critico-retencion] [esc. 8-9 y 13-14] Residual, no bloquea: los pares titular + capítulo siguen separados (dos cortes a fondo oscuro en 15 s) → que el capítulo entre como tercera línea del titular",
+        "[critico-retencion] [esc. 29, beat 2 / ~7:30-7:37] El zoom va y vuelve entre las filas 3 y 4 en 7,6 s: parece un temblor → un solo recorrido descendente (fila 3 'borras' → paneo a fila 4 'pegas') y zoom_fuera",
+        "[critico-retencion] [esc. 28-29 / 7:19-7:37] Las filas no resaltadas quedan en gris con texto de ~12 px y a 168 px son una mancha → atenuar más o recortar la vista a A2:B5",
+        "[editor-qc] [esc. 5 / 1:44-1:50] La lupa de la Meta dura ~2 s y vuelven tres bloques → mantenerla hasta el final del beat y atenuar el resaltado de la respuesta (no bloqueante)",
+        "[editor-qc] [esc. 27-28 / 7:19-7:35] La fila resaltada tiene ~25 palabras y en Prompts la columna D queda cortada → lupa por beat con el paso en ≤ 12 palabras y encuadrar A:C",
+        "[editor-qc] [esc. 28 / 7:21-7:27 y 7:35-7:37] Plano general ilegible de Tus datos ~6 s → zoom al paso 3 apenas la voz nombra 'Tus datos'",
+        "[editor-qc] [esc. 7-8 / 2:38-2:43] Hueco tras el 'sí' resaltado y manchas del Excel desenfocado detrás del texto → corregir el espaciado y capa oscura ~50 % en titulares y capítulos fundidos (7-8, 12-13, 23)",
+        "[editor-qc] [resueltas] Esc. 22, 17 y 25 verificadas con cuadros: sin objeción abierta de coherencia número-voz"
       ]
     }
   ]
