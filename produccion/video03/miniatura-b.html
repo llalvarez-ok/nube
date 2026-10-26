@@ -1,0 +1,35 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:Inter;font-weight:400;src:url(file:///home/user/nube/produccion/render/fonts/inter-latin-400-normal.woff2)}
+@font-face{font-family:Inter;font-weight:600;src:url(file:///home/user/nube/produccion/render/fonts/inter-latin-600-normal.woff2)}
+@font-face{font-family:Inter;font-weight:800;src:url(file:///home/user/nube/produccion/render/fonts/inter-latin-800-normal.woff2)}
+@font-face{font-family:Inter;font-weight:900;src:url(file:///home/user/nube/produccion/render/fonts/inter-latin-900-normal.woff2)}
+@font-face{font-family:Inter;font-weight:900;src:url(file:///home/user/nube/produccion/render/fonts/inter-latin-ext-900-normal.woff2);unicode-range:U+0100-024F}
+*{box-sizing:border-box}
+html,body{margin:0;width:1280px;height:720px;overflow:hidden;font-family:Inter,sans-serif;color:#fff}
+body{background:radial-gradient(900px 640px at 70% 50%,#2a0d0d 0%,#161011 50%,#0f0f10 80%)}
+.bubble{position:absolute;width:150px;height:112px;background:#ffffff;border-radius:30px;box-shadow:0 18px 40px #000a, 0 0 0 6px #0f0f10;display:flex;align-items:center;justify-content:center;gap:14px}
+.bubble:after{content:"";position:absolute;left:26px;bottom:-22px;border:16px solid transparent;border-top:24px solid #fff;border-left:6px solid #fff;transform:skewX(-10deg)}
+.bubble i{width:22px;height:22px;border-radius:50%;background:#0f0f10;display:block}
+.bubble svg{position:absolute;right:-22px;top:-26px;width:58px;height:58px;filter:drop-shadow(0 4px 8px #000a)}
+
+.dash{position:absolute;left:480px;top:40px;width:760px;height:640px;background:#17191a;border-radius:20px;border:2px solid #2a2e2c;filter:brightness(.8);transform:rotate(-2deg)}
+.cards{display:flex;gap:18px;padding:26px}
+.cards div{flex:1;height:110px;background:#222625;border-radius:14px;border:2px solid #303533}
+.cards div:before{content:"";display:block;margin:20px 18px 14px;width:60%;height:12px;border-radius:6px;background:#3b413e}
+.cards div:after{content:"";display:block;margin:0 18px;width:75%;height:30px;border-radius:8px;background:#4a524e}
+.chart{position:absolute;left:26px;right:26px;bottom:26px;height:440px;background:#222625;border-radius:14px;border:2px solid #303533}
+.bars{position:absolute;left:24px;right:24px;bottom:28px;height:340px;display:flex;align-items:flex-end;gap:12px;border-bottom:3px solid #4a524e}
+.bars div{flex:1;background:linear-gradient(#2fb36e,#107C41);border-radius:6px 6px 0 0}
+.kpi{position:absolute;left:510px;top:340px;width:560px;height:310px;background:#fff;border-radius:28px;transform:rotate(-4deg);box-shadow:0 30px 90px #000e,0 0 0 8px #e5252a,0 0 140px #e5252a66;overflow:visible}
+.kpi h4{margin:26px 0 0 40px;font:800 30px Inter;color:#6a726e;letter-spacing:-.5px}
+.kpi .v{position:absolute;left:28px;top:80px;font:900 184px Inter;color:#e5252a;letter-spacing:-14px;line-height:1;white-space:nowrap}
+.kpi svg.arrow{position:absolute;right:-120px;bottom:-60px;width:170px;height:240px;filter:drop-shadow(0 12px 20px #000c)}
+.t{position:absolute;left:44px;top:200px;font-weight:900;line-height:.88;letter-spacing:-6px;text-shadow:0 10px 30px #000}
+.t span{display:block;font-size:150px;color:#ffd400}
+</style></head><body>
+<div class="dash"><div class="cards"><div></div><div></div><div></div></div><div class="chart"><div class="bars"><div style="height:296px"></div><div style="height:301px"></div><div style="height:289px"></div><div style="height:221px"></div><div style="height:247px"></div><div style="height:252px"></div><div style="height:330px"></div><div style="height:275px"></div><div style="height:249px"></div><div style="height:271px"></div><div style="height:26px"></div><div style="height:4px"></div></div></div></div></div>
+<div class="kpi"><h4>Ventas vs. mes anterior</h4><div class="v">−90 %</div>
+<svg class="arrow" viewBox="0 0 100 130"><path d="M35 0h30v78h28L50 130 7 78h28z" fill="#e5252a" stroke="#0f0f10" stroke-width="4"/></svg></div>
+<div class="t"><span>¿ES</span><span>REAL?</span></div>
+<div class="bubble" style="left:1090px;top:30px"><i></i><i></i><i></i><svg viewBox="0 0 24 24"><path fill="#FFD400" stroke="#0f0f10" stroke-width="1.2" d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"/></svg></div>
+</body></html>

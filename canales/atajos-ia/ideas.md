@@ -77,6 +77,7 @@ Las 30 primeras ideas del canal reorientado, **ordenadas por potencial**. El ord
 - **Plantilla:** "Dashboard de ventas": versión de 1 mes **gratis**; versión de 12 meses con KPIs, metas y comparativo interanual **de pago** (entra en el pack de USD 9–19)
 - **Por qué funciona:** es el video más vistoso del formato animado (los gráficos se construyen solos) y es la plantilla que mejor se vende en el nicho.
 - **Evidencia:** guías en español actualizadas a 2026 sobre dashboards con IA ([G-Talent, "Dashboard Excel 2026: guía con IA y KPIs"](https://www.g-talent.net/blogs/microsoft/dashboard-excel-2026-guia-ia-kpis)) y herramientas pagas que venden justo esto ([ExcelDashboard AI](https://creati.ai/es/ai-tools/excel-dashboard-ai/)). Hay tutoriales de dashboards en YouTube, pero los que aparecieron en la búsqueda son en inglés y sin IA ([hlrnet](https://hlrnet.com/technoblog/inicio/?p=57266)). Volumen: **sin verificar**.
+- **Seguimiento (26/10/2026, video03):** Excel tiene un modo dashboard nativo con Copilot (Insiders o de pago, [Kenji Explains, 16/10/2026](https://youtu.be/PxmvWAOksls), 173 mil vistas en 10 días). Verificar disponibilidad y precio en español; candidato a idea P4 ("Modo dashboard de Excel: lo probé") cuando salga de Insiders.
 
 ### 3. BUSCARV y BUSCARX con IA: cruza dos listas sin errores
 - **Palabra clave:** buscarv / buscarx (secundarias: buscarv no funciona, cruzar dos listas en excel)
