@@ -3,7 +3,7 @@
   "canal": "atajos-ia",
   "tema": "Dashboard en Excel con IA (por confirmar con la medición de demanda)",
   "creado": "2026-10-26T17:12:20",
-  "etapa": "idea",
+  "etapa": "guion",
   "historial": [
     {
       "fecha": "2026-10-26T17:22:40",
@@ -117,6 +117,14 @@
         "[espectador] [hook] 'Y con ese número decidirías el lunes' se traba en voz sintética → 'Y el lunes tomarías decisiones con ese número'",
         "[espectador] [reenganche 2:10] 'La tarjeta que lo arregla no es la que piensas' supone que pienso en alguna tarjeta → 'en un rato te muestro por qué ese −90 % no es cierto, y qué número sí mirar el lunes'",
         "[espectador] [encaje] Si las corridas en claude.ai gratis o la prueba en Excel para la web fallan, 'gratis' y 'se rehace solo' dejan de ser ciertos → mantener el bloqueo del guion y no publicar la promesa sin verificar"
+      ]
+    },
+    {
+      "fecha": "2026-10-26T18:32:46",
+      "etapa": "idea",
+      "resultado": "forzado",
+      "motivos": [
+        "Aprobada por el creador el 26/10/2026 tras escalada (7,85; RPM sin cifra con fuente). Ajustes de empaque de la ronda 3 pendientes para la etapa empaque (debate.md)"
       ]
     }
   ]
