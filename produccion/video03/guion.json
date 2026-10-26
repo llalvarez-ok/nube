@@ -361,7 +361,8 @@
       "capitulo": "Lo probé: un dashboard en un solo mensaje",
       "condicional": "Se elimina si la corrida real no dio un dashboard o no se hizo (respuestas-ia.md, prompt 1)",
       "datos": {
-        "app": "Claude"
+        "app": "Claude",
+        "etiqueta_fija": "Prompt completo: hoja *Prompts*"
       },
       "beats": [
         {
@@ -370,7 +371,21 @@
             {
               "tipo": "prompt",
               "texto": "Te adjunto Distribuidora Sur - Pedidos 2026.xlsx (datos ficticios). Hazme un dashboard de ventas en Excel para la reunión del lunes: indicadores, gráficos y un filtro por vendedor, que se actualice cuando pegue pedidos nuevos.",
-              "duracion": 1.6
+              "duracion": 1.6,
+              "frases": [
+                "Hazme un dashboard de ventas en Excel",
+                "que se actualice cuando pegue pedidos nuevos"
+              ]
+            },
+            {
+              "tipo": "resaltar_prompt",
+              "frases": [
+                0,
+                1
+              ],
+              "retraso": 2.6,
+              "lupa": "«Hazme un *dashboard de ventas en Excel* … *que se actualice* cuando pegue pedidos nuevos»",
+              "hasta": 2.6
             }
           ]
         },
@@ -380,8 +395,12 @@
             {
               "tipo": "respuesta",
               "pendiente_respuesta_real": true,
-              "duracion": 3.0,
-              "texto": "PENDIENTE: pegar la respuesta real de Claude (respuestas-ia.md, prompt 1). Borrador para la vista previa: un resumen del archivo y un dashboard propuesto con indicadores y gráficos."
+              "duracion": 1.8,
+              "texto": "Listo: armé el dashboard con 4 indicadores, 2 gráficos y un filtro por vendedor. Ventas de noviembre: 441.000, −90,4 % frente a octubre…",
+              "frase_clave": "−90,4 % frente a octubre",
+              "clave_retraso": 3.2,
+              "maqueta": true,
+              "nota_maqueta": "maqueta de diseño (ronda visual 2): reemplazar por la respuesta real de respuestas-ia.md, recortada a ≤ 3 líneas, sin cambiar el sentido"
             }
           ]
         },
@@ -389,11 +408,11 @@
           "voz": "Rápido, sí. Pero ¿cómo sabes si esos números están bien?",
           "accion": [
             {
-              "tipo": "rotulo",
-              "texto": "Veredicto: [según la corrida real]",
-              "sub": "se ve tal cual salió · respuestas-ia.md",
-              "hasta": 5.0,
-              "pendiente_respuesta_real": true
+              "tipo": "lupa",
+              "texto": "Ventas de noviembre: *−90,4 %* frente a octubre. ¿Es cierto?",
+              "retraso": 0.3,
+              "hasta": 4.6,
+              "maqueta": true
             }
           ],
           "elegir_rama": "respuestas-ia.md, prompt 1: si entregó algo usable, voz; si falló o quedó a medias, voz_si_falla. Si no dio un dashboard, se elimina la escena.",
@@ -821,7 +840,8 @@
               "texto": "Insertar › Tabla (Ctrl+T) · rango A1:K251",
               "sub": "Diseño de tabla › Nombre: Pedidos",
               "hasta": 3.6,
-              "retraso": 0.4
+              "retraso": 0.4,
+              "posicion": "arriba"
             }
           ]
         },
@@ -881,17 +901,28 @@
     {
       "plantilla": "chat",
       "datos": {
-        "app": "Claude"
+        "app": "Claude",
+        "pasos": [
+          "Mapa",
+          "Meta",
+          "Prueba"
+        ],
+        "etiqueta_fija": "Prompt completo: hoja *Prompts*"
       },
       "beats": [
         {
           "voz": "Las fórmulas se las pido a la IA con un método de tres partes: mapa, meta y prueba.",
           "accion": [
             {
-              "tipo": "rotulo",
-              "texto": "Mapa · Meta · Prueba",
-              "sub": "dónde están los datos · qué quieres · cómo comprobarlo",
+              "tipo": "lupa",
+              "texto": "Un método de tres partes: *Mapa* · *Meta* · *Prueba*",
+              "retraso": 0.4,
               "hasta": 4.2
+            },
+            {
+              "tipo": "paso",
+              "n": 0,
+              "retraso": 4.9
             }
           ]
         },
@@ -901,7 +932,20 @@
             {
               "tipo": "prompt",
               "texto": "Mapa: Excel para la web en español, separador punto y coma. Tabla llamada Pedidos con las columnas Fecha, Cliente, Vendedor, Código, Cant., Precio, Desc., Neto, Vence, Pagado (Sí/No) y Estado (Cobrado, Vencido o Al día). En la hoja Dashboard, B1 es la fecha de corte y B2 el vendedor (o Todos). Usa referencias a la Tabla, como Pedidos[Neto]. Meta: En Dashboard!B3, las ventas netas del año hasta la fecha de corte. En B4, cuántos pedidos hay en ese período. En B5, las ventas del último mes cerrado antes de la fecha de corte.",
-              "duracion": 2.4
+              "duracion": 6.2,
+              "pausa_en": "Meta:",
+              "pausa": 8.0,
+              "frases": [
+                "Tabla llamada Pedidos",
+                "Fecha, Cliente, Vendedor, Código, Cant., Precio, Desc., Neto",
+                "Meta: En Dashboard!B3, las ventas netas del año hasta la fecha de corte"
+              ]
+            },
+            {
+              "tipo": "lupa",
+              "texto": "*Mapa*: una Tabla llamada *Pedidos* con las columnas *Fecha, Cliente, Vendedor…* Solo los nombres.",
+              "retraso": 1.0,
+              "hasta": 4.4
             }
           ]
         },
@@ -909,10 +953,16 @@
           "voz": "Copia este prompt de la plantilla y cambia solo los nombres de tus columnas.",
           "accion": [
             {
-              "tipo": "rotulo",
-              "texto": "Prompt listo: hoja *Prompts*",
-              "sub": "cambia los nombres de columna · ¿tu Excel usa coma? dilo",
-              "hasta": 3.6
+              "tipo": "lupa",
+              "texto": "Cambia solo *los nombres de tus columnas*",
+              "retraso": 0.3,
+              "hasta": 2.4
+            },
+            {
+              "tipo": "lupa",
+              "texto": "¿Tu Excel usa *coma* en vez de punto y coma? Dilo en el mapa.",
+              "retraso": 2.8,
+              "hasta": 2.6
             }
           ]
         },
@@ -920,11 +970,26 @@
           "voz": "La meta: el año, los pedidos y el mes cerrado. La prueba, para la tarjeta que más asusta.",
           "accion": [
             {
+              "tipo": "paso",
+              "n": 1
+            },
+            {
+              "tipo": "resaltar_prompt",
+              "frases": [
+                2
+              ],
+              "retraso": 2.3
+            },
+            {
               "tipo": "respuesta",
               "pendiente_respuesta_real": true,
-              "duracion": 2.4,
-              "texto": "PENDIENTE: pegar la respuesta real de Claude (respuestas-ia.md, prompt 2). Borrador para la vista previa: B3 suma el neto entre el 1 de enero y la fecha de corte; B4 cuenta los pedidos; B5 suma el mes anterior al de la fecha de corte.",
-              "formula": "=SUMAR.SI.CONJUNTO(Pedidos[Neto];Pedidos[Fecha];\">=\"&FECHA(AÑO(B1);1;1);Pedidos[Fecha];\"<=\"&B1)"
+              "duracion": 1.4,
+              "texto": "B3 suma el neto de la Tabla entre el 1 de enero y la fecha de corte; B4 cuenta esos pedidos y B5 suma el último mes cerrado antes del corte.",
+              "formula": "=SUMAR.SI.CONJUNTO(Pedidos[Neto];Pedidos[Fecha];\">=\"&FECHA(AÑO(B1);1;1);Pedidos[Fecha];\"<=\"&B1)",
+              "retraso": 2.6,
+              "frase_clave": "entre el 1 de enero y la fecha de corte",
+              "maqueta": true,
+              "nota_maqueta": "maqueta de diseño (ronda visual 2): reemplazar por la respuesta real de respuestas-ia.md, recortada a ≤ 3 líneas, sin cambiar el sentido"
             }
           ]
         }
@@ -1328,7 +1393,7 @@
               "celda": "B1",
               "texto": "En la plantilla: *=HOY()*",
               "lado": "abajo",
-              "retraso": 2.6
+              "retraso": 4.2
             },
             {
               "tipo": "mover",
@@ -1341,6 +1406,13 @@
               "escala": 2.0,
               "duracion": 1.6,
               "retraso": 5.0
+            },
+            {
+              "tipo": "resaltar",
+              "rango": "B1",
+              "color": "#ffd400",
+              "retraso": 7.2,
+              "hasta": 1.4
             }
           ]
         },
@@ -1545,7 +1617,8 @@
         {
           "voz": "…y qué número sí mirar el lunes."
         }
-      ]
+      ],
+      "fondo_desenfocado": true
     },
     {
       "plantilla": "capitulo",
@@ -1559,12 +1632,14 @@
         {
           "voz": "Pregunta dos: ¿vamos mejor o peor?"
         }
-      ]
+      ],
+      "fondo_desenfocado": true
     },
     {
       "plantilla": "chat",
       "datos": {
-        "app": "Claude"
+        "app": "Claude",
+        "etiqueta_fija": "Prompt completo: hoja *Prompts*"
       },
       "beats": [
         {
@@ -1573,7 +1648,22 @@
             {
               "tipo": "prompt",
               "texto": "En B6, las ventas de este mes hasta la fecha de corte, y en B7 la variación de este mes contra el mes anterior, en porcentaje. Para el gráfico, en H2:I13, las ventas de cada mes del año, de enero a diciembre.",
-              "duracion": 1.6
+              "duracion": 1.6,
+              "frases": [
+                "En B6, las ventas de este mes",
+                "en B7 la variación de este mes contra el mes anterior",
+                "H2:I13, las ventas de cada mes"
+              ]
+            },
+            {
+              "tipo": "resaltar_prompt",
+              "frases": [
+                0,
+                1
+              ],
+              "retraso": 2.6,
+              "lupa": "*B6*: las ventas de este mes · *B7*: la variación contra el mes anterior",
+              "hasta": 2.8
             }
           ]
         },
@@ -1583,9 +1673,20 @@
             {
               "tipo": "respuesta",
               "pendiente_respuesta_real": true,
-              "duracion": 2.4,
-              "texto": "PENDIENTE: pegar la respuesta real de Claude (respuestas-ia.md, prompt 3). Borrador para la vista previa: B6 suma desde el día siguiente al fin del mes anterior hasta el corte; B7 divide B6 por B5 y resta 1.",
-              "formula": "=B6/B5-1"
+              "duracion": 1.4,
+              "texto": "B6 suma desde el día siguiente al cierre del mes anterior hasta la fecha de corte. B7 divide este mes por el anterior y resta 1:",
+              "formula": "=B6/B5-1",
+              "frase_clave": "B7 divide este mes por el anterior y resta 1",
+              "maqueta": true,
+              "nota_maqueta": "maqueta de diseño (ronda visual 2): reemplazar por la respuesta real de respuestas-ia.md, recortada a ≤ 3 líneas, sin cambiar el sentido"
+            },
+            {
+              "tipo": "lupa",
+              "texto": "IA: *=B6/B5-1* · plantilla: *=B6/B5-1*",
+              "retraso": 2.2,
+              "hasta": 2.6,
+              "maqueta": true,
+              "rama_b": "IA: *[la que dio]* · plantilla: *=B6/B5-1*"
             }
           ],
           "elegir_rama": "respuestas-ia.md, prompt 3: si coincide, voz; si no, voz_rama_b con lo que usó y por qué cambia en la plantilla.",
@@ -1798,7 +1899,8 @@
               "texto": "Insertar › Gráfico de columnas",
               "sub": "meses fijos: enero a diciembre",
               "hasta": 3.0,
-              "retraso": 0.6
+              "retraso": 0.6,
+              "posicion": "arriba"
             },
             {
               "tipo": "grafico",
@@ -2005,7 +2107,7 @@
             {
               "tipo": "zoom",
               "rango": "A5:B8",
-              "escala": 1.7,
+              "escala": 1.55,
               "retraso": 0.6
             },
             {
@@ -2166,7 +2268,8 @@
         {
           "voz": "La tarjeta roja vuelve, y la arregla una sola pregunta."
         }
-      ]
+      ],
+      "fondo_desenfocado": true
     },
     {
       "plantilla": "capitulo",
@@ -2180,12 +2283,14 @@
         {
           "voz": "Pregunta tres: ¿quién vende, y qué?"
         }
-      ]
+      ],
+      "fondo_desenfocado": true
     },
     {
       "plantilla": "chat",
       "datos": {
-        "app": "Claude"
+        "app": "Claude",
+        "etiqueta_fija": "Respuesta completa: hoja *Prompts*"
       },
       "condicional": "Se elimina si la respuesta real del prompt 4 no usa el comodín * (respuestas-ia.md)",
       "beats": [
@@ -2195,18 +2300,36 @@
             {
               "tipo": "prompt",
               "texto": "En B2 pondré una lista desplegable con Todos, Diego Paz, Carla Ruiz y Tomás Gil. En B10 quiero las ventas del año del vendedor de B2; si dice Todos, las de todos. Y el mismo filtro para las ventas por producto de O2:O8.",
-              "duracion": 1.6
+              "duracion": 1.6,
+              "frases": [
+                "lista desplegable con Todos, Diego Paz, Carla Ruiz y Tomás Gil",
+                "si dice Todos, las de todos",
+                "En B10 quiero las ventas del año del vendedor de B2"
+              ]
             },
             {
-              "tipo": "rotulo",
-              "texto": "Respuesta completa: hoja *Prompts*",
-              "sub": "prompt 4",
-              "hasta": 2.6,
-              "retraso": 2.2
+              "tipo": "resaltar_prompt",
+              "frases": [
+                0,
+                1
+              ],
+              "retraso": 2.6,
+              "lupa": "Una *lista desplegable* en B2 · si dice *Todos*, las de todos",
+              "hasta": 2.4
+            },
+            {
+              "tipo": "resaltar_prompt",
+              "frases": [
+                2
+              ],
+              "retraso": 5.2,
+              "lupa": "En *B10*: las ventas del año del vendedor de B2",
+              "hasta": 2.0
             }
           ]
         }
-      ]
+      ],
+      "fondo_desenfocado": true
     },
     {
       "plantilla": "excel",
@@ -2656,11 +2779,12 @@
               "texto": "Pedidos › Estado: Cobrado · Vencido · Al día",
               "sub": "cómo se arma: en el video del final",
               "hasta": 3.0,
-              "tarjeta_youtube": "video02"
+              "tarjeta_youtube": "video02",
+              "posicion": "arriba"
             },
             {
               "tipo": "zoom",
-              "rango": "D1:F5",
+              "rango": "D1:F3",
               "escala": 1.5,
               "retraso": 0.8
             },
@@ -2678,86 +2802,243 @@
           "voz_tts": "La fórmula se queda con los vencidos y los ordena: arriba, el Colegio Nuevo Horizonte, uno coma dos millones.",
           "accion": [
             {
+              "tipo": "zoom",
+              "rango": "D1:I12",
+              "escala": 1.4,
+              "duracion": 0.8
+            },
+            {
               "tipo": "calcular",
               "celda": "D2",
               "valor": "Colegio Nuevo Horizonte",
-              "derecha": false
+              "derecha": false,
+              "retraso": 0.3
             },
             {
               "tipo": "calcular",
               "celda": "E2",
               "valor": "31/10/2026",
-              "retraso": 0.1
+              "retraso": 0.35
             },
             {
               "tipo": "calcular",
               "celda": "F2",
               "valor": "1.215.000",
-              "retraso": 0.15
+              "retraso": 0.4
             },
             {
               "tipo": "calcular",
               "celda": "D3",
               "valor": "Librería San Martín Srl",
               "derecha": false,
-              "retraso": 0.3
+              "retraso": 0.52
             },
             {
               "tipo": "calcular",
               "celda": "E3",
               "valor": "30/09/2026",
-              "retraso": 0.35
+              "retraso": 0.57
             },
             {
               "tipo": "calcular",
               "celda": "F3",
               "valor": "486.000",
-              "retraso": 0.4
+              "retraso": 0.62
             },
             {
               "tipo": "calcular",
               "celda": "D4",
               "valor": "Hotel Mirador",
               "derecha": false,
-              "retraso": 0.55
+              "retraso": 0.74
             },
             {
               "tipo": "calcular",
               "celda": "E4",
               "valor": "31/10/2026",
-              "retraso": 0.6
+              "retraso": 0.79
             },
             {
               "tipo": "calcular",
               "celda": "F4",
               "valor": "264.600",
-              "retraso": 0.65
+              "retraso": 0.84
             },
             {
               "tipo": "calcular",
               "celda": "D5",
               "valor": "Ferretería El Tornillo",
               "derecha": false,
-              "retraso": 0.8
+              "retraso": 0.96
             },
             {
               "tipo": "calcular",
               "celda": "E5",
               "valor": "31/10/2026",
-              "retraso": 0.85
+              "retraso": 1.01
             },
             {
               "tipo": "calcular",
               "celda": "F5",
               "valor": "172.800",
-              "retraso": 0.9
+              "retraso": 1.06
             },
             {
-              "tipo": "rotulo",
-              "texto": "ELEGIRCOLS: no en Excel 2021",
-              "sub": "sí en la web y 365",
-              "hasta": 3.0,
-              "retraso": 1.2
+              "tipo": "calcular",
+              "celda": "D6",
+              "valor": "Ferretería El Tornillo",
+              "derecha": false,
+              "retraso": 1.18
+            },
+            {
+              "tipo": "calcular",
+              "celda": "E6",
+              "valor": "31/10/2026",
+              "retraso": 1.23
+            },
+            {
+              "tipo": "calcular",
+              "celda": "F6",
+              "valor": "167.400",
+              "retraso": 1.28
+            },
+            {
+              "tipo": "calcular",
+              "celda": "D7",
+              "valor": "Kiosco La Esquina",
+              "derecha": false,
+              "retraso": 1.4
+            },
+            {
+              "tipo": "calcular",
+              "celda": "E7",
+              "valor": "31/10/2026",
+              "retraso": 1.45
+            },
+            {
+              "tipo": "calcular",
+              "celda": "F7",
+              "valor": "132.300",
+              "retraso": 1.5
+            },
+            {
+              "tipo": "calcular",
+              "celda": "D8",
+              "valor": "Librería San Martín Srl",
+              "derecha": false,
+              "retraso": 1.62
+            },
+            {
+              "tipo": "calcular",
+              "celda": "E8",
+              "valor": "28/02/2026",
+              "retraso": 1.67
+            },
+            {
+              "tipo": "calcular",
+              "celda": "F8",
+              "valor": "121.500",
+              "retraso": 1.72
+            },
+            {
+              "tipo": "calcular",
+              "celda": "D9",
+              "valor": "Hotel Mirador",
+              "derecha": false,
+              "retraso": 1.84
+            },
+            {
+              "tipo": "calcular",
+              "celda": "E9",
+              "valor": "31/10/2026",
+              "retraso": 1.89
+            },
+            {
+              "tipo": "calcular",
+              "celda": "F9",
+              "valor": "105.840",
+              "retraso": 1.94
+            },
+            {
+              "tipo": "calcular",
+              "celda": "D10",
+              "valor": "Kiosco La Esquina",
+              "derecha": false,
+              "retraso": 2.06
+            },
+            {
+              "tipo": "calcular",
+              "celda": "E10",
+              "valor": "31/10/2026",
+              "retraso": 2.11
+            },
+            {
+              "tipo": "calcular",
+              "celda": "F10",
+              "valor": "87.400",
+              "retraso": 2.16
+            },
+            {
+              "tipo": "calcular",
+              "celda": "D11",
+              "valor": "Colegio Nuevo Horizonte",
+              "derecha": false,
+              "retraso": 2.28
+            },
+            {
+              "tipo": "calcular",
+              "celda": "E11",
+              "valor": "31/10/2026",
+              "retraso": 2.33
+            },
+            {
+              "tipo": "calcular",
+              "celda": "F11",
+              "valor": "58.900",
+              "retraso": 2.38
+            },
+            {
+              "tipo": "calcular",
+              "celda": "D12",
+              "valor": "Ferretería El Tornillo",
+              "derecha": false,
+              "retraso": 2.5
+            },
+            {
+              "tipo": "calcular",
+              "celda": "E12",
+              "valor": "31/10/2026",
+              "retraso": 2.55
+            },
+            {
+              "tipo": "calcular",
+              "celda": "F12",
+              "valor": "42.750",
+              "retraso": 2.6
+            },
+            {
+              "tipo": "tarjeta",
+              "id": "cobranza",
+              "titulo": "Vencido sin cobrar",
+              "valor": "2.951.090",
+              "sub": "16 facturas · 11 a la vista",
+              "x": 1290,
+              "y": 440,
+              "ancho": 290,
+              "color": "#d13438",
+              "retraso": 3.0
+            },
+            {
+              "tipo": "tarjeta",
+              "id": "elegircols",
+              "titulo": "ELEGIRCOLS",
+              "valor": "No en 2021",
+              "sub": "sí en Excel para la web y 365",
+              "x": 1290,
+              "y": 640,
+              "ancho": 290,
+              "color": "#555555",
+              "retraso": 1.4
             }
           ]
         },
@@ -2825,16 +3106,41 @@
     {
       "plantilla": "chat",
       "datos": {
-        "app": "Claude"
+        "app": "Claude",
+        "pasos": [
+          "Mapa",
+          "Meta",
+          "Prueba"
+        ],
+        "etiqueta_fija": "Prompt completo: hoja *Prompts*"
       },
       "beats": [
         {
           "voz": "No le pido otra fórmula. Le pregunto qué puede salir mal, y qué debería mostrar.",
           "accion": [
             {
+              "tipo": "paso",
+              "n": 2,
+              "retraso": 0.3
+            },
+            {
               "tipo": "prompt",
               "texto": "Prueba: B7 es la variación de este mes contra el anterior (=B6/B5-1) y hoy muestra −90,4 %. ¿Qué situación puede hacer que esta tarjeta muestre un número creíble pero equivocado, sin dar error? ¿Qué debería mostrar con fecha de corte 03/11/2026?",
-              "duracion": 2.0
+              "duracion": 2.0,
+              "frases": [
+                "¿Qué situación puede hacer que esta tarjeta muestre un número creíble pero equivocado",
+                "¿Qué debería mostrar"
+              ]
+            },
+            {
+              "tipo": "resaltar_prompt",
+              "frases": [
+                0,
+                1
+              ],
+              "retraso": 3.2,
+              "lupa": "¿Qué puede hacer que la tarjeta muestre un número *creíble pero equivocado*?",
+              "hasta": 2.4
             }
           ]
         },
@@ -2844,8 +3150,17 @@
             {
               "tipo": "respuesta",
               "pendiente_respuesta_real": true,
-              "duracion": 3.0,
-              "texto": "PENDIENTE: pegar la respuesta real de Claude (respuestas-ia.md, prompt 5). Borrador para la vista previa: [Rama A] señala que noviembre lleva 3 días y octubre 31. [Rama B] no lo señala."
+              "duracion": 1.3,
+              "texto": "El −90,4 % puede engañar: noviembre lleva solo 3 días (1 al 3) y lo comparas con los 31 días de octubre. Con corte 03/11/2026, muestra el último mes cerrado…",
+              "frase_clave": "noviembre lleva solo 3 días (1 al 3) y lo comparas con los 31 días de octubre",
+              "clave_retraso": 1.9,
+              "maqueta": true,
+              "nota_maqueta": "maqueta de diseño (ronda visual 2): reemplazar por la respuesta real de respuestas-ia.md, recortada a ≤ 3 líneas, sin cambiar el sentido",
+              "rama_b": {
+                "frase_clave": "(la línea donde explica la causa sin nombrar el mes incompleto)",
+                "estilo_clave": "falta",
+                "lupa": "*No lo menciona*: 3 días contra 31"
+              }
             }
           ]
         },
@@ -2853,12 +3168,22 @@
           "voz": "Dice que noviembre lleva tres días, y octubre, treinta y uno. Y ahora lo compruebo yo: cambio la fecha de corte.",
           "accion": [
             {
+              "tipo": "lupa",
+              "texto": "«*noviembre lleva solo 3 días* … y lo comparas con los *31 días de octubre*»",
+              "retraso": 0.3,
+              "hasta": 4.2,
+              "maqueta": true,
+              "rama_b": {
+                "texto": "*No lo menciona*: 3 días contra 31",
+                "falta": true
+              }
+            },
+            {
               "tipo": "rotulo",
-              "texto": "Claude: «[frase textual de la respuesta]»",
-              "sub": "respuesta real · prompt 5 de la hoja Prompts",
-              "hasta": 6.0,
-              "pendiente_respuesta_real": true,
-              "texto_rama_b": "Claude: no señaló el mes incompleto"
+              "texto": "Lo compruebo yo",
+              "sub": "cambio la fecha de corte",
+              "hasta": 3.4,
+              "retraso": 4.5
             }
           ],
           "elegir_rama": "respuestas-ia.md, prompt 5: rama A (voz, si Claude señala el mes incompleto) o rama B (voz_rama_b). El render se bloquea hasta poner rama_elegida.",
@@ -2973,55 +3298,56 @@
             {
               "tipo": "calcular",
               "celda": "B1",
-              "valor": "31/10/2026"
+              "valor": "31/10/2026",
+              "retraso": 0.3
             },
             {
               "tipo": "calcular",
               "celda": "B5",
               "valor": "4.213.090",
-              "retraso": 0.2
+              "retraso": 0.5
             },
             {
               "tipo": "calcular",
               "celda": "B6",
               "valor": "4.574.425",
-              "retraso": 0.3
+              "retraso": 0.6
             },
             {
               "tipo": "calcular",
               "celda": "B7",
               "valor": "8,6 %",
-              "retraso": 0.4
+              "retraso": 0.7
             },
             {
               "tipo": "calcular",
               "celda": "B3",
               "valor": "46.145.220",
-              "retraso": 0.5
+              "retraso": 0.8
             },
             {
               "tipo": "calcular",
               "celda": "B4",
               "valor": "249",
-              "retraso": 0.55
+              "retraso": 0.85
             },
             {
               "tipo": "calcular",
               "celda": "B10",
               "valor": "46.145.220",
-              "retraso": 0.6
+              "retraso": 0.9
             },
             {
               "tipo": "calcular",
               "celda": "B11",
               "valor": "607.500",
-              "retraso": 0.65
+              "retraso": 0.95
             },
             {
               "tipo": "calcular",
               "celda": "B12",
               "valor": "2",
-              "retraso": 0.7
+              "retraso": 1.0
             },
             {
               "tipo": "formato",
@@ -3036,12 +3362,12 @@
               "valor": "+8,6 %",
               "sub": "octubre vs. septiembre",
               "color": "#107c41",
-              "retraso": 1.3
+              "retraso": 0.7
             },
             {
               "tipo": "zoom_fuera",
-              "duracion": 0.7,
-              "retraso": 0.6
+              "duracion": 0.5,
+              "retraso": 0.0
             }
           ]
         }
@@ -3053,12 +3379,19 @@
         "antes": {
           "valor": 3,
           "sufijo": " días",
-          "texto": "de *noviembre*, hasta el corte"
+          "texto": "del 1 al 3",
+          "etiqueta": "Noviembre (hasta el corte)"
         },
         "despues": {
           "valor": 31,
           "sufijo": " días",
-          "texto": "de *octubre*: frenarías compras por una caída *que no existe*"
+          "texto": "el mes entero",
+          "etiqueta": "Octubre (completo)"
+        },
+        "consecuencia": {
+          "texto": "El lunes frenarías compras por una caída *que no existe*",
+          "beat": 1,
+          "retraso": 1.8
         }
       },
       "beats": [
@@ -3190,7 +3523,7 @@
             {
               "tipo": "zoom",
               "rango": "A6:B9",
-              "escala": 1.6,
+              "escala": 1.55,
               "retraso": 2.3
             },
             {
@@ -3230,21 +3563,18 @@
               "retraso": 0.4
             },
             {
-              "tipo": "quitar",
-              "id": "var",
-              "retraso": 0.9
+              "tipo": "resaltar",
+              "rango": "B7",
+              "color": "#ffd400",
+              "retraso": 2.8,
+              "hasta": 2.0
             },
             {
-              "tipo": "tarjeta",
-              "id": "cerr_var",
-              "titulo": "Último mes cerrado vs. el anterior",
-              "valor": "+8,6 %",
-              "sub": "octubre vs. septiembre",
-              "x": 1244,
-              "y": 252,
-              "ancho": 315,
-              "retraso": 1.2,
-              "color": "#107c41"
+              "tipo": "resaltar",
+              "rango": "F1:F4",
+              "color": "#ffd400",
+              "retraso": 2.8,
+              "hasta": 2.0
             }
           ]
         },
@@ -3255,7 +3585,7 @@
             {
               "tipo": "zoom",
               "rango": "A7:B9",
-              "escala": 1.6,
+              "escala": 1.55,
               "duracion": 0.8
             },
             {
@@ -3331,17 +3661,43 @@
               "duracion": 0.7
             },
             {
+              "tipo": "quitar",
+              "id": "var",
+              "retraso": 1.0
+            },
+            {
+              "tipo": "tarjeta",
+              "id": "cerr_var",
+              "titulo": "Último mes cerrado vs. el anterior",
+              "valor": "+8,6 %",
+              "sub": "octubre vs. septiembre",
+              "x": 1244,
+              "y": 252,
+              "ancho": 315,
+              "retraso": 3.2,
+              "color": "#107c41"
+            },
+            {
+              "tipo": "zoom",
+              "rango": "F1:F4",
+              "escala": 1.55,
+              "duracion": 0.8,
+              "retraso": 3.2
+            },
+            {
               "tipo": "resaltar",
               "rango": "F1:F4",
               "color": "#107c41",
-              "hasta": 3.0
+              "retraso": 3.5,
+              "hasta": 2.2
             },
             {
               "tipo": "rotulo",
               "texto": "La tarjeta del lunes: *+8,6 %*",
               "sub": "último mes cerrado · octubre vs. septiembre",
-              "hasta": 3.6,
-              "retraso": 0.3
+              "hasta": 3.2,
+              "retraso": 3.4,
+              "posicion": "arriba"
             }
           ]
         },
@@ -3351,7 +3707,7 @@
             {
               "tipo": "zoom",
               "rango": "A1:B2",
-              "escala": 1.6,
+              "escala": 1.55,
               "duracion": 0.8
             },
             {
@@ -3371,9 +3727,25 @@
             {
               "tipo": "zoom",
               "rango": "A1:B2",
-              "escala": 2.0,
+              "escala": 1.55,
               "duracion": 1.6,
               "retraso": 4.2
+            },
+            {
+              "tipo": "quitar_nota",
+              "retraso": 4.6
+            },
+            {
+              "tipo": "zoom_fuera",
+              "duracion": 0.8,
+              "retraso": 4.8
+            },
+            {
+              "tipo": "resaltar",
+              "rango": "F1:F4",
+              "color": "#ffd400",
+              "retraso": 6.4,
+              "hasta": 2.0
             }
           ]
         }
@@ -3403,7 +3775,8 @@
         {
           "voz": "Antes de mandarlo, pregúntale a la IA qué puede salir mal. Y compruébalo tú."
         }
-      ]
+      ],
+      "fondo_desenfocado": true
     },
     {
       "plantilla": "excel",
@@ -3926,6 +4299,36 @@
               "escala": 1.4,
               "duracion": 0.9,
               "retraso": 2.2
+            },
+            {
+              "tipo": "calcular",
+              "celda": "B3",
+              "valor": "47.156.820",
+              "retraso": 1.4
+            },
+            {
+              "tipo": "calcular",
+              "celda": "B4",
+              "valor": "253",
+              "retraso": 1.4
+            },
+            {
+              "tipo": "calcular",
+              "celda": "B6",
+              "valor": "1.011.600",
+              "retraso": 1.4
+            },
+            {
+              "tipo": "calcular",
+              "celda": "B10",
+              "valor": "47.156.820",
+              "retraso": 1.4
+            },
+            {
+              "tipo": "actualizar_tarjeta",
+              "id": "anio",
+              "valor": "47.156.820",
+              "retraso": 1.4
             }
           ]
         },
@@ -3938,34 +4341,18 @@
               "duracion": 0.7
             },
             {
-              "tipo": "calcular",
-              "celda": "B3",
-              "valor": "47.156.820",
-              "retraso": 0.3
+              "tipo": "resaltar",
+              "rango": "B3",
+              "color": "#ffd400",
+              "retraso": 0.5,
+              "hasta": 1.8
             },
             {
-              "tipo": "calcular",
-              "celda": "B4",
-              "valor": "253",
-              "retraso": 0.4
-            },
-            {
-              "tipo": "calcular",
-              "celda": "B6",
-              "valor": "1.011.600",
-              "retraso": 0.45
-            },
-            {
-              "tipo": "calcular",
-              "celda": "B10",
-              "valor": "47.156.820",
-              "retraso": 0.55
-            },
-            {
-              "tipo": "actualizar_tarjeta",
-              "id": "anio",
-              "valor": "47.156.820",
-              "retraso": 0.5
+              "tipo": "resaltar",
+              "rango": "D1:D4",
+              "color": "#ffd400",
+              "retraso": 0.5,
+              "hasta": 1.8
             }
           ]
         },
@@ -4052,8 +4439,12 @@
           ],
           [
             "Datos de clientes reales",
-            "Solo el *Mapa* a la IA: nombres de columnas, nunca los datos"
+            "*Solo el mapa* a la IA: nombres de columnas, nunca los datos"
           ]
+        ],
+        "resaltar_en": [
+          6.2,
+          3.0
         ]
       },
       "beats": [
@@ -4067,36 +4458,288 @@
       ]
     },
     {
-      "plantilla": "lista",
+      "plantilla": "excel",
+      "transicion": "zoom",
       "datos": {
-        "titulo": "La plantilla, *gratis* y sin registro",
-        "items": [
-          {
-            "texto": "Distribuidora Sur · Dashboard de ventas",
-            "detalle": "Pedidos, Dashboard, Prompts y Tus datos · enlace en la descripción",
-            "icono": "download"
-          },
-          {
-            "texto": "El criterio lo pones tú",
-            "detalle": "hoja Tus datos: los pasos para pegar tus pedidos",
-            "icono": "target"
-          },
-          {
-            "texto": "Borras, pegas y se rehace",
-            "detalle": "tus pedidos, con las mismas columnas",
-            "icono": "clipboard-paste"
-          }
+        "archivo": "Distribuidora Sur · Dashboard de ventas.xlsx",
+        "hoja": "Prompts",
+        "hojas": [
+          "Pedidos",
+          "Dashboard",
+          "Prompts",
+          "Tus datos"
+        ],
+        "solo_video": true,
+        "anchos": [
+          50,
+          330,
+          760,
+          600
+        ],
+        "seleccion_inicial": "A1",
+        "celdas": [
+          [
+            "#",
+            "Bloque",
+            "Prompt (Mapa · Meta · Prueba)",
+            "Fórmula de la plantilla (verificada)"
+          ],
+          [
+            "0",
+            "Mapa (va primero, una sola vez)",
+            "Excel para la web en español, separador punto y coma. Tabla llamada Pedidos con las columnas Fecha, Cliente, Vendedor, Código, Cant., Precio, Desc., Neto, Vence, Pagado (Sí/No) y Estado (Cobrado, Vencido o Al día). En la hoja Dashboard, B1 es la fecha de corte y B2 el vendedor (o Todos). Usa referencias a la Tabla, como Pedidos[Neto].",
+            ""
+          ],
+          [
+            "1",
+            "Mensaje único (lo probé)",
+            "Te adjunto Distribuidora Sur - Pedidos 2026.xlsx (datos ficticios). Hazme un dashboard de ventas en Excel para la reunión del lunes: indicadores, gráficos y un filtro por vendedor, que se actualice cuando pegue pedidos nuevos.",
+            ""
+          ],
+          [
+            "2",
+            "Pregunta 1 · Meta (B3, B4, B5)",
+            "En Dashboard!B3, las ventas netas del año hasta la fecha de corte. En B4, cuántos pedidos hay en ese período. En B5, las ventas del último mes cerrado antes de la fecha de corte.",
+            "B3 =SUMAR.SI.CONJUNTO(Pedidos[Neto];Pedidos[Fecha];\">=\"&FECHA(AÑO(B1);1;1);Pedidos[Fecha];\"<=\"&B1) · B4 =CONTAR.SI.CONJUNTO(Pedidos[Fecha];\">=\"&FECHA(AÑO(B1);1;1);Pedidos[Fecha];\"<=\"&B1) · B5 =SUMAR.SI.CONJUNTO(Pedidos[Neto];Pedidos[Fecha];\">\"&FIN.MES(B1;-2);Pedidos[Fecha];\"<=\"&FIN.MES(B1;-1))"
+          ],
+          [
+            "3",
+            "Pregunta 2 · Meta (B6 y gráfico)",
+            "En B6, las ventas de este mes hasta la fecha de corte, y en B7 la variación de este mes contra el mes anterior, en porcentaje. Para el gráfico, en H2:I13, las ventas de cada mes del año, de enero a diciembre.",
+            "B6 =SUMAR.SI.CONJUNTO(Pedidos[Neto];Pedidos[Fecha];\">\"&FIN.MES(B1;-1);Pedidos[Fecha];\"<=\"&B1) · H2 =FECHA(AÑO($B$1);1;1) (y 2…12 hacia abajo) · I2 =SUMAR.SI.CONJUNTO(Pedidos[Neto];Pedidos[Fecha];\">=\"&H2;Pedidos[Fecha];\"<=\"&MIN(FIN.MES(H2;0);$B$1))"
+          ],
+          [
+            "3b",
+            "La ingenua, para que la veas (no está en el Dashboard)",
+            "—",
+            "=B6/B5-1  → el día 3 del mes da −90,4 %: compara 3 días con un mes completo"
+          ],
+          [
+            "4",
+            "Pregunta 3 · Meta (B10 y productos)",
+            "En B2 pondré una lista desplegable con Todos, Diego Paz, Carla Ruiz y Tomás Gil. En B10 quiero las ventas del año del vendedor de B2; si dice Todos, las de todos. Y el mismo filtro para las ventas por producto de O2:O8.",
+            "B10 =SUMAR.SI.CONJUNTO(Pedidos[Neto];Pedidos[Vendedor];SI(B2=\"Todos\";\"*\";B2);Pedidos[Fecha];\">=\"&FECHA(AÑO(B1);1;1);Pedidos[Fecha];\"<=\"&B1) · L2 =SUMAR.SI.CONJUNTO(Pedidos[Neto];Pedidos[Vendedor];K2;Pedidos[Fecha];\">=\"&FECHA(AÑO($B$1);1;1);Pedidos[Fecha];\"<=\"&$B$1) · O2 =SUMAR.SI.CONJUNTO(Pedidos[Neto];Pedidos[Código];N2;Pedidos[Vendedor];SI($B$2=\"Todos\";\"*\";$B$2);Pedidos[Fecha];\">=\"&FECHA(AÑO($B$1);1;1);Pedidos[Fecha];\"<=\"&$B$1)"
+          ],
+          [
+            "5",
+            "La Prueba (el paso secreto: B7 y B8)",
+            "Prueba: B7 es la variación de este mes contra el anterior (=B6/B5-1) y hoy muestra −90,4 %. ¿Qué situación puede hacer que esta tarjeta muestre un número creíble pero equivocado, sin dar error? ¿Qué debería mostrar con fecha de corte 03/11/2026?",
+            "B7 =B5/SUMAR.SI.CONJUNTO(Pedidos[Neto];Pedidos[Fecha];\">\"&FIN.MES(B1;-3);Pedidos[Fecha];\"<=\"&FIN.MES(B1;-2))-1 · B8 =B6/SUMAR.SI.CONJUNTO(Pedidos[Neto];Pedidos[Fecha];\">\"&FIN.MES(B1;-2);Pedidos[Fecha];\"<=\"&FECHA.MES(B1;-1))-1"
+          ],
+          [
+            "6",
+            "Pregunta 4 · cobranza (D2, B11, B12)",
+            "Meta: en D2, una lista que se actualice sola con Cliente, Vence y Neto de los pedidos con Estado Vencido, de mayor a menor neto; si no hay, que diga Sin vencidos.",
+            "D2 =SI.ERROR(ORDENAR(FILTRAR(ELEGIRCOLS(Pedidos;2;9;8);Pedidos[Estado]=\"Vencido\");3;-1);\"Sin vencidos\") · B11 =SUMAR.SI.CONJUNTO(Pedidos[Neto];Pedidos[Estado];\"Vencido\") · B12 =CONTAR.SI(Pedidos[Estado];\"Vencido\")"
+          ],
+          [
+            "7",
+            "Estado (hoja Pedidos, columna K)",
+            "Se arma en el video «10 fórmulas de Excel con IA» (Distribuidora Sur).",
+            "K2 =SI(J2=\"Sí\";\"Cobrado\";SI(I2<Dashboard!$B$1;\"Vencido\";\"Al día\"))"
+          ],
+          [
+            "",
+            "",
+            "",
+            ""
+          ],
+          [
+            "",
+            "",
+            "",
+            ""
+          ]
         ]
       },
       "beats": [
         {
-          "voz": "La plantilla está gratis en la descripción, sin registro: la Tabla, el dashboard y todas las fórmulas, con sus prompts."
+          "voz": "La plantilla está gratis en la descripción, sin registro: la Tabla, el dashboard y todas las fórmulas, con sus prompts.",
+          "accion": [
+            {
+              "tipo": "rotulo",
+              "texto": "Plantilla *gratis*, sin registro",
+              "sub": "enlace en la descripción",
+              "hasta": 4.0,
+              "retraso": 0.2,
+              "posicion": "arriba"
+            },
+            {
+              "tipo": "hoja",
+              "hoja": "Pedidos",
+              "retraso": 2.4,
+              "hasta": 1.0
+            },
+            {
+              "tipo": "hoja",
+              "hoja": "Dashboard",
+              "retraso": 3.6,
+              "hasta": 1.0
+            },
+            {
+              "tipo": "seleccionar",
+              "rango": "C2:D9",
+              "retraso": 5.0
+            },
+            {
+              "tipo": "resaltar",
+              "rango": "C2:D9",
+              "color": "#ffd400",
+              "retraso": 5.9,
+              "hasta": 1.6
+            },
+            {
+              "tipo": "zoom",
+              "rango": "B4:D8",
+              "escala": 1.6,
+              "duracion": 1.0,
+              "retraso": 5.6
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "plantilla": "excel",
+      "transicion": "fundido",
+      "datos": {
+        "archivo": "Distribuidora Sur · Dashboard de ventas.xlsx",
+        "hoja": "Tus datos",
+        "hojas": [
+          "Pedidos",
+          "Dashboard",
+          "Prompts",
+          "Tus datos"
+        ],
+        "solo_video": true,
+        "anchos": [
+          80,
+          1200
+        ],
+        "seleccion_inicial": "A1",
+        "celdas": [
+          [
+            "Paso",
+            "Cómo usar el dashboard con tus pedidos"
+          ],
+          [
+            "1",
+            "Dashboard!B1 ya tiene =HOY(). Si quieres otra fecha de corte, escríbela ahí (para ver el video: 03/11/2026). Si ves todo en 0 (por ejemplo, en 2027, con los pedidos de ejemplo de 2026), escribe 03/11/2026 en B1."
+          ],
+          [
+            "2",
+            "En Pedidos, borra las filas de ejemplo (deja el encabezado: la Tabla se mantiene). El total de M2 suma toda la columna Neto de la Tabla (todos los años, sin filtros): es solo para comprobar que la Tabla creció al pegar. Está fuera de la Tabla, separado por la columna L vacía."
+          ],
+          [
+            "3",
+            "Pega tus pedidos debajo del encabezado, con las mismas columnas y en el mismo orden. Si tu sistema trae otras columnas, ordénalas primero."
+          ],
+          [
+            "4",
+            "Revisa que Fecha y Vence sean fechas (no texto) y que Neto sea número: si no, las sumas dan 0 sin avisar."
+          ],
+          [
+            "5",
+            "Cada lunes, pega los pedidos nuevos debajo de la última fila. Mira la tarjeta del mes cerrado (B7), no la del mismo tramo."
+          ],
+          [
+            "",
+            ""
+          ],
+          [
+            "",
+            ""
+          ],
+          [
+            "",
+            ""
+          ],
+          [
+            "",
+            ""
+          ],
+          [
+            "",
+            ""
+          ],
+          [
+            "",
+            ""
+          ]
+        ]
+      },
+      "beats": [
+        {
+          "voz": "Ojo: el criterio lo pones tú. La plantilla hace el resto, y en la hoja Tus datos están los pasos para pegar tus pedidos.",
+          "accion": [
+            {
+              "tipo": "rotulo",
+              "texto": "El criterio lo pones tú",
+              "sub": "la plantilla hace el resto",
+              "hasta": 3.6,
+              "retraso": 0.4,
+              "posicion": "arriba"
+            },
+            {
+              "tipo": "hoja",
+              "hoja": "Tus datos",
+              "retraso": 4.6,
+              "hasta": 1.2
+            },
+            {
+              "tipo": "resaltar",
+              "rango": "A2:B6",
+              "color": "#ffd400",
+              "etiqueta": "los pasos",
+              "retraso": 5.8,
+              "hasta": 3.0
+            }
+          ]
         },
         {
-          "voz": "Ojo: el criterio lo pones tú. La plantilla hace el resto, y en la hoja Tus datos están los pasos para pegar tus pedidos."
-        },
-        {
-          "voz": "Borras los pedidos de ejemplo, pegas los tuyos con las mismas columnas, y el tablero se rehace."
+          "voz": "Borras los pedidos de ejemplo, pegas los tuyos con las mismas columnas, y el tablero se rehace.",
+          "accion": [
+            {
+              "tipo": "zoom",
+              "rango": "B2:B5",
+              "escala": 1.4,
+              "duracion": 0.8
+            },
+            {
+              "tipo": "seleccionar",
+              "rango": "A3:B3",
+              "retraso": 0.1
+            },
+            {
+              "tipo": "resaltar",
+              "rango": "A3:B3",
+              "color": "#d13438",
+              "retraso": 0.8,
+              "hasta": 1.6
+            },
+            {
+              "tipo": "seleccionar",
+              "rango": "A4:B4",
+              "retraso": 2.3
+            },
+            {
+              "tipo": "resaltar",
+              "rango": "A4:B4",
+              "color": "#ffd400",
+              "retraso": 3.0,
+              "hasta": 2.0
+            },
+            {
+              "tipo": "hoja",
+              "hoja": "Dashboard",
+              "retraso": 5.0
+            },
+            {
+              "tipo": "zoom_fuera",
+              "duracion": 0.8,
+              "retraso": 4.6
+            }
+          ]
         }
       ]
     },

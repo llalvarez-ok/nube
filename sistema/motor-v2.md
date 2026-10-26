@@ -25,6 +25,7 @@
 - `elegir_rama` (en un beat): la voz depende de una respuesta real de IA que todavía no se corrió (variantes en `voz_rama_b`, `voz_si_falla`…). `motor.py` no hace el video final hasta que el beat tiene `rama_elegida` y la `voz` correcta; `--sin-voz` y `--cuadros` sí funcionan.
 - `voz_tts`: el texto que se manda a la voz cuando la pronunciación lo pide ("B-U-S-C-A-R-X", "punto y coma"); los subtítulos usan `voz`.
 - `marca.visible`: muestra el logo arriba a la izquierda (apagado por defecto: YouTube ya pone la marca de agua del canal y el logo choca con los zooms).
+- `fondo_desenfocado: true` (en una escena de texto: `titular`, `capitulo`…): la última escena `excel`/`chat` anterior queda de fondo, desenfocada y oscura, en lugar del negro. Sirve para que un capítulo o un titular no se vea como otra pantalla oscura igual a la anterior.
 - `capitulo`: marca un capítulo para la descripción y una marca en la barra de progreso.
 - `transicion` (de entrada): `empuje` (por defecto), `zoom` (por defecto en excel y chat), `barrido` (por defecto en capitulo: barrido amarillo con el logo), `fundido`, `corte`.
 - Opciones de escena: `entrada` (segundos antes del primer beat, 0,45), `cola` (segundos después del último, 0,35), `extra`.
@@ -37,18 +38,19 @@
 |---|---|---|
 | `titular` | `etiqueta`, `icono`, `lineas: ["...", {"texto": "...", "beat": 1}]`, `sub`, `sub_beat`, `tamano` | Las líneas entran en el beat 0 (o en su `beat`); el `sub` en el beat 1 |
 | `cifra` | `valor`, `prefijo`, `sufijo`, `decimales`, `etiqueta`, `fuente` | Cuenta de 0 al valor al empezar |
-| `antes_despues` | `antes: {segundos, texto, beat}`, `despues: {segundos, texto, beat}`; en lugar de `segundos`, `valor` + `sufijo` muestra una cifra ("10" → "5 clientes") | Antes en el beat 0, después en el 1; los relojes (o las cifras) corren |
+| `antes_despues` | `antes: {segundos, texto, beat, etiqueta}`, `despues: {…}`; en lugar de `segundos`, `valor` + `sufijo` muestra una cifra ("10" → "5 clientes"). `etiqueta` reemplaza "Antes"/"Después" (p. ej. "Noviembre (hasta el corte)"). `consecuencia: {texto, beat, retraso}` agrega una línea propia debajo de las dos tarjetas | Antes en el beat 0, después en el 1; los relojes (o las cifras) corren |
 | `lista` | `titulo`, `items: [{texto, detalle, icono, beat}]` | Un elemento por beat (o el de su `beat`) |
 | `capitulo` | `numero`, `total`, `titulo` | Entra con barrido; dura al menos 2,2 s |
 | `aviso` | `titulo`, `texto`, `nivel: "rojo"`, `icono` | Sacudida del ícono y sonido de alerta |
-| `comparar` | `titulo`, `columnas`, `filas`, `ganador` (índice), `ganador_beat`, `beats_filas` | Una fila por beat; el ganador se pinta de amarillo |
+| `comparar` | `titulo`, `columnas`, `filas`, `ganador` (índice), `ganador_beat`, `beats_filas`, `resaltar_en` (segundos desde el beat de cada fila en que se pinta el `*marcador*`, para que entre cuando la voz lo dice) | Una fila por beat; el ganador se pinta de amarillo |
 | `excel` | ver abajo | Acciones por beat |
-| `chat` | `app` ("ChatGPT", "Copilot", "Claude"), `modelo` ("versión gratuita") | Acciones `prompt` y `respuesta` |
+| `chat` | `app` ("ChatGPT", "Copilot", "Claude"), `modelo` ("versión gratuita"), `pasos` (tarjetas del método en la cabecera, p. ej. `["Mapa","Meta","Prueba"]`), `etiqueta_fija` (aviso fijo arriba a la derecha, p. ej. "Prompt completo: hoja *Prompts*") | Acciones `prompt`, `respuesta`, `resaltar_prompt`, `lupa`, `paso` |
 | `imagen` | `imagen` (ruta desde la raíz del repo; usa `herramientas/recursos.py`), `titulo`, `texto`, `credito`, `foco` ("30% 40%") | Foto a pantalla completa con acercamiento lento y leyenda |
 | `final` | `titulo` | Dura al menos 20 s (pantalla final de YouTube); deja huecos para el video y el botón de suscribirse |
 
 ### `excel`
 `datos`: `archivo`, `hoja`, `asistente` ("Copilot"), `pestana`, `anchos` (px por columna, 210 por defecto), `celdas` (filas desde la fila 1; la primera es el encabezado), `seleccion_inicial`. Se ven 12 filas y unas 7 columnas.
+`hojas` (opcional): las pestañas del pie, por ejemplo `["Pedidos", "Dashboard", "Prompts", "Tus datos"]`; `hoja` es la activa.
 `filas` (opcional): los números de fila que se ven, en orden, por ejemplo `[1, 241, 242, …, 251]` para mostrar el encabezado inmovilizado y el final de una tabla larga. Las `celdas` siguen siendo las 12 filas visibles, de arriba abajo, y las acciones usan los números reales ("A251"). Una escena con `filas` debería ser `solo_video` (la plantilla no sabe dónde va cada fila).
 
 | Acción | Campos | Qué se ve |
@@ -71,7 +73,8 @@
 | `quitar` | `id` | Retira un gráfico o una tarjeta |
 | `panel_ia` | `prompt`, `respuesta`, `formula`, `boton` | Panel lateral de IA: se escribe el prompt, se envía y la respuesta aparece palabra por palabra, con la fórmula y el botón "Insertar" |
 | `insertar` | `celda`, `formula`, `valor` | Clic en "Insertar": la fórmula queda en la celda con su resultado |
-| `rotulo` | `texto`, `sub`, `numero` ("01"), `hasta` (s, 3,2) | Zócalo grande que entra desde la izquierda, en espacio de pantalla (no lo afecta el zoom). Úsalo al empezar cada fórmula o idea clave: puntúa sin salir de la hoja. También existe en `chat` |
+| `hoja` | `hoja`, `hasta` | El cursor hace clic en esa pestaña del pie y se marca en amarillo (no cambia el contenido de la escena) |
+| `rotulo` | `texto`, `sub`, `numero` ("01"), `hasta` (s, 3,2), `posicion` ("arriba": arriba a la derecha, para no tapar las últimas filas ni el pie del gráfico) | Zócalo grande que entra desde la izquierda, en espacio de pantalla (no lo afecta el zoom). Úsalo al empezar cada fórmula o idea clave: puntúa sin salir de la hoja. También existe en `chat` |
 | `cerrar_panel`, `quitar_refs`, `mover` (`celda`) | | |
 
 Cada acción admite `retraso` (segundos desde el inicio del beat). Las acciones de un beat se encadenan por tiempo: deja ~1,5 s entre un `escribir` y su `calcular` (usa `retraso` o un beat nuevo).
@@ -81,6 +84,15 @@ Cada acción admite `retraso` (segundos desde el inicio del beat). Las acciones 
 |---|---|
 | `prompt` | `texto`, `duracion` (se escribe en la caja y sube como mensaje) |
 | `respuesta` | `texto`, `formula`, `duracion` (aparece palabra por palabra; la fórmula, en bloque de código) |
+
+| `prompt` (más) | `frases` (textos del prompt que se podrán resaltar), `pausa_en` (texto donde el tecleo se detiene) + `pausa` (s): el prompt se escribe en dos tiempos, al ritmo de la voz |
+| `resaltar_prompt` | `frases` (índices de `frases` del último prompt), `lupa` (texto opcional), `hasta`: el prompt queda atenuado y esas frases se pintan de amarillo |
+| `lupa` | `texto` (con `*marcador*`), `hasta`, `falta` (borde rojo): recuadro grande de 52 px arriba del chat, legible en el celular, con 3–6 palabras clave |
+| `paso` | `n` (índice de `pasos`): enciende esa tarjeta del método; las anteriores quedan como "hechas" |
+| `respuesta` (más) | `frase_clave` (parte del texto que se resalta al terminar), `estilo_clave: "falta"` (recuadro rojo: la idea que no aparece), `clave_retraso`, `lupa`, `lupa_hasta`, `recorte: false` (por defecto se ven 3 líneas como máximo, con "…") |
+
+Prompts largos: en pantalla no se lee un prompt de 40–80 palabras. Se muestra completo pero atenuado, se resaltan 3–6 palabras por beat (las que dice la voz) con `resaltar_prompt` o `lupa`, y `etiqueta_fija` remite a la hoja Prompts.
+Respuestas aún no corridas: el texto de prueba va con `"maqueta": true` y `nota_maqueta` en el JSON (nunca "PENDIENTE" ni corchetes en pantalla). Al pegar la real se cambia `texto` y `frase_clave`; si hay ramas, la otra va en `rama_b` del mismo objeto.
 
 **El texto de `respuesta` tiene que ser la respuesta real** de esa herramienta a ese prompt (puede recortarse, sin cambiar el sentido).
 

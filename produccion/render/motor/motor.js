@@ -32,9 +32,11 @@
   function rotulo(cam, tl, c, a, t) {
     const r = el("div", "rotulo", `<span class="rot-num">${esc(a.numero || "")}</span><div><b>${marcar(a.texto)}</b>${a.sub ? `<small>${marcar(a.sub)}</small>` : ""}</div>`, cam);
     if (!a.numero) r.querySelector(".rot-num").remove();
-    tl.fromTo(r, { xPercent: -110, opacity: 0 }, { xPercent: 0, opacity: 1, duration: 0.55, ease: "power4.out", immediateRender: true }, t);
-    tl.from(r.querySelectorAll("b, small, .rot-num"), { x: -30, opacity: 0, duration: 0.4, stagger: 0.07, ease: "power3.out" }, t + 0.15);
-    tl.to(r, { xPercent: -110, opacity: 0, duration: 0.45, ease: "power3.in" }, t + (a.hasta || 3.2));
+    const arriba = a.posicion === "arriba", dx = arriba ? 110 : -110; // "arriba": arriba a la derecha, para no tapar el pie de la hoja
+    if (arriba) r.classList.add("arriba");
+    tl.fromTo(r, { xPercent: dx, opacity: 0 }, { xPercent: 0, opacity: 1, duration: 0.55, ease: "power4.out", immediateRender: true }, t);
+    tl.from(r.querySelectorAll("b, small, .rot-num"), { x: arriba ? 30 : -30, opacity: 0, duration: 0.4, stagger: 0.07, ease: "power3.out" }, t + 0.15);
+    tl.to(r, { xPercent: dx, opacity: 0, duration: 0.45, ease: "power3.in" }, t + (a.hasta || 3.2));
     c.sonido("whoosh_suave", t);
   }
   const PUNTERO = '<svg viewBox="0 0 24 24"><path d="M4 2 L4 19 L8.5 15 L11.5 22 L14.5 20.7 L11.6 14 L18 14 Z" fill="#fff" stroke="#111" stroke-width="1.4" stroke-linejoin="round"/></svg>';
@@ -103,7 +105,7 @@
     const d = es.datos, tl = gsap.timeline();
     const lado = (k, x) => {
       const o = d[k], caja = el("div", "ad tarjeta " + k, null, cam);
-      el("div", "etq", k === "antes" ? "Antes" : "Después", caja);
+      el("div", "etq", esc(o.etiqueta || (k === "antes" ? "Antes" : "Después")), caja);
       const num = o.valor != null; // cifra en vez de reloj: {valor, sufijo}
       const fmt = (v) => (num ? fmtNum(v) + (o.sufijo || "") : reloj(v));
       const r = el("div", "reloj", fmt(0), caja);
@@ -119,6 +121,12 @@
     const t2 = lado("despues", 120);
     const vs = el("div", "vs", "VS", cam);
     tl.from(vs, { scale: 0, duration: 0.5, ease: "back.out(2)" }, t2);
+    // "consecuencia": línea propia debajo de las dos tarjetas
+    if (d.consecuencia) {
+      const k = typeof d.consecuencia === "string" ? { texto: d.consecuencia } : d.consecuencia;
+      const q = el("div", "ad-consecuencia", marcar(k.texto), cam);
+      tl.from(q, { y: 40, opacity: 0, duration: 0.6, ease: "power3.out" }, c.B(k.beat != null ? k.beat : 1, k.retraso != null ? k.retraso : 1.6));
+    }
     return tl;
   };
 
@@ -174,6 +182,14 @@
     d.filas.forEach((f, i) => {
       const tr = el("tr", "", f.map((x) => `<td>${marcar(x)}</td>`).join(""), tb);
       tl.from(tr, { opacity: 0, x: 40, duration: 0.5 }, c.B(d.beats_filas ? d.beats_filas[i] : i, 0.15));
+      // "resaltar_en": segundos (desde el beat de la fila) en que se pinta el marcador amarillo, cuando la voz lo dice
+      if (d.resaltar_en && d.resaltar_en[i] != null) {
+        const tm = c.B(d.beats_filas ? d.beats_filas[i] : i, d.resaltar_en[i]);
+        tr.querySelectorAll(".resaltado").forEach((r) => {
+          tl.fromTo(r, { "--trazo": 0, color: "#ffffff" }, { "--trazo": 1, color: "#0b0d12", duration: 0.5, ease: "power2.inOut", immediateRender: true }, tm);
+        });
+        c.sonido("pop", tm);
+      }
       c.sonido("pop", c.B(d.beats_filas ? d.beats_filas[i] : i, 0.15));
       if (d.ganador === i) {
         tl.set(tr, { className: "gana" }, c.B(d.ganador_beat != null ? d.ganador_beat : es.beats.length - 1, 0.2));
@@ -250,7 +266,8 @@
     el("div", "xl-fx", "fx", fbar);
     const ftexto = el("div", "xl-ftexto", "", fbar);
     const hoja = el("div", "xl-hoja", null, xl);
-    el("div", "xl-pie", `<span class="on">${esc(d.hoja || "Hoja1")}</span><span>+</span>`, xl);
+    // pie con las hojas del libro: "hojas" (lista) o solo la actual
+    const pie = el("div", "xl-pie", (d.hojas || [d.hoja || "Hoja1"]).map((h) => `<span class="${h === (d.hoja || "Hoja1") ? "on" : ""}" data-hoja="${esc(h)}">${esc(h)}</span>`).join("") + "<span>+</span>", xl);
     hoja.style.top = HOJA_Y + "px";
 
     // grilla
@@ -581,6 +598,16 @@
       cerrar_panel: (a, t) => { if (panel) { tl.to(panel, { x: 600, duration: 0.5, ease: "power3.in" }, t); c.sonido("whoosh_suave", t); } },
       quitar_refs: (a, t) => quitarRefs(t),
       mover: (a, t) => { const r = rect(a.celda); mover(r.x + r.w / 2, r.y + r.h / 2, t); },
+      // clic en una pestaña de hoja del pie: se marca en amarillo (no cambia el contenido de la hoja)
+      hoja: (a, t) => {
+        const sp = [...pie.querySelectorAll("span")].find((x) => x.dataset.hoja === a.hoja);
+        if (!sp) return;
+        const x = pie.offsetLeft + sp.offsetLeft + sp.offsetWidth / 2, y = pie.offsetTop + sp.offsetTop + sp.offsetHeight / 2;
+        const tt = mover(x, y, t);
+        clic(tt);
+        tl.fromTo(sp, { backgroundColor: "rgba(255,212,0,0)" }, { backgroundColor: ACENTO, color: "#111", duration: 0.25, immediateRender: false }, tt);
+        if (a.hasta != null) tl.to(sp, { backgroundColor: "rgba(255,212,0,0)", color: "#555", duration: 0.3 }, tt + a.hasta);
+      },
       rotulo: (a, t) => rotulo(cam, tl, c, a, t),
     };
 
@@ -600,35 +627,99 @@
   P.chat = function (cam, es, c) {
     const d = es.datos, tl = gsap.timeline();
     const w = el("div", "chat", null, cam);
-    el("div", "chat-cab", `<span class="punto"></span>${esc(d.app || "Asistente de IA")}<span style="margin-left:auto;font-size:20px;color:#8a8f9e;font-weight:500">${esc(d.modelo || "")}</span>`, w);
+    const cab = el("div", "chat-cab", `<span class="punto"></span>${esc(d.app || "Asistente de IA")}`, w);
+    // "pasos": tarjetas del método (p. ej. Mapa · Meta · Prueba) en la cabecera; la acción "paso" las enciende
+    const pasos = (d.pasos || []).map((p) => el("span", "chat-paso", esc(p), cab));
+    if (d.modelo) el("span", "", esc(d.modelo), cab).style.cssText = "margin-left:auto;font-size:20px;color:#8a8f9e;font-weight:500";
+    // "etiqueta_fija": aviso permanente arriba a la derecha (p. ej. "completo en la hoja Prompts")
+    if (d.etiqueta_fija) el("span", "chat-fija", marcar(d.etiqueta_fija), cab);
     const msgs = el("div", "chat-msgs", null, w);
     const input = el("div", "chat-input", "", w);
     tl.from(w, { y: 70, opacity: 0, scale: 0.97, duration: 0.8, ease: "power3.out" }, 0.1);
     const acciones = [];
     es.beats.forEach((b) => [].concat(b.accion || [], b.acciones || []).forEach((a) => acciones.push({ a, t: b.t + (a.retraso || 0) })));
+    // frases que se resaltan en cada prompt: se envuelven al construir la burbuja
+    const envolver = (texto, frases) => {
+      let h = esc(texto);
+      frases.forEach((f, k) => { const e = esc(f), i = h.indexOf(e); if (i >= 0) h = h.slice(0, i) + `<span class="mk" data-k="${k}">${e}</span>` + h.slice(i + e.length); });
+      return h;
+    };
+    let burbuja = null, frasesB = [], respuestaActual = null, lupaActual = null;
+    const lupa = (texto, t, hasta, falta) => {
+      if (lupaActual) tl.to(lupaActual, { opacity: 0, y: -20, duration: 0.25 }, t);
+      const l = el("div", "chat-lupa" + (falta ? " falta" : ""), marcar(texto), cam);
+      tl.fromTo(l, { opacity: 0, y: 30, scale: 0.94 }, { opacity: 1, y: 0, scale: 1, duration: 0.45, ease: "back.out(1.6)", immediateRender: true }, t);
+      if (hasta != null) tl.to(l, { opacity: 0, y: -20, duration: 0.3 }, t + hasta);
+      lupaActual = hasta != null ? null : l;
+      c.sonido("zoom", t);
+    };
     acciones.sort((x, y) => x.t - y.t).forEach(({ a, t }) => {
       t = Math.max(0.8, t);
       if (a.tipo === "rotulo") { rotulo(cam, tl, c, a, t); return; }
+      if (a.tipo === "lupa") { lupa(a.texto, t, a.hasta, a.falta); return; }
+      if (a.tipo === "paso") {
+        pasos.forEach((p, k) => { if (k <= a.n) tl.set(p, { className: "chat-paso " + (k === a.n ? "on" : "hecho") }, t); });
+        tl.fromTo(pasos[a.n], { scale: 1.25 }, { scale: 1, duration: 0.45, ease: "back.out(2)", immediateRender: false }, t);
+        c.sonido("pop", t);
+        return;
+      }
       if (a.tipo === "prompt") {
         const dp = a.duracion || Math.min(3.5, Math.max(1, a.texto.length / 22));
         tl.set(input, { text: "" }, t);
-        tl.to(input, { text: { value: esc(a.texto) }, duration: dp, ease: "none" }, t);
-        c.sonido("tecleo", t, dp);
-        const bu = el("div", "chat-u", esc(a.texto), msgs);
-        tl.fromTo(bu, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.35, immediateRender: true }, t + dp + 0.3);
-        tl.set(input, { text: "" }, t + dp + 0.3);
-        c.sonido("enviar", t + dp + 0.3);
+        let fin = t + dp;
+        // "pausa_en": el prompt se escribe en dos tiempos (hasta ese texto, pausa de "pausa" s, y el resto)
+        const corte = a.pausa_en ? a.texto.indexOf(a.pausa_en) : -1;
+        if (corte > 0) {
+          const d1 = dp * corte / a.texto.length;
+          tl.to(input, { text: { value: esc(a.texto.slice(0, corte)) }, duration: d1, ease: "none" }, t);
+          c.sonido("tecleo", t, d1);
+          tl.to(input, { text: { value: esc(a.texto) }, duration: dp - d1, ease: "none" }, t + d1 + (a.pausa || 1));
+          c.sonido("tecleo", t + d1 + (a.pausa || 1), dp - d1);
+          fin = t + dp + (a.pausa || 1);
+        } else {
+          tl.to(input, { text: { value: esc(a.texto) }, duration: dp, ease: "none" }, t);
+          c.sonido("tecleo", t, dp);
+        }
+        frasesB = a.frases || [];
+        const bu = el("div", "chat-u", envolver(a.texto, frasesB), msgs);
+        burbuja = bu;
+        tl.fromTo(bu, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.35, immediateRender: true }, fin + 0.3);
+        tl.set(input, { text: "" }, fin + 0.3);
+        c.sonido("enviar", fin + 0.3);
+      } else if (a.tipo === "resaltar_prompt") {
+        // el prompt queda atenuado y se marcan las frases de "frases" (índices o textos ya declarados en el prompt)
+        if (!burbuja) return;
+        tl.set(burbuja, { className: "chat-u atenuado" }, t);
+        burbuja.querySelectorAll(".mk").forEach((m) => {
+          const on = (a.frases || []).some((f) => (typeof f === "number" ? String(f) === m.dataset.k : frasesB[m.dataset.k] === f));
+          tl.set(m, { className: on ? "mk on" : "mk" }, t);
+        });
+        c.sonido("brillo", t, 0.4);
+        if (a.lupa) lupa(a.lupa, t + 0.15, a.hasta);
       } else if (a.tipo === "respuesta") {
-        const bi = el("div", "chat-ia", "", msgs);
+        // "frase_clave": parte del texto que se resalta al terminar de escribirse ("estilo_clave": "falta" = rojo, la idea que no aparece)
+        const bi = el("div", "chat-ia" + (a.recorte !== false ? " recorte" : ""), "", msgs);
         const dr = a.duracion || Math.min(6, Math.max(1.5, a.texto.split(" ").length / 8));
         tl.fromTo(bi, { opacity: 0 }, { opacity: 1, duration: 0.2, immediateRender: true }, t);
         tl.to(bi, { text: { value: escBr(a.texto), delimiter: " " }, duration: dr, ease: "none" }, t + 0.1);
         c.sonido("respuesta", t, 0.6);
+        let tf = t + dr + 0.2;
         if (a.formula) {
           const f = el("div", "chat-ia", "<code></code>", msgs);
-          tl.fromTo(f, { opacity: 0 }, { opacity: 1, duration: 0.2, immediateRender: true }, t + dr + 0.2);
-          tl.to(f.firstChild, { text: { value: esc(a.formula) }, duration: Math.min(1.6, a.formula.length / 22), ease: "none" }, t + dr + 0.2);
+          tl.fromTo(f, { opacity: 0 }, { opacity: 1, duration: 0.2, immediateRender: true }, tf);
+          tl.to(f.firstChild, { text: { value: esc(a.formula) }, duration: Math.min(1.6, a.formula.length / 22), ease: "none" }, tf);
+          tf += Math.min(1.6, a.formula.length / 22);
         }
+        if (a.frase_clave && a.texto.includes(a.frase_clave)) {
+          const k = a.texto.indexOf(a.frase_clave), cls = a.estilo_clave === "falta" ? "mk falta" : "mk on";
+          const html = escBr(a.texto.slice(0, k)) + `<span class="${cls}">${escBr(a.frase_clave)}</span>` + escBr(a.texto.slice(k + a.frase_clave.length));
+          const tk = t + (a.clave_retraso != null ? a.clave_retraso : dr + 0.3);
+          tl.set(bi, { innerHTML: html }, tk);
+          tl.set(bi, { className: "chat-ia recorte atenuado" }, tk);
+          c.sonido("brillo", tk, 0.4);
+          if (a.lupa) lupa(a.lupa, tk + 0.15, a.lupa_hasta, a.estilo_clave === "falta");
+        }
+        respuestaActual = bi;
       }
     });
     return tl;
@@ -649,12 +740,39 @@
     master.fromTo(deriva, { scale: 1 }, { scale: es.plantilla === "excel" || es.plantilla === "chat" ? 1.015 : 1.035, duration: es.dur + TR, ease: "none", immediateRender: false }, es.inicio);
     capas.push(capa);
   });
+  // "fondo_desenfocado": la última escena excel/chat anterior queda visible (desenfocada) detrás de esta
+  const base = {}, ocultar = {};
+  G.escenas.forEach((es, i) => {
+    if (!es.fondo_desenfocado) return;
+    let b = i - 1;
+    while (b >= 0 && !["excel", "chat"].includes(G.escenas[b].plantilla)) b--;
+    if (b < 0) return;
+    base[i] = b;
+    ocultar[b] = Math.max(ocultar[b] || 0, (G.escenas[i + 1] ? G.escenas[i + 1].inicio : es.inicio + es.dur));
+    if (b !== i - 1) master.set(capas[b], { visibility: "visible" }, es.inicio);
+  });
   G.escenas.forEach((es, i) => {
     const capa = capas[i], prev = capas[i - 1], t = es.inicio;
     const tipo = i === 0 ? "ninguna" : es.transicion || (es.plantilla === "capitulo" ? "barrido" : es.plantilla === "excel" || es.plantilla === "chat" ? "zoom" : "empuje");
     master.set(capa, { visibility: "visible" }, t);
-    if (G.escenas[i + 1]) master.set(capa, { visibility: "hidden" }, G.escenas[i + 1].inicio + TR + 0.05);
+    if (G.escenas[i + 1]) master.set(capa, { visibility: "hidden" }, (ocultar[i] || G.escenas[i + 1].inicio) + TR + 0.05);
     if (!prev) return;
+    if (es.fondo_desenfocado && base[i] === i - 1) {
+      // la escena anterior (Excel) queda de fondo, desenfocada y oscura
+      master.to(prev, { filter: "blur(18px) brightness(0.32)", scale: 1.04, duration: TR, ease: "power2.out" }, t);
+      if (tipo === "barrido") {
+        const panel = el("div", "", `<div style="width:140px;height:140px">${LOGO}</div>`, document.getElementById("barridos"));
+        Object.assign(panel.style, { position: "absolute", inset: 0, background: ACENTO, display: "flex", alignItems: "center", justifyContent: "center", zIndex: 60 });
+        gsap.set(panel, { xPercent: -101 });
+        master.to(panel, { xPercent: 0, duration: 0.35, ease: "power3.in" }, t - 0.35);
+        master.to(panel, { xPercent: 101, duration: 0.45, ease: "power3.out" }, t + 0.05);
+        sonido("whoosh", t - 0.4);
+      } else {
+        master.fromTo(capa, { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: TR, ease: "power3.out", immediateRender: false }, t);
+        sonido("whoosh", t - 0.05);
+      }
+      return;
+    }
     if (tipo === "empuje") {
       master.fromTo(capa, { xPercent: 100 }, { xPercent: 0, duration: TR, ease: "power3.inOut", immediateRender: false }, t);
       master.to(prev, { xPercent: -35, opacity: 0, duration: TR, ease: "power3.inOut" }, t);
