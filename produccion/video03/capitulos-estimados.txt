@@ -1,0 +1,9 @@
+0:00 Introducción
+0:22 Lo probé: un dashboard en un solo mensaje
+0:48 Pregunta 1: ¿cuánto vendimos? (Tabla de Excel)
+2:40 Pregunta 2: ¿vamos mejor o peor? (ventas por mes)
+3:44 Pregunta 3: ¿quién y qué vende? (lista desplegable)
+4:17 Pregunta 4: ¿quién nos debe? (cuentas por cobrar)
+4:40 El paso secreto: la Prueba sobre el −90 %
+6:18 Resultado: pegas los pedidos y se rehace solo
+6:56 Límites: cuándo NO usar esto (Power BI)

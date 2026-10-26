@@ -1,0 +1,53 @@
+{
+  "titulo": "Dashboard en Excel con IA paso a paso: el número que asusta",
+  "descripcion": "Arma paso a paso un dashboard de ventas en Excel con IA: pegas los pedidos y se rehace solo, en Excel para la web gratis, sin macros.\nY aprende a detectar el número que te muestra una caída de ventas que no existe.\n\n📥 Plantilla gratis y sin registro, la misma del video (la Tabla, el dashboard, todas las fórmulas verificadas y sus prompts Mapa · Meta · Prueba): [ENLACE PLANTILLA]\n▶️ ¿Tus datos vienen sucios? Empieza por el video anterior, 10 fórmulas de Excel con IA: https://youtu.be/drjrSlUxi78\n\n⏱️ Capítulos\n{capitulos}\n\n✅ Qué Excel necesitas\n• Excel para la web (gratis con una cuenta Microsoft) o Microsoft 365: sí.\n• Excel 2021: funciona todo menos la lista de cobranza (ELEGIRCOLS).\n• En la plantilla, Dashboard!B1 trae =HOY(): el tablero se actualiza solo cada día. Para ver los mismos números del video, escribe 03/11/2026.\n• Si tu Excel separa los argumentos con coma en vez de punto y coma, díselo a la IA en el mapa.\n• ¿Tienes Copilot en Excel? Microsoft tiene «en desarrollo» Excel canvas, tableros armados con Copilot (Microsoft 365 Roadmap, RM569424). La Prueba de este video sirve igual con cualquier herramienta.\n\n📚 Fuentes\n• Excel para la web, gratis con cuenta Microsoft: https://www.microsoft.com/microsoft-365/free-office-online-for-the-web\n• ELEGIRCOLS (Microsoft 365, Excel para la web y Excel 2024; no Excel 2021): https://support.microsoft.com/office/choosecols-function-bf117976-2722-4466-9b9a-1c01ed9aebff\n• Tablas de Excel (se expanden al pegar filas debajo): https://support.microsoft.com/es-es/office/información-general-sobre-las-tablas-de-excel-7ab0bb7d-3a9e-4b56-a3c9-6c94334e492c\n• Excel canvas, «In development» en el Microsoft 365 Roadmap (RM569424): https://mc.merill.net/message/RM569424 · https://windowsreport.com/microsoft-excel-canvas-turns-spreadsheet-data-into-interactive-dashboards/\n• 46.586.220, −90,4 %, +8,6 %, +7,6 %, +146,8 %, 2.951.090 y el resto de las cifras: cálculo propio sobre la base ficticia del video.\n\nℹ️ Sobre este video\nLa empresa (Distribuidora Sur), sus clientes, pedidos y montos son ficticios. Las respuestas de IA que se muestran se generaron con Claude el [FECHA DE LA CORRIDA]; si pegas el mismo prompt en ChatGPT o Copilot, la respuesta puede cambiar, y para eso está la Prueba. Narración con voz sintética: la primera persona del guion es un recurso narrativo. Guion, investigación y demos verificados por el equipo de Atajos IA. Efectos de sonido generados por el canal; sin música de terceros.\n\n🔔 Un atajo nuevo de Excel con IA cada semana: suscríbete a Atajos IA.\n\n#Excel #IA #DashboardEnExcel",
+  "etiquetas": [
+    "dashboard en excel con ia",
+    "dashboard en excel",
+    "dashboard automático en excel",
+    "dashboard con claude",
+    "dashboard interactivo en excel",
+    "plantilla dashboard excel gratis",
+    "informe de ventas en excel",
+    "reporte de ventas en excel",
+    "cuentas por cobrar",
+    "tabla de excel",
+    "lista desplegable en excel",
+    "sumar.si.conjunto",
+    "excel para la web",
+    "Atajos IA"
+  ],
+  "categoria": "27",
+  "playlists": [
+    "Flujos paso a paso con IA"
+  ],
+  "titulos_ab": [
+    {
+      "titulo": "Dashboard en Excel con IA paso a paso: el número que asusta",
+      "miniatura": "miniatura-b.png"
+    },
+    {
+      "titulo": "Dashboard en Excel con IA: el error de cada inicio de mes",
+      "miniatura": "miniatura-b.png"
+    },
+    {
+      "titulo": "Dashboard en Excel con IA: no lo mandes sin esta prueba",
+      "miniatura": "miniatura-b.png"
+    }
+  ],
+  "titulos_ab_condicionales": {
+    "si_se_midieron_los_20_s": {
+      "reemplaza": 3,
+      "titulo": "Dashboard en Excel con IA: pegas pedidos y se rehace solo",
+      "miniatura": "miniatura-a.png"
+    },
+    "si_falla_el_mensaje_unico": {
+      "reemplaza": 3,
+      "titulo": "Le pedí a la IA un dashboard en 1 mensaje: esto salió",
+      "miniatura": "miniatura-c.png"
+    },
+    "si_asusta_se_corta_en_celular": {
+      "principal": "Dashboard en Excel con IA: no lo mandes sin esta prueba"
+    }
+  }
+}
