@@ -591,3 +591,23 @@ Recomendaré aprobar con las objeciones pendientes documentadas, siempre que la 
 - `herramientas/plantilla_xlsx.py`: nuevo `celdas_fijas` en las hojas que salen de un CSV.
 - `herramientas/motor.py`: bloquea el render final si hay ramas sin elegir (`elegir_rama` sin `rama_elegida`).
 - `sistema/motor-v2.md`: documenta el bloqueo de ramas.
+
+## Pulido final tras aprobación del creador (26/10/2026, sin nueva ronda)
+Se aplicaron los 6 recortes pedidos, a partir de `rondas/guion-3.json`. No se tocó nada más.
+
+**Cambios:**
+- **Gancho:** la voz de logística quedó en «Con Excel para la web, gratis.». Lo demás («sin macros · datos inventados · el prompt sirve en otras IA») pasó al sub del rótulo. El bucle quedó en «la única pregunta a la IA que atrapa ese número».
+- **Pregunta 4:** las dos frases de mantenimiento quedaron en una sola. El rótulo de 3 s sobre la fórmula dice «ELEGIRCOLS: no en Excel 2021 · sí en la web y 365».
+- **Frase de la fecha de corte** («mueve la fecha de corte al último día del mes anterior…»): pasó a la escena de Excel de la corrección (escena 22), y el titular de la lección quedó en 2 beats.
+- **Voz de la corrección:** «reemplazo la fórmula de B7 por esta».
+- **`=HOY()` en B1:** se ve escrito en la celda y en la barra de fórmulas en ese beat (cuadro 124 revisado).
+- **Plantilla:**
+  - M1 dice «Total de la Tabla (comprobación)».
+  - El paso 2 de Tus datos dice que M2 suma toda la columna Neto, sin filtros.
+- **Arreglo de forma:** en el prompt del chat se veía un `<br>` literal entre el Mapa y la Meta. Ahora va un espacio y el texto no cambia.
+
+**Controles:**
+- `puntuar_guion.py`: 100/100.
+- `--verificar`: sin diferencias en lo calculable.
+- Tiempos estimados: 8,15 min, con el corte de anuncios en 4:47. Quedan unos 9 s de margen sobre los 8 min que necesitan los anuncios a mitad de video. Hay que confirmarlo con la voz real.
+- La plantilla de video02 no se regeneró.

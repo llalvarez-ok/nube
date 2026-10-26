@@ -308,7 +308,7 @@
           ]
         },
         {
-          "voz": "Solo necesitas Excel para la web, que es gratis. Sin macros, los datos son inventados, y el prompt también lo puedes usar en ChatGPT.",
+          "voz": "Con Excel para la web, gratis.",
           "accion": [
             {
               "tipo": "zoom_fuera",
@@ -317,7 +317,7 @@
             {
               "tipo": "rotulo",
               "texto": "Excel para la web *gratis* + Claude",
-              "sub": "datos inventados · el prompt sirve en otras IA",
+              "sub": "sin macros · datos inventados · el prompt sirve en otras IA",
               "hasta": 6.0,
               "retraso": 0.2,
               "pendiente_verificar": "«Claude · versión gratuita» solo con captura de la corrida en el plan gratis (respuestas-ia.md)"
@@ -325,7 +325,7 @@
           ]
         },
         {
-          "voz": "Te muestro el armado paso a paso y, antes de terminar, la pregunta que atrapa ese número.",
+          "voz": "Te muestro el armado paso a paso, y la única pregunta a la IA que atrapa ese número.",
           "accion": [
             {
               "tipo": "resaltar",
@@ -862,7 +862,7 @@
           "accion": [
             {
               "tipo": "prompt",
-              "texto": "Mapa: Excel para la web en español, separador punto y coma. Tabla llamada Pedidos con las columnas Fecha, Cliente, Vendedor, Código, Cant., Precio, Desc., Neto, Vence, Pagado (Sí/No) y Estado (Cobrado, Vencido o Al día). En la hoja Dashboard, B1 es la fecha de corte y B2 el vendedor (o Todos). Usa referencias a la Tabla, como Pedidos[Neto].<br>Meta: En Dashboard!B3, las ventas netas del año hasta la fecha de corte. En B4, cuántos pedidos hay en ese período. En B5, las ventas del último mes cerrado antes de la fecha de corte.",
+              "texto": "Mapa: Excel para la web en español, separador punto y coma. Tabla llamada Pedidos con las columnas Fecha, Cliente, Vendedor, Código, Cant., Precio, Desc., Neto, Vence, Pagado (Sí/No) y Estado (Cobrado, Vencido o Al día). En la hoja Dashboard, B1 es la fecha de corte y B2 el vendedor (o Todos). Usa referencias a la Tabla, como Pedidos[Neto]. Meta: En Dashboard!B3, las ventas netas del año hasta la fecha de corte. En B4, cuántos pedidos hay en ese período. En B5, las ventas del último mes cerrado antes de la fecha de corte.",
               "duracion": 2.4
             }
           ]
@@ -2524,7 +2524,7 @@
       },
       "beats": [
         {
-          "voz": "La columna Estado ya viene en la plantilla; cómo se arma, en el video del final.",
+          "voz": "Estado ya viene en la plantilla, igual que el prompt: mismo mapa, la meta son los vencidos.",
           "accion": [
             {
               "tipo": "tarjeta",
@@ -2540,26 +2540,22 @@
             {
               "tipo": "rotulo",
               "texto": "Pedidos › Estado: Cobrado · Vencido · Al día",
-              "sub": "se arma en el video del final",
-              "hasta": 3.4,
+              "sub": "cómo se arma: en el video del final",
+              "hasta": 3.0,
               "tarjeta_youtube": "video02"
-            }
-          ]
-        },
-        {
-          "voz": "El prompt está en la plantilla: mismo mapa; la meta, los vencidos ordenados.",
-          "accion": [
+            },
             {
               "tipo": "zoom",
               "rango": "D1:F5",
-              "escala": 1.5
+              "escala": 1.5,
+              "retraso": 0.8
             },
             {
               "tipo": "escribir",
               "celda": "D2",
               "texto": "=SI.ERROR(ORDENAR(FILTRAR(ELEGIRCOLS(Pedidos;2;9;8);Pedidos[Estado]=\"Vencido\");3;-1);\"Sin vencidos\")",
               "duracion": 3.0,
-              "retraso": 0.6
+              "retraso": 1.4
             }
           ]
         },
@@ -2644,8 +2640,8 @@
             },
             {
               "tipo": "rotulo",
-              "texto": "ELEGIRCOLS: Excel para la web y 365",
-              "sub": "no funciona en Excel 2021",
+              "texto": "ELEGIRCOLS: no en Excel 2021",
+              "sub": "sí en la web y 365",
               "hasta": 3.0,
               "retraso": 1.2
             }
@@ -3024,8 +3020,8 @@
       },
       "beats": [
         {
-          "voz": "Vuelvo al 3 de noviembre. La corrección, en B7: el último mes cerrado contra el anterior.",
-          "voz_tts": "Vuelvo al tres de noviembre. La corrección, en be siete: el último mes cerrado contra el anterior.",
+          "voz": "Vuelvo al 3 de noviembre y reemplazo la fórmula de B7 por esta: el último mes cerrado contra el anterior.",
+          "voz_tts": "Vuelvo al tres de noviembre y reemplazo la fórmula de be siete por esta: el último mes cerrado contra el anterior.",
           "accion": [
             {
               "tipo": "escribir",
@@ -3195,6 +3191,25 @@
               "hasta": 3.0
             }
           ]
+        },
+        {
+          "voz": "Sirve con cualquier tablero: mueve la fecha de corte al último día del mes anterior y mira si el número cambia de signo.",
+          "accion": [
+            {
+              "tipo": "zoom",
+              "rango": "A1:B2",
+              "escala": 1.6,
+              "duracion": 0.8
+            },
+            {
+              "tipo": "resaltar",
+              "rango": "B1",
+              "color": "#3b6fd8",
+              "etiqueta": "la Prueba, en 5 segundos",
+              "retraso": 0.6,
+              "hasta": 3.6
+            }
+          ]
         }
       ]
     },
@@ -3221,9 +3236,6 @@
         },
         {
           "voz": "Antes de mandarlo, pregúntale a la IA qué puede salir mal. Y compruébalo tú."
-        },
-        {
-          "voz": "Sirve con cualquier tablero: mueve la fecha de corte al último día del mes anterior y mira si el número cambia de signo."
         }
       ]
     },
@@ -4033,7 +4045,7 @@
           "K": "=SI(J{f}=\"Sí\";\"Cobrado\";SI(I{f}<Dashboard!$B$1;\"Vencido\";\"Al día\"))"
         },
         "celdas_fijas": {
-          "M1": "Total del año (comprobación)",
+          "M1": "Total de la Tabla (comprobación)",
           "M2": "=SUMA(Pedidos[Neto])"
         },
         "anchos": [
@@ -4164,7 +4176,7 @@
           ],
           [
             "2",
-            "En Pedidos, borra las filas de ejemplo (deja el encabezado: la Tabla se mantiene). El total de M2 es solo de comprobación: está fuera de la Tabla, separado por la columna L vacía."
+            "En Pedidos, borra las filas de ejemplo (deja el encabezado: la Tabla se mantiene). El total de M2 suma toda la columna Neto de la Tabla (todos los años, sin filtros): es solo para comprobar que la Tabla creció al pegar. Está fuera de la Tabla, separado por la columna L vacía."
           ],
           [
             "3",
