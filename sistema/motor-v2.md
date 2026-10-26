@@ -22,6 +22,7 @@
     "datos": {...}, "beats": [{"voz": "...", "voz_tts": "(opcional)", "pausa": 0.3, "accion": {...}}]}]}
 ```
 
+- `elegir_rama` (en un beat): la voz depende de una respuesta real de IA que todavía no se corrió (variantes en `voz_rama_b`, `voz_si_falla`…). `motor.py` no hace el video final hasta que el beat tiene `rama_elegida` y la `voz` correcta; `--sin-voz` y `--cuadros` sí funcionan.
 - `voz_tts`: el texto que se manda a la voz cuando la pronunciación lo pide ("B-U-S-C-A-R-X", "punto y coma"); los subtítulos usan `voz`.
 - `marca.visible`: muestra el logo arriba a la izquierda (apagado por defecto: YouTube ya pone la marca de agua del canal y el logo choca con los zooms).
 - `capitulo`: marca un capítulo para la descripción y una marca en la barra de progreso.

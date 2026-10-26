@@ -1,6 +1,14 @@
 # video03 · Respuestas de IA (pendientes de correr)
 
-Actualizado el 26/10/2026 para la ronda 2 del guion. **Los textos de los prompts no cambiaron**: solo cambiaron los números de escena y las voces que dependen de cada respuesta. Estado: **ninguna respuesta de este archivo salió todavía de claude.ai**. Todas las acciones `respuesta` y los rótulos con frases de Claude en `guion.json` llevan `"pendiente_respuesta_real": true` y textos de borrador que empiezan con «PENDIENTE». El orquestador no tiene acceso a claude.ai: corre todo el creador, antes del **viernes 30/10**.
+Actualizado el 26/10/2026 para la ronda 3 del guion. **Los textos de los prompts no cambiaron** (ni en la ronda 2 ni en la 3): solo cambiaron los números de escena y las voces que dependen de cada respuesta. Estado: **ninguna respuesta de este archivo salió todavía de claude.ai**. Todas las acciones `respuesta` y los rótulos con frases de Claude en `guion.json` llevan `"pendiente_respuesta_real": true` y textos de borrador que empiezan con «PENDIENTE». El orquestador no tiene acceso a claude.ai: corre todo el creador, antes del **viernes 30/10**.
+
+## Antes del render: elegir las ramas (obligatorio)
+`motor.py` **no hace el video final** mientras haya beats con `elegir_rama` sin `rama_elegida`: escena 1 (beat 2), escena 9 (beat 1) y escena 19 (beat 2). Para cada uno:
+1. Copia en `voz` la variante que corresponde (`voz`, `voz_rama_b` o `voz_si_falla`).
+2. Agrega `"rama_elegida": "A"` (o `"B"`, o `"falla"`).
+3. Borra las variantes que no se usaron.
+
+`--sin-voz` y `--cuadros` siguen funcionando para revisar. Las dos ramas de la escena 19 están escritas completas. Hoy `voz` tiene la rama A, que todavía **no está confirmada**.
 
 ## Cómo correrlos
 - claude.ai con el **plan gratuito** (anota el modelo que muestra la interfaz y la fecha). Guarda cada respuesta **textual** (copiar y pegar) y una **captura**, debajo de su prompt.
@@ -51,6 +59,10 @@ En B6, las ventas de este mes hasta la fecha de corte, y en B7 la variación de 
 - Que B7 sea `=B6/B5-1` (o equivalente) → **−90,4 %**, y B6 → **441.000**.
 - Los 12 meses fijos, con diciembre en 0 y noviembre en 441.000.
 - **Importante para el giro:** ¿avisa ya aquí, sin que se lo pidas, de que noviembre está incompleto?
+- **Voz de la escena 9, beat 1 (elegir la rama):**
+  - Si la fórmula de B7 coincide con `=B6/B5-1` (o equivale), queda `voz`: «La fórmula de la IA coincide con la de la plantilla.»
+  - Si no coincide, va `voz_rama_b`, completando los corchetes: «La IA usó [X]; en la plantilla queda [Y], porque [motivo].»
+  - No se insinúa una coincidencia sin el texto real.
   - **Si avisa:** es un hallazgo honesto. El beat 4 de la escena 11, «¿Se desplomaron las ventas? La fórmula no da error…», se cambia por «Ojo: Claude ya avisa algo. Lo dejo así y lo comprobamos después de las otras dos preguntas». El giro pasa a «la IA a veces avisa sola; la Prueba, siempre», como en video02.
   - **Si no avisa:** el guion queda como está.
 
@@ -59,7 +71,10 @@ En B6, las ventas de este mes hasta la fecha de corte, y en B7 la variación de 
 En B2 pondré una lista desplegable con Todos, Diego Paz, Carla Ruiz y Tomás Gil. En B10 quiero las ventas del año del vendedor de B2; si dice Todos, las de todos. Y el mismo filtro para las ventas por producto de O2:O8.
 ```
 **Qué revisar:**
-- El criterio de «Todos». Ahora el asterisco lo explica el **narrador** sobre la fórmula de la plantilla (escena 15, beat 0: «En la plantilla, el criterio del vendedor es este…»), así que no depende de lo que diga Claude. Si Claude propone otra cosa (por ejemplo, `SI(B2="Todos";SUMAR.SI.CONJUNTO(…);…)`), se muestra su respuesta tal cual y la voz no cambia.
+- **¿Usa el comodín `*` para «Todos»?** La escena 14 ahora muestra solo el prompt, y la voz dice «La IA lo resuelve con un comodín; lo veo en la fórmula».
+  - **Si lo usa:** la escena queda.
+  - **Si no lo usa** (por ejemplo, `SI(B2="Todos";SUMAR.SI.CONJUNTO(…);…)`): **se elimina la escena 14** y la pregunta 3 empieza en la escena 15, donde el narrador explica el asterisco sobre la fórmula de la plantilla.
+  - En los dos casos, la respuesta completa va en la hoja Prompts, con su fecha.
 - Con Carla Ruiz, B10 → **16.253.850**; con Todos → **46.586.220**.
 
 ## Prompt 5 · La Prueba (el paso secreto, escena 19) — **el más importante**
@@ -69,13 +84,13 @@ Prueba: B7 es la variación de este mes contra el anterior (=B6/B5-1) y hoy mues
 **Qué revisar:** si menciona, con estas u otras palabras, que noviembre lleva 3 días (mes incompleto) contra un octubre completo, y qué propone mostrar.
 
 **Rama A (lo ve):**
-- La voz por defecto del beat 2 es neutra («Su respuesta queda en pantalla, tal cual. Y lo compruebo yo, con la fecha de corte.»). Con la respuesta real, se reemplaza por `voz_rama_a`: «Lo vio: noviembre lleva tres días, y octubre, treinta y uno. Lo compruebo yo, con la fecha de corte.»
+- Voz del beat 2 (es la `voz` actual): «Dice que noviembre lleva tres días, y octubre, treinta y uno. Y ahora lo compruebo yo: cambio la fecha de corte.» Si Claude lo dice con otras palabras, el resumen se ajusta a lo que dijo, sin cambiar el sentido.
 - El rótulo lleva la frase **textual** de Claude que lo dice (recortada, sin cambiar el sentido).
 - La comprobación de la escena 20 (fecha de corte en 31/10 → +8,6 %) se mantiene como prueba propia.
 - Si propone también el mes cerrado o el mismo tramo, se puede decir «y propone lo mismo que vas a ver».
 
 **Rama B (no lo ve):**
-- Voz del beat 2: reemplazar por `voz_rama_b`: «Esta vez no lo vio. Por eso la prueba también la haces tú: cambio la fecha de corte.»
+- Voz del beat 2: reemplazar por `voz_rama_b`: «Esta vez no lo vio. Y ahora lo compruebo yo: cambio la fecha de corte.»
 - El rótulo lleva lo que sí dijo (por ejemplo, «propuso revisar divisiones por cero»), textual.
 - La lección (escena 23, beat 1) ya dice «Y compruébalo tú»: no se agrega nada a Límites (quedó en 2 frases).
 - **Nunca** se escribe que Claude lo vio si no lo vio.
@@ -88,13 +103,14 @@ Prueba: B7 es la variación de este mes contra el anterior (=B6/B5-1) y hoy mues
 | 0 / 3 (rótulo) | «Excel para la web gratis + Claude» («versión gratuita» solo con captura) | Prompt 1 |
 | 1 / 1-2 | Lo que salió del mensaje único y el veredicto | Prompt 1 |
 | 5 / 3 | Respuesta en pantalla (la voz no la describe) | Prompt 2 |
-| 9 / 1 | «Su respuesta, tal cual. Las fórmulas que uso son las de la plantilla.» | Prompt 3 |
+| 9 / 1 | «La fórmula de la IA coincide con la de la plantilla» o «La IA usó X; en la plantilla queda Y…» | Prompt 3 |
 | 11 / 4 | «¿Se desplomaron las ventas?…» (cambia si Claude avisa solo) | Prompt 3 |
-| 14 / 0 | Respuesta en pantalla (el asterisco lo explica el narrador en la escena 15) | Prompt 4 |
-| 19 / 1-2 | Respuesta a la Prueba: voz neutra hasta elegir la rama A o B | Prompt 5 |
+| 14 / 0 | «La IA lo resuelve con un comodín» (si no lo usa, se elimina la escena) | Prompt 4 |
+| 19 / 1-2 | Rama A («Dice que noviembre lleva tres días…») o rama B («Esta vez no lo vio…») | Prompt 5 |
+| 23 / 0 | «como el del primer mensaje» (si se elimina la escena 1, va `voz_sin_esc1`) | Prompt 1 |
 
 Cuando estén las respuestas:
 - reemplazar los textos «PENDIENTE…» de `guion.json` y quitar `pendiente_respuesta_real`;
-- elegir `voz_rama_a` o `voz_rama_b` en la escena 19;
+- elegir las ramas de las escenas 1, 9 y 19, y poner `rama_elegida` (ver arriba);
 - completar la columna «Respuesta de Claude (fecha)» de la hoja Prompts (`plantilla_extra`), sin tocar la de las fórmulas verificadas;
 - poner la fecha en `descripcion_avisos`.

@@ -21,7 +21,7 @@ agrega hojas de apoyo que no salen en el video (por ejemplo, Prompts y Práctica
 las celdas que empiezan con "=" se guardan como texto. Una escena
 con "datos": {"solo_video": true} (por ejemplo, el adelanto del resultado en el hook) no se
 usa para armar la plantilla. Una hoja extra puede venir de un CSV ("csv", "csv_columnas": [[encabezado, columna_csv|null]],
-"formulas_fila": {"K": "=SI(J{f}=...)"}) y convertirse en Tabla de Excel ("tabla": "Pedidos", para las referencias
+"formulas_fila": {"K": "=SI(J{f}=...)"}, "celdas_fijas": {"M2": "=SUMA(...)"}) y convertirse en Tabla de Excel ("tabla": "Pedidos", para las referencias
 estructuradas como Pedidos[Neto]); "posicion" fija su orden. "plantilla_extra": {"graficos": [{"hoja", "titulo",
 "categorias", "valores", "ancla"}], "validaciones": [{"hoja", "celda", "lista"}]} agrega gráficos de barras y listas
 desplegables. "formatos": [{"hoja", "rango", "formato"}] fija formatos de número (p. ej. "mmm" o "0.0%").
@@ -221,6 +221,11 @@ def hoja_csv(ws, extra):
     for i, w in enumerate(extra.get("anchos") or [], 1):
         ws.column_dimensions[get_column_letter(i)].width = max(8, w / 8)
     ws.freeze_panes = "A2"
+    for ref, v in extra.get("celdas_fijas", {}).items():  # fuera de la Tabla (p. ej. un total de comprobación)
+        val, fmt = valor_celda(v)
+        ws[ref] = val
+        if isinstance(val, str) and val.startswith("="):
+            ws[ref].number_format = "#,##0"
     if extra.get("tabla"):
         ref = f"A1:{get_column_letter(len(cols))}{len(filas) + 1}"
         t = Table(displayName=extra["tabla"], ref=ref)

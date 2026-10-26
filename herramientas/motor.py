@@ -280,6 +280,12 @@ def main():
     # 1) voz por beat (o duración estimada)
     clave = os.environ.get("GOOGLE_TTS_API_KEY")
     cuadros = opcion("--cuadros")
+    # beats con ramas según una respuesta real de IA: el video final no se hace hasta elegir la rama
+    sin_elegir = [f"escena {i}, beat {j}" for i, es in enumerate(guion["escenas"]) for j, b in enumerate(es["beats"])
+                  if b.get("elegir_rama") and not b.get("rama_elegida")]
+    if sin_elegir and not sin_voz and not cuadros:
+        sys.exit("Falta elegir la rama (campo rama_elegida, y la voz que corresponda) en: " + "; ".join(sin_elegir)
+                 + ". Ver respuestas-ia.md. La vista previa (--sin-voz) y --cuadros sí funcionan.")
     if not sin_voz and not clave and not cuadros:
         sys.exit("Falta GOOGLE_TTS_API_KEY (o usa --sin-voz para una vista previa con tiempos estimados).")
     voz = None

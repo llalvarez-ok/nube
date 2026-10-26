@@ -308,7 +308,7 @@
           ]
         },
         {
-          "voz": "Sin macros, los datos son inventados y sirve igual con ChatGPT.",
+          "voz": "Solo necesitas Excel para la web, que es gratis. Sin macros, los datos son inventados, y el prompt también lo puedes usar en ChatGPT.",
           "accion": [
             {
               "tipo": "zoom_fuera",
@@ -317,7 +317,7 @@
             {
               "tipo": "rotulo",
               "texto": "Excel para la web *gratis* + Claude",
-              "sub": "datos inventados · sirve igual con ChatGPT",
+              "sub": "datos inventados · el prompt sirve en otras IA",
               "hasta": 6.0,
               "retraso": 0.2,
               "pendiente_verificar": "«Claude · versión gratuita» solo con captura de la corrida en el plan gratis (respuestas-ia.md)"
@@ -325,7 +325,7 @@
           ]
         },
         {
-          "voz": "Te muestro el armado paso a paso, y a mitad del video atrapamos ese número.",
+          "voz": "Te muestro el armado paso a paso y, antes de terminar, la pregunta que atrapa ese número.",
           "accion": [
             {
               "tipo": "resaltar",
@@ -378,6 +378,7 @@
               "pendiente_respuesta_real": true
             }
           ],
+          "elegir_rama": "respuestas-ia.md, prompt 1: si entregó algo usable, voz; si falló o quedó a medias, voz_si_falla. Si no dio un dashboard, se elimina la escena.",
           "voz_si_falla": "Rápido, sí, pero no es un Excel que se rehaga al pegar. Y aunque lo fuera: ¿cómo sabrías si sus números están bien?"
         }
       ]
@@ -412,7 +413,7 @@
       },
       "beats": [
         {
-          "voz": "Armemos uno de verdad. El tablero del lunes tiene que contestar cuatro preguntas. ¿Cuánto vendimos?"
+          "voz": "El tablero del lunes tiene que contestar cuatro preguntas. ¿Cuánto vendimos?"
         },
         {
           "voz": "¿Vamos mejor o peor?"
@@ -458,13 +459,13 @@
           2,
           2,
           2,
-          210,
-          210,
+          60,
+          260,
           210
         ],
         "filas": [
           1,
-          241,
+          2,
           242,
           243,
           244,
@@ -476,7 +477,7 @@
           250,
           251
         ],
-        "seleccion_inicial": "L248",
+        "seleccion_inicial": "M2",
         "celdas": [
           [
             "Fecha",
@@ -490,21 +491,23 @@
             "",
             "",
             "",
-            ""
+            "",
+            "Total del año"
           ],
           [
-            "23/10/2026",
-            "Librería San Martín Srl",
+            "05/01/2026",
+            "Hotel Mirador",
             "Diego Paz",
-            "LIM-040",
-            "10",
+            "PAP-220",
+            "25",
             "",
             "",
-            "93.100",
+            "92.625",
             "",
             "",
             "",
-            ""
+            "",
+            "46.145.220"
           ],
           [
             "26/10/2026",
@@ -515,6 +518,7 @@
             "",
             "",
             "43.700",
+            "",
             "",
             "",
             "",
@@ -532,6 +536,7 @@
             "",
             "",
             "",
+            "",
             ""
           ],
           [
@@ -543,6 +548,7 @@
             "",
             "",
             "92.625",
+            "",
             "",
             "",
             "",
@@ -560,6 +566,7 @@
             "",
             "",
             "",
+            "",
             ""
           ],
           [
@@ -571,6 +578,7 @@
             "",
             "",
             "139.500",
+            "",
             "",
             "",
             "",
@@ -588,7 +596,8 @@
             "",
             "",
             "",
-            "Total del año"
+            "",
+            ""
           ],
           [
             "28/10/2026",
@@ -602,7 +611,8 @@
             "",
             "",
             "",
-            "46.145.220"
+            "",
+            ""
           ],
           [
             "29/10/2026",
@@ -613,6 +623,7 @@
             "",
             "",
             "42.750",
+            "",
             "",
             "",
             "",
@@ -630,9 +641,11 @@
             "",
             "",
             "",
+            "",
             ""
           ],
           [
+            "",
             "",
             "",
             "",
@@ -650,8 +663,8 @@
       },
       "beats": [
         {
-          "voz": "Los pedidos vienen del sistema, uno por fila. Este total suma la columna Neto, de la fila 2 a la 250.",
-          "voz_tts": "Los pedidos vienen del sistema, uno por fila. Este total suma la columna Neto, de la fila dos a la doscientos cincuenta.",
+          "voz": "Este total suma la columna Neto, de la fila 2 a la 250.",
+          "voz_tts": "Este total suma la columna Neto, de la fila dos a la doscientos cincuenta.",
           "accion": [
             {
               "tipo": "tarjeta",
@@ -659,18 +672,18 @@
               "titulo": "Ventas del año",
               "valor": "46.145.220",
               "sub": "fórmula con rango fijo: H2:H250",
-              "x": 1100,
-              "y": 250,
+              "x": 1170,
+              "y": 520,
               "ancho": 380
             },
             {
               "tipo": "seleccionar",
-              "rango": "L248",
+              "rango": "M2",
               "retraso": 0.4
             },
             {
               "tipo": "nota",
-              "celda": "L248",
+              "celda": "M2",
               "texto": "=SUMA(Pedidos!*H2:H250*)",
               "lado": "abajo",
               "retraso": 0.8
@@ -728,7 +741,7 @@
             },
             {
               "tipo": "resaltar",
-              "rango": "L247:L248",
+              "rango": "M1:M2",
               "color": "#d13438",
               "etiqueta": "no cambió",
               "retraso": 1.4,
@@ -741,7 +754,7 @@
           "accion": [
             {
               "tipo": "seleccionar",
-              "rango": "A1:H251"
+              "rango": "A1:K251"
             },
             {
               "tipo": "formato",
@@ -752,37 +765,37 @@
             },
             {
               "tipo": "formato",
-              "rango": "A242:H242",
+              "rango": "A243:H243",
               "fondo": "#e8f3ec",
               "retraso": 1.0
             },
             {
               "tipo": "formato",
-              "rango": "A244:H244",
+              "rango": "A245:H245",
               "fondo": "#e8f3ec",
               "retraso": 1.05
             },
             {
               "tipo": "formato",
-              "rango": "A246:H246",
+              "rango": "A247:H247",
               "fondo": "#e8f3ec",
               "retraso": 1.1
             },
             {
               "tipo": "formato",
-              "rango": "A248:H248",
+              "rango": "A249:H249",
               "fondo": "#e8f3ec",
               "retraso": 1.15
             },
             {
               "tipo": "formato",
-              "rango": "A250:H250",
+              "rango": "A251:H251",
               "fondo": "#e8f3ec",
               "retraso": 1.2
             },
             {
               "tipo": "rotulo",
-              "texto": "Insertar › Tabla (Ctrl+T)",
+              "texto": "Insertar › Tabla (Ctrl+T) · rango A1:K251",
               "sub": "Diseño de tabla › Nombre: Pedidos",
               "hasta": 3.6,
               "retraso": 0.4
@@ -794,7 +807,7 @@
           "accion": [
             {
               "tipo": "escribir",
-              "celda": "L248",
+              "celda": "M2",
               "texto": "=SUMA(Pedidos[Neto])",
               "duracion": 1.4
             }
@@ -806,7 +819,7 @@
           "accion": [
             {
               "tipo": "calcular",
-              "celda": "L248",
+              "celda": "M2",
               "valor": "46.586.220"
             },
             {
@@ -818,8 +831,8 @@
             },
             {
               "tipo": "zoom",
-              "rango": "L241:M248",
-              "escala": 1.4,
+              "rango": "M1:N12",
+              "escala": 1.3,
               "duracion": 0.8,
               "retraso": 0.5
             }
@@ -866,7 +879,7 @@
           ]
         },
         {
-          "voz": "La meta: el año, los pedidos y el último mes cerrado. La prueba la guardo para la tarjeta que más asusta.",
+          "voz": "La meta: el año, los pedidos y el mes cerrado. La prueba, para la tarjeta que más asusta.",
           "accion": [
             {
               "tipo": "respuesta",
@@ -1257,8 +1270,8 @@
       },
       "beats": [
         {
-          "voz": "En la hoja Dashboard, la fecha de corte va en B1. Aquí la dejo fija en el 3 de noviembre.",
-          "voz_tts": "En la hoja Dashboard, la fecha de corte va en be uno. Aquí la dejo fija en el tres de noviembre.",
+          "voz": "La fecha de corte va en B1. En tu plantilla, B1 tiene la fórmula igual a hoy, así se actualiza sola cada día.",
+          "voz_tts": "La fecha de corte va en be uno. En tu plantilla, be uno tiene la fórmula igual a hoy, así se actualiza sola cada día.",
           "accion": [
             {
               "tipo": "zoom",
@@ -1266,23 +1279,39 @@
               "escala": 1.7
             },
             {
-              "tipo": "resaltar",
-              "rango": "B1",
-              "color": "#3b6fd8",
-              "etiqueta": "fecha de corte",
-              "retraso": 0.6,
-              "hasta": 3.6
-            }
-          ]
-        },
-        {
-          "voz": "En tu plantilla tiene igual a hoy, así se actualiza sola cada día.",
-          "accion": [
+              "tipo": "escribir",
+              "celda": "B1",
+              "texto": "=HOY()",
+              "duracion": 0.8,
+              "retraso": 0.8
+            },
             {
               "tipo": "nota",
               "celda": "B1",
               "texto": "En la plantilla: *=HOY()*",
-              "lado": "abajo"
+              "lado": "abajo",
+              "retraso": 1.8
+            }
+          ]
+        },
+        {
+          "voz": "Aquí la dejo fija en el 3 de noviembre, para que veas los mismos números.",
+          "voz_tts": "Aquí la dejo fija en el tres de noviembre, para que veas los mismos números.",
+          "accion": [
+            {
+              "tipo": "quitar_nota"
+            },
+            {
+              "tipo": "escribir",
+              "celda": "B1",
+              "texto": "03/11/2026",
+              "duracion": 0.8
+            },
+            {
+              "tipo": "calcular",
+              "celda": "B1",
+              "valor": "03/11/2026",
+              "retraso": 1.0
             }
           ]
         },
@@ -1447,7 +1476,7 @@
           ]
         },
         {
-          "voz": "Su respuesta, tal cual. Las fórmulas que uso son las de la plantilla.",
+          "voz": "La fórmula de la IA coincide con la de la plantilla.",
           "accion": [
             {
               "tipo": "respuesta",
@@ -1456,7 +1485,9 @@
               "texto": "PENDIENTE: pegar la respuesta real de Claude (respuestas-ia.md, prompt 3). Borrador para la vista previa: B6 suma desde el día siguiente al fin del mes anterior hasta el corte; B7 divide B6 por B5 y resta 1.",
               "formula": "=B6/B5-1"
             }
-          ]
+          ],
+          "elegir_rama": "respuestas-ia.md, prompt 3: si coincide, voz; si no, voz_rama_b con lo que usó y por qué cambia en la plantilla.",
+          "voz_rama_b": "La IA usó [X]; en la plantilla queda [Y], porque [motivo]."
         }
       ]
     },
@@ -1633,7 +1664,7 @@
       },
       "beats": [
         {
-          "voz": "Para el gráfico, una tabla chica: los doce meses, de enero a diciembre, cada uno con su suma.",
+          "voz": "Para el gráfico, una tabla chica: los doce meses, cada uno con su suma.",
           "accion": [
             {
               "tipo": "resaltar",
@@ -1983,7 +2014,7 @@
           ]
         },
         {
-          "voz": "¿Se desplomaron las ventas? La fórmula no da error. Lo dejo así, a propósito, y lo resolvemos después de las otras dos preguntas.",
+          "voz": "¿Se desplomaron las ventas? La fórmula no da error. Lo dejo así, a propósito.",
           "accion": [
             {
               "tipo": "zoom_fuera",
@@ -2054,9 +2085,10 @@
       "datos": {
         "app": "Claude"
       },
+      "condicional": "Se elimina si la respuesta real del prompt 4 no usa el comodín * (respuestas-ia.md)",
       "beats": [
         {
-          "voz": "Quiero elegir un vendedor de una lista, y que todo cambie con él.",
+          "voz": "Quiero elegir un vendedor de una lista. La IA lo resuelve con un comodín; lo veo en la fórmula.",
           "accion": [
             {
               "tipo": "prompt",
@@ -2064,12 +2096,11 @@
               "duracion": 1.6
             },
             {
-              "tipo": "respuesta",
-              "pendiente_respuesta_real": true,
-              "duracion": 2.4,
-              "retraso": 2.0,
-              "texto": "PENDIENTE: pegar la respuesta real de Claude (respuestas-ia.md, prompt 4). Borrador para la vista previa: una fórmula para B10 con un criterio para Todos y otro para cada vendedor.",
-              "formula": "=SUMAR.SI.CONJUNTO(Pedidos[Neto];Pedidos[Vendedor];SI(B2=\"Todos\";\"*\";B2);Pedidos[Fecha];\">=\"&FECHA(AÑO(B1);1;1);Pedidos[Fecha];\"<=\"&B1)"
+              "tipo": "rotulo",
+              "texto": "Respuesta completa: hoja *Prompts*",
+              "sub": "prompt 4",
+              "hasta": 2.6,
+              "retraso": 2.2
             }
           ]
         }
@@ -2145,8 +2176,8 @@
       },
       "beats": [
         {
-          "voz": "En la plantilla, el criterio del vendedor es este: si B2 dice Todos, un asterisco, que en Excel significa cualquier texto.",
-          "voz_tts": "En la plantilla, el criterio del vendedor es este: si be dos dice Todos, un asterisco, que en Excel significa cualquier texto.",
+          "voz": "El criterio: si B2 dice Todos, un asterisco, que en Excel significa cualquier texto.",
+          "voz_tts": "El criterio: si be dos dice Todos, un asterisco, que en Excel significa cualquier texto.",
           "accion": [
             {
               "tipo": "tarjeta",
@@ -2516,7 +2547,7 @@
           ]
         },
         {
-          "voz": "Esta fórmula se queda con los vencidos y los ordena, del más grande al más chico.",
+          "voz": "El prompt está en la plantilla: mismo mapa; la meta, los vencidos ordenados.",
           "accion": [
             {
               "tipo": "zoom",
@@ -2533,8 +2564,8 @@
           ]
         },
         {
-          "voz": "Arriba, el Colegio Nuevo Horizonte: 1,2 millones.",
-          "voz_tts": "Arriba, el Colegio Nuevo Horizonte: uno coma dos millones.",
+          "voz": "La fórmula se queda con los vencidos y los ordena: arriba, el Colegio Nuevo Horizonte, 1,2 millones.",
+          "voz_tts": "La fórmula se queda con los vencidos y los ordena: arriba, el Colegio Nuevo Horizonte, uno coma dos millones.",
           "accion": [
             {
               "tipo": "calcular",
@@ -2610,18 +2641,13 @@
               "celda": "F5",
               "valor": "172.800",
               "retraso": 0.9
-            }
-          ]
-        },
-        {
-          "voz": "Ojo: ELEGIRCOLS no está en Excel 2021; en la web y en 365, sí.",
-          "voz_tts": "Ojo: elegir cols no está en Excel dos mil veintiuno; en la web y en trescientos sesenta y cinco, sí.",
-          "accion": [
+            },
             {
-              "tipo": "nota",
-              "celda": "D3",
-              "texto": "*ELEGIRCOLS*: Excel para la web y 365 · no en 2021",
-              "lado": "abajo"
+              "tipo": "rotulo",
+              "texto": "ELEGIRCOLS: Excel para la web y 365",
+              "sub": "no funciona en Excel 2021",
+              "hasta": 3.0,
+              "retraso": 1.2
             }
           ]
         },
@@ -2629,9 +2655,6 @@
           "voz": "En total, dieciséis facturas: casi 3 millones por cobrar.",
           "voz_tts": "En total, dieciséis facturas: casi tres millones por cobrar.",
           "accion": [
-            {
-              "tipo": "quitar_nota"
-            },
             {
               "tipo": "zoom",
               "rango": "A10:B12",
@@ -2716,7 +2739,7 @@
           ]
         },
         {
-          "voz": "Su respuesta queda en pantalla, tal cual. Y lo compruebo yo, con la fecha de corte.",
+          "voz": "Dice que noviembre lleva tres días, y octubre, treinta y uno. Y ahora lo compruebo yo: cambio la fecha de corte.",
           "accion": [
             {
               "tipo": "rotulo",
@@ -2726,9 +2749,8 @@
               "pendiente_respuesta_real": true
             }
           ],
-          "elegir_rama": "respuestas-ia.md, prompt 5: si Claude lo señala, voz_rama_a; si no, voz_rama_b. La voz neutra solo queda si no se eligió.",
-          "voz_rama_a": "Lo vio: noviembre lleva tres días, y octubre, treinta y uno. Lo compruebo yo, con la fecha de corte.",
-          "voz_rama_b": "Esta vez no lo vio. Por eso la prueba también la haces tú: cambio la fecha de corte."
+          "elegir_rama": "respuestas-ia.md, prompt 5: rama A (voz, si Claude señala el mes incompleto) o rama B (voz_rama_b). El render se bloquea hasta poner rama_elegida.",
+          "voz_rama_b": "Esta vez no lo vio. Y ahora lo compruebo yo: cambio la fecha de corte."
         }
       ]
     },
@@ -2803,8 +2825,8 @@
       },
       "beats": [
         {
-          "voz": "Pongo el corte en el 31 de octubre, con el mes completo.",
-          "voz_tts": "Pongo el corte en el treinta y uno de octubre, con el mes completo.",
+          "voz": "El 31 de octubre: el mes completo.",
+          "voz_tts": "El treinta y uno de octubre: el mes completo.",
           "accion": [
             {
               "tipo": "tarjeta",
@@ -3194,34 +3216,21 @@
       },
       "beats": [
         {
-          "voz": "Un dashboard rápido no sirve si el número más grande engaña."
+          "voz": "Un dashboard rápido, como el del primer mensaje, no sirve si el número más grande engaña.",
+          "voz_sin_esc1": "Un dashboard rápido no sirve si el número más grande engaña."
         },
         {
           "voz": "Antes de mandarlo, pregúntale a la IA qué puede salir mal. Y compruébalo tú."
-        }
-      ]
-    },
-    {
-      "plantilla": "titular",
-      "capitulo": "Resultado: pegas los pedidos y se rehace solo",
-      "datos": {
-        "etiqueta": "Resultado",
-        "icono": "clipboard-paste",
-        "tamano": 92,
-        "lineas": [
-          "El lunes:",
-          "*pegar y listo*"
-        ]
-      },
-      "beats": [
+        },
         {
-          "voz": "Y ahora, el lunes de verdad."
+          "voz": "Sirve con cualquier tablero: mueve la fecha de corte al último día del mes anterior y mira si el número cambia de signo."
         }
       ]
     },
     {
       "plantilla": "excel",
-      "transicion": "zoom",
+      "transicion": "corte",
+      "capitulo": "Resultado: pegas los pedidos y se rehace solo",
       "datos": {
         "archivo": "Distribuidora Sur · Dashboard de ventas.xlsx",
         "hoja": "Pedidos",
@@ -3383,7 +3392,7 @@
       },
       "beats": [
         {
-          "voz": "Llegan tres pedidos de hoy. Los copio del sistema y los pego debajo de la Tabla.",
+          "voz": "Y ahora, el lunes: llegan tres pedidos. Los copio del sistema y los pego debajo de la Tabla.",
           "accion": [
             {
               "tipo": "seleccionar",
@@ -3783,7 +3792,7 @@
           ]
         },
         {
-          "voz": "Y mira la chica: salta a más ciento cuarenta y seis por ciento. Con tres días, salta; el lunes miras la grande.",
+          "voz": "Y mira la chica: salta a más ciento cuarenta y seis por ciento. Con tres días, salta.",
           "accion": [
             {
               "tipo": "calcular",
@@ -3807,7 +3816,7 @@
           ]
         },
         {
-          "voz": "El mes cerrado sigue en más ocho coma seis por ciento: ese es el número del lunes.",
+          "voz": "La grande sigue en más ocho coma seis por ciento: ese es el número del lunes.",
           "accion": [
             {
               "tipo": "zoom_fuera",
@@ -3890,6 +3899,9 @@
         },
         {
           "voz": "Ojo: el criterio lo pones tú. La plantilla hace el resto, y en la hoja Tus datos están los pasos para pegar tus pedidos."
+        },
+        {
+          "voz": "Borras los pedidos de ejemplo, pegas los tuyos con las mismas columnas, y el tablero se rehace."
         }
       ]
     },
@@ -4020,6 +4032,10 @@
         "formulas_fila": {
           "K": "=SI(J{f}=\"Sí\";\"Cobrado\";SI(I{f}<Dashboard!$B$1;\"Vencido\";\"Al día\"))"
         },
+        "celdas_fijas": {
+          "M1": "Total del año (comprobación)",
+          "M2": "=SUMA(Pedidos[Neto])"
+        },
         "anchos": [
           110,
           220,
@@ -4031,7 +4047,9 @@
           110,
           110,
           80,
-          90
+          90,
+          40,
+          220
         ]
       },
       {
@@ -4142,11 +4160,11 @@
           ],
           [
             "1",
-            "Dashboard!B1 ya tiene =HOY(). Si quieres otra fecha de corte, escríbela ahí (para ver el video: 03/11/2026)."
+            "Dashboard!B1 ya tiene =HOY(). Si quieres otra fecha de corte, escríbela ahí (para ver el video: 03/11/2026). Si ves todo en 0 (por ejemplo, en 2027, con los pedidos de ejemplo de 2026), escribe 03/11/2026 en B1."
           ],
           [
             "2",
-            "En Pedidos, borra las filas de ejemplo (deja el encabezado: la Tabla se mantiene)."
+            "En Pedidos, borra las filas de ejemplo (deja el encabezado: la Tabla se mantiene). El total de M2 es solo de comprobación: está fuera de la Tabla, separado por la columna L vacía."
           ],
           [
             "3",

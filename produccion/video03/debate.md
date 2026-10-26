@@ -505,3 +505,89 @@ El CTA al 42 % y el corte antes del giro (el pico de expectativa) son lo que mej
 
 ### Si la ronda 3 no aprueba
 Recomendaré aprobar con las objeciones pendientes documentadas, siempre que la veracidad siga en ≥ 9 y sin veto. Las condiciones de cierre siguen bloqueando el render final.
+
+## Respuesta a la ronda 2 (guion · guionista, 26/10/2026)
+
+**Controles:**
+- `puntuar_guion.py video03`: **100/100**.
+- `plantilla_xlsx.py video03 --verificar`: **sin diferencias** en lo calculable. Las 12 celdas de FILTRAR/ORDENAR/ELEGIRCOLS se informan aparte, igual que antes.
+- **Nueva comprobación:** Pedidos!M2 da 46.586.220 en LibreOffice y la Tabla sigue en A1:K251.
+- **Tiempos estimados:** **8,31 min**; **corte de anuncios y giro en 4:58 (59,8 %)**; 54 % del video en Excel.
+- **video02:** regeneré su plantilla sin `--verificar`.
+
+**Prompts:** sus textos **no cambiaron**. `respuestas-ia.md` suma la sección «Antes del render: elegir las ramas» y las voces nuevas de las escenas 9, 14 y 19.
+
+**Hoja Pedidos:** las columnas A:K y los datos quedan iguales. Solo se agrega el total de comprobación M1:M2, que es parte de la plantilla y no del export del sistema. Por eso **no regeneré** `Distribuidora Sur - Pedidos 2026.xlsx`. Es el adjunto del prompt 1 y meterle un total cambiaría lo que se prueba.
+
+### Correcciones obligatorias
+1. **Promesa del gancho: aceptada.**
+   - **Escena 0, beat 4:** «Te muestro el armado paso a paso y, antes de terminar, la pregunta que atrapa ese número.»
+   - **Escena 0, beat 3:** «Solo necesitas Excel para la web, que es gratis. Sin macros, los datos son inventados, y el prompt también lo puedes usar en ChatGPT.»
+   - **Sub del rótulo:** «datos inventados · el prompt sirve en otras IA».
+   - **Escena 11:** sale «y lo resolvemos después de las otras dos preguntas». El reenganche de la escena 12 se queda.
+2. **Q3 y Q4 más cortos: aceptada.** El corte de anuncios queda en 4:58, dentro de la meta de ≤ 5:00.
+   - **Escena 14:**
+     - solo el prompt, con «La IA lo resuelve con un comodín; lo veo en la fórmula»;
+     - marcada `condicional`: se elimina si la respuesta real no usa el comodín.
+   - **Escena 17:**
+     - «El prompt está en la plantilla: mismo mapa; la meta, los vencidos ordenados»;
+     - ELEGIRCOLS pasa a un rótulo de 3 s, sin voz;
+     - cierra en «casi 3 millones por cobrar».
+   - **Escenas 23 y 24:** quedan fusionadas en un titular: «Un dashboard rápido, como el del primer mensaje, no sirve si el número más grande engaña». Si se elimina la escena 1, va `voz_sin_esc1`. Después corta directo a Pedidos, que ahora lleva el capítulo «Resultado».
+   - **Recortes de frases en las escenas 2, 4, 5, 6, 10, 14 y 15 para llegar al 4:58,** sin tocar lo de «no tocar».
+     - En la escena 4 sale «Los pedidos vienen del sistema, uno por fila».
+     - El método y los números quedan iguales.
+3. **Clímax sin metanarración: aceptada.**
+   - **Escena 19, beat 2:** no hay voz neutra. Las dos ramas están completas:
+     - **A** (va en `voz`): «Dice que noviembre lleva tres días, y octubre, treinta y uno. Y ahora lo compruebo yo: cambio la fecha de corte.»
+     - **B** (`voz_rama_b`): «Esta vez no lo vio. Y ahora lo compruebo yo: cambio la fecha de corte.»
+   - **Escena 9:** «La fórmula de la IA coincide con la de la plantilla.» La alternativa con «La IA usó X; en la plantilla queda Y, porque…» está en `voz_rama_b`.
+   - **Bloqueo real:** `motor.py` ahora **no hace el video final** mientras haya beats con `elegir_rama` sin `rama_elegida` (escenas 1, 9 y 19). La vista previa y `--cuadros` siguen funcionando. Lo probé y bloquea con el mensaje que corresponde. Está documentado en `sistema/motor-v2.md`.
+   - **Para que no repita la voz:** la escena 20 arranca con «El 31 de octubre: el mes completo».
+4. **Verificador y plantilla: aceptada.**
+   - **Escena 4:**
+     - el total pasa a `Pedidos!M2`, con la columna L vacía como separador;
+     - la vista muestra las filas 1–2 inmovilizadas y la 242–251;
+     - la selección y el rótulo dicen «rango A1:K251».
+   - **Plantilla:**
+     - M1 «Total del año (comprobación)» y M2 `=SUMA(Pedidos[Neto])` (el nuevo campo `celdas_fijas`), fuera de la Tabla;
+     - el paso 2 de Tus datos lo explica.
+   - **Escena 6:** «En tu plantilla, B1 tiene la fórmula igual a hoy, así se actualiza sola cada día», con `=HOY()` escrito en la celda. Después vuelve a la fecha fija («Aquí la dejo fija en el 3 de noviembre, para que veas los mismos números»).
+   - **Tus datos (paso 1):** «Si ves todo en 0 (por ejemplo, en 2027, con los pedidos de ejemplo de 2026), escribe 03/11/2026 en B1».
+5. **Opcional de la escena 25: aceptado.** «Y mira la chica: salta a más ciento cuarenta y seis por ciento. Con tres días, salta.» + «La grande sigue en más ocho coma seis por ciento: ese es el número del lunes.»
+
+### Desvío nuevo (con argumento)
+- **Dos frases nuevas después del giro (escenas 23 y 27):**
+  - «Sirve con cualquier tablero: mueve la fecha de corte al último día del mes anterior y mira si el número cambia de signo.»
+  - «Borras los pedidos de ejemplo, pegas los tuyos con las mismas columnas, y el tablero se rehace.»
+- **Por qué:** con los recortes, el total había bajado a 8,04 min, a 2 s de perder los anuncios a mitad de video. Las dos frases suman unos 16 s de contenido usable y no mueven el corte ni el giro. Quedan unos 19 s de margen sobre los 8 min.
+
+### Objeciones de los críticos (`rondas/guion-2.json`)
+**Retención**
+1. **ELEGIRCOLS antes del giro: aceptada.** Rótulo de 3 s y cierre en «casi 3 millones».
+2. **Metanarración en el clímax: aceptada.** No hay voz neutra; el render se bloquea hasta elegir la rama.
+   - Su propuesta de neutra («Mira qué contesta…»): **rechazada**, porque el showrunner pidió ramas completas y no una neutra.
+3. **El «un solo mensaje» no se retoma: aceptada.** Se retoma en el titular de la lección, con la variante si se elimina la escena 1.
+4. **«Mira la grande» dos veces: aceptada** (escena 25).
+5. **Dos titulares seguidos: aceptada.** Se fusionaron y el capítulo pasa a la escena de Pedidos.
+6. **El chat de Q3 queda colgado: aceptada.** Solo el prompt, con la voz del comodín, y condicional.
+
+**Verificador**
+1. **«Sirve igual con ChatGPT»: aceptada.** Ahora dice «el prompt también lo puedes usar en ChatGPT» y el sub dice «el prompt sirve en otras IA».
+2. **Total pegado a K: aceptada.** Va en M2, separado por la columna L vacía, en el guion y en la plantilla.
+3. **Condición de cierre de las respuestas reales: aceptada.** Además del texto, quedó el bloqueo en `motor.py`.
+4. **Captura de la Tabla de A1:K251 a A1:K254: sigue pendiente del creador.** No cambia nada en el guion.
+5. **Todo en 0 en 2027: aceptada** (Tus datos, paso 1).
+
+**Espectador**
+1. **«A mitad del video» contra la resolución al 70 %: aceptada.** El gancho promete «antes de terminar» y la resolución llega antes. La propuesta de resolverlo justo después de Q2: **rechazada**, por la decisión central del showrunner.
+2. **`=HOY()` no se entiende al oído: aceptada.** La voz dice «la fórmula igual a hoy» y `=HOY()` se ve escrito en la celda.
+3. **«Gratis» volvió a la voz: aceptada.**
+4. **«Las fórmulas que uso son las de la plantilla» hace sospechar: aceptada.** La voz dice si coincide o qué cambió.
+5. **La voz no resume lo que detectó la IA: aceptada** (rama A).
+6. **No se ve cómo se pide a la IA en Q4: aceptada.** «El prompt está en la plantilla: mismo mapa; la meta, los vencidos ordenados.»
+
+### Herramientas (ronda 3)
+- `herramientas/plantilla_xlsx.py`: nuevo `celdas_fijas` en las hojas que salen de un CSV.
+- `herramientas/motor.py`: bloquea el render final si hay ramas sin elegir (`elegir_rama` sin `rama_elegida`).
+- `sistema/motor-v2.md`: documenta el bloqueo de ramas.
