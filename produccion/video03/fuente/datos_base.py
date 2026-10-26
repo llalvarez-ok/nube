@@ -71,6 +71,37 @@ def total(filas, desde, hasta):
     return sum(r["neto"] for r in filas if desde <= r["fecha"] <= hasta)
 
 
+def extras(filas):
+    """Cifras que agregó el guion (video03, 26/10/2026): tarjetas, gráficos y filas visibles."""
+    a0 = dt.date(2026, 1, 1)
+    sin_02 = [r for r in filas if r["fecha"] < dt.date(2026, 11, 2)]
+    print("\n--- extras del guion ---")
+    print("antes de pegar el 02/11 (rango fijo): pedidos", len(sin_02), "acumulado", total(sin_02, a0, CORTE))
+    ven = sorted([r for r in filas if r["vence"] < CORTE and r["pagado"] == "No"], key=lambda r: -r["neto"])
+    print("vencidos sin cobrar:", len(ven), sum(r["neto"] for r in ven))
+    for r in ven[:5]:
+        print("   ", r["cliente"], r["vence"].strftime("%d/%m/%Y"), r["neto"])
+    for v in [None] + VENDEDORES:
+        sub = [r for r in filas if v is None or r["vendedor"] == v]
+        print("productos", v or "Todos", {c: sum(r["neto"] for r in sub if r["codigo"] == c) for c in PRODUCTOS})
+    # corte al 31/10 (demostración del giro): "este mes" = octubre completo
+    c31 = dt.date(2026, 10, 31)
+    octu = total(filas, dt.date(2026, 10, 1), c31); sep = total(filas, dt.date(2026, 9, 1), dt.date(2026, 9, 30))
+    print("corte 31/10: este mes vs anterior", f"{octu/sep-1:+.1%}", "· acumulado", total(filas, a0, c31),
+          "· pedidos", sum(1 for r in filas if r["fecha"] <= c31))
+    v31 = [r for r in filas if r["vence"] < c31 and r["pagado"] == "No"]
+    print("corte 31/10: vencidos", len(v31), sum(r["neto"] for r in v31))
+    todo = filas + pedidos_hoy()
+    nov2 = total(todo, dt.date(2026, 11, 1), CORTE)
+    print("después de pegar los 3 de hoy: ingenuo nov vs oct", f"{nov2/octu-1:+.1%}", "· pedidos", len(todo))
+    for v in ["Carla Ruiz"]:
+        print("año", v, sum(r["neto"] for r in filas if r["vendedor"] == v))
+    print("filas visibles (n.º de fila en Excel = índice + 2):")
+    for i in range(len(filas) - 11, len(filas)):
+        r = filas[i]
+        print("   ", i + 2, r["fecha"].strftime("%d/%m/%Y"), r["cliente"], r["vendedor"], r["codigo"], r["cant"], r["neto"])
+
+
 if __name__ == "__main__":
     filas = generar()
     if "--csv" in sys.argv:
@@ -101,3 +132,5 @@ if __name__ == "__main__":
           "noviembre", nov2, f"mismo tramo {nov2/oct3-1:+.1%}")
     print("gráfico 12 meses (después de pegar):", meses(todo))
     print("pedidos en el año (antes):", sum(1 for r in filas if r["fecha"] <= CORTE))
+    extras(filas)
+

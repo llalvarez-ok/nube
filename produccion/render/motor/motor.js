@@ -234,6 +234,9 @@
     const colX = [CAB_W];
     anchos.forEach((w, i) => colX.push(colX[i] + w));
     const nfil = 12;
+    // "filas": números de fila visibles (p. ej. [1, 241, 242, …] = encabezado inmovilizado + el final de la tabla)
+    const filasVis = d.filas || Array.from({ length: nfil }, (_, i) => i + 1);
+    const vis = (r) => { const i = filasVis.indexOf(r); return i >= 0 ? i : r - filasVis[0]; };
 
     const xl = el("div", "xl", null, cam);
     el("div", "xl-titulo", `<span class="app">${icono("sheet")}</span>${esc(d.archivo || "Libro1.xlsx")}<span style="opacity:.75;font-weight:400">  ·  Guardado</span>` +
@@ -259,7 +262,7 @@
       cabCol.push(h);
     }
     for (let r = 1; r <= nfil; r++) {
-      const h = el("div", "xl-celda cab", String(r), hoja);
+      const h = el("div", "xl-celda cab", String(filasVis[r - 1]), hoja);
       h.style.cssText = `left:0;top:${CAB_H + (r - 1) * FILA}px;width:${CAB_W}px;height:${FILA}px`;
       cabFil.push(h);
       for (let ci = 0; ci < ncol; ci++) {
@@ -268,12 +271,12 @@
         const cel = el("div", "xl-celda" + (esNum ? " num" : "") + (r === 1 && d.encabezado !== false ? " enc" : ""), null, hoja);
         cel.style.cssText = `left:${colX[ci]}px;top:${CAB_H + (r - 1) * FILA}px;width:${anchos[ci]}px;height:${FILA}px`;
         const span = el("span", "", esc(v), cel);
-        celdas[colLetra(ci) + r] = { cel, span };
+        celdas[colLetra(ci) + filasVis[r - 1]] = { cel, span };
       }
     }
     const rect = (ref) => {
       const R = parseRef(ref);
-      return { x: colX[R.c1], y: HOJA_Y + CAB_H + (R.r1 - 1) * FILA, w: colX[R.c2 + 1] - colX[R.c1], h: (R.r2 - R.r1 + 1) * FILA, R };
+      return { x: colX[R.c1], y: HOJA_Y + CAB_H + vis(R.r1) * FILA, w: colX[R.c2 + 1] - colX[R.c1], h: (vis(R.r2) - vis(R.r1) + 1) * FILA, R };
     };
     const sel = el("div", "xl-sel", null, xl);
     const s0 = rect(d.seleccion_inicial || "A1");
@@ -304,7 +307,7 @@
       colsOn.forEach((h) => tl.set(h, { className: "xl-celda cab" }, t));
       colsOn = [];
       for (let ci = R.c1; ci <= R.c2; ci++) { tl.set(cabCol[ci], { className: "xl-celda cab on" }, t); colsOn.push(cabCol[ci]); }
-      for (let r = R.r1; r <= R.r2 && r <= nfil; r++) { tl.set(cabFil[r - 1], { className: "xl-celda cab on" }, t); colsOn.push(cabFil[r - 1]); }
+      for (let r = R.r1; r <= R.r2; r++) { const h = cabFil[vis(r)]; if (!h) continue; tl.set(h, { className: "xl-celda cab on" }, t); colsOn.push(h); }
     };
     const seleccionar = (ref, t, conClic = true) => {
       const r = rect(ref), primera = ref.split(":")[0], r1 = rect(primera);

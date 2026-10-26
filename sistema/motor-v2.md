@@ -48,6 +48,7 @@
 
 ### `excel`
 `datos`: `archivo`, `hoja`, `asistente` ("Copilot"), `pestana`, `anchos` (px por columna, 210 por defecto), `celdas` (filas desde la fila 1; la primera es el encabezado), `seleccion_inicial`. Se ven 12 filas y unas 7 columnas.
+`filas` (opcional): los números de fila que se ven, en orden, por ejemplo `[1, 241, 242, …, 251]` para mostrar el encabezado inmovilizado y el final de una tabla larga. Las `celdas` siguen siendo las 12 filas visibles, de arriba abajo, y las acciones usan los números reales ("A251"). Una escena con `filas` debería ser `solo_video` (la plantilla no sabe dónde va cada fila).
 
 | Acción | Campos | Qué se ve |
 |---|---|---|

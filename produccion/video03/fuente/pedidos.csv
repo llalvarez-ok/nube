@@ -1,0 +1,251 @@
+fecha,cliente,vendedor,codigo,cant,precio,desc,neto,vence,pagado
+2026-01-05,Hotel Mirador,Diego Paz,PAP-220,25,3900,0.05,92625,2026-02-28,Sí
+2026-01-06,Hotel Mirador,Diego Paz,LIM-030,50,1150,0.05,54625,2026-02-28,Sí
+2026-01-07,Colegio Nuevo Horizonte,Diego Paz,LIM-020,120,3100,0.1,334800,2026-02-28,Sí
+2026-01-07,Kiosco La Esquina,Diego Paz,PAP-220,15,3900,0.05,55575,2026-02-28,Sí
+2026-01-08,Ferretería El Tornillo,Carla Ruiz,LIM-010,80,2400,0.1,172800,2026-02-28,Sí
+2026-01-08,Kiosco La Esquina,Diego Paz,PAP-200,15,4500,0.05,64125,2026-02-28,Sí
+2026-01-09,Librería San Martín Srl,Tomás Gil,LIM-020,60,3100,0.1,167400,2026-02-28,Sí
+2026-01-09,Ferretería El Tornillo,Carla Ruiz,PAP-200,50,4500,0.1,202500,2026-02-28,Sí
+2026-01-12,Kiosco La Esquina,Diego Paz,PAP-210,60,6200,0.1,334800,2026-02-28,Sí
+2026-01-13,Librería San Martín Srl,Carla Ruiz,PAP-200,30,4500,0.1,121500,2026-02-28,No
+2026-01-14,Colegio Nuevo Horizonte,Tomás Gil,PAP-210,60,6200,0.1,334800,2026-02-28,Sí
+2026-01-19,Kiosco La Esquina,Carla Ruiz,PAP-200,100,4500,0.1,405000,2026-02-28,Sí
+2026-01-20,Ferretería El Tornillo,Diego Paz,LIM-040,50,9800,0.1,441000,2026-02-28,Sí
+2026-01-21,Librería San Martín Srl,Diego Paz,LIM-020,120,3100,0.1,334800,2026-02-28,Sí
+2026-01-21,Hotel Mirador,Tomás Gil,LIM-020,40,3100,0.1,111600,2026-02-28,Sí
+2026-01-22,Ferretería El Tornillo,Carla Ruiz,LIM-040,10,9800,0.05,93100,2026-02-28,Sí
+2026-01-22,Hotel Mirador,Carla Ruiz,LIM-010,60,2400,0.1,129600,2026-02-28,Sí
+2026-01-23,Kiosco La Esquina,Diego Paz,PAP-200,15,4500,0.05,64125,2026-02-28,Sí
+2026-01-26,Hotel Mirador,Tomás Gil,PAP-220,120,3900,0.1,421200,2026-02-28,Sí
+2026-01-27,Librería San Martín Srl,Tomás Gil,PAP-200,80,4500,0.1,324000,2026-02-28,Sí
+2026-01-28,Ferretería El Tornillo,Tomás Gil,PAP-220,100,3900,0.1,351000,2026-02-28,Sí
+2026-01-28,Kiosco La Esquina,Tomás Gil,LIM-020,30,3100,0.05,88350,2026-02-28,Sí
+2026-01-29,Kiosco La Esquina,Diego Paz,LIM-010,80,2400,0.1,172800,2026-02-28,Sí
+2026-01-30,Ferretería El Tornillo,Carla Ruiz,LIM-010,60,2400,0.1,129600,2026-02-28,Sí
+2026-02-02,Kiosco La Esquina,Carla Ruiz,LIM-040,15,9800,0.1,132300,2026-03-31,Sí
+2026-02-03,Hotel Mirador,Carla Ruiz,LIM-010,40,2400,0.05,91200,2026-03-31,Sí
+2026-02-03,Librería San Martín Srl,Diego Paz,PAP-210,120,6200,0.1,669600,2026-03-31,Sí
+2026-02-05,Hotel Mirador,Diego Paz,PAP-200,40,4500,0.1,162000,2026-03-31,Sí
+2026-02-05,Hotel Mirador,Carla Ruiz,LIM-040,30,9800,0.1,264600,2026-03-31,Sí
+2026-02-06,Colegio Nuevo Horizonte,Carla Ruiz,LIM-010,10,2400,0.0,24000,2026-03-31,Sí
+2026-02-09,Colegio Nuevo Horizonte,Tomás Gil,LIM-030,30,1150,0.0,34500,2026-03-31,Sí
+2026-02-09,Ferretería El Tornillo,Carla Ruiz,PAP-220,100,3900,0.1,351000,2026-03-31,Sí
+2026-02-12,Colegio Nuevo Horizonte,Carla Ruiz,LIM-040,15,9800,0.1,132300,2026-03-31,Sí
+2026-02-16,Colegio Nuevo Horizonte,Tomás Gil,LIM-040,25,9800,0.1,220500,2026-03-31,Sí
+2026-02-16,Kiosco La Esquina,Tomás Gil,PAP-210,20,6200,0.1,111600,2026-03-31,Sí
+2026-02-17,Kiosco La Esquina,Tomás Gil,PAP-220,12,3900,0.05,44460,2026-03-31,Sí
+2026-02-17,Hotel Mirador,Carla Ruiz,PAP-220,20,3900,0.05,74100,2026-03-31,Sí
+2026-02-18,Kiosco La Esquina,Diego Paz,LIM-040,60,9800,0.1,529200,2026-03-31,Sí
+2026-02-19,Hotel Mirador,Tomás Gil,LIM-010,25,2400,0.05,57000,2026-03-31,Sí
+2026-02-23,Colegio Nuevo Horizonte,Diego Paz,LIM-040,60,9800,0.1,529200,2026-03-31,Sí
+2026-02-24,Kiosco La Esquina,Diego Paz,LIM-010,20,2400,0.05,45600,2026-03-31,Sí
+2026-02-25,Librería San Martín Srl,Diego Paz,LIM-040,100,9800,0.1,882000,2026-03-31,Sí
+2026-02-26,Librería San Martín Srl,Tomás Gil,PAP-220,80,3900,0.1,280800,2026-03-31,Sí
+2026-02-27,Ferretería El Tornillo,Carla Ruiz,LIM-030,120,1150,0.1,124200,2026-03-31,Sí
+2026-02-27,Kiosco La Esquina,Tomás Gil,PAP-200,80,4500,0.1,324000,2026-03-31,Sí
+2026-03-02,Colegio Nuevo Horizonte,Carla Ruiz,PAP-220,25,3900,0.05,92625,2026-04-30,Sí
+2026-03-02,Librería San Martín Srl,Carla Ruiz,PAP-200,10,4500,0.05,42750,2026-04-30,Sí
+2026-03-04,Colegio Nuevo Horizonte,Tomás Gil,LIM-040,12,9800,0.1,105840,2026-04-30,Sí
+2026-03-05,Colegio Nuevo Horizonte,Tomás Gil,PAP-210,10,6200,0.05,58900,2026-04-30,Sí
+2026-03-05,Kiosco La Esquina,Diego Paz,LIM-010,15,2400,0.0,36000,2026-04-30,Sí
+2026-03-06,Colegio Nuevo Horizonte,Carla Ruiz,LIM-040,100,9800,0.1,882000,2026-04-30,Sí
+2026-03-09,Colegio Nuevo Horizonte,Carla Ruiz,LIM-020,120,3100,0.1,334800,2026-04-30,Sí
+2026-03-10,Kiosco La Esquina,Carla Ruiz,LIM-040,20,9800,0.1,176400,2026-04-30,Sí
+2026-03-16,Ferretería El Tornillo,Tomás Gil,PAP-210,15,6200,0.05,88350,2026-04-30,Sí
+2026-03-16,Librería San Martín Srl,Carla Ruiz,LIM-040,20,9800,0.1,176400,2026-04-30,Sí
+2026-03-17,Colegio Nuevo Horizonte,Tomás Gil,PAP-220,120,3900,0.1,421200,2026-04-30,Sí
+2026-03-18,Librería San Martín Srl,Diego Paz,LIM-030,80,1150,0.05,87400,2026-04-30,Sí
+2026-03-18,Hotel Mirador,Diego Paz,LIM-010,20,2400,0.05,45600,2026-04-30,Sí
+2026-03-19,Colegio Nuevo Horizonte,Carla Ruiz,LIM-040,12,9800,0.1,105840,2026-04-30,Sí
+2026-03-19,Hotel Mirador,Diego Paz,PAP-210,50,6200,0.1,279000,2026-04-30,Sí
+2026-03-20,Colegio Nuevo Horizonte,Tomás Gil,LIM-030,50,1150,0.05,54625,2026-04-30,Sí
+2026-03-20,Ferretería El Tornillo,Diego Paz,LIM-020,15,3100,0.05,44175,2026-04-30,Sí
+2026-03-23,Kiosco La Esquina,Carla Ruiz,LIM-040,80,9800,0.1,705600,2026-04-30,Sí
+2026-03-24,Ferretería El Tornillo,Diego Paz,PAP-210,30,6200,0.1,167400,2026-04-30,Sí
+2026-03-24,Colegio Nuevo Horizonte,Tomás Gil,PAP-200,25,4500,0.1,101250,2026-04-30,Sí
+2026-03-25,Ferretería El Tornillo,Tomás Gil,LIM-010,120,2400,0.1,259200,2026-04-30,Sí
+2026-03-25,Colegio Nuevo Horizonte,Tomás Gil,PAP-220,120,3900,0.1,421200,2026-04-30,Sí
+2026-03-26,Colegio Nuevo Horizonte,Tomás Gil,LIM-030,20,1150,0.0,23000,2026-04-30,Sí
+2026-03-27,Kiosco La Esquina,Diego Paz,PAP-210,10,6200,0.05,58900,2026-04-30,Sí
+2026-03-27,Colegio Nuevo Horizonte,Tomás Gil,PAP-200,25,4500,0.1,101250,2026-04-30,Sí
+2026-03-31,Hotel Mirador,Tomás Gil,LIM-030,12,1150,0.0,13800,2026-04-30,Sí
+2026-04-01,Librería San Martín Srl,Tomás Gil,LIM-020,50,3100,0.1,139500,2026-05-31,Sí
+2026-04-02,Hotel Mirador,Diego Paz,LIM-030,80,1150,0.05,87400,2026-05-31,Sí
+2026-04-03,Hotel Mirador,Carla Ruiz,PAP-210,15,6200,0.05,88350,2026-05-31,Sí
+2026-04-06,Hotel Mirador,Tomás Gil,LIM-020,30,3100,0.05,88350,2026-05-31,Sí
+2026-04-06,Ferretería El Tornillo,Carla Ruiz,LIM-030,120,1150,0.1,124200,2026-05-31,Sí
+2026-04-07,Colegio Nuevo Horizonte,Carla Ruiz,LIM-010,25,2400,0.05,57000,2026-05-31,Sí
+2026-04-07,Kiosco La Esquina,Carla Ruiz,PAP-220,10,3900,0.0,39000,2026-05-31,Sí
+2026-04-08,Hotel Mirador,Diego Paz,PAP-200,40,4500,0.1,162000,2026-05-31,Sí
+2026-04-09,Kiosco La Esquina,Diego Paz,LIM-020,60,3100,0.1,167400,2026-05-31,Sí
+2026-04-13,Colegio Nuevo Horizonte,Carla Ruiz,LIM-030,10,1150,0.0,11500,2026-05-31,Sí
+2026-04-14,Librería San Martín Srl,Carla Ruiz,PAP-200,40,4500,0.1,162000,2026-05-31,Sí
+2026-04-15,Librería San Martín Srl,Diego Paz,LIM-040,15,9800,0.1,132300,2026-05-31,Sí
+2026-04-16,Ferretería El Tornillo,Tomás Gil,LIM-040,30,9800,0.1,264600,2026-05-31,Sí
+2026-04-17,Librería San Martín Srl,Carla Ruiz,LIM-020,40,3100,0.1,111600,2026-05-31,Sí
+2026-04-17,Ferretería El Tornillo,Tomás Gil,PAP-210,12,6200,0.05,70680,2026-05-31,Sí
+2026-04-20,Colegio Nuevo Horizonte,Diego Paz,LIM-010,40,2400,0.05,91200,2026-05-31,Sí
+2026-04-21,Librería San Martín Srl,Carla Ruiz,PAP-210,25,6200,0.1,139500,2026-05-31,Sí
+2026-04-21,Ferretería El Tornillo,Tomás Gil,LIM-020,120,3100,0.1,334800,2026-05-31,Sí
+2026-04-22,Kiosco La Esquina,Diego Paz,LIM-040,40,9800,0.1,352800,2026-05-31,Sí
+2026-04-23,Ferretería El Tornillo,Tomás Gil,LIM-030,10,1150,0.0,11500,2026-05-31,Sí
+2026-04-24,Colegio Nuevo Horizonte,Tomás Gil,PAP-200,120,4500,0.1,486000,2026-05-31,Sí
+2026-04-24,Hotel Mirador,Diego Paz,LIM-010,60,2400,0.1,129600,2026-05-31,Sí
+2026-04-30,Ferretería El Tornillo,Diego Paz,PAP-200,120,4500,0.1,486000,2026-05-31,Sí
+2026-05-04,Librería San Martín Srl,Carla Ruiz,LIM-020,12,3100,0.0,37200,2026-06-30,Sí
+2026-05-06,Ferretería El Tornillo,Diego Paz,LIM-010,15,2400,0.0,36000,2026-06-30,Sí
+2026-05-07,Librería San Martín Srl,Carla Ruiz,LIM-020,100,3100,0.1,279000,2026-06-30,Sí
+2026-05-08,Ferretería El Tornillo,Tomás Gil,LIM-020,40,3100,0.1,111600,2026-06-30,Sí
+2026-05-08,Kiosco La Esquina,Carla Ruiz,PAP-200,100,4500,0.1,405000,2026-06-30,Sí
+2026-05-11,Ferretería El Tornillo,Carla Ruiz,LIM-020,120,3100,0.1,334800,2026-06-30,Sí
+2026-05-12,Ferretería El Tornillo,Carla Ruiz,LIM-010,120,2400,0.1,259200,2026-06-30,Sí
+2026-05-12,Ferretería El Tornillo,Diego Paz,PAP-210,100,6200,0.1,558000,2026-06-30,Sí
+2026-05-13,Ferretería El Tornillo,Carla Ruiz,LIM-040,20,9800,0.1,176400,2026-06-30,Sí
+2026-05-14,Colegio Nuevo Horizonte,Carla Ruiz,LIM-030,20,1150,0.0,23000,2026-06-30,Sí
+2026-05-15,Librería San Martín Srl,Carla Ruiz,PAP-220,60,3900,0.1,210600,2026-06-30,Sí
+2026-05-15,Colegio Nuevo Horizonte,Diego Paz,LIM-010,20,2400,0.05,45600,2026-06-30,Sí
+2026-05-18,Ferretería El Tornillo,Tomás Gil,LIM-020,10,3100,0.0,31000,2026-06-30,Sí
+2026-05-19,Kiosco La Esquina,Carla Ruiz,PAP-220,40,3900,0.1,140400,2026-06-30,Sí
+2026-05-20,Ferretería El Tornillo,Tomás Gil,LIM-020,60,3100,0.1,167400,2026-06-30,Sí
+2026-05-21,Colegio Nuevo Horizonte,Carla Ruiz,PAP-200,15,4500,0.05,64125,2026-06-30,Sí
+2026-05-21,Colegio Nuevo Horizonte,Diego Paz,PAP-220,60,3900,0.1,210600,2026-06-30,Sí
+2026-05-22,Ferretería El Tornillo,Carla Ruiz,PAP-220,15,3900,0.05,55575,2026-06-30,Sí
+2026-05-25,Hotel Mirador,Diego Paz,PAP-210,50,6200,0.1,279000,2026-06-30,Sí
+2026-05-26,Hotel Mirador,Diego Paz,LIM-020,120,3100,0.1,334800,2026-06-30,Sí
+2026-05-26,Librería San Martín Srl,Carla Ruiz,PAP-210,60,6200,0.1,334800,2026-06-30,Sí
+2026-05-27,Kiosco La Esquina,Carla Ruiz,PAP-220,12,3900,0.05,44460,2026-06-30,Sí
+2026-05-29,Kiosco La Esquina,Tomás Gil,LIM-030,30,1150,0.0,34500,2026-06-30,Sí
+2026-06-01,Hotel Mirador,Diego Paz,PAP-210,10,6200,0.05,58900,2026-07-31,Sí
+2026-06-03,Hotel Mirador,Tomás Gil,LIM-030,60,1150,0.05,65550,2026-07-31,Sí
+2026-06-03,Hotel Mirador,Carla Ruiz,PAP-200,12,4500,0.05,51300,2026-07-31,Sí
+2026-06-05,Kiosco La Esquina,Tomás Gil,PAP-200,40,4500,0.1,162000,2026-07-31,Sí
+2026-06-08,Hotel Mirador,Carla Ruiz,LIM-040,12,9800,0.1,105840,2026-07-31,Sí
+2026-06-08,Librería San Martín Srl,Diego Paz,LIM-030,80,1150,0.05,87400,2026-07-31,Sí
+2026-06-09,Librería San Martín Srl,Tomás Gil,LIM-020,12,3100,0.0,37200,2026-07-31,Sí
+2026-06-10,Kiosco La Esquina,Tomás Gil,LIM-020,120,3100,0.1,334800,2026-07-31,Sí
+2026-06-11,Ferretería El Tornillo,Tomás Gil,PAP-210,40,6200,0.1,223200,2026-07-31,Sí
+2026-06-12,Colegio Nuevo Horizonte,Tomás Gil,LIM-040,20,9800,0.1,176400,2026-07-31,Sí
+2026-06-12,Librería San Martín Srl,Carla Ruiz,LIM-040,20,9800,0.1,176400,2026-07-31,Sí
+2026-06-15,Colegio Nuevo Horizonte,Diego Paz,LIM-040,15,9800,0.1,132300,2026-07-31,Sí
+2026-06-15,Librería San Martín Srl,Tomás Gil,LIM-010,50,2400,0.1,108000,2026-07-31,Sí
+2026-06-16,Ferretería El Tornillo,Diego Paz,LIM-010,50,2400,0.1,108000,2026-07-31,Sí
+2026-06-17,Hotel Mirador,Diego Paz,PAP-210,50,6200,0.1,279000,2026-07-31,Sí
+2026-06-18,Hotel Mirador,Diego Paz,LIM-040,50,9800,0.1,441000,2026-07-31,Sí
+2026-06-19,Ferretería El Tornillo,Diego Paz,LIM-040,40,9800,0.1,352800,2026-07-31,Sí
+2026-06-23,Kiosco La Esquina,Diego Paz,PAP-200,120,4500,0.1,486000,2026-07-31,Sí
+2026-06-23,Kiosco La Esquina,Diego Paz,LIM-030,40,1150,0.05,43700,2026-07-31,Sí
+2026-06-24,Colegio Nuevo Horizonte,Diego Paz,PAP-220,30,3900,0.1,105300,2026-07-31,Sí
+2026-06-25,Kiosco La Esquina,Tomás Gil,PAP-200,40,4500,0.1,162000,2026-07-31,Sí
+2026-06-26,Hotel Mirador,Diego Paz,PAP-210,40,6200,0.1,223200,2026-07-31,Sí
+2026-06-26,Librería San Martín Srl,Tomás Gil,LIM-010,120,2400,0.1,259200,2026-07-31,Sí
+2026-06-29,Kiosco La Esquina,Tomás Gil,LIM-020,30,3100,0.05,88350,2026-07-31,Sí
+2026-07-01,Librería San Martín Srl,Carla Ruiz,PAP-210,120,6200,0.1,669600,2026-08-31,Sí
+2026-07-02,Kiosco La Esquina,Tomás Gil,PAP-220,30,3900,0.1,105300,2026-08-31,Sí
+2026-07-02,Librería San Martín Srl,Carla Ruiz,PAP-200,80,4500,0.1,324000,2026-08-31,Sí
+2026-07-03,Hotel Mirador,Diego Paz,LIM-040,10,9800,0.05,93100,2026-08-31,Sí
+2026-07-03,Ferretería El Tornillo,Diego Paz,LIM-040,120,9800,0.1,1058400,2026-08-31,Sí
+2026-07-06,Colegio Nuevo Horizonte,Carla Ruiz,PAP-220,30,3900,0.1,105300,2026-08-31,Sí
+2026-07-07,Kiosco La Esquina,Carla Ruiz,PAP-210,40,6200,0.1,223200,2026-08-31,Sí
+2026-07-08,Kiosco La Esquina,Diego Paz,PAP-210,60,6200,0.1,334800,2026-08-31,Sí
+2026-07-08,Librería San Martín Srl,Carla Ruiz,LIM-020,50,3100,0.1,139500,2026-08-31,Sí
+2026-07-09,Hotel Mirador,Carla Ruiz,PAP-220,50,3900,0.1,175500,2026-08-31,Sí
+2026-07-09,Kiosco La Esquina,Carla Ruiz,LIM-030,100,1150,0.1,103500,2026-08-31,Sí
+2026-07-10,Colegio Nuevo Horizonte,Carla Ruiz,PAP-210,80,6200,0.1,446400,2026-08-31,Sí
+2026-07-13,Ferretería El Tornillo,Tomás Gil,LIM-030,25,1150,0.0,28750,2026-08-31,Sí
+2026-07-14,Librería San Martín Srl,Tomás Gil,PAP-210,30,6200,0.1,167400,2026-08-31,Sí
+2026-07-15,Colegio Nuevo Horizonte,Tomás Gil,PAP-220,10,3900,0.0,39000,2026-08-31,Sí
+2026-07-15,Hotel Mirador,Tomás Gil,LIM-010,40,2400,0.05,91200,2026-08-31,Sí
+2026-07-16,Kiosco La Esquina,Carla Ruiz,PAP-220,60,3900,0.1,210600,2026-08-31,Sí
+2026-07-17,Librería San Martín Srl,Diego Paz,LIM-030,25,1150,0.0,28750,2026-08-31,Sí
+2026-07-20,Librería San Martín Srl,Tomás Gil,PAP-200,10,4500,0.05,42750,2026-08-31,Sí
+2026-07-20,Ferretería El Tornillo,Tomás Gil,LIM-010,10,2400,0.0,24000,2026-08-31,Sí
+2026-07-21,Ferretería El Tornillo,Carla Ruiz,LIM-010,12,2400,0.0,28800,2026-08-31,Sí
+2026-07-22,Hotel Mirador,Tomás Gil,LIM-020,100,3100,0.1,279000,2026-08-31,Sí
+2026-07-23,Ferretería El Tornillo,Diego Paz,LIM-020,80,3100,0.1,223200,2026-08-31,Sí
+2026-07-24,Kiosco La Esquina,Tomás Gil,LIM-010,60,2400,0.1,129600,2026-08-31,Sí
+2026-07-24,Hotel Mirador,Carla Ruiz,LIM-020,20,3100,0.05,58900,2026-08-31,Sí
+2026-07-27,Colegio Nuevo Horizonte,Tomás Gil,PAP-200,80,4500,0.1,324000,2026-08-31,Sí
+2026-07-30,Ferretería El Tornillo,Carla Ruiz,PAP-220,15,3900,0.05,55575,2026-08-31,Sí
+2026-07-31,Kiosco La Esquina,Carla Ruiz,PAP-210,10,6200,0.05,58900,2026-08-31,Sí
+2026-08-03,Hotel Mirador,Carla Ruiz,PAP-220,100,3900,0.1,351000,2026-09-30,Sí
+2026-08-04,Ferretería El Tornillo,Diego Paz,LIM-010,40,2400,0.05,91200,2026-09-30,Sí
+2026-08-04,Librería San Martín Srl,Diego Paz,PAP-200,20,4500,0.05,85500,2026-09-30,Sí
+2026-08-04,Ferretería El Tornillo,Diego Paz,LIM-030,50,1150,0.05,54625,2026-09-30,Sí
+2026-08-07,Librería San Martín Srl,Tomás Gil,LIM-040,60,9800,0.1,529200,2026-09-30,Sí
+2026-08-10,Colegio Nuevo Horizonte,Tomás Gil,PAP-200,20,4500,0.05,85500,2026-09-30,Sí
+2026-08-11,Ferretería El Tornillo,Tomás Gil,LIM-040,40,9800,0.1,352800,2026-09-30,Sí
+2026-08-12,Librería San Martín Srl,Carla Ruiz,PAP-200,120,4500,0.1,486000,2026-09-30,No
+2026-08-12,Colegio Nuevo Horizonte,Diego Paz,PAP-200,12,4500,0.05,51300,2026-09-30,Sí
+2026-08-12,Ferretería El Tornillo,Carla Ruiz,LIM-030,30,1150,0.0,34500,2026-09-30,Sí
+2026-08-13,Kiosco La Esquina,Tomás Gil,PAP-220,100,3900,0.1,351000,2026-09-30,Sí
+2026-08-13,Colegio Nuevo Horizonte,Tomás Gil,LIM-040,120,9800,0.1,1058400,2026-09-30,Sí
+2026-08-14,Colegio Nuevo Horizonte,Carla Ruiz,LIM-030,12,1150,0.0,13800,2026-09-30,Sí
+2026-08-14,Librería San Martín Srl,Carla Ruiz,LIM-010,60,2400,0.1,129600,2026-09-30,Sí
+2026-08-18,Librería San Martín Srl,Diego Paz,PAP-210,15,6200,0.05,88350,2026-09-30,Sí
+2026-08-20,Ferretería El Tornillo,Carla Ruiz,PAP-220,12,3900,0.05,44460,2026-09-30,Sí
+2026-08-20,Kiosco La Esquina,Tomás Gil,LIM-030,15,1150,0.0,17250,2026-09-30,Sí
+2026-08-21,Kiosco La Esquina,Tomás Gil,LIM-020,15,3100,0.05,44175,2026-09-30,Sí
+2026-08-21,Kiosco La Esquina,Tomás Gil,PAP-200,12,4500,0.05,51300,2026-09-30,Sí
+2026-08-24,Hotel Mirador,Diego Paz,LIM-020,20,3100,0.05,58900,2026-09-30,Sí
+2026-08-24,Librería San Martín Srl,Diego Paz,PAP-210,40,6200,0.1,223200,2026-09-30,Sí
+2026-08-25,Kiosco La Esquina,Diego Paz,PAP-210,15,6200,0.05,88350,2026-09-30,Sí
+2026-08-25,Kiosco La Esquina,Carla Ruiz,LIM-030,30,1150,0.0,34500,2026-09-30,Sí
+2026-08-26,Librería San Martín Srl,Diego Paz,PAP-220,30,3900,0.1,105300,2026-09-30,Sí
+2026-08-26,Kiosco La Esquina,Diego Paz,LIM-040,10,9800,0.05,93100,2026-09-30,Sí
+2026-08-28,Librería San Martín Srl,Diego Paz,LIM-020,20,3100,0.05,58900,2026-09-30,Sí
+2026-08-31,Hotel Mirador,Diego Paz,PAP-210,10,6200,0.05,58900,2026-09-30,Sí
+2026-09-01,Hotel Mirador,Tomás Gil,LIM-020,30,3100,0.05,88350,2026-10-31,Sí
+2026-09-01,Kiosco La Esquina,Tomás Gil,LIM-030,12,1150,0.0,13800,2026-10-31,No
+2026-09-02,Ferretería El Tornillo,Diego Paz,PAP-210,60,6200,0.1,334800,2026-10-31,Sí
+2026-09-03,Colegio Nuevo Horizonte,Carla Ruiz,LIM-030,12,1150,0.0,13800,2026-10-31,No
+2026-09-04,Ferretería El Tornillo,Tomás Gil,LIM-010,80,2400,0.1,172800,2026-10-31,No
+2026-09-07,Colegio Nuevo Horizonte,Tomás Gil,PAP-210,10,6200,0.05,58900,2026-10-31,No
+2026-09-08,Kiosco La Esquina,Tomás Gil,LIM-040,15,9800,0.1,132300,2026-10-31,No
+2026-09-09,Colegio Nuevo Horizonte,Carla Ruiz,PAP-200,300,4500,0.1,1215000,2026-10-31,No
+2026-09-09,Hotel Mirador,Carla Ruiz,LIM-010,50,2400,0.1,108000,2026-10-31,Sí
+2026-09-10,Colegio Nuevo Horizonte,Tomás Gil,PAP-200,10,4500,0.05,42750,2026-10-31,Sí
+2026-09-10,Kiosco La Esquina,Carla Ruiz,PAP-200,60,4500,0.1,243000,2026-10-31,Sí
+2026-09-11,Hotel Mirador,Carla Ruiz,LIM-020,120,3100,0.1,334800,2026-10-31,Sí
+2026-09-14,Librería San Martín Srl,Carla Ruiz,LIM-030,12,1150,0.0,13800,2026-10-31,Sí
+2026-09-15,Kiosco La Esquina,Tomás Gil,LIM-030,25,1150,0.0,28750,2026-10-31,No
+2026-09-16,Ferretería El Tornillo,Tomás Gil,LIM-020,15,3100,0.05,44175,2026-10-31,Sí
+2026-09-17,Kiosco La Esquina,Carla Ruiz,LIM-030,80,1150,0.05,87400,2026-10-31,No
+2026-09-17,Ferretería El Tornillo,Carla Ruiz,PAP-200,10,4500,0.05,42750,2026-10-31,No
+2026-09-18,Colegio Nuevo Horizonte,Diego Paz,LIM-030,20,1150,0.0,23000,2026-10-31,No
+2026-09-21,Hotel Mirador,Carla Ruiz,LIM-040,30,9800,0.1,264600,2026-10-31,No
+2026-09-21,Kiosco La Esquina,Tomás Gil,PAP-210,15,6200,0.05,88350,2026-10-31,Sí
+2026-09-22,Colegio Nuevo Horizonte,Carla Ruiz,LIM-030,15,1150,0.0,17250,2026-10-31,Sí
+2026-09-22,Ferretería El Tornillo,Tomás Gil,LIM-030,120,1150,0.1,124200,2026-10-31,Sí
+2026-09-23,Librería San Martín Srl,Diego Paz,PAP-220,40,3900,0.1,140400,2026-10-31,Sí
+2026-09-23,Ferretería El Tornillo,Diego Paz,LIM-020,60,3100,0.1,167400,2026-10-31,No
+2026-09-24,Kiosco La Esquina,Diego Paz,LIM-010,100,2400,0.1,216000,2026-10-31,Sí
+2026-09-25,Colegio Nuevo Horizonte,Carla Ruiz,LIM-030,15,1150,0.0,17250,2026-10-31,No
+2026-09-28,Librería San Martín Srl,Carla Ruiz,LIM-020,25,3100,0.05,73625,2026-10-31,Sí
+2026-09-30,Hotel Mirador,Diego Paz,LIM-040,12,9800,0.1,105840,2026-10-31,No
+2026-10-01,Colegio Nuevo Horizonte,Carla Ruiz,PAP-220,100,3900,0.1,351000,2026-11-30,No
+2026-10-02,Ferretería El Tornillo,Tomás Gil,LIM-020,20,3100,0.05,58900,2026-11-30,No
+2026-10-05,Ferretería El Tornillo,Diego Paz,PAP-220,60,3900,0.1,210600,2026-11-30,No
+2026-10-06,Colegio Nuevo Horizonte,Carla Ruiz,PAP-220,150,3900,0.1,526500,2026-11-30,No
+2026-10-07,Colegio Nuevo Horizonte,Diego Paz,LIM-020,60,3100,0.1,167400,2026-11-30,No
+2026-10-08,Kiosco La Esquina,Diego Paz,LIM-020,40,3100,0.1,111600,2026-11-30,No
+2026-10-12,Colegio Nuevo Horizonte,Diego Paz,PAP-220,40,3900,0.1,140400,2026-11-30,No
+2026-10-12,Kiosco La Esquina,Diego Paz,LIM-030,15,1150,0.0,17250,2026-11-30,No
+2026-10-13,Hotel Mirador,Carla Ruiz,PAP-200,80,4500,0.1,324000,2026-11-30,No
+2026-10-14,Hotel Mirador,Tomás Gil,LIM-040,30,9800,0.1,264600,2026-11-30,No
+2026-10-15,Hotel Mirador,Tomás Gil,LIM-040,15,9800,0.1,132300,2026-11-30,No
+2026-10-16,Librería San Martín Srl,Diego Paz,LIM-040,80,9800,0.1,705600,2026-11-30,No
+2026-10-21,Kiosco La Esquina,Tomás Gil,LIM-030,20,1150,0.0,23000,2026-11-30,No
+2026-10-22,Kiosco La Esquina,Diego Paz,PAP-210,10,6200,0.05,58900,2026-11-30,No
+2026-10-22,Hotel Mirador,Carla Ruiz,LIM-010,60,2400,0.1,129600,2026-11-30,No
+2026-10-23,Librería San Martín Srl,Diego Paz,LIM-040,10,9800,0.05,93100,2026-11-30,No
+2026-10-26,Ferretería El Tornillo,Diego Paz,LIM-030,40,1150,0.05,43700,2026-11-30,No
+2026-10-26,Kiosco La Esquina,Diego Paz,PAP-210,120,6200,0.1,669600,2026-11-30,No
+2026-10-27,Hotel Mirador,Carla Ruiz,PAP-220,25,3900,0.05,92625,2026-11-30,No
+2026-10-27,Colegio Nuevo Horizonte,Tomás Gil,LIM-010,50,2400,0.1,108000,2026-11-30,No
+2026-10-28,Ferretería El Tornillo,Carla Ruiz,LIM-020,50,3100,0.1,139500,2026-11-30,Sí
+2026-10-28,Kiosco La Esquina,Tomás Gil,LIM-010,15,2400,0.0,36000,2026-11-30,No
+2026-10-28,Librería San Martín Srl,Carla Ruiz,LIM-030,100,1150,0.1,103500,2026-11-30,No
+2026-10-29,Colegio Nuevo Horizonte,Carla Ruiz,PAP-200,10,4500,0.05,42750,2026-11-30,No
+2026-10-29,Kiosco La Esquina,Carla Ruiz,LIM-010,10,2400,0.0,24000,2026-11-30,No
+2026-11-02,Hotel Mirador,Diego Paz,LIM-040,50,9800,0.1,441000,2026-12-31,No

@@ -184,3 +184,72 @@ Comando para el creador (forzar es una decisión humana; no la tomo yo):
 
 - **Condición dura de la ronda 2, sin cambios:** antes del viernes 30/10, el creador corre en claude.ai gratis el mensaje único y la Prueba con el .xlsx, prueba Excel para la web (Tabla, referencias estructuradas, desplegable, gráficos) y mide los tiempos, todo con captura. Sin eso, el guion no se cierra, la promesa no se publica y el 03/11 se mueve.
 - **RPM sin cifra con fuente:** queda como tarea del investigador para el informe de noviembre.
+
+## Guion · ronda 1 · respuesta del guionista (26/10/2026)
+
+**Entregable:** `produccion/video03/guion.json` (30 escenas, motor v2). `puntuar_guion.py`: **100/100**. Duración estimada con la lógica de tiempos del motor: **≈ 9,1 min** (rango de la idea: 9–11). `plantilla_xlsx.py --verificar`: **sin diferencias** en las celdas que calcula LibreOffice. Las 12 celdas de la lista de cobranza (FILTRAR + ORDENAR + ELEGIRCOLS, que LibreOffice 24.2 no calcula) se compararon aparte contra `datos_base.py` y coinciden. Los estados que solo salen en el video también se recalcularon en LibreOffice con copias modificadas de la plantilla y coinciden: Carla Ruiz, corte al 31/10 y los 3 pedidos de hoy. Las cifras nuevas quedaron en `fuente/datos_base.py`, en la sección `extras`.
+
+Mapa de tiempos (estimado): hook 0:00 · lo probé 0:33 · 4 preguntas 0:52 · P1 1:04 · reenganche 2:52 · P2 2:52 · CTA de suscripción 3:47 (42 %) · P3 3:59 · P4 4:59 · **corte de anuncios y giro 5:24 (60 %)** · aviso 6:03 · corrección 6:21 · resultado 7:04 · límites 7:51 · plantilla 8:24 · pantalla final 8:44.
+
+### Decisiones del showrunner incorporadas
+- **Hook (ronda 3):** «Pego los pedidos y este dashboard se rehace solo. Pero me dice que las ventas cayeron un 90 %, y no es cierto. Y el lunes tomarías decisiones con ese número.»
+  - El −90,4 % entra en pantalla a los ≈ 3,5 s, con zoom.
+  - El hook no dice «hoy», «día 3», «jefe» ni la causa.
+  - Bucle abierto sin «al final»: «Te muestro cómo armarlo paso a paso, con IA, y cómo atrapar ese número antes de mandarlo.»
+- **Reenganche de 2:10 (ronda 3), textual:** «En un rato te muestro por qué ese −90 % no es cierto… y qué número sí mirar el lunes.» Va en un `titular` al cerrar la pregunta 1.
+- **Flecha y foco en la barra de noviembre:** en la pregunta 2 la barra de noviembre se pinta de amarillo (`destacar`), con zoom, y la voz dice «mira la barra de noviembre: casi no existe». En el resultado final es la barra que crece.
+- **Rótulo desde 0:15:** «Excel para la web gratis + Claude», sin macros y con los datos ficticios dichos en voz. Pasa a «Claude · versión gratuita» solo si pasa la condición dura.
+- **«Lo probé» ≤ 30 s:** dura ≈ 18 s y está marcado como `condicional` (se elimina si no hay corrida real).
+- **Tabla dentro de la pregunta 1 en ≈ 20 s:** el antes/después usa dos números. Con rango fijo, al pegar el pedido del 02/11 el total sigue en 46.145.220. Con la Tabla, pasa a 46.586.220.
+- **Tarjeta −90 % en la esquina durante las preguntas 3 y 4:** se crea con `id: "alarma"` en cada escena (las tarjetas viven dentro de su escena) y se quita en la corrección.
+- **Otras correcciones de la ronda 1:**
+  - El método se explica en una línea la primera vez: «mapa, meta y prueba».
+  - La voz dice «No tienes que memorizar las fórmulas: te las da la IA, y están en la plantilla».
+  - El desplegable usa «Carla Ruiz».
+  - El gráfico va de enero a diciembre fijos, con `max` fijo para que noviembre crezca sin reescalar.
+- **Giro con dos ramas:**
+  - Las dos voces quedan escritas: `voz` es la rama A y `voz_rama_b`, la B.
+  - La comprobación con el corte al 31/10 (+8,6 %) se hace en las dos ramas, así el giro no depende de la IA.
+  - La corrección usa dos tarjetas: la grande es el mes cerrado (+8,6 %) y la chica, el mismo tramo (+7,6 %, «con 3 días, es ruido»).
+  - En el final, el mismo tramo salta a +146,8 % y el mes cerrado sigue en +8,6 %, con la frase de la ronda 2.
+- **Datos ficticios declarados en voz:** «los datos son inventados». Separador `;`. Sin VBA ni Power Query.
+- **Límites:**
+  - Power BI y tabla dinámica.
+  - Modo dashboard con Copilot: verificado hoy solo con fuentes no oficiales (vista previa para Insiders, sin fecha de Microsoft). Por eso la voz dice «Excel está probando un modo dashboard… está en prueba» y no da precios ni fechas.
+  - Datos reales de clientes.
+  - «La IA no sabe qué te importa».
+- **Pantalla final:** video02, con «Es este video, aquí en pantalla».
+
+### Desvíos de la escaleta de la idea (con argumento)
+1. **CTA de suscripción: de 2:10 a 3:47 (42 %).** La regla del guionista y `puntuar_guion.py` exigen pedirla después del 35 % del video. En 2:10 (≈ 24 %) habría costado 6 puntos y la habría pedido antes de entregar el segundo resultado. A las 2:10 queda solo el reenganche.
+2. **Corte de anuncios: de 5:00 a ≈ 5:24.** Va donde termina la pregunta 4 y empieza «Ahora sí: ese −90 %». La escena tiene la marca `"corte_anuncios": true`, y el creador lo coloca en Studio según la duración real con voz.
+3. **La pregunta 4 no tiene escena de chat.** La fórmula es la de video02 sobre la Tabla y se dice así. Ahorra unos 15 s y evita un prompt más sin respuesta real.
+4. **El cronómetro «a mano contra con IA» no está.** No hay tiempos medidos, así que el final dice «Lo armas una vez. Cada lunes: pegar, y listo». La marca `pendiente_verificar` indica dónde va el `antes_despues` si el creador mide.
+
+### Objeciones de los críticos de la idea que tocaban al guion
+- **Espectador ronda 3, «decidirías el lunes» se traba en voz sintética: aceptada.** Cambié el hook y también el `aviso` del giro.
+- **Espectador ronda 3, reenganche de 2:10: aceptada.** Va textual.
+- **Espectador ronda 3, la flecha a la barra de noviembre: aceptada en el guion.** Hay `destacar` y zoom. En la miniatura la ajusta la etapa empaque.
+- **Retención ronda 1, «tres tramos seguidos sin dashboard nuevo»: aceptada.** Entre el hook y el primer cálculo hay un chat de 18 s, una lista de 12 s y la Tabla con dos tarjetas. El primer número nuevo cae en ≈ 1:20.
+- **Espectador ronda 1, «Laura no sabe la diferencia entre rango y Tabla»: aceptada.** Se muestra con números, no con palabras.
+- **Espectador ronda 1, jerga y fórmula del desplegable: aceptada.** El método va en una línea, se dice «no tienes que memorizarlas» y el asterisco se explica como «cualquier texto».
+- **Retención y espectador, «gratis» y «se rehace solo» sin verificar: aceptada como bloqueo.** El guion no se cierra hasta las pruebas del creador. Si falla la expansión de la Tabla, cambian las escenas 4, 25 y 26 (Pedidos y el dashboard final), además de la línea 1.
+- **Retención ronda 3, «(y el número falso)»: rechazada.** Por veracidad: el −90,4 % es correcto en lo literal. En la voz nunca se dice «falso» ni «mentira»; se dice «no es cierto» que las ventas cayeron, que sí es exacto.
+
+### Cambios en herramientas (necesarios para este guion)
+- `produccion/render/motor/motor.js` y `sistema/motor-v2.md`: nueva opción `datos.filas` en `excel`, con los números de fila visibles. Sirve para mostrar el encabezado inmovilizado y las filas 241–254 de la Tabla, con su número real. Probada con `--cuadros`.
+- `herramientas/plantilla_xlsx.py`:
+  - Hojas extra desde un CSV, con Tabla de Excel con nombre (para `Pedidos[Neto]`) y fórmulas por fila.
+  - `posicion` para fijar el orden de las hojas.
+  - `graficos` (barras) y `validaciones` (lista desplegable).
+  - Con `--verificar`, las celdas con funciones que LibreOffice 24.2 no calcula se informan como «verificar aparte» en lugar de contar como error. Con video02 pasa de 72 a 31 diferencias: las 41 restantes ahora se listan aparte, sin cambios en la plantilla de video02.
+
+### Pendientes del creador (bloquean el cierre del guion, no la ronda)
+1. Correr los prompts de `respuestas-ia.md` en claude.ai gratis y reemplazar los 5 textos «PENDIENTE» (y elegir la rama del giro y la del «lo probé»).
+2. Excel para la web gratis, en español:
+   - abrir la plantilla;
+   - que la Tabla se expanda al pegar debajo;
+   - que funcionen las referencias `Pedidos[...]`, el desplegable de B2 y los 3 gráficos;
+   - que la lista de cobranza dé Colegio Nuevo Horizonte 1.215.000 arriba y 16 filas.
+3. Medir el armado y el lunes, si se quiere cronómetro.
+4. Fijar en Studio el corte de anuncios y la tarjeta hacia video02 (escena 16, beat 3; escenas y beats se cuentan desde 0).

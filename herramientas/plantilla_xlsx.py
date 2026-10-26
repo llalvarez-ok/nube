@@ -20,7 +20,11 @@ columnas ocultas en pantalla completas). "plantilla_extra": {"hojas": [{"nombre"
 agrega hojas de apoyo que no salen en el video (por ejemplo, Prompts y Práctica); con "formulas": false
 las celdas que empiezan con "=" se guardan como texto. Una escena
 con "datos": {"solo_video": true} (por ejemplo, el adelanto del resultado en el hook) no se
-usa para armar la plantilla. LibreOffice 24.2 no calcula BUSCARX, TEXTODESPUES, FILTRAR,
+usa para armar la plantilla. Una hoja extra puede venir de un CSV ("csv", "csv_columnas": [[encabezado, columna_csv|null]],
+"formulas_fila": {"K": "=SI(J{f}=...)"}) y convertirse en Tabla de Excel ("tabla": "Pedidos", para las referencias
+estructuradas como Pedidos[Neto]); "posicion" fija su orden. "plantilla_extra": {"graficos": [{"hoja", "titulo",
+"categorias", "valores", "ancla"}], "validaciones": [{"hoja", "celda", "lista"}]} agrega gráficos de barras y listas
+desplegables. LibreOffice 24.2 no calcula BUSCARX, TEXTODESPUES, FILTRAR,
 ORDENAR, UNICOS ni ELEGIRCOLS (llegan en 24.8/25.x): esas celdas hay que verificarlas aparte.
 """
 
@@ -183,6 +187,60 @@ def marcar_matrices_dinamicas(ruta):
             zout.writestr(nombre, datos)
 
 
+def hoja_csv(ws, extra):
+    """Hoja de datos desde un CSV (fechas ISO -> fecha, números -> número) y, si se pide, Tabla de Excel con nombre."""
+    import csv
+    from openpyxl.worksheet.table import Table, TableStyleInfo
+    cols = extra["csv_columnas"]
+    with open(os.path.join(RAIZ, extra["csv"]), encoding="utf-8") as fh:
+        filas = list(csv.DictReader(fh))
+    for c, (enc, _) in enumerate(cols, 1):
+        ws.cell(row=1, column=c, value=enc).font = Font(bold=True)
+    for r, fila in enumerate(filas, 2):
+        for c, (enc, clave) in enumerate(cols, 1):
+            letra = get_column_letter(c)
+            if clave is None:
+                f = extra.get("formulas_fila", {}).get(letra)
+                if f:
+                    ws.cell(row=r, column=c, value=traducir(f.replace("{f}", str(r))))
+                continue
+            v = fila[clave]
+            cel = ws.cell(row=r, column=c)
+            if re.fullmatch(r"\d{4}-\d{2}-\d{2}", v):
+                cel.value, cel.number_format = datetime.fromisoformat(v), "dd/mm/yyyy"
+            elif re.fullmatch(r"-?\d+", v):
+                cel.value = int(v)
+                if abs(int(v)) >= 1000:
+                    cel.number_format = "#,##0"
+            elif re.fullmatch(r"-?\d*\.\d+", v):
+                cel.value, cel.number_format = float(v), "0%"
+            else:
+                cel.value = v
+    for i, w in enumerate(extra.get("anchos") or [], 1):
+        ws.column_dimensions[get_column_letter(i)].width = max(8, w / 8)
+    ws.freeze_panes = "A2"
+    if extra.get("tabla"):
+        ref = f"A1:{get_column_letter(len(cols))}{len(filas) + 1}"
+        t = Table(displayName=extra["tabla"], ref=ref)
+        t.tableStyleInfo = TableStyleInfo(name="TableStyleMedium7", showRowStripes=True)
+        ws.add_table(t)
+
+
+def grafico_barras(ws, g):
+    from openpyxl.chart import BarChart, Reference
+    from openpyxl.utils.cell import range_boundaries
+    ch = BarChart()
+    ch.type, ch.title, ch.legend = "col", g.get("titulo"), None
+    c1, r1, c2, r2 = range_boundaries(g["valores"])
+    ch.add_data(Reference(ws, min_col=c1, min_row=r1, max_col=c2, max_row=r2), titles_from_data=False)
+    c1, r1, c2, r2 = range_boundaries(g["categorias"])
+    ch.set_categories(Reference(ws, min_col=c1, min_row=r1, max_col=c2, max_row=r2))
+    if g.get("formato_categorias"):
+        ch.x_axis.number_format = g["formato_categorias"]
+    ch.width, ch.height = g.get("ancho", 16), g.get("alto", 7.5)
+    ws.add_chart(ch, g.get("ancla", "H2"))
+
+
 def main():
     args = [a for a in sys.argv[1:] if not a.startswith("--")]
     if not args:
@@ -228,7 +286,10 @@ def main():
             ws.column_dimensions[get_column_letter(i)].width = max(10, w / 8)
         ws.freeze_panes = "A2"
     for extra in guion.get("plantilla_extra", {}).get("hojas", []):  # hojas de apoyo: texto tal cual (Prompts, Práctica…)
-        ws = wb.create_sheet(extra["nombre"][:31])
+        ws = wb.create_sheet(extra["nombre"][:31], extra.get("posicion"))
+        if extra.get("csv"):
+            hoja_csv(ws, extra)
+            continue
         for r, fila in enumerate(extra.get("celdas", []), 1):
             for c, v in enumerate(fila, 1):
                 if v in (None, ""):
@@ -249,6 +310,13 @@ def main():
         for i, w in enumerate(extra.get("anchos") or [], 1):
             ws.column_dimensions[get_column_letter(i)].width = max(10, w / 8)
         ws.freeze_panes = "A2"
+    for g in guion.get("plantilla_extra", {}).get("graficos", []):
+        grafico_barras(wb[g["hoja"]], g)
+    for v in guion.get("plantilla_extra", {}).get("validaciones", []):
+        from openpyxl.worksheet.datavalidation import DataValidation
+        dv = DataValidation(type="list", formula1='"' + ",".join(v["lista"]) + '"', allow_blank=False)
+        wb[v["hoja"]].add_data_validation(dv)
+        dv.add(v["celda"])
     ws = wb.create_sheet("Léeme", 0)
     ws["A1"] = guion.get("titulo", "")
     ws["A1"].font = Font(bold=True, size=14)
@@ -270,9 +338,21 @@ def main():
         os.makedirs(tmp, exist_ok=True)
         subprocess.run([soffice, "--headless", "--convert-to", "xlsx", "--outdir", tmp, ruta], check=True, capture_output=True)
         calc = load_workbook(os.path.join(tmp, archivo), data_only=True)
-        errores = 0
+        errores, aparte = 0, []
         for nombre, h in hojas.items():
             ws = calc[nombre[:31]]
+            # fórmulas que LibreOffice 24.2 no calcula: su celda y su desborde se informan aparte, no como error
+            sin_lo = [ref for ref, v in h["celdas"].items() if isinstance(v, str) and v.startswith("=")
+                      and re.search(r"\b(FILTRAR|ORDENAR|ORDENARPOR|UNICOS|BUSCARX|TEXTODESPUES|TEXTOANTES|ELEGIRCOLS|ELEGIRFILAS|DIVIDIRTEXTO)\(", v)]
+
+            def no_calculable(ref):
+                if ref in sin_lo:
+                    return True
+                c, r = re.match(r"([A-Z]+)(\d+)", ref).groups()
+                ci, ri = column_index_from_string(c), int(r)
+                propia = h["celdas"].get(ref)
+                return not (isinstance(propia, str) and propia.startswith("=")) and any(
+                    column_index_from_string(re.match(r"[A-Z]+", a).group()) <= ci and int(re.search(r"\d+", a).group()) <= ri for a in sin_lo)
             for ref, esperado in h["esperados"].items():
                 real = ws[ref].value
                 num, _ = valor_celda(esperado)
@@ -282,10 +362,16 @@ def main():
                     elif isinstance(real, (int, float)):
                         num = (num - datetime(1899, 12, 30)).days
                 ok = (isinstance(num, (int, float)) and isinstance(real, (int, float)) and abs(real - num) <= max(0.01, abs(num) * 0.001)) or str(real) == str(esperado)
+                if not ok and no_calculable(ref) and (real is None or str(real).startswith(("#", "Err")) or ref in sin_lo):
+                    aparte.append(f"{nombre}!{ref}")
+                    continue
                 if not ok:
                     errores += 1
                     print(f"  ✗ {nombre}!{ref}: el video muestra «{esperado}» y la fórmula da «{real}»")
-        print("✔ Todos los valores del video coinciden con las fórmulas" if not errores else f"✗ {errores} valores no coinciden")
+        if aparte:
+            print(f"⚠ {len(aparte)} celdas usan funciones que LibreOffice 24.2 no calcula (FILTRAR, ORDENAR, ELEGIRCOLS, BUSCARX…): "
+                  f"verificarlas aparte en Excel para la web · {', '.join(aparte)}")
+        print("✔ Todos los valores calculables del video coinciden con las fórmulas" if not errores else f"✗ {errores} valores no coinciden")
         sys.exit(1 if errores else 0)
 
 
