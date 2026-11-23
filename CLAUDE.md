@@ -16,6 +16,6 @@ Canal en español sobre IA práctica para el trabajo. Nombre real del canal: **A
 
 # Proyecto: tienda de Etsy (productos digitales)
 
-Iniciado el 23/11/2026. Packs de juegos imprimibles en inglés en `etsy/` (contenido en `contenido.py`, se generan con `python3 etsy/generar.py`; borradores de publicación en `etsy/publicaciones.md`).
+Iniciado el 23/11/2026. Packs de juegos imprimibles en `etsy/`, en inglés, español, alemán y francés (contenido en `contenido_<idioma>.py`, ilustraciones propias en `ilustraciones.py`, se generan con `python3 etsy/generar.py [idioma] [slug]` en `productos/<idioma>/<slug>/`; borradores de publicación en `etsy/publicaciones_<idioma>.md`).
 - Etsy prohíbe contenido generado íntegramente por IA sin aporte humano: Lean dirige, revisa y pide cambios en cada producto, y declara el uso de IA al publicar. Claude no oculta ese uso.
 - Lean abre la tienda (cobro por Payoneer) y publica a mano; Claude no tiene acceso a Etsy.
