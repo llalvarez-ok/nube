@@ -19,7 +19,7 @@ Etiquetas: máximo 13, de hasta 20 caracteres cada una.
 
 **Título:** Christmas Party Games Printable Bundle, 9 Family Games with Trivia, Word Scramble and Left Right Gift Exchange
 
-**Etiquetas:** christmas games, christmas party game, printable christmas, family christmas game, christmas trivia, left right game, holiday party games, christmas printable, xmas party games, christmas activity, classroom christmas, emoji christmas game, gift exchange game
+**Etiquetas:** christmas games, christmas party game, printable christmas, family xmas games, christmas trivia, left right game, holiday party games, christmas printable, xmas party games, christmas activity, classroom christmas, emoji christmas game, gift exchange game
 
 **Descripción:**
 
@@ -96,7 +96,7 @@ This product was designed by the shop owner with the assistance of AI tools.
 
 **Título:** Office Holiday Party Games Printable Bundle, 8 Work Christmas Party Games with Icebreaker, Trivia and Team Awards
 
-**Etiquetas:** office party games, work christmas party, office christmas game, holiday party games, coworker games, team building game, staff party games, work party printable, office icebreaker, holiday trivia, left right game, office awards, find the coworker
+**Etiquetas:** office party games, work christmas party, office xmas games, holiday party games, coworker games, team building game, staff party games, work party printable, office icebreaker, holiday trivia, left right game, office awards, find the coworker
 
 **Descripción:**
 
