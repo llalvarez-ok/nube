@@ -13,3 +13,9 @@ Canal en español sobre IA práctica para el trabajo. Nombre real del canal: **A
 - API conectada y verificada el 03/10/2026 (Data API y Analytics responden).
 - Rutina semanal de los lunes creada (sesión nueva en cada disparo).
 - Pendiente: auditoría de la API de YouTube (guía en `herramientas/auditoria-api.md`).
+
+# Proyecto: tienda de Etsy (productos digitales)
+
+Iniciado el 23/11/2026. Packs de juegos imprimibles en inglés en `etsy/` (contenido en `contenido.py`, se generan con `python3 etsy/generar.py`; borradores de publicación en `etsy/publicaciones.md`).
+- Etsy prohíbe contenido generado íntegramente por IA sin aporte humano: Lean dirige, revisa y pide cambios en cada producto, y declara el uso de IA al publicar. Claude no oculta ese uso.
+- Lean abre la tienda (cobro por Payoneer) y publica a mano; Claude no tiene acceso a Etsy.
